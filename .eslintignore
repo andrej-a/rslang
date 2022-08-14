@@ -1,0 +1,4 @@
+*.json
+*.config.json
+*.config.js
+node_modules
