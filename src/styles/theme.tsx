@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { GRADIENT, WHITE, LIGHT_GREEN, RED } from './constants';
+import { GRADIENT, WHITE, LIGHT_GREEN, RED } from './constansts';
 
 export const theme = createTheme({
   palette: {
@@ -17,3 +17,24 @@ export const theme = createTheme({
     },
   },
 });
+
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiIconButton: {
+      root: {
+        '&:hover': {
+          backgroundColor: "$labelcolor"
+        }
+      }
+    }
+  }
+})
+
+
+<MuiThemeProvider theme={theme}>
+
+// Your Component here
+
+</MuiThemeProvider>

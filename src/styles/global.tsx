@@ -9,7 +9,6 @@ export const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     min-height: 100vh;
   }
- 
   *,
 *::before,
 *::after {
@@ -31,14 +30,29 @@ a:visited {
 a:hover {
   text-decoration: none;
 }
-h1,
-h2,
-h3,
 h4,
 h5,
 h6 {
   font-size: inherit;
   font-weight: inherit;
+}
+h1 {
+  margin: 0;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 87px;
+}
+h2 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 87px;
+}
+h3 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 40px;
 }
 img {
   vertical-align: top;
@@ -49,7 +63,6 @@ body {
   font-family:'Rubik';
   background: ${GRADIENT};
   width: 100%;
-  height: 100%;
   font-size: 18px;
 }
 input[type="text"],
