@@ -8,46 +8,46 @@ import HomeIcon from '@mui/icons-material/Home';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import {BLACK} from '../../styles/constansts';
+import { Colors } from '../../styles/constansts';
 
 export const Navigation = () => {
-  return(
+  return (
     <DivAppNavigation data-testid="navbar">
       <GroupMenuItem>
       <MenuIcon sx={{
         width:'40px',
         height: '40px',
-        color: BLACK
+        color: Colors.BLACK,
       }}/>
         <Link data-testid="home-link" to="/">
           <HomeIcon sx={{
-        width:'40px',
-        height: '40px',
-        color: BLACK
-      }}/>
+            width:'40px',
+            height: '40px',
+            color: Colors.BLACK,
+          }}/>
           {/* Main */}
         </Link>
         <Link data-testid="about-link" to="/textbook">
           <ImportContactsIcon sx={{
-        width:'40px',
-        height: '40px',
-        color: BLACK
-      }}/>
+            width:'40px',
+            height: '40px',
+            color: Colors.BLACK,
+          }}/>
           {/* Textbook */}
         </Link>
         <Link data-testid="form" to="/minigames">
           <ExtensionIcon sx={{
-        width:'40px',
-        height: '40px',
-        color: BLACK
-      }}/>
+            width:'40px',
+            height: '40px',
+            color: Colors.BLACK,
+          }}/>
           {/* Minigames */}
         </Link>
         <Link data-testid="form" to="/statistics">
           <BarChartIcon sx={{
             width:'40px',
             height: '40px',
-            color: BLACK
+            color: Colors.BLACK,
           }}/>
           {/* Statistics */}
         </Link>
@@ -55,5 +55,5 @@ export const Navigation = () => {
       
       <LogoutIcon/>
     </DivAppNavigation>
-  )
-}
+  );
+};

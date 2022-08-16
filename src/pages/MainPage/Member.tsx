@@ -1,7 +1,7 @@
 import React from 'react';
 import gitLogo from '../../assets/gitHub.svg';
 import { MemberWrapper, MemberImage, MemberTextBlock, BlockName, BlockRole, BlockAboutMember, BlockProjectTitle, BlockProjectWork } from './MainPage.styled';
-import { IMembers } from './TeamMembers';
+import { IMembers } from '../../components/Interfaces';
 
 const Member = (props: IMembers) => {
 
@@ -24,6 +24,6 @@ const Member = (props: IMembers) => {
         <BlockProjectWork>{projectWork}</BlockProjectWork>
       </MemberTextBlock>
     </MemberWrapper>
-  )
-}
+  );
+};
 export  default Member;

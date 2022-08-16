@@ -1,18 +1,27 @@
 import styled from 'styled-components';
-import footerBackground from '../../assets/FooterBackground.png'
-import { BLACK, GREEN} from '../../styles/constansts'
+import footerBackground from '../../assets/FooterBackground.png';
+import { Colors, device } from '../../styles/constansts';
 
 export const WrapperFooter = styled.div`
   background-image: url(${footerBackground});
   background-size: 100% 100%;
   display: flex;
   padding: 96px 200px 20px 200px;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
   p {
     font-size: 18px;
   }
-
+  
+  @media (max-width: 1024px) {
+    padding: 96px 100px 20px 100px;
+  }
+  @media (max-width: 768px) {
+    align-items: start;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 100px;
+  }
 `;
 
 export const MembersInfo = styled.div`
@@ -34,10 +43,10 @@ export const MemberItem = styled.div`
     display: flex;
     align-items: center;
     gap: 12px;
-    color: ${BLACK}
+    color: ${Colors.BLACK}
   }
   a:hover{
-    color: ${GREEN}
+    color: ${Colors.GREEN}
   }
   `;
 

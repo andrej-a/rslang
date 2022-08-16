@@ -1,40 +1,40 @@
 import { createTheme } from '@mui/material/styles';
-import { GRADIENT, WHITE, LIGHT_GREEN, RED } from './constansts';
+import { Colors } from './constansts';
 
 export const theme = createTheme({
   palette: {
     primary: {
-      main: GRADIENT,
+      main: Colors.GRADIENT,
     },
     secondary: {
-      main: WHITE,
+      main: Colors.WHITE,
     },
     success: {
-      main: LIGHT_GREEN,
+      main: Colors.LIGHT_GREEN,
     },
     warning: {
-      main: RED,
+      main: Colors.RED,
     },
   },
 });
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
-  overrides: {
-    MuiIconButton: {
-      root: {
-        '&:hover': {
-          backgroundColor: "$labelcolor"
-        }
-      }
-    }
-  }
-})
+// const theme = createMuiTheme({
+//   overrides: {
+//     MuiIconButton: {
+//       root: {
+//         '&:hover': {
+//           backgroundColor: "$labelcolor"
+//         }
+//       }
+//     }
+//   }
+// })
 
 
-<MuiThemeProvider theme={theme}>
+// <MuiThemeProvider theme={theme}>
 
-// Your Component here
+// // Your Component here
 
-</MuiThemeProvider>
+// </MuiThemeProvider>

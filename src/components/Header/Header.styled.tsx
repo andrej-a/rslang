@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { WHITE, BLACK } from '../../styles/constansts';
+import { Colors } from '../../styles/constansts';
 
 export const WrapperHeader = styled.div`
   display: flex;
@@ -20,8 +20,8 @@ export const DivAppNavigation = styled.div`
   justify-content: space-between;
   gap: 20px;
   padding: 20px 26px 30px 26px;
-  background-color: ${WHITE};
-  color: ${BLACK};
+  background-color: ${Colors.WHITE};
+  color: ${Colors.BLACK};
 `;
 
 export const UserProfile = styled.div`
@@ -34,12 +34,13 @@ export const UserProfile = styled.div`
   p{
     font-weight: 600;
     line-height: 40px;
+    color: ${Colors.WHITE};
   }
 `;
 
 export const PageTitle = styled.div`
   z-index: 102;
-  color: ${WHITE};
+  color: ${Colors.WHITE};
   position: fixed;
   left: 118px;
   top: 20px;

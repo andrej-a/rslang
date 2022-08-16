@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
-import {GRADIENT} from './constansts'
+import { Colors } from './constansts';
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -40,19 +40,19 @@ h1 {
   margin: 0;
   font-size: 60px;
   font-weight: 500;
-  line-height: 87px;
+  line-height: 80px;
 }
 h2 {
   margin: 0;
   font-size: 40px;
   font-weight: 500;
-  line-height: 87px;
+  line-height: 40px;
 }
 h3 {
   margin: 0;
   font-size: 30px;
   font-weight: 500;
-  line-height: 40px;
+  line-height: 30px;
 }
 img {
   vertical-align: top;
@@ -61,7 +61,7 @@ html,
 body {
   margin: 0;
   font-family:'Rubik';
-  background: ${GRADIENT};
+  background: ${Colors.GRADIENT};
   width: 100%;
   font-size: 18px;
 }

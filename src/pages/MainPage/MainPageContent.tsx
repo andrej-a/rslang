@@ -1,16 +1,13 @@
 import React from 'react';
 import BannerImg from '../../assets/main1.svg';
-import AppImg_1 from '../../assets/main2.svg';
-import AppImg_2 from '../../assets/main3.svg';
-import AppImg_3 from '../../assets/main4.svg';
-import AppImg_4 from '../../assets/main5.svg';
 import PlayArrow from '../../assets/playArrow.svg';
-import { AboutApp, BannerTextBlock, ButtonBlock, ItemBlock, ItemBlockInfo, MainPageWrapper, OurTeam, Banner, PlayVideoButton, JoinButton } from './MainPage.styled';
+import AboutAppItems from './ItemsBlock';
+import { BannerTextBlock, ButtonBlock, MainPageWrapper, OurTeam, Banner, PlayVideoButton, JoinButton, AboutApp, VideoPlayer, Intro } from './MainPage.styled';
 import TeamMembers from './TeamMembers';
 
 
 export const MainPageContent = () => {
-  return(
+  return (
     <MainPageWrapper>
       <Banner>
         <BannerTextBlock>
@@ -28,23 +25,20 @@ export const MainPageContent = () => {
             </div>
           </ButtonBlock>
         </BannerTextBlock>
-        <img src={BannerImg} alt="image" />
+        <img src={BannerImg} alt="image" /> 
       </Banner>
-      {/* <AboutApp>
+      <AboutApp>
         <h2>About app</h2>
-        <ItemBlock>
-          <img src={AppImg_1} alt="image" />
-          <ItemBlockInfo>
-            <h3>Textbook </h3>
-            <p>The electronic textbook consists of six sections. Each section has 30 pages of 20 words. The translation of the word, the thematic image, as well as the pronunciation of both the word separately and as part of the phrase are presented</p>
-            <button>View textbook</button>
-          </ItemBlockInfo>
-        </ItemBlock>
-      </AboutApp> */}
+        <AboutAppItems/>
+      </AboutApp> 
+      <Intro>
+        <h2>Intro</h2>
+        <VideoPlayer/>
+      </Intro>  
       <OurTeam>
         <h2>Our team</h2>
         <TeamMembers/>
       </OurTeam>
     </MainPageWrapper>
-  )
-}
+  );
+};
