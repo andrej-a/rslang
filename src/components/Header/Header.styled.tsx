@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 import { Colors } from '../../styles/constansts';
+import MenuIcon from '../../assets/menu.svg';
+import HomeIcon from '../../assets/home.svg';
+import TextBookIcon from '../../assets/book.svg';
+import GameIcon from '../../assets/puzzle.svg';
+import StatisticsIcon from '../../assets/statistics.svg';
+import SignoutIcon from '../../assets/signout.svg';
 
 export const WrapperHeader = styled.div`
   display: flex;
@@ -7,7 +13,39 @@ export const WrapperHeader = styled.div`
   heidht: 100vh;
   justify-content: space-between;
 `;
-
+const IconDiv = styled.div`
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  // padding: 5px 4px;
+  &:hover{
+    background-color: ${Colors.GREEN};
+    outline: solid 6px ${Colors.GREEN};
+    border-radius: 12px;
+    
+  }
+`;
+export const MenuIconDiv = styled(IconDiv)`
+  background-image: url(${MenuIcon});
+  width: 42px;
+  height: 40px;
+`;
+export const HomeIconDiv = styled(IconDiv)`
+  background-image: url(${HomeIcon});
+  
+`;
+export const TextBookIconDiv = styled(IconDiv)`
+  background-image: url(${TextBookIcon});
+`;
+export const GamesIconDiv = styled(IconDiv)`
+  background-image: url(${GameIcon});
+`;
+export const StatisticsIconDiv = styled(IconDiv)`
+  background-image: url(${StatisticsIcon});
+`;
+export const SignoutIconIconDiv = styled(IconDiv)`
+  background-image: url(${SignoutIcon});
+`;
 export const DivAppNavigation = styled.div`
   width: 94px;
   height: 100vh;
