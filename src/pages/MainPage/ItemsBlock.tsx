@@ -5,7 +5,7 @@ import Image2 from '../../assets/main3.svg';
 import Image3 from '../../assets/main4.svg';
 import Image4 from '../../assets/main5.svg';
 import { IAboutAppItem } from '../../components/Interfaces';
-import { AboutAppItemWrapper, AboutAppItemImage, AboutAppItemTextBlock, AboutAppItemTitle, AboutAppItemText, AboutAppItemButton } from './MainPage.styled';
+import { AboutAppItemWrapper, AboutAppItemImage, AboutAppItemTextBlock, AboutAppItemTitle, AboutAppItemText, AboutAppItemButton, AboutAppItemsWrapper } from './MainPage.styled';
 
 
 const data: IAboutAppItem[] = [
@@ -76,9 +76,9 @@ const AboutAppItems = () => {
   });
 
   return (
-    <div>
+    <AboutAppItemsWrapper>
       {elements}
-    </div>
+    </AboutAppItemsWrapper>
   );
 };
 export default AboutAppItems;

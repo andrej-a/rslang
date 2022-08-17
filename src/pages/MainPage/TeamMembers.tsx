@@ -4,7 +4,7 @@ import ImageLiza from '../../assets/liza.jpg';
 import ImageNastya from '../../assets/nastya.jpg';
 import { IMembers } from '../../components/Interfaces';
 import Member from './Member';
-
+import { DivContainerMembers } from './MainPage.styled';
 
 const data: IMembers[] = [
   {
@@ -45,9 +45,9 @@ const TeamMembers = () => {
   });
 
   return (
-    <div>
+    <DivContainerMembers>
       {elements}
-    </div>
+    </DivContainerMembers>
   );
 };
 export default TeamMembers;

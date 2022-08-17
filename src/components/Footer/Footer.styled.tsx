@@ -4,7 +4,8 @@ import { Colors, device } from '../../styles/constansts';
 
 export const WrapperFooter = styled.div`
   background-image: url(${footerBackground});
-  background-size: 100% 100%;
+  background-size: auto 100%;
+  background-position-y: bottom;
   display: flex;
   padding: 96px 200px 20px 200px;
   align-items: end;
