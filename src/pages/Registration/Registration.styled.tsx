@@ -11,14 +11,17 @@ export const RegistrationWrapper = styled.div`
     align-items: center;
 `;
 
-export const Form = styled.div`
+export const LogForm = styled.div`
     width: auto;
     max-width: 510px;
     height: auto;
     background: ${Colors.WHITE};
     border-radius: 8px;
-    margin-bottom: 300px;
-    margin-left: 107px;
+    margin-left: 105px;
+
+    @media (min-height: 1100px) {
+        margin-bottom: 320px;
+    }
 
     @media (max-width: ${WindowSizes.laptop}) {
         margin-bottom: 0;
@@ -55,14 +58,19 @@ export const Form = styled.div`
         }
     }
 
-    input {
+    .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
         padding: 15px 0 15px 23px;
         border: 2px solid ${Colors.GRAY};
         border-radius: 4px;
     }
 
-    input:active {
-        border-color: ${Colors.GREEN};
+    .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input input:focus {
+        outline:0;outline-offset:0
+    }
+
+    .errorMessage {
+        margin-top: 5px;
+        color: ${Colors.RED}
     }
 `;
 
@@ -121,7 +129,7 @@ export const StyledButton = styled(Button)`
 export const ToggleToRegistration = styled.div`
     margin-top: 14px;
     margin-left: 118px;
-    margin-bottom: 63px;
+    padding-bottom: 63px;
     cursor: pointer;
     p {
         color: ${Colors.FORM_BLUE};
