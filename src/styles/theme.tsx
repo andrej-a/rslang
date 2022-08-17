@@ -4,24 +4,7 @@ import { Colors } from './constansts';
 export const Formtheme = createTheme({
   palette: {
     primary: {
-      main: Colors.BLACK,
-    },
-    secondary: {
-      main: Colors.WHITE,
-    },
-    success: {
-      main: Colors.LIGHT_GREEN,
-    },
-    warning: {
-      main: Colors.RED,
-    },
-  },
-});
-
-export const theme = createTheme({
-  palette: {
-    primary: {
-      main: Colors.GRADIENT,
+      main: '#222',
     },
     secondary: {
       main: Colors.WHITE,

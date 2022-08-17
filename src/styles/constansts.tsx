@@ -14,10 +14,12 @@ export enum Colors {
   BOOK_ORANGE = '#FF9900',
   BOOK_RED = '#EF1E01',
   BOOK_PURPLE = '#AF00ED',
+  DISABLED = '#D5D8D6',
+  FORM_BLUE = '#0252CC',
 }
   
   
-enum WindowSizes {
+export enum WindowSizes {
   mobile = '320px',
   tablet = '768px',
   laptop = '1024px',
