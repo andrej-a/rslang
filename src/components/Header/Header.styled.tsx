@@ -91,13 +91,10 @@ export const MenuIconDiv = styled.div`
       transform: rotate(45deg);
       margin-top: -3px;
     }
-    
   }
-  
 `;
 export const HomeIconDiv = styled(IconDiv)`
   background-image: url(${HomeIcon});
-  
 `;
 export const TextBookIconDiv = styled(IconDiv)`
   background-image: url(${TextBookIcon});
@@ -177,9 +174,6 @@ export const UserProfile = styled.div`
     font-weight: 600;
     line-height: 40px;
     color: ${Colors.WHITE};
-    &:hover{
-
-    }
   }
   @media (max-width: 768px) {
     right: 50px;
@@ -210,11 +204,9 @@ export const PageTitle = styled.p`
     left: 0px;
     top: 0px;
     opacity: 100%;
-
   }
   @media (max-width: 400px) {
       opacity: 0;
-
     }
 `;
 
@@ -223,5 +215,4 @@ margin-top: 80px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  
 `;

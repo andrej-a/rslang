@@ -15,7 +15,6 @@ const Footer = () => {
           </a>
         </div>
     </WrapperFooter>
-
   );
 };
 

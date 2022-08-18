@@ -14,16 +14,3 @@ export enum Colors {
   BOOK_RED = '#EF1E01',
   BOOK_PURPLE = '#AF00ED',
 }
-
-
-enum WindowSizes {
-  mobile = '320px',
-  tablet = '768px',
-  laptop = '1024px',
-}
-
-export const device = {
-  mobile: `(min-width: ${WindowSizes.mobile})`,
-  tablet: `(min-width: ${WindowSizes.mobile})`,
-  laptop: `(min-width: ${WindowSizes.mobile})`,
-};

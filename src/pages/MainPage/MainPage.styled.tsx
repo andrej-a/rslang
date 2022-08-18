@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Colors, device } from '../../styles/constansts';
+import { Colors } from '../../styles/constansts';
 import WaveImage from '../../assets/wave.png';
 import WaveImageReverse from '../../assets/waveReverse.png';
 import { GreenButton } from '../../components/Buttons.styled';
@@ -17,25 +17,24 @@ export const Banner = styled.div`
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position-y: bottom;
-  
 `;
 export const BannerImage = styled.div`
-display: flex;
-justify-content: flex-end;
-img{
-  width:100%;
-}
-@media (max-width: 1040px) {
+  display: flex;
+  justify-content: flex-end;
   img{
-    width:600px;
+    width:100%;
   }
-}
-@media (max-width: 768px) {
-  justify-content: center;
-  img{
-    width:300px;
+  @media (max-width: 1040px) {
+    img{
+      width:600px;
+    }
   }
-}
+  @media (max-width: 768px) {
+    justify-content: center;
+    img{
+      width:300px;
+    }
+  }
 `;
 export const BannerTextBlock = styled.div`
   width: 774px;
@@ -92,36 +91,33 @@ export const ButtonBlock = styled.div`
       top:0;
       right:0;
     }
-    &:hover{
+  &:hover{
       p{
         border-bottom: solid ${Colors.WHITE};
       }
-      
     }
   }
-  
   @media (max-width: 768px) {
     flex-direction: column;
     gap:20px;
   }
-  
 `;
 export const JoinButton = styled.button`
-    background-color: ${Colors.WHITE};
-    font-weight: 500;
-    border-radius: 32px;
-    color: ${Colors.BLACK};
-    width: 226px;
-    height: 50px;
-    align-items: center;
-    cursor: pointer;
+  background-color: ${Colors.WHITE};
+  font-weight: 500;
+  border-radius: 32px;
+  color: ${Colors.BLACK};
+  width: 226px;
+  height: 50px;
+  align-items: center;
+  cursor: pointer;
   &:hover{
-    color: ${Colors.GREEN};
+   color: ${Colors.GREEN};
   }
 `;
 
 export const PlayVideoButton = styled.button`
-position: relative;
+  position: relative;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -132,14 +128,13 @@ position: relative;
   }
   img{
     position: initial;
-    
   }
   &:hover{
     box-shadow: 2px 4px 10px rgba(0, 186, 137, 0.5);
   }
 `;
 export const AboutApp = styled.div`
-margin-top: -3px;
+  margin-top: -3px;
   display: flex;
   flex-direction: column;
   color:${Colors.BLACK};
@@ -159,9 +154,9 @@ margin-top: -3px;
 `;
 
 export const AboutAppItemsWrapper = styled.div`
-gap:30px;
-display: flex;
-flex-direction: column;
+  gap:30px;
+  display: flex;
+  flex-direction: column;
   @media (max-width: 768px) {
     display:flex;
     flex-direction: column;
@@ -191,18 +186,18 @@ export const AboutAppItemWrapper = styled.div`
   }
 `;
 export const AboutAppItemImage = styled.div`
-display: flex;
-align-items: center;
-@media (max-width: 1180px) {
-  img{
-    width: 360px;
+  display: flex;
+  align-items: center;
+  @media (max-width: 1180px) {
+    img{
+      width: 360px;
+    }
   }
-}
-@media (max-width: 500px) {
-  img{
-    width: 200px;
+  @media (max-width: 500px) {
+    img{
+      width: 200px;
+    }
   }
-}
 `;
 export const AboutAppItemTextBlock = styled.div`
   width: 576px;
@@ -227,7 +222,7 @@ export const AboutAppItemTitle = styled.p`
   margin-bottom: 20px;
   @media (max-width: 700px) {
     font-size: 22px;
-}
+  }
 `;
 export const AboutAppItemText = styled.p`
   font-weight: 500;
@@ -238,7 +233,7 @@ export const AboutAppItemText = styled.p`
 export const AboutAppItemButton = styled(GreenButton)`
 `;
 export const Intro = styled.div`
-margin-top: -3px;
+  margin-top: -3px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -257,7 +252,6 @@ margin-top: -3px;
 export const VideoPlayer = styled.div`
     width: 600px;
     height: 400px;
-    
     background-color: black;
     @media (max-width: 768px) {
       margin: 0 auto;
@@ -324,7 +318,6 @@ export const MemberImage = styled.div`
   height: 300px;
   align-items:center;
   display: flex;
-  
   img {
     height: 100%;
     width: 100%;
@@ -394,7 +387,6 @@ export const ContentWrapper = styled.div`
 `;
 export const ContentWrapperBanner = styled(ContentWrapper)`
   padding-left: 94px;
-
   display: flex;
   @media (max-width: 1040px) {
     flex-direction: column;

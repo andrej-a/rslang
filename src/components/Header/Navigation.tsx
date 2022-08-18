@@ -9,7 +9,6 @@ type Props = {
 };
 
 export const Navigation = ({ active }:Props) => {
-
   return (
     <DivAppNavigation data-testid="navbar" className={active ? 'active' : ''}>
       <Blur className={active ? 'active' : ''}/>

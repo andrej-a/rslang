@@ -22,7 +22,6 @@ const Header = () => {
           </UserProfile>
         </Link>
       </WrapperHeader>
-
   );
 };
 

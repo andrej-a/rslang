@@ -74,7 +74,7 @@ const AboutAppItems = () => {
     const { key, ...itemProps } = item;
     return <AboutItem key={key} {...itemProps}/>;
   });
-
+  
   return (
     <AboutAppItemsWrapper>
       {elements}

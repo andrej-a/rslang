@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import footerBackground from '../../assets/FooterBackground.png';
-import { Colors, device } from '../../styles/constansts';
+import { Colors } from '../../styles/constansts';
 
 export const WrapperFooter = styled.div`
   background-image: url(${footerBackground});
@@ -14,7 +14,6 @@ export const WrapperFooter = styled.div`
   p {
     font-size: 18px;
   }
-  
   @media (max-width: 1024px) {
     padding: 96px 100px 20px 100px;
   }
@@ -35,7 +34,6 @@ export const MembersInfo = styled.div`
 
 export const MemberItem = styled.div`
   display: flex;
-  
   align-items: center;
   p {
     font-size: 16px;
@@ -54,6 +52,4 @@ export const MemberItem = styled.div`
   `;
 
 export const GitIcon = styled.div`
-
-
 `;

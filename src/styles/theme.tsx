@@ -17,24 +17,3 @@ export const theme = createTheme({
     },
   },
 });
-
-// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
-// const theme = createMuiTheme({
-//   overrides: {
-//     MuiIconButton: {
-//       root: {
-//         '&:hover': {
-//           backgroundColor: "$labelcolor"
-//         }
-//       }
-//     }
-//   }
-// })
-
-
-// <MuiThemeProvider theme={theme}>
-
-// // Your Component here
-
-// </MuiThemeProvider>
