@@ -1,12 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import Image1 from '../../assets/main2.svg';
 import Image2 from '../../assets/main3.svg';
 import Image3 from '../../assets/main4.svg';
 import Image4 from '../../assets/main5.svg';
 import { IAboutAppItem } from '../../components/Interfaces';
-import { AboutAppItemWrapper, AboutAppItemImage, AboutAppItemTextBlock, AboutAppItemTitle, AboutAppItemText, AboutAppItemButton, AboutAppItemsWrapper } from './MainPage.styled';
-
+import {
+  AboutAppItemWrapper,
+  AboutAppItemImage,
+  AboutAppItemTextBlock,
+  AboutAppItemTitle,
+  AboutAppItemText,
+  AboutAppItemButton,
+  AboutAppItemsWrapper,
+} from './MainPage.styled';
 
 const data: IAboutAppItem[] = [
   {
@@ -47,10 +55,7 @@ const data: IAboutAppItem[] = [
   },
 ];
 
-const AboutItem = (props: IAboutAppItem) => {
-
-  const { key, title, text, img, textButton, linkPage, alignImage } = props;
- 
+const AboutItem = ({ key, title, text, img, textButton, linkPage, alignImage }: IAboutAppItem) => {
   return (
     <AboutAppItemWrapper color={alignImage}>
       <AboutAppItemImage>
@@ -67,20 +72,12 @@ const AboutItem = (props: IAboutAppItem) => {
   );
 };
 
-
 const AboutAppItems = () => {
-
-  const elements = data.map(item => {
+  const elements = data.map((item) => {
     const { key, ...itemProps } = item;
-    return <AboutItem key={key} {...itemProps}/>;
+    return <AboutItem key={key} {...itemProps} />;
   });
-  
-  return (
-    <AboutAppItemsWrapper>
-      {elements}
-    </AboutAppItemsWrapper>
-  );
+
+  return <AboutAppItemsWrapper>{elements}</AboutAppItemsWrapper>;
 };
 export default AboutAppItems;
-
-

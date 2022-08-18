@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import footerBackground from '../../assets/FooterBackground.png';
+
 import { Colors } from '../../styles/constansts';
+import footerBackground from '../../assets/FooterBackground.png';
+
 
 export const WrapperFooter = styled.div`
   background-image: url(${footerBackground});
@@ -30,7 +32,7 @@ export const MembersInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-` ;
+`;
 
 export const MemberItem = styled.div`
   display: flex;
@@ -38,18 +40,17 @@ export const MemberItem = styled.div`
   p {
     font-size: 16px;
     font-weight: 500;
-    margin:0;
+    margin: 0;
   }
   a {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: ${Colors.BLACK}
+    color: ${Colors.BLACK};
   }
-  a:hover{
-    color: ${Colors.GREEN}
+  a:hover {
+    color: ${Colors.GREEN};
   }
-  `;
-
-export const GitIcon = styled.div`
 `;
+
+export const GitIcon = styled.div``;

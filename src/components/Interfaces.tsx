@@ -1,11 +1,11 @@
 export interface IMembers {
-  key: number,
-  name: string,
-  img: string,
-  role: string,
-  aboutMember: string,
-  projectWork: string,
-  link: string,
+  key: number;
+  name: string;
+  img: string;
+  role: string;
+  aboutMember: string;
+  projectWork: string;
+  link: string;
 }
 
 export interface IAboutAppItem {

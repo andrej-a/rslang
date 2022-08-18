@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { Colors } from '../../styles/constansts';
 import WaveImage from '../../assets/wave.png';
 import WaveImageReverse from '../../assets/waveReverse.png';
@@ -12,7 +13,7 @@ export const MainPageWrapper = styled.div`
 
 export const Banner = styled.div`
   display: flex;
-  justify-content:center;
+  justify-content: center;
   background-image: url(${WaveImage});
   background-size: 100% auto;
   background-repeat: no-repeat;
@@ -21,28 +22,28 @@ export const Banner = styled.div`
 export const BannerImage = styled.div`
   display: flex;
   justify-content: flex-end;
-  img{
-    width:100%;
+  img {
+    width: 100%;
   }
   @media (max-width: 1040px) {
-    img{
-      width:600px;
+    img {
+      width: 600px;
     }
   }
   @media (max-width: 768px) {
     justify-content: center;
-    img{
-      width:300px;
+    img {
+      width: 300px;
     }
   }
 `;
 export const BannerTextBlock = styled.div`
   width: 774px;
-  display:flex;
+  display: flex;
   margin-top: 120px;
   margin-bottom: 220px;
   margin-left: 140px;
-  flex-direction:column;
+  flex-direction: column;
   color: ${Colors.WHITE};
   @media (max-width: 1040px) {
     width: 640px;
@@ -53,7 +54,7 @@ export const BannerTextBlock = styled.div`
     width: 400px;
     margin: 0 auto;
     margin-top: 160px;
-    h1{
+    h1 {
       font-size: 40px;
       line-height: 60px;
     }
@@ -61,18 +62,18 @@ export const BannerTextBlock = styled.div`
   @media (max-width: 600px) {
     width: 100%;
     padding: 0 40px;
-    h3{
+    h3 {
       font-size: 20px;
       line-height: 30px;
     }
-    h1{
+    h1 {
       font-size: 30px;
       line-height: 38px;
     }
   }
 `;
 export const ButtonBlock = styled.div`
-  display:flex;
+  display: flex;
   margin-top: 22px;
   gap: 34px;
   p {
@@ -81,25 +82,25 @@ export const ButtonBlock = styled.div`
     line-height: 24px;
     transition: 0.2s;
   }
-  a{ 
+  a {
     display: flex;
-    align-items:center;
+    align-items: center;
     gap: 14px;
-    img{
+    img {
       width: auto;
       position: relative;
-      top:0;
-      right:0;
+      top: 0;
+      right: 0;
     }
-  &:hover{
-      p{
+    &:hover {
+      p {
         border-bottom: solid ${Colors.WHITE};
       }
     }
   }
   @media (max-width: 768px) {
     flex-direction: column;
-    gap:20px;
+    gap: 20px;
   }
 `;
 export const JoinButton = styled.button`
@@ -111,8 +112,8 @@ export const JoinButton = styled.button`
   height: 50px;
   align-items: center;
   cursor: pointer;
-  &:hover{
-   color: ${Colors.GREEN};
+  &:hover {
+    color: ${Colors.GREEN};
   }
 `;
 
@@ -123,13 +124,13 @@ export const PlayVideoButton = styled.button`
   border-radius: 50%;
   background-color: ${Colors.WHITE};
   cursor: pointer;
-  &:hover{
+  &:hover {
     color: ${Colors.WHITE};
   }
-  img{
+  img {
     position: initial;
   }
-  &:hover{
+  &:hover {
     box-shadow: 2px 4px 10px rgba(0, 186, 137, 0.5);
   }
 `;
@@ -137,7 +138,7 @@ export const AboutApp = styled.div`
   margin-top: -3px;
   display: flex;
   flex-direction: column;
-  color:${Colors.BLACK};
+  color: ${Colors.BLACK};
   align-items: center;
   width: 100wh;
   background-color: ${Colors.WHITE};
@@ -145,24 +146,24 @@ export const AboutApp = styled.div`
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position-y: bottom;
-  h2{
+  h2 {
     margin-top: 120px;
     margin-bottom: 48px;
   }
-  @media(max-width: 768px){
+  @media (max-width: 768px) {
   }
 `;
 
 export const AboutAppItemsWrapper = styled.div`
-  gap:30px;
+  gap: 30px;
   display: flex;
   flex-direction: column;
   @media (max-width: 768px) {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:64px;
+    gap: 64px;
   }
 `;
 export const AboutAppItemWrapper = styled.div`
@@ -175,7 +176,7 @@ export const AboutAppItemWrapper = styled.div`
   @media (min-width: 1180px) {
     width: auto;
   }
-  @media (max-width: 1024px){
+  @media (max-width: 1024px) {
     width: auto;
     gap: 20px;
   }
@@ -189,12 +190,12 @@ export const AboutAppItemImage = styled.div`
   display: flex;
   align-items: center;
   @media (max-width: 1180px) {
-    img{
+    img {
       width: 360px;
     }
   }
   @media (max-width: 500px) {
-    img{
+    img {
       width: 200px;
     }
   }
@@ -206,14 +207,14 @@ export const AboutAppItemTextBlock = styled.div`
   justify-content: center;
   align-item: center;
   @media (max-width: 1024px) {
-      width: 40%;
+    width: 40%;
   }
   @media (max-width: 768px) {
     width: 100%;
     text-align: center;
     align-items: center;
     padding: 0 60px;
-}
+  }
 `;
 export const AboutAppItemTitle = styled.p`
   font-weight: 500;
@@ -230,8 +231,7 @@ export const AboutAppItemText = styled.p`
   line-height: 28px;
   margin-bottom: 36px;
 `;
-export const AboutAppItemButton = styled(GreenButton)`
-`;
+export const AboutAppItemButton = styled(GreenButton)``;
 export const Intro = styled.div`
   margin-top: -3px;
   display: flex;
@@ -239,25 +239,25 @@ export const Intro = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${Colors.WHITE};
-  h2{
+  h2 {
     margin-top: 80px;
     margin-bottom: 48px;
   }
   @media (max-width: 768px) {
-    h2{
+    h2 {
       margin-bottom: 20px;
     }
   }
 `;
 export const VideoPlayer = styled.div`
-    width: 600px;
-    height: 400px;
-    background-color: black;
-    @media (max-width: 768px) {
-      margin: 0 auto;
-      width: 320px;
-      height: 180px;
-    }
+  width: 600px;
+  height: 400px;
+  background-color: black;
+  @media (max-width: 768px) {
+    margin: 0 auto;
+    width: 320px;
+    height: 180px;
+  }
 `;
 export const OurTeam = styled.div`
   margin-top: -3px;
@@ -294,7 +294,7 @@ export const DivContainerMembers = styled.div`
   margin-bottom: 20px;
 `;
 export const MemberWrapper = styled.div`
-  align-items:center;
+  align-items: center;
   display: flex;
   padding: 4%;
   background: ${Colors.WHITE};
@@ -302,21 +302,21 @@ export const MemberWrapper = styled.div`
   border-radius: 18px;
   width: 800px;
   gap: 20px;
-  @media (max-width: 1024px){
+  @media (max-width: 1024px) {
     width: 640px;
   }
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     width: 400px;
     flex-direction: column;
   }
-  @media (max-width: 440px){
+  @media (max-width: 440px) {
     width: 320px;
   }
 `;
 export const MemberImage = styled.div`
   width: 300px;
   height: 300px;
-  align-items:center;
+  align-items: center;
   display: flex;
   img {
     height: 100%;
@@ -338,7 +338,7 @@ export const BlockName = styled.div`
   display: flex;
   gap: 16px;
   margin-bottom: 10px;
-  p{
+  p {
     font-weight: 500;
     font-size: 20px;
     line-height: 30px;
@@ -374,13 +374,13 @@ export const BlockProjectWork = styled(BlockAboutMember)`
 export const ContentWrapper = styled.div`
   padding-left: 94px;
   margin: 0 auto;
-  h2{
+  h2 {
     text-align: center;
   }
   @media (max-width: 700px) {
     padding-left: 0px;
     width: 100%;
-    h2{
+    h2 {
       font-size: 28px;
     }
   }

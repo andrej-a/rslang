@@ -1,11 +1,19 @@
 import React from 'react';
-import gitLogo from '../../assets/gitHub.svg';
-import { MemberWrapper, MemberImage, MemberTextBlock, BlockName, BlockRole, BlockAboutMember, BlockProjectTitle, BlockProjectWork } from './MainPage.styled';
+
 import { IMembers } from '../../components/Interfaces';
+import gitLogo from '../../assets/gitHub.svg';
+import {
+  MemberWrapper,
+  MemberImage,
+  MemberTextBlock,
+  BlockName,
+  BlockRole,
+  BlockAboutMember,
+  BlockProjectTitle,
+  BlockProjectWork,
+} from './MainPage.styled';
 
-const Member = (props: IMembers) => {
-
-  const { name, img, role, aboutMember, projectWork, link } = props;
+const Member = ({ name, img, role, aboutMember, projectWork, link }: IMembers) => {
   return (
     <MemberWrapper>
       <MemberImage>
@@ -26,4 +34,4 @@ const Member = (props: IMembers) => {
     </MemberWrapper>
   );
 };
-export  default Member;
+export default Member;

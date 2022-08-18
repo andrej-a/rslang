@@ -1,6 +1,6 @@
 import styled from 'styled-components';
+
 import { Colors } from '../../styles/constansts';
-import MenuIcon from '../../assets/menu.svg';
 import HomeIcon from '../../assets/home.svg';
 import TextBookIcon from '../../assets/book.svg';
 import GameIcon from '../../assets/puzzle.svg';
@@ -13,14 +13,14 @@ export const WrapperHeader = styled.div`
   justify-content: space-between;
 `;
 export const Blur = styled.div`
-  display:none;
+  display: none;
   height: 100vh;
   width: 100vw;
   backdrop-filter: blur(2px);
   position: absolute;
   left: 286px;
-  &.active{
-    display:flex;
+  &.active {
+    display: flex;
     overflow: hidden;
   }
 `;
@@ -46,47 +46,47 @@ export const MenuIconDiv = styled.div`
   position: fixed;
   top: 20px;
   left: 26px;
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
   padding: 8px 0px;
   cursor: pointer;
-  &::before{
+  &::before {
     content: '';
     position: absolute;
-    top:6px;
+    top: 6px;
     width: 36px;
     height: 3px;
     background-color: ${Colors.BLACK};
     transition: transform 0.4s ease-in-out;
   }
-  &::after{
+  &::after {
     content: '';
     position: absolute;
-    bottom:5px;
+    bottom: 5px;
     width: 36px;
     height: 3px;
     background-color: ${Colors.BLACK};
     transition: transform 0.4s ease-in-out;
   }
-  span{
+  span {
     content: '';
     position: absolute;
     top: 20px;
     width: 36px;
     height: 3px;
-    background-color: ${Colors.BLACK}; 
+    background-color: ${Colors.BLACK};
     transition: transform 0.2s ease-in-out;
   }
-  &.active{
-    &::before{
+  &.active {
+    &::before {
       transform: rotate(-45deg);
       margin-top: 11px;
     }
-    &::after{
+    &::after {
       transform: rotate(45deg);
       margin-bottom: 14px;
     }
-    span{
+    span {
       opacity: 0;
       transform: rotate(45deg);
       margin-top: -3px;
@@ -125,7 +125,7 @@ export const DivAppNavigation = styled.div`
   background-color: ${Colors.WHITE};
   color: ${Colors.BLACK};
   transition: 0.8s;
-  a{
+  a {
     display: flex;
     gap: 26px;
     color: ${Colors.BLACK};
@@ -134,29 +134,29 @@ export const DivAppNavigation = styled.div`
     font-size: 22px;
     line-height: 40px;
   }
-  p{
-   display: none;
+  p {
+    display: none;
   }
   a:hover {
-    p{
+    p {
       color: ${Colors.GREEN};
     }
-    div{
+    div {
       background-color: ${Colors.GREEN};
-    outline: solid 6px ${Colors.GREEN};
-    border-radius: 12px;
+      outline: solid 6px ${Colors.GREEN};
+      border-radius: 12px;
     }
-  }  
-  &.active{
+  }
+  &.active {
     width: 286px;
-    p{
+    p {
       display: flex;
     }
   }
   @media (max-width: 700px) {
-    display:none;
-    &.active{
-      display:flex;
+    display: none;
+    &.active {
+      display: flex;
       width: 100vw;
       height: 100vh;
     }
@@ -170,7 +170,7 @@ export const UserProfile = styled.div`
   display: flex;
   gap: 18px;
   align-items: center;
-  p{
+  p {
     font-weight: 600;
     line-height: 40px;
     color: ${Colors.WHITE};
@@ -179,8 +179,8 @@ export const UserProfile = styled.div`
     right: 50px;
   }
   @media (max-width: 600px) {
-    p{
-      display:none;
+    p {
+      display: none;
     }
   }
 `;
@@ -197,7 +197,7 @@ export const PageTitle = styled.p`
   display: flex;
   gap: 18px;
   transition: 1s;
-  &.active{
+  &.active {
     color: ${Colors.BLACK};
     margin-left: 86px;
     position: fixed;
@@ -206,12 +206,11 @@ export const PageTitle = styled.p`
     opacity: 100%;
   }
   @media (max-width: 400px) {
-      opacity: 0;
-    }
+    opacity: 0;
+  }
 `;
-
 export const GroupMenuItem = styled.div`
-margin-top: 80px;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   gap: 20px;
