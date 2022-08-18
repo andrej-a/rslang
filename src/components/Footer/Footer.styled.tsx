@@ -4,7 +4,8 @@ import { Colors, device } from '../../styles/constansts';
 
 export const WrapperFooter = styled.div`
   background-image: url(${footerBackground});
-  background-size: auto 100%;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
   background-position-y: bottom;
   display: flex;
   padding: 96px 200px 20px 200px;
@@ -18,10 +19,11 @@ export const WrapperFooter = styled.div`
     padding: 96px 100px 20px 100px;
   }
   @media (max-width: 768px) {
-    align-items: start;
+    align-items: center;
     flex-direction: column;
-    gap: 20px;
-    padding-left: 100px;
+    gap: 30px;
+    justify-content: center;
+    padding: 50px 0 10px 0;
   }
 `;
 

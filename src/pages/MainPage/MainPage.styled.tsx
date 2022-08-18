@@ -22,22 +22,33 @@ export const Banner = styled.div`
 export const BannerImage = styled.div`
 display: flex;
 justify-content: flex-end;
-@media (max-width: 560px) {
+img{
+  width:100%;
+}
+@media (max-width: 1040px) {
+  img{
+    width:600px;
+  }
+}
+@media (max-width: 768px) {
   justify-content: center;
   img{
     width:300px;
   }
-  
 }
 `;
 export const BannerTextBlock = styled.div`
   width: 774px;
   display:flex;
-  margin-top: 160px;
+  margin-top: 120px;
+  margin-bottom: 220px;
+  margin-left: 140px;
   flex-direction:column;
   color: ${Colors.WHITE};
-  @media (max-width: 1024px) {
+  @media (max-width: 1040px) {
     width: 640px;
+    margin-bottom: 0px;
+    margin-left: 0px;
   }
   @media (max-width: 768px) {
     width: 400px;
@@ -68,27 +79,32 @@ export const ButtonBlock = styled.div`
   p {
     color: ${Colors.WHITE};
     font-weight: 500;
-    border-bottom: solid ${Colors.WHITE};
     line-height: 24px;
+    transition: 0.2s;
   }
   a{ 
     display: flex;
     align-items:center;
     gap: 14px;
-    &:hover{
-      color: ${Colors.BLACK};
-    }
     img{
       width: auto;
       position: relative;
       top:0;
       right:0;
     }
+    &:hover{
+      p{
+        border-bottom: solid ${Colors.WHITE};
+      }
+      
+    }
   }
+  
   @media (max-width: 768px) {
     flex-direction: column;
     gap:20px;
   }
+  
 `;
 export const JoinButton = styled.button`
     background-color: ${Colors.WHITE};
@@ -98,6 +114,9 @@ export const JoinButton = styled.button`
     width: 226px;
     height: 50px;
     align-items: center;
+    cursor: pointer;
+  &:hover{
+    color: ${Colors.GREEN};
   }
 `;
 
@@ -107,8 +126,16 @@ position: relative;
   height: 50px;
   border-radius: 50%;
   background-color: ${Colors.WHITE};
+  cursor: pointer;
+  &:hover{
+    color: ${Colors.WHITE};
+  }
   img{
     position: initial;
+    
+  }
+  &:hover{
+    box-shadow: 2px 4px 10px rgba(0, 186, 137, 0.5);
   }
 `;
 export const AboutApp = styled.div`
@@ -125,7 +152,7 @@ margin-top: -3px;
   background-position-y: bottom;
   h2{
     margin-top: 120px;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
   }
   @media(max-width: 768px){
   }
@@ -211,6 +238,7 @@ export const AboutAppItemText = styled.p`
 export const AboutAppItemButton = styled(GreenButton)`
 `;
 export const Intro = styled.div`
+margin-top: -3px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -218,7 +246,7 @@ export const Intro = styled.div`
   background-color: ${Colors.WHITE};
   h2{
     margin-top: 80px;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
   }
   @media (max-width: 768px) {
     h2{
@@ -238,6 +266,7 @@ export const VideoPlayer = styled.div`
     }
 `;
 export const OurTeam = styled.div`
+  margin-top: -3px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -361,5 +390,16 @@ export const ContentWrapper = styled.div`
     h2{
       font-size: 28px;
     }
+  }
+`;
+export const ContentWrapperBanner = styled(ContentWrapper)`
+  padding-left: 94px;
+
+  display: flex;
+  @media (max-width: 1040px) {
+    flex-direction: column;
+  }
+  @media (max-width: 700px) {
+    padding-left: 0px;
   }
 `;

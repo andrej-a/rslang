@@ -2,22 +2,24 @@ import React from 'react';
 import BannerImg from '../../assets/main1.svg';
 import PlayArrow from '../../assets/playArrow.svg';
 import AboutAppItems from './ItemsBlock';
-import { BannerTextBlock, ButtonBlock, MainPageWrapper, OurTeam, Banner, PlayVideoButton, JoinButton, AboutApp, VideoPlayer, Intro, BannerImage, ContentWrapper } from './MainPage.styled';
+import { BannerTextBlock, ButtonBlock, MainPageWrapper, OurTeam, Banner, PlayVideoButton, JoinButton, AboutApp, VideoPlayer, Intro, BannerImage, ContentWrapper, ContentWrapperBanner } from './MainPage.styled';
 import TeamMembers from './TeamMembers';
-
+import { Link } from 'react-router-dom';
 
 export const MainPageContent = () => {
   return (
     <MainPageWrapper>
       <Banner>
-        <ContentWrapper>
+        <ContentWrapperBanner>
           <BannerTextBlock>
             <h3>Welcome back!</h3>
             <h1>To have another language is to possess a second soul</h1>
             <ButtonBlock>
-              <JoinButton>Join for free</JoinButton>
+              <Link to={'/registration'}> <JoinButton>Join for free</JoinButton>
+              </Link>
+              
               <div>
-                <a href="https://github.com/Lizaveta01">
+                <a href="#video">
                   <PlayVideoButton>
                     <img src={PlayArrow} alt="play button"/>
                   </PlayVideoButton>
@@ -29,7 +31,7 @@ export const MainPageContent = () => {
           <BannerImage>
           <img src={BannerImg} alt="image" /> 
           </BannerImage>
-        </ContentWrapper>
+        </ContentWrapperBanner>
       </Banner>
        <AboutApp>
         <ContentWrapper>
@@ -37,10 +39,13 @@ export const MainPageContent = () => {
           <AboutAppItems/>
         </ContentWrapper>
       </AboutApp>  
-      <Intro>
-        <ContentWrapper>
+      <Intro >
+        <ContentWrapper id="video">
           <h2>Intro</h2>
-          <VideoPlayer></VideoPlayer>
+          <VideoPlayer > 
+          <iframe frameBorder="0" allowFullScreen={true} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="Ulearning | RS lang" width="100%" height="100%" 
+          src="https://www.youtube.com/embed/9KJxaFHotqI?autoplay=0&amp;mute=0&amp;controls=1&amp;origin=https%3A%2F%2Fulearning-69team.netlify.app&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1&amp;widgetid=1" id="widget2"></iframe>
+          </VideoPlayer>
         </ContentWrapper>
       </Intro>  
       <OurTeam>

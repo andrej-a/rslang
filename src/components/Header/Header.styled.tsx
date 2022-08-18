@@ -29,15 +29,18 @@ const IconDiv = styled.div`
   height: 40px;
   background-repeat: no-repeat;
   cursor: pointer;
-  &:hover, &:active {
+  &:active {
     background-color: ${Colors.GREEN};
     outline: solid 6px ${Colors.GREEN};
     border-radius: 12px;
-    
   }
 `;
-export const MenuIconDiv = styled(IconDiv)`
-z-index: 200;
+export const MenuIconDiv = styled.div`
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  z-index: 200;
   width: 42px;
   height: 40px;
   position: fixed;
@@ -75,9 +78,6 @@ z-index: 200;
     transition: transform 0.2s ease-in-out;
   }
   &.active{
-    body{
-      
-    }
     &::before{
       transform: rotate(-45deg);
       margin-top: 11px;
@@ -91,7 +91,6 @@ z-index: 200;
       transform: rotate(45deg);
       margin-top: -3px;
     }
-
     
   }
   
@@ -144,6 +143,11 @@ export const DivAppNavigation = styled.div`
   a:hover {
     p{
       color: ${Colors.GREEN};
+    }
+    div{
+      background-color: ${Colors.GREEN};
+    outline: solid 6px ${Colors.GREEN};
+    border-radius: 12px;
     }
   }  
   &.active{
