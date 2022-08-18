@@ -1,8 +1,10 @@
-import './App.scss';
 import React from 'react';
+import 'typeface-rubik';
+
+import './App.scss';
 import MainPage from './pages/MainPage/MainPage';
 import { GlobalStyle } from '../src/styles/global';
-import 'typeface-rubik';
+
 
 function App() {
   return (
