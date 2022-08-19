@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
-import { ForgetPassword, LogForm, FormTitle, RegistrationWrapper, StyledButton, ToggleToRegistration } from './Registration.styled';
-import ValidationTextFields from './LoginForm/LoginForm';
+import { RegistrationWrapper } from './LoginForm/LoginForm.styled';
+import LoginForm from './LoginForm/LoginForm';
+import RegistrationForm from './RegistrationForm/RegistrationForm';
+
 const Registration = () => {
-  const [formToggler, setFormToggler] = useState('login');
+  const [formToggler, setFormToggler] = useState('registration');
   const onSetFormToggler = (value: string) => {
     setFormToggler(value);
-  };  
+  };
   return (
         <RegistrationWrapper>
-            {formToggler === 'login' ? <LogForm>
-                <FormTitle>
-                    <p>Log in</p>
-                </FormTitle>
-                <ValidationTextFields />
-                <ToggleToRegistration onClick={() => onSetFormToggler('registration')}>
-                    <p>Don’t have an account? Sign Up</p>
-                </ToggleToRegistration>
-            </LogForm> : null}
+            {formToggler === 'login' ? <LoginForm 
+            onSetFormToggler={onSetFormToggler}
+            /> : 
+            <RegistrationForm 
+            onSetFormToggler={onSetFormToggler}
+            />}
         </RegistrationWrapper>
   );
 };

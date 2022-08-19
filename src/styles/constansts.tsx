@@ -30,3 +30,8 @@ export const device = {
   tablet: `(min-width: ${WindowSizes.mobile})`,
   laptop: `(min-width: ${WindowSizes.mobile})`,
 };
+
+export enum Values {
+  LOGIN_FORM_TITLE = 'Log in',
+  REGISTRATION_FORM_TITLE = 'Registration',
+}

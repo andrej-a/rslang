@@ -1,6 +1,6 @@
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import styled from 'styled-components';
-import { Colors, device, WindowSizes } from '../../styles/constansts';
+import { Colors, device, WindowSizes } from '../../../styles/constansts';
 
 export const RegistrationWrapper = styled.div`
     width: 100%;
@@ -11,13 +11,19 @@ export const RegistrationWrapper = styled.div`
     align-items: center;
 `;
 
-export const LogForm = styled.div`
+export const Form = styled.div`
     width: auto;
     max-width: 510px;
+    min-width: 300px;
     height: auto;
     background: ${Colors.WHITE};
     border-radius: 8px;
     margin-left: 105px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 
     @media (min-height: 1100px) {
         margin-bottom: 320px;
@@ -57,36 +63,26 @@ export const LogForm = styled.div`
             width: 250px;
         }
     }
-
-    .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
-        padding: 15px 0 15px 23px;
-        border: 2px solid ${Colors.GRAY};
-        border-radius: 4px;
-    }
-
-    .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input input:focus {
-        outline:0;outline-offset:0
-    }
-
     .errorMessage {
         margin-top: 5px;
         color: ${Colors.RED}
     }
 `;
 
-export const FormTitle = styled.div`
-    padding-top: 62px;
-    padding-left: 211px;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 40px;
-    letter-spacing: 0.015em;
-    color: ${Colors.BLACK};
-    @media (max-width: 560px) {
-        padding-left: 0;
+export const StyledTextField = styled(TextField)`
+ &.MuiTextField-root {
+    input {
+        padding: 15px 0 15px 23px;
+        border: 2px solid ${Colors.GRAY};
+        border-radius: 4px;
     }
-`;
 
+    &.valid input{
+        color: ${Colors.GREEN};
+        border: 2px solid ${Colors.GREEN};
+    }
+ }
+`;
 
 export const ForgetPassword = styled.div`
     p {
@@ -126,9 +122,8 @@ export const StyledButton = styled(Button)`
     }
 `;
 
-export const ToggleToRegistration = styled.div`
+export const ToggleToAnotherForm = styled.div`
     margin-top: 14px;
-    margin-left: 118px;
     padding-bottom: 63px;
     cursor: pointer;
     p {
