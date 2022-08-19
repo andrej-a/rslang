@@ -37,6 +37,7 @@ const TextBookContent = () => {
     setActiveWord(() => (words.find(word => word.id === wordId) as IWord));
   };
   const paginate = (direction: number, numButt = false) => {
+    if (typeof direction !== 'number') return;
     if (numButt) setCurrentPage(page => direction);
     else setCurrentPage(page => page + direction);
   };

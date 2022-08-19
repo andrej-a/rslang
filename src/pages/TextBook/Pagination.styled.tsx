@@ -1,17 +1,14 @@
 import styled from 'styled-components';
-import { Colors, device } from '../../styles/constansts';
+import { Colors } from '../../styles/constansts';
 import next from '../../assets/next.svg';
 import previous from '../../assets/prev.svg';
-import WaveImage from '../../assets/wave.png';
-import WaveImageReverse from '../../assets/waveReverse.png';
-import LevelHint from '../../assets/levelHint.svg';
-import { GreenButton } from '../../components/Buttons.styled';
 
 export const PaginationWrapper = styled.div`
   display: flex;
   gap: 15px;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 export const PaginationButton = styled.button.attrs((props: { state: boolean }) => props)`
   height: 44px;
@@ -23,6 +20,7 @@ export const PaginationButton = styled.button.attrs((props: { state: boolean }) 
   font-size: 22px;
   line-height: 35px;
   border-radius: 50%;
+  cursor: pointer;
 `;
 export const PreviousButton =  styled(PaginationButton)`
   background: url('${previous}');

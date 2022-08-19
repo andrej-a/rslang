@@ -1,15 +1,13 @@
 import styled from 'styled-components';
-import { Colors, device } from '../../styles/constansts';
+import { Colors } from '../../styles/constansts';
 import Audio from '../../assets/Audio.svg';
-import WaveImageReverse from '../../assets/waveReverse.png';
 import LevelHint from '../../assets/levelHint.svg';
-import { GreenButton } from '../../components/Buttons.styled';
 
 export const TextBookWrapper = styled.div`
   display: flex;
   width: fit-content;
   flex-direction: row;
-  margin: 63px auto 48px;
+	margin: 100px auto;
 	gap: 97px;
 `;
 export const GameBlock = styled.div`
@@ -94,7 +92,8 @@ export const WordButtonsWrapper = styled.div`
 
 export const WordCardWrapper = styled.div`
   width: 455px;
-  height: 586px;
+  min-height: 586px;
+	height: fit-content;
   border-radius: 9px;
   background-color: ${Colors.WHITE}; 
 
@@ -103,6 +102,7 @@ export const WordCardWrapper = styled.div`
 export const WordCardImage = styled.div.attrs((props: { imgPath: string }) => props)`
   width: 100%;
   height: 278px;
+  border-radius: 9px;
   background: url('${props => props.imgPath}');
   background-size: 100%;
 `;
@@ -154,4 +154,26 @@ export const Line = styled.hr.attrs((props: { color: string }) => props)`
 	margin: 0 47px 0 32px;
 	padding-left: 15px;
 	color: ${props => props.color};
+`;
+export const WordDescritionBlock = styled.div`
+	margin: 19px 37px;
+`;
+export const WordDescritionBlockTitle = styled.h3`
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 20px;
+`;
+export const WordDescritionBlockExample = styled.h3`
+	font-size: 16px;
+	line-height: 22px;
+	letter-spacing: 0.015em;
+	color: #222222;
+	padding: 10px 0 4px;
+`;
+export const WordDescritionBlockTranslation = styled.h3`
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+	letter-spacing: 0.015em;
+	color: #222222;
 `;
