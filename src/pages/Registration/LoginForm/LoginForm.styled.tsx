@@ -66,7 +66,7 @@ export const Form = styled.div`
     .errorMessage {
         margin-top: 5px;
         color: ${Colors.RED}
-    }
+    }    
 `;
 
 export const StyledTextField = styled(TextField)`
@@ -118,6 +118,7 @@ export const StyledButton = styled(Button)`
         background-color: ${Colors.GREEN};
     }
     &.MuiButton-containedPrimary:disabled {
+        border-color: transparent;
         background-color: ${Colors.DISABLED};
     }
 `;
