@@ -34,5 +34,19 @@ export const device = {
 
 export enum Values {
   LOGIN_FORM_TITLE = 'Log in',
+  LOGIN_FORM_STATE = 'login',
   REGISTRATION_FORM_TITLE = 'Registration',
+  REGISTRATION_FORM_STATE = 'registration',
+  EMAIL_PLACEHOLDER = 'Email',
+  EMAIL_ERROR_MESSAGE = 'Email is required field',
+  EMAIL_FORMAT_ERROR_MESSAGE = 'Email should have correct format',
+  PASSWORD_PLACEHOLDER = 'Password',
+  PASSWORD_LENGTH_ERROR_MESSAGE = 'Password must be 8 chars minimum.',
+  PASSWORD_ERROR_MESSAGE = 'Password is required field',
+  NAME_PLACEHOLDER = 'Name',
+  NAME_LENGTH_ERROR_MESSAGE = 'Name should be 2 chars minimum.',
+  NAME_ERROR_MESSAGE = 'Name is required field',
 }
+
+export const mailRegularCheeker = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+

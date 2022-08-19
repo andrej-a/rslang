@@ -1,6 +1,8 @@
 import { Button, TextField } from '@mui/material';
 import styled from 'styled-components';
-import { Colors, device, WindowSizes } from '../../../styles/constansts';
+
+import { Colors, WindowSizes } from '../../../styles/constansts';
+const { tablet } = WindowSizes;
 
 export const RegistrationWrapper = styled.div`
     width: 100%;
@@ -9,12 +11,19 @@ export const RegistrationWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: ${tablet}) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 export const Form = styled.div`
     width: auto;
-    max-width: 510px;
-    min-width: 300px;
+    max-width: 100%;
+    min-width: 280px;
     height: auto;
     background: ${Colors.WHITE};
     border-radius: 8px;
@@ -24,34 +33,21 @@ export const Form = styled.div`
     justify-content: center;
     align-items: center;
 
-
-    @media (min-height: 1100px) {
-        margin-bottom: 320px;
-    }
-
-    @media (max-width: ${WindowSizes.laptop}) {
-        margin-bottom: 0;
+    @media (max-width: ${tablet}) {
         margin-left: 0;
+        width: 60%;
+        margin-top: 60px;
     }
 
-    @media (max-width: 560px) {
-        width: 290px;
-        padding-left: 20px;
-        padding-right: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    form {
+    .MuiBox-root {
         margin-top: 14px;
         padding-left: 86px;
         padding-right: 86px;
-        width: auto;
-        @media (max-width: 560px) {
-            padding-left: 0;
-            padding-right: 0;
+        width: 100%;
+
+        @media (max-width: ${tablet}) {
+            padding-left: 30px;
+            padding-right: 30px;
         }
     }
 
@@ -59,10 +55,12 @@ export const Form = styled.div`
         width: 339px;
         height: 60px;
         margin-top: 24px;
-        @media (max-width: 560px) {
-            width: 250px;
+
+        @media (max-width: ${tablet}) {
+            width: 100%;
         }
     }
+
     .errorMessage {
         margin-top: 5px;
         color: ${Colors.RED}
@@ -77,7 +75,7 @@ export const StyledTextField = styled(TextField)`
         border-radius: 4px;
     }
 
-    &.valid input{
+    &.valid input {
         color: ${Colors.GREEN};
         border: 2px solid ${Colors.GREEN};
     }
@@ -107,9 +105,10 @@ export const StyledButton = styled(Button)`
         box-shadow: 2px 4px 10px rgba(0, 186, 137, 0.5);
         border-radius: 15px;
         background-color: ${Colors.LIGHT_GREEN};
-        @media (max-width: 560px) {
+
+        @media (max-width: ${tablet}) {
             margin-left: 0;
-            padding: 3px 75px;
+            padding: 3px 50px;
             width: 100%;
         }
     
@@ -134,7 +133,8 @@ export const ToggleToAnotherForm = styled.div`
         line-height: 40px;
         letter-spacing: 0.015em;
     }
-    @media (max-width: 560px) {
+
+    @media (max-width: ${tablet}) {
         margin-left: 0;
         p {
             font-size: 16px;

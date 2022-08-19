@@ -1,14 +1,31 @@
-import { Box } from '@mui/material';
 import React from 'react';
+import { Box } from '@mui/material';
 import { useForm, FieldValues } from 'react-hook-form';
-import FormTitle from '../../../components/FormTitle/FormTitle';
-import { Values } from '../../../styles/constansts';
+import { ThemeProvider } from '@mui/system';
+
+import { mailRegularCheeker, Values } from '../../../styles/constansts';
+import { theme } from '../../../styles/theme';
 import { Form, StyledButton, StyledTextField, ToggleToAnotherForm } from '../LoginForm/LoginForm.styled';
+
+import FormTitle from '../../../components/FormTitle/FormTitle';
+
 interface IRegistrationForm {
   onSetFormToggler: (value: string) => void;
 }
 const RegistrationForm = ({ onSetFormToggler }: IRegistrationForm) => {
-  const { REGISTRATION_FORM_TITLE } = Values;
+  const { 
+    REGISTRATION_FORM_TITLE, 
+    LOGIN_FORM_STATE,
+    EMAIL_ERROR_MESSAGE, 
+    EMAIL_FORMAT_ERROR_MESSAGE,
+    EMAIL_PLACEHOLDER,
+    PASSWORD_LENGTH_ERROR_MESSAGE,
+    PASSWORD_ERROR_MESSAGE,
+    PASSWORD_PLACEHOLDER,
+    NAME_PLACEHOLDER,
+    NAME_LENGTH_ERROR_MESSAGE,
+    NAME_ERROR_MESSAGE, 
+  } = Values;
   const {
     register,
     formState: {
@@ -29,61 +46,65 @@ const RegistrationForm = ({ onSetFormToggler }: IRegistrationForm) => {
       <FormTitle
         TITLE={REGISTRATION_FORM_TITLE}
       />
-
+      <ThemeProvider theme={theme}>
       <Box
         component="form"
         noValidate
-        autoComplete="off"
+        autoComplete="on"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div>
         <StyledTextField
+            sx={[{ '&:focus-within': { outline: 'none',  borderColor: theme.palette.success.main } }]}
             error={!!errors.name}
             className={isValid ? 'valid' : ''}
             id="name"
-            placeholder='Name'
+            placeholder={NAME_PLACEHOLDER}
             {...register('name', {
               minLength: {
                 value: 2,
-                message: 'Name should be 2 chars minimum.',
+                message: NAME_LENGTH_ERROR_MESSAGE,
               },
               required: true,
             })}
           />
-          <p className='errorMessage'>{errors.name && (errors?.name?.message as string || 'Name is required field')}</p>
+          <p className='errorMessage'>{errors.name && (errors?.name?.message as string || NAME_ERROR_MESSAGE)}</p>
           <StyledTextField
+            sx={[{ '&:focus-within': { outline: 'none',  borderColor: theme.palette.success.main } }]}
             error={!!errors.email}
             className={isValid ? 'valid' : ''}
             id="email"
-            placeholder='Email'
+            placeholder={EMAIL_PLACEHOLDER}
             {...register('email', {
               pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: 'Email should have correct format',
+                value: mailRegularCheeker,
+                message: EMAIL_FORMAT_ERROR_MESSAGE,
               },
               required: true,
             })}
           />
-          <p className='errorMessage'>{errors.email && (errors?.email?.message as string || 'Email is required field')}</p>
+          <p className='errorMessage'>{errors.email && (errors?.email?.message as string || EMAIL_ERROR_MESSAGE)}</p>
           <StyledTextField
+            sx={[{ '&:focus-within': { outline: 'none',  borderColor: theme.palette.success.main } }]}
             error={!!errors.password}
             className={isValid ? 'valid' : ''}
             type='password'
             id="password"
-            placeholder="Password"
+            placeholder={PASSWORD_PLACEHOLDER}
             {...register('password', {
               required: true,
               minLength: {
                 value: 8,
-                message: 'Password is too short - should be 8 chars minimum.',
+                message: PASSWORD_LENGTH_ERROR_MESSAGE,
               },
             })}
           />
-          <p className='errorMessage'>{errors.password && (errors?.password?.message as string || 'Password is required field')}</p>
+          <p className='errorMessage'>{errors.password && (errors?.password?.message as string || PASSWORD_ERROR_MESSAGE)}</p>
         </div>
         <StyledButton disabled={!isValid} type='submit' variant="contained">Sign Up</StyledButton>
       </Box>
-      <ToggleToAnotherForm onClick={() => onSetFormToggler('login')}>
+      </ThemeProvider>
+      <ToggleToAnotherForm onClick={() => onSetFormToggler(LOGIN_FORM_STATE)}>
         <p>Do you have an account? Sign In</p>
       </ToggleToAnotherForm>
     </Form>

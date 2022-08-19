@@ -4,9 +4,6 @@ import { Colors } from './constansts';
 
 export const theme = createTheme({
   palette: {
-    primary: {
-      main: Colors.GRADIENT,
-    },
     secondary: {
       main: Colors.WHITE,
     },
