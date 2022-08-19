@@ -1,10 +1,11 @@
 import { createTheme } from '@mui/material/styles';
+
 import { Colors } from './constansts';
 
-export const Formtheme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
-      main: '#222',
+      main: Colors.GRADIENT,
     },
     secondary: {
       main: Colors.WHITE,
