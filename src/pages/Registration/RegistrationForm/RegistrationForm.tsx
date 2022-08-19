@@ -3,7 +3,8 @@ import React from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import FormTitle from '../../../components/FormTitle/FormTitle';
 import { Values } from '../../../styles/constansts';
-import { ForgetPassword, Form, StyledButton, StyledTextField, ToggleToAnotherForm } from '../LoginForm/LoginForm.styled';
+import { Form, StyledButton, StyledTextField, ToggleToAnotherForm } from '../LoginForm/LoginForm.styled';
+import { StyledUploadAvatarButton } from './RegistrationForm.styled';
 interface IRegistrationForm {
   onSetFormToggler: (value: string) => void;
 }
@@ -30,6 +31,7 @@ const RegistrationForm = ({ onSetFormToggler }: IRegistrationForm) => {
       <FormTitle
         TITLE={REGISTRATION_FORM_TITLE}
       />
+
       <Box
         component="form"
         noValidate
@@ -80,6 +82,10 @@ const RegistrationForm = ({ onSetFormToggler }: IRegistrationForm) => {
             })}
           />
           <p className='errorMessage'>{errors.password && (errors?.password?.message as string || 'Password is required field')}</p>
+          <StyledUploadAvatarButton variant="contained">
+            Upload avatar
+            <input hidden accept="image/*" multiple type="file" />
+          </StyledUploadAvatarButton>
         </div>
         <StyledButton disabled={!isValid} type='submit' variant="contained">Sign Up</StyledButton>
       </Box>
