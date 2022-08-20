@@ -1,8 +1,8 @@
 import { Button } from '@mui/material';
 import styled from 'styled-components';
-import { Colors } from '../../styles/constansts';
+import { Colors, WindowSizes } from '../../styles/constansts';
 const { WHITE, PLAY_BUTTON_GRADIENT } = Colors;
-
+const { laptop, tablet } = WindowSizes;
 interface IImageWrapperProps {
   inputColor: string;
 }
@@ -10,13 +10,25 @@ interface IImageWrapperProps {
   
 export const MiniGamesWrapper = styled.div`
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    gap: 126px;
-    padding-left: 123px;
+    flex-wrap: wrap;
+    gap: 10%;
+    padding-left: 10%;
+    padding-bottom: 100px;
+
+    @media (max-width: ${laptop}) {
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0;
+        padding: 0 20px;
+        padding-top: 100px;
+        gap: 50px;
+    }
 `;
 
 export const Card = styled.div`
@@ -25,13 +37,17 @@ export const Card = styled.div`
     max-width: 404px;
     min-height: 150px;
     height: auto;
-    margin-top: 200px;
+    margin-top: 100px;
     background: ${WHITE};
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: ${laptop}) {
+        margin-top: 0px;
+    }
 `;
 export const ImageWrapper = styled.div`
     width: 111px;
@@ -55,6 +71,11 @@ export const Description = styled.div`
         text-align: center;
         letter-spacing: 0.015em;
     }
+
+    @media (max-width: ${tablet}) {
+        padding: 0 20px;
+    }
+
 `;
 
 export const StyledPlayButton = styled(Button)`

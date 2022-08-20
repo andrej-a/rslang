@@ -1,37 +1,28 @@
 import React from 'react';
 import FormTitle from '../../components/FormTitle/FormTitle';
-import { Colors } from '../../styles/constansts';
+import { cards } from './cardsDB';
 import { Card, Description, ImageWrapper, MiniGamesWrapper, StyledPlayButton } from './MiniGames.styled';
-import SPRINT from '../../assets/sprintImage.svg';
-import AUDIO from '../../assets/audioImage.svg';
 const MiniGames = () => {
-  const { GREEN, LIGHT_GREEN } = Colors;
+
+  const items = cards.map(card => {
+    const { id, TITLE, inputColor, src } = card;
+    return <Card key={id}>
+                <FormTitle TITLE={TITLE}/>
+                <ImageWrapper
+                inputColor={inputColor}
+                >
+                    <img src={src} alt="game_image" />
+                </ImageWrapper>
+                <Description>
+                    <p>Check how much points you can get in one minute, making educated guesses about what is right and what is wrong</p>
+                </Description>
+                <StyledPlayButton variant="contained">Play</StyledPlayButton>
+            </Card>;
+  });
+
   return (
         <MiniGamesWrapper>
-            <Card>
-                <FormTitle TITLE={'Sprint'}/>
-                <ImageWrapper
-                inputColor={GREEN}
-                >
-                    <img src={SPRINT} alt="game_image" />
-                </ImageWrapper>
-                <Description>
-                    <p>Check how much points you can get in one minute, making educated guesses about what is right and what is wrong</p>
-                </Description>
-                <StyledPlayButton variant="contained">Play</StyledPlayButton>
-            </Card>
-            <Card>
-                <FormTitle TITLE={'Audio challenge'}/>
-                <ImageWrapper
-                inputColor={LIGHT_GREEN}
-                >
-                    <img src={AUDIO} alt="game_image" />
-                </ImageWrapper>
-                <Description>
-                    <p>Check how much points you can get in one minute, making educated guesses about what is right and what is wrong</p>
-                </Description>
-                <StyledPlayButton variant="contained">Play</StyledPlayButton>
-            </Card>
+            {items}
         </MiniGamesWrapper>
   );
 };
