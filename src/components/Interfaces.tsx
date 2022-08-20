@@ -23,3 +23,8 @@ export interface IContact {
   name: string;
   link: string;
 }
+
+export interface IGameCommomInfo {
+  title: string;
+  img: string;
+}

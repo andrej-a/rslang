@@ -1,14 +1,12 @@
 import React from 'react';
 
-import Footer from '../../../components/Footer/Footer';
-import Header from '../../../components/Header/Header';
-import { MainPageContent } from './MainPageContent';
+import { GameSprintWrapper } from './SprintGame.styled';
 
-const MainPage = () => {
+const SprintGame = () => {
   return (
-    <>
-      <Header />
-    </>
+    <GameSprintWrapper>
+      
+    </GameSprintWrapper>
   );
 };
 

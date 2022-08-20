@@ -8,7 +8,7 @@ import { GreenButton } from '../../components/Buttons.styled';
 export const MainPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justufy-content: center;
+  justify-content: center;
 `;
 
 export const Banner = styled.div`
