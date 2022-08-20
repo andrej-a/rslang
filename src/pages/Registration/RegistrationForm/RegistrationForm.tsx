@@ -26,6 +26,7 @@ const RegistrationForm = ({ onSetFormToggler }: IRegistrationForm) => {
     NAME_LENGTH_ERROR_MESSAGE,
     NAME_ERROR_MESSAGE, 
   } = Values;
+  
   const {
     register,
     formState: {
@@ -37,7 +38,7 @@ const RegistrationForm = ({ onSetFormToggler }: IRegistrationForm) => {
   } = useForm({ mode: 'onChange' });
 
   const onSubmit = (data: FieldValues) => {
-    alert(JSON.stringify(data));
+    alert(JSON.stringify(data)); //IN DATA ARE AN INFORMATION FROM INPUTS
     reset();
   };
 

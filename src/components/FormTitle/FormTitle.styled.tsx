@@ -8,7 +8,4 @@ export const FormTitleStyled = styled.div`
     line-height: 40px;
     letter-spacing: 0.015em;
     color: ${Colors.BLACK};
-    @media (max-width: 560px) {
-        padding-left: 0;
-    }
 `;
