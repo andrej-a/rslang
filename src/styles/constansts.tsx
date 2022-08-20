@@ -8,6 +8,7 @@ export enum Colors {
   GREEN = '#07D6A0',
   RED = '#FD1E1E',
   GRADIENT = 'linear-gradient(180deg, #4EE57E, #07D6A0)',
+  PLAY_BUTTON_GRADIENT = 'linear-gradient(127.86deg, #4EE57E 6.91%, #07D6A0 110.49%)',
   BOOK_GRREN = '#00C013',
   BOOK_YELLOW = '#EBFF00',
   BOOK_AZURE_BLUE = '#00E0FF',
