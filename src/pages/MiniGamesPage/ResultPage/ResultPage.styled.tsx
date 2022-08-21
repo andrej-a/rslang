@@ -40,7 +40,6 @@ export const SeeResultButton = styled.button`
   }
 `;
 export const SeeWordButton = styled(SeeResultButton)``;
-
 export const ResultViewWindowContainer = styled.div`
   height: 308px;
   display: flex;
@@ -79,7 +78,6 @@ export const CircleStatistic = styled.div`
   background-color: ${Colors.GREEN};
   border-radius: 50%;
 `;
-
 export const ButtonContainer = styled.div`
   display: flex;
   gap: 44px;
@@ -108,12 +106,10 @@ export const WorldViewWindowContainer = styled.div`
   &::-webkit-scrollbar {
     width: 6px;
   }
-
   &::-webkit-scrollbar-track {
     background-color: #d9d9d9;
     border-radius: 6px;
   }
-
   &::-webkit-scrollbar-thumb {
     background-color: #a5a5a5;
     border-radius: 4px;

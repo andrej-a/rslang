@@ -65,4 +65,3 @@ const ResultPage = ({ result }: Props) => {
 };
 
 export default ResultPage;
-

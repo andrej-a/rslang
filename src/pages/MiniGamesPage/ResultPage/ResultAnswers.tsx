@@ -8,11 +8,18 @@ type Props = {
   answers: IWord[];
 };
 
-export const WordItem = ({ wordEng, wordRu, audio }: IWord) => {
+export const WordItem = ({ wordEng, wordRu, audioUrl }: IWord) => {
+
+  const startSong = (url:string | undefined) => {
+    const audio = new Audio();
+    audio.src = `${url}`;
+    audio.autoplay = true; 
+  };
+ 
   return (
     <Word>
-      <AudioButton>
-        <img src={ListenIcon} alt="icon" />
+      <AudioButton onClick={()=>startSong(audioUrl)}>
+      <img src={ListenIcon} alt="icon" /> 
       </AudioButton>
       <WordEng>{wordEng} - </WordEng>
       <WordRu> {wordRu}</WordRu>

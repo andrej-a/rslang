@@ -19,11 +19,9 @@ export const GameWrapper = styled.div`
     font-weight: 400;
   }
 `;
-
 export const GameImage = styled.div`
   display: flex;
 `;
-
 export const LevelDiv = styled.div`
   margin-top: 20px;
   justify-content: center;
@@ -32,14 +30,12 @@ export const LevelDiv = styled.div`
   flex-direction: column;
   gap: 32px;
 `;
-
 export const LevelButtonsContainer = styled.div`
   justify-content: center;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 `;
-
 export const LevelButton = styled.button`
   width: 52px;
   height: 52px;

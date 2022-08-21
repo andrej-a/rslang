@@ -33,5 +33,5 @@ export interface IWord {
   key?: number;
   wordEng?: string;
   wordRu?: string;
-  audio?: string;
+  audioUrl?: string;
 }

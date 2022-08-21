@@ -1,5 +1,5 @@
-import SprintIcon from '../../assets/sprint.svg';
-import AudioIcon from '../../assets/audio.svg';
+import SprintIcon from '../../../assets/sprint.svg';
+import AudioIcon from '../../../assets/audio.svg';
 
 export const GamesData = [
   {
