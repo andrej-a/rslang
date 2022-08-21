@@ -19,7 +19,6 @@ export enum Colors {
   FORM_BLUE = '#0252CC',
 }
   
-  
 export enum WindowSizes {
   mobile = '320px',
   tablet = '768px',
