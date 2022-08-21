@@ -7,9 +7,7 @@ import { MainPageContent } from './MainPageContent';
 const MainPage = () => {
   return (
     <>
-      
       <MainPageContent />
-      
     </>
   );
 };

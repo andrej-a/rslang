@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { IGameCommomInfo } from '../../components/Interfaces';
-import { GameWrapper, LevelDiv, LevelButtonsContainer, LevelButton, GameImage } from './CommontGame.styled';
-
+import { IGameCommomInfo } from '../../../components/Interfaces';
+import { GameWrapper, LevelDiv, LevelButtonsContainer, LevelButton, GameImage } from './InitialGame.styled';
 
 const InitialGame = ({ title, img }: IGameCommomInfo) => {
   return (
     <GameWrapper>
-      <GameImage> <img src={img} alt="icon" /></GameImage>
+      <GameImage>
+        <img src={img} alt="icon" />
+      </GameImage>
       <h2>{title}</h2>
       <LevelDiv>
         <h3>Select the level</h3>

@@ -44,8 +44,7 @@ const data: IMembers[] = [
 ];
 
 const TeamMembers = () => {
-  const elements = data.map((item) => {
-    const { key, ...itemProps } = item;
+  const elements = data.map(({ key, ...itemProps }) => {
     return <Member key={key} {...itemProps} />;
   });
 

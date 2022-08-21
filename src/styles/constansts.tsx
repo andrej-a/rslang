@@ -14,3 +14,9 @@ export enum Colors {
   BOOK_RED = '#EF1E01',
   BOOK_PURPLE = '#AF00ED',
 }
+
+export enum TextMessageResult {
+  GOOD = 'Good job! All your answers are right!',
+  NORMAL = 'You can better! Repeat the words and come back',
+  BAD = 'Not bad, but you need more practice',
+}

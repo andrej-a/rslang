@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Colors } from '../../styles/constansts';
+import { Colors } from '../../../styles/constansts';
 
 export const GameWrapper = styled.div`
   justify-content: center;
@@ -11,11 +11,11 @@ export const GameWrapper = styled.div`
   gap: 10px;
   height: 100vh;
   color: ${Colors.WHITE};
-  h2{
-    font-size:30px;
+  h2 {
+    font-size: 30px;
   }
-  h3{
-    font-size:24px;
+  h3 {
+    font-size: 24px;
     font-weight: 400;
   }
 `;
@@ -37,7 +37,7 @@ export const LevelButtonsContainer = styled.div`
   justify-content: center;
   display: flex;
   gap: 10px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 `;
 
 export const LevelButton = styled.button`
