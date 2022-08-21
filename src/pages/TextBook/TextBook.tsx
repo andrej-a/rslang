@@ -7,7 +7,6 @@ import TextBookContent from './TextBookContent';
 const TextBook = () => {
   return (
     <>
-      <Header title='TextBook' />
       <TextBookContent/>
     </>
   );
