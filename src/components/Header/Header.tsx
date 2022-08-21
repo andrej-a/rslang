@@ -16,7 +16,7 @@ const Header = () => {
       <PageTitle className={isActive ? 'active' : ''}> EasyEnglish </PageTitle>
       <Link to={'/registration'}>
         <UserProfile>
-          <p>Sign in</p>
+            <p>Sign in</p>
           <div>
             <img src={ProfileIcon} alt="" />
           </div>
