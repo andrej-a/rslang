@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ProgressBarSize } from '../../styles/constansts';
 
 import { CircleContainer, ProgressBarContainer } from './ProgressBar.styled';
 
@@ -8,7 +9,7 @@ type Props = {
 
 const ProgressBar = ({ percent }: Props) => {
 
-  const radius = 53;
+  const radius = ProgressBarSize.MEDIUM;
   const circumference = Math.PI * 2 * radius;
   const offset = circumference - percent / 100 * circumference;
   const [offsetNew, setOffset] = useState(offset);
