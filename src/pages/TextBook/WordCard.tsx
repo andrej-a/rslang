@@ -14,9 +14,9 @@ import { WordCardWrapper,
   WordDescritionBlockExample,
   WordDescritionBlockTranslation } from './TextBook.styled';
 
-const WordCard = ({ word, color }: { word: IWord, color: string }) => {
+const WordCard = ({ word, color, isModal = false }: { word: IWord, color: string, isModal?: boolean }) => {
   return (
-        <WordCardWrapper>
+        <WordCardWrapper className={ isModal ? '' : 'card' }>
             <WordCardImage imgPath={`https://react-rslang-back.herokuapp.com/${word.image}`} />
             <CardTitleWrapper >
                 <AudioButton />

@@ -4,11 +4,17 @@ import Audio from '../../assets/Audio.svg';
 import LevelHint from '../../assets/levelHint.svg';
 
 export const TextBookWrapper = styled.div`
-  display: flex;
+  display: grid;
+	grid-template-rows: 1fr auto;
+	grid-template-columns: repeat(2, 1fr);
   width: fit-content;
-  flex-direction: row;
 	margin: 100px auto;
-	gap: 97px;
+	grid-gap: 29px 97px;
+
+	@media (max-width: 1230px){
+		grid-template-columns: repeat(1, 1fr);
+
+	}
 `;
 export const GameBlock = styled.div`
   display: flex;
@@ -51,6 +57,7 @@ export const LevelButtonStyled = styled.button.attrs((props: { levelColor: strin
     font-size: 14px;
     line-height: 16px;
 		content: '${props => props.title}';
+		color: ${Colors.BLACK};
   }
   &:hover:after{    
     visibility: visible;
@@ -95,10 +102,16 @@ export const WordCardWrapper = styled.div`
   min-height: 586px;
 	height: fit-content;
   border-radius: 9px;
+	padding-bottom: 23px;
   background-color: ${Colors.WHITE}; 
 
-`;
+	@media (max-width: 1230px){
+		&.card{
+			display: none;
+		}
+	}
 
+`;
 export const WordCardImage = styled.div.attrs((props: { imgPath: string }) => props)`
   width: 100%;
   height: 278px;
@@ -176,4 +189,53 @@ export const WordDescritionBlockTranslation = styled.h3`
 	line-height: 22px;
 	letter-spacing: 0.015em;
 	color: #222222;
+`;
+export const ProceedToGameButtonsWrapper = styled.div`
+display: flex;
+gap: 13px;
+@media (max-width: 1230px){
+	justify-content: center;
+}
+`;
+export const ProceedToGameButton = styled.button.attrs((props: { imagePath: string, iconColor: string }) => props)`
+background-color: transparent;
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: 16px;
+padding: 0 18px;
+height: 60px;
+white-space: nowrap;
+border-radius: 4px;
+border: 3px solid ${Colors.WHITE};
+font-weight: 400;
+font-size: 22px;
+line-height: 40px;
+letter-spacing: 0.015em;
+cursor: pointer;
+
+& .button__icon{
+	border-radius: 50%;
+	background-image: url('${props => props.imagePath}');
+	background-color: ${Colors.WHITE};
+	background-repeat: no-repeat;
+	background-position: center;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 38px;
+	height: 38px;
+}
+
+&:hover{
+	background-color: ${Colors.WHITE};
+}
+&:disabled{
+	background-color: rgba(255, 255, 255, 0.46);
+	border: 3px solid transparent;
+}
+&:hover .button__icon,
+&:disabled .button__icon{
+	background-color: ${props => props.iconColor};
+}
+
 `;
