@@ -3,18 +3,18 @@ import React from 'react';
 import { ResultStatistic, ResultTextInfo, ResultViewWindowContainer } from './ResultPage.styled';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { IWord } from '../../../components/Interfaces';
-import { TextMessageResult } from '../../../styles/constansts';
+import { GameResultInfo, ProgressBarInfo, TextMessageResult } from '../../../styles/constansts';
 
 type Props = {
   rightAnswers: IWord[];
   wrongAnswers: IWord[];
 };
 const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
-  const allWordNumber = 10;
+  const allWordNumber = GameResultInfo.WORD_COUNT;
   const textMessage =
-    rightAnswers.length === 10
+    rightAnswers.length === allWordNumber
       ? TextMessageResult.GOOD
-      : rightAnswers.length > 5
+      : rightAnswers.length > GameResultInfo.HALF_WORD_COUNT
         ? TextMessageResult.NORMAL
         : TextMessageResult.BAD;
   return (
@@ -24,7 +24,7 @@ const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
         <span>{rightAnswers.length}</span> words studied, <span>{wrongAnswers.length}</span> words to learn
       </ResultTextInfo>
       <ResultStatistic>
-        <ProgressBar percent={(rightAnswers.length * 100) / allWordNumber } />
+        <ProgressBar percent={(rightAnswers.length * GameResultInfo.PERSENT) / allWordNumber } />
         <p>Accurancy</p>
       </ResultStatistic>
     </ResultViewWindowContainer>

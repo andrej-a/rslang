@@ -55,9 +55,17 @@ export enum TextMessageResult {
   BAD = 'Not bad, but you need more practice',
 }
 
-export enum ProgressBarSize {
-  MEDIUM = 53,
-  LARGE = 184,
+export enum ProgressBarInfo {
+  SIZE_MEDIUM = 53,
+  SIZE_LARGE = 184,
+  PERSENT = 100,
+  FOR_CIRCLE_LENGTH = Math.PI * 2,
+}
+
+export enum GameResultInfo {
+  WORD_COUNT = 10,
+  HALF_WORD_COUNT = 10,
+  PERSENT = 100,
 }
 
 
