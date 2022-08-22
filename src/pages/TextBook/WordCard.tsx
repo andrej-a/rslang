@@ -12,12 +12,21 @@ import { WordCardWrapper,
   WordDescritionBlock, 
   WordDescritionBlockTitle,
   WordDescritionBlockExample,
-  WordDescritionBlockTranslation } from './TextBook.styled';
+  WordDescritionBlockTranslation,
+  WordCardButtonsWrapper } from './TextBook.styled';
 
-const WordCard = ({ word, color, isModal = false }: { word: IWord, color: string, isModal?: boolean }) => {
+interface IWordCard { 
+  word: IWord, 
+  color: string, 
+  isModal?: boolean 
+}
+
+const WordCard = ({ word, color, isModal = false }: IWordCard) => {
   return (
         <WordCardWrapper className={ isModal ? '' : 'card' }>
+
             <WordCardImage imgPath={`https://react-rslang-back.herokuapp.com/${word.image}`} />
+
             <CardTitleWrapper >
                 <AudioButton onClick={ () => {
                   const audioMeaning = new Audio(`https://react-rslang-back.herokuapp.com/${word.audioMeaning}`);
@@ -25,23 +34,29 @@ const WordCard = ({ word, color, isModal = false }: { word: IWord, color: string
                   audioMeaning.addEventListener('ended', () => audioExample.play());
                   audioMeaning.play();
                 }} />
-                <div style={{ display: 'flex', flexDirection: 'column', padding: '15px 0 0 42px' }}>
+
+                <WordCardButtonsWrapper>
                     <WordTitle>{Capitalize(word.word)}</WordTitle>
                     <WordTranslation>{word.wordTranslate}</WordTranslation>
-                </div>
+                </WordCardButtonsWrapper>
+
                 <WordTranscription>{word.transcription}</WordTranscription>
             </CardTitleWrapper>
+
             <Line color={color} />
+
             <WordDescritionBlock>
                 <WordDescritionBlockTitle>What it mean?</WordDescritionBlockTitle>
                 <WordDescritionBlockExample dangerouslySetInnerHTML={{ __html: word.textMeaning }}></WordDescritionBlockExample>
                 <WordDescritionBlockTranslation dangerouslySetInnerHTML={{ __html: word.textMeaningTranslate }}></WordDescritionBlockTranslation>
             </WordDescritionBlock>
+
             <WordDescritionBlock>
                 <WordDescritionBlockTitle>Example</WordDescritionBlockTitle>
                 <WordDescritionBlockExample dangerouslySetInnerHTML={{ __html: word.textExample }}></WordDescritionBlockExample>
                 <WordDescritionBlockTranslation dangerouslySetInnerHTML={{ __html: word.textExampleTranslate }}></WordDescritionBlockTranslation>
             </WordDescritionBlock>
+
         </WordCardWrapper>
   );
 };

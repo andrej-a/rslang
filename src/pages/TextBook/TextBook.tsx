@@ -6,17 +6,21 @@ import Modal from '@mui/material/Modal';
 import { IWord } from '../../models/IWord';
 import { Colors, levels } from '../../styles/constansts';
 import { Capitalize } from '../../utils/utils';
-import { emptyWord, 
-  totalCountPages, 
-  words } 
+import {
+  emptyWord,
+  totalCountPages,
+  words,
+}
   from './ExampleData';
 
-import { TextBookWrapper, 
-  LevelButtonsWrapper, 
-  WordButtonsWrapper, 
-  GameBlock, 
-  ProceedToGameButton, 
-  ProceedToGameButtonsWrapper } 
+import {
+  TextBookWrapper,
+  LevelButtonsWrapper,
+  WordButtonsWrapper,
+  GameBlock,
+  ProceedToGameButton,
+  ProceedToGameButtonsWrapper,
+}
   from './TextBook.styled';
 
 import LevelButton from './LevelButton';
@@ -47,74 +51,81 @@ const TextBook = () => {
     else setCurrentPage(page => page + direction);
   };
 
-
-
   const levelsButtons = [];
   for (const [level, { color, fullname }] of levels) {
-    levelsButtons.push((<LevelButton name={level} color={color} fullname={fullname} activeLevel={activeLevel} changeLevel={changeLevel} key={`levelButton${color}`} />));
+    levelsButtons.
+      push((
+        <LevelButton
+          name={level}
+          color={color}
+          fullname={fullname}
+          activeLevel={activeLevel}
+          changeLevel={changeLevel}
+          key={`levelButton${color}`}
+        />));
   }
 
   return (
-        <TextBookWrapper className='TEST'>
-            <GameBlock>
+    <TextBookWrapper className='TEST'>
+      <GameBlock>
 
-                <LevelButtonsWrapper>
-                    {levelsButtons}
-                </LevelButtonsWrapper>
+        <LevelButtonsWrapper>
+          {levelsButtons}
+        </LevelButtonsWrapper>
 
-                <WordButtonsWrapper>
-                    {words.map((word, index) =>
-                      (<WordButton
-                        word={Capitalize(word.word)}
-                        wordTranslate={Capitalize(word.wordTranslate)}
-                        id={word.id}
-                        key={word.id + index}
-                        activeWord={activeWord.id}
-                        selectWord={selectWord}
-                        handleClick={handleOpen} />))}
-                </WordButtonsWrapper>
+        <WordButtonsWrapper>
+          {words.map((word, index) =>
+            (<WordButton
+            word={Capitalize(word.word)}
+            wordTranslate={Capitalize(word.wordTranslate)}
+            id={word.id}
+            key={word.id + index}
+            activeWord={activeWord.id}
+            selectWord={selectWord}
+            handleClick={handleOpen} />))}
+        </WordButtonsWrapper>
 
-            </GameBlock>
+      </GameBlock>
 
+      <WordCard
+        word={activeWord}
+        color={levels.get(activeLevel)?.color ?? ''}
+      />
+
+      {global.innerWidth < 1230 ?
+        (<Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={{
+            p: 4,
+            width: 'fit-content',
+            margin: '0 auto',
+          }}>
             <WordCard
-                word={activeWord}
-                color={levels.get(activeLevel)?.color ?? ''}
+              word={activeWord}
+              color={levels.get(activeLevel)?.color ?? ''}
+              isModal={true}
             />
-            
-            {global.innerWidth < 1230 ?
-              (<Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={{
-                      p: 4,
-                      width: 'fit-content',
-                      margin: '0 auto',
-                    }}>
-                        <WordCard
-                            word={activeWord}
-                            color={levels.get(activeLevel)?.color ?? ''}
-                            isModal={true}
-                        />
-                    </Box>
-                </Modal>) : (<></>)
+          </Box>
+        </Modal>) : (<></>)
 
-            }
+      }
 
-            <Pagination currentPage={currentPage} pagination={paginate} totalCount={totalCountPages} />
-            <ProceedToGameButtonsWrapper>
-                <ProceedToGameButton imagePath={Sprint} iconColor={Colors.GREEN}>
-                    <div className="button__icon"></div>
-                    Sprint
-                </ProceedToGameButton>
-                <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN}>
-                    <div className="button__icon"></div>
-                    Audio challenge
-                </ProceedToGameButton>
-            </ProceedToGameButtonsWrapper>
-        </TextBookWrapper>
+      <Pagination currentPage={currentPage} pagination={paginate} totalCount={totalCountPages} />
+      <ProceedToGameButtonsWrapper>
+        <ProceedToGameButton imagePath={Sprint} iconColor={Colors.GREEN}>
+          <div className="button__icon"></div>
+          Sprint
+        </ProceedToGameButton>
+        <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN}>
+          <div className="button__icon"></div>
+          Audio challenge
+        </ProceedToGameButton>
+      </ProceedToGameButtonsWrapper>
+    </TextBookWrapper>
   );
 };
 

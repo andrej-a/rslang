@@ -132,6 +132,11 @@ export const CardTitleWrapper = styled.div`
 	height: 96px;
 	padding: 0 39px 0;
 `;
+export const WordCardButtonsWrapper = styled.div`
+	display: flex;
+	flex-direction: column; 
+	padding: 15px 0 0 42px;
+`;
 export const WordTitle = styled.h3`
   font-weight: 500;
   font-size: 24px;
