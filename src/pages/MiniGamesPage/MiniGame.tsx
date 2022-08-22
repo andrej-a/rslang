@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import FormTitle from '../../components/FormTitle/FormTitle';
 import { cards } from './cardsDB';
 import { Card, Description, ImageWrapper, MiniGamesWrapper, StyledPlayButton } from './MiniGames.styled';
 const MiniGames = () => {
 
   const items = cards.map(card => {
-    const { id, TITLE, inputColor, src } = card;
+    const { id, TITLE, inputColor, src, link } = card;
     return <Card key={id}>
                 <FormTitle TITLE={TITLE}/>
                 <ImageWrapper
@@ -16,7 +17,9 @@ const MiniGames = () => {
                 <Description>
                     <p>Check how much points you can get in one minute, making educated guesses about what is right and what is wrong</p>
                 </Description>
-                <StyledPlayButton variant="contained">Play</StyledPlayButton>
+                <Link to={link}>
+                    <StyledPlayButton variant="contained">Play</StyledPlayButton>
+                </Link>
             </Card>;
   });
 

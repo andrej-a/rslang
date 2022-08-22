@@ -10,6 +10,8 @@ import MainPage from './pages/MainPage/MainPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MiniGames from './pages/MiniGamesPage/MiniGame';
+import { GamesData } from './pages/MiniGamesPage/InitialPage/GamesData';
+import InitialGame from './pages/MiniGamesPage/InitialPage/InitialGame';
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
       }/>
       <Route path='/games' element={
         <MiniGames />
+      }/>
+      <Route path='/games/:game' element={
+        <InitialGame/>
       }/>
       </Routes>
 
