@@ -12,6 +12,7 @@ import Footer from './components/Footer/Footer';
 import MiniGames from './pages/MiniGamesPage/MiniGame';
 import { GamesData } from './pages/MiniGamesPage/InitialPage/GamesData';
 import InitialGame from './pages/MiniGamesPage/InitialPage/InitialGame';
+import AudioChallengeGame from './pages/MiniGamesPage/AudioChallengeGame/AudioChallengeGame';
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
       }/>
       <Route path='/games/:game' element={
         <InitialGame/>
+      }/>
+      <Route path='/games/audiochallenge/start' element={
+        <AudioChallengeGame/>
       }/>
       </Routes>
 
