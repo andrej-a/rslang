@@ -1,4 +1,3 @@
-
 export enum Colors {
   WHITE = '#fff',
   BLACK = '#000',
@@ -19,7 +18,6 @@ export enum Colors {
   DISABLED = '#D5D8D6',
   FORM_BLUE = '#0252CC',
 }
-  
   
 export enum WindowSizes {
   mobile = '320px',
@@ -50,4 +48,24 @@ export enum Values {
 }
 
 export const mailRegularCheeker = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+export enum TextMessageResult {
+  GOOD = 'Good job! All your answers are right!',
+  NORMAL = 'You can better! Repeat the words and come back',
+  BAD = 'Not bad, but you need more practice',
+}
+
+export enum ProgressBarInfo {
+  SIZE_MEDIUM = 53,
+  SIZE_LARGE = 184,
+  PERSENT = 100,
+  FOR_CIRCLE_LENGTH = Math.PI * 2,
+}
+
+export enum GameResultInfo {
+  WORD_COUNT = 10,
+  HALF_WORD_COUNT = 10,
+  PERSENT = 100,
+}
+
 

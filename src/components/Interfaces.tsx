@@ -23,3 +23,15 @@ export interface IContact {
   name: string;
   link: string;
 }
+
+export interface IGameCommomInfo {
+  title: string;
+  img: string;
+}
+
+export interface IWord {
+  key?: number;
+  wordEng?: string;
+  wordRu?: string;
+  audioUrl?: string;
+}

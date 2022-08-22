@@ -9,7 +9,6 @@ import SignoutIcon from '../../assets/signout.svg';
 
 export const WrapperHeader = styled.div`
   display: flex;
-  heidht: 100vh;
   justify-content: space-between;
 `;
 export const Blur = styled.div`
@@ -129,7 +128,7 @@ export const DivAppNavigation = styled.div`
     display: flex;
     gap: 26px;
     color: ${Colors.BLACK};
-    alidn-items: center;
+    align-items: center;
     font-weight: 500;
     font-size: 22px;
     line-height: 40px;

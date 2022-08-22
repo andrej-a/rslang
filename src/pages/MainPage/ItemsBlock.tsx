@@ -73,8 +73,7 @@ const AboutItem = ({ key, title, text, img, textButton, linkPage, alignImage }: 
 };
 
 const AboutAppItems = () => {
-  const elements = data.map((item) => {
-    const { key, ...itemProps } = item;
+  const elements = data.map(({ key, ...itemProps }) => {
     return <AboutItem key={key} {...itemProps} />;
   });
 
