@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 
 
 import { IWord } from '../../models/IWord';
-import { Colors, levels } from '../../styles/constansts';
+import { Colors, levels, WindowSizes } from '../../styles/constansts';
 import { Capitalize } from '../../utils/utils';
 import {
   emptyWord,
@@ -87,12 +87,7 @@ const TextBook = () => {
 
       </GameBlock>
 
-      <WordCard
-        word={activeWord}
-        color={levels.get(activeLevel)?.color ?? ''}
-      />
-
-      {global.innerWidth < 1230 ?
+      {global.innerWidth < Number(WindowSizes.textBookSize) ?
         (<Modal
           open={open}
           onClose={handleClose}
@@ -110,11 +105,16 @@ const TextBook = () => {
               isModal={true}
             />
           </Box>
-        </Modal>) : (<></>)
+        </Modal>) 
+        : (<WordCard
+        word={activeWord}
+        color={levels.get(activeLevel)?.color ?? ''}
+      />)
 
       }
 
       <Pagination currentPage={currentPage} pagination={paginate} totalCount={totalCountPages} />
+
       <ProceedToGameButtonsWrapper>
         <ProceedToGameButton imagePath={Sprint} iconColor={Colors.GREEN}>
           <div className="button__icon"></div>
