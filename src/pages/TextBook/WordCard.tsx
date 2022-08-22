@@ -19,7 +19,12 @@ const WordCard = ({ word, color, isModal = false }: { word: IWord, color: string
         <WordCardWrapper className={ isModal ? '' : 'card' }>
             <WordCardImage imgPath={`https://react-rslang-back.herokuapp.com/${word.image}`} />
             <CardTitleWrapper >
-                <AudioButton />
+                <AudioButton onClick={ () => {
+                  const audioMeaning = new Audio(`https://react-rslang-back.herokuapp.com/${word.audioMeaning}`);
+                  const audioExample = new Audio(`https://react-rslang-back.herokuapp.com/${word.audioExample}`);
+                  audioMeaning.addEventListener('ended', () => audioExample.play());
+                  audioMeaning.play();
+                }} />
                 <div style={{ display: 'flex', flexDirection: 'column', padding: '15px 0 0 42px' }}>
                     <WordTitle>{Capitalize(word.word)}</WordTitle>
                     <WordTranslation>{word.wordTranslate}</WordTranslation>
