@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { Colors } from '../../styles/constansts';
+import { Colors, WindowSizes } from '../../styles/constansts';
 import Audio from '../../assets/Audio.svg';
 import LevelHint from '../../assets/levelHint.svg';
+
+const { textBookSize }  = WindowSizes;
 
 export const TextBookWrapper = styled.div`
   display: grid;
@@ -11,7 +13,7 @@ export const TextBookWrapper = styled.div`
 	margin: 100px auto;
 	grid-gap: 29px 97px;
 
-	@media (max-width: 1230px){
+	@media (max-width: ${textBookSize}px){
 		grid-template-columns: repeat(1, 1fr);
 
 	}
@@ -21,6 +23,13 @@ export const GameBlock = styled.div`
   flex-direction: column;
   width: fit-content;
   gap: 29px;
+`;
+export const LevelButtonsWrapper = styled.div`
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;  
+  gap: 18px;
 `;
 export const LevelButtonStyled = styled.button.attrs((props: { levelColor: string, title: string, state: boolean }) => props)`
   height: 52px;
@@ -62,14 +71,6 @@ export const LevelButtonStyled = styled.button.attrs((props: { levelColor: strin
   &:hover:after{    
     visibility: visible;
   }
-  
-`;
-export const LevelButtonsWrapper = styled.div`
-  flex-wrap: wrap;
-  display: flex;
-  flex-direction: row;
-  align-items: center;  
-  gap: 18px;
 `;
 export const WordButtonStyled = styled.button.attrs((props: { state: boolean }) => props)`
   width: 220px;
@@ -96,7 +97,6 @@ export const WordButtonsWrapper = styled.div`
   align-items: center;  
   gap: 12px;
 `;
-
 export const WordCardWrapper = styled.div`
   width: 455px;
   min-height: 586px;
@@ -105,7 +105,7 @@ export const WordCardWrapper = styled.div`
 	padding-bottom: 23px;
   background-color: ${Colors.WHITE}; 
 
-	@media (max-width: 1230px){
+	@media (max-width: ${textBookSize}px){
 		&.card{
 			display: none;
 		}
@@ -119,7 +119,6 @@ export const WordCardImage = styled.div.attrs((props: { imgPath: string }) => pr
   background: url('${props => props.imgPath}');
   background-size: 100%;
 `;
-
 export const AudioButton = styled.button`
   margin-top: 30px;
   width: 38px;
@@ -127,7 +126,6 @@ export const AudioButton = styled.button`
   background: url('${Audio}');
   cursor: pointer;
 `;
-
 export const CardTitleWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -139,26 +137,24 @@ export const WordTitle = styled.h3`
   font-size: 24px;
   line-height: 40px;
   letter-spacing: 0.015em;
-  color: #2F2F2F;
+  color: ${Colors.MIDDLE_BLACK};
 	display: inline;
 `;
-
 export const WordTranscription = styled.h4`
 	font-weight: 400;
 	font-size: 22px;
   line-height: 17px;
 	letter-spacing: 0.015em;
-	color: #2F2F2F;
+	color: ${Colors.MIDDLE_BLACK};
 	display: inline;
 	padding: 27px 0 0 12px;
 `;
-
 export const WordTranslation = styled.h4`
 	font-weight: 400;
 	font-size: 24px;
 	line-height: 22px;
 	letter-spacing: 0.015em;
-	color: #898989;
+	color: ${Colors.DARK_GRAY};
 	display: inline;
 `;
 export const Line = styled.hr.attrs((props: { color: string }) => props)`
@@ -180,7 +176,7 @@ export const WordDescritionBlockExample = styled.h3`
 	font-size: 16px;
 	line-height: 22px;
 	letter-spacing: 0.015em;
-	color: #222222;
+	color: ${Colors.MIDDLE_BLACK};
 	padding: 10px 0 4px;
 `;
 export const WordDescritionBlockTranslation = styled.h3`
@@ -188,12 +184,12 @@ export const WordDescritionBlockTranslation = styled.h3`
 	font-size: 16px;
 	line-height: 22px;
 	letter-spacing: 0.015em;
-	color: #222222;
+	color: ${Colors.MIDDLE_BLACK};
 `;
 export const ProceedToGameButtonsWrapper = styled.div`
 display: flex;
 gap: 13px;
-@media (max-width: 1230px){
+@media (max-width: ${textBookSize}px){
 	justify-content: center;
 }
 `;

@@ -1,8 +1,15 @@
 import React from 'react';
-import { useState } from 'react';
 import { LevelButtonStyled } from './TextBook.styled';
 
-const LevelButton = ({ name, color, fullname, activeLevel, changeLevel }: { name: string, color: string, fullname: string, activeLevel: string, changeLevel: (level: string) => void }) => {
+interface ILevelButton {
+  name: string, 
+  color: string, 
+  fullname: string, 
+  activeLevel: string, 
+  changeLevel: (level: string) => void 
+}
+
+const LevelButton = ({ name, color, fullname, activeLevel, changeLevel } : ILevelButton) => {
 
   return (
     <>

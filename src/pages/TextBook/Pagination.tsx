@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import next from '../../assets/next.svg';
 import { PaginationButton, PaginationWrapper, NextButton, PreviousButton } from './Pagination.styled';
 
 const Pagination = ({ pagination, currentPage, totalCount }:
@@ -18,6 +17,7 @@ const Pagination = ({ pagination, currentPage, totalCount }:
 
   const [fifthButton, setFifthButton] = useState<number | string>(totalCount);
   const [fifthButtonState, setFifthButtonState] = useState<boolean>(fifthButton === currentPage);
+  
   useEffect(
     () => {
       setFirstButtonState(() => (firstButton === currentPage));
