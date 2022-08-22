@@ -115,7 +115,7 @@ export const WordCardWrapper = styled.div`
 export const WordCardImage = styled.div.attrs((props: { imgPath: string }) => props)`
   width: 100%;
   height: 278px;
-  border-radius: 9px;
+  border-radius: 9px 9px 0 0;
   background: url('${props => props.imgPath}');
   background-size: 100%;
 `;
