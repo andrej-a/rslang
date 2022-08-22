@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { GlobalStyle } from '../src/styles/global';
+import { GlobalStyle } from './styles/global';
 import './App.scss';
 import 'typeface-rubik';
 
@@ -10,6 +10,7 @@ import MainPage from './pages/MainPage/MainPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MiniGames from './pages/MiniGamesPage/MiniGame';
+import SprintGame from './pages/MiniGamesPage/SprintGame/SprintGame';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
       }/>
       <Route path='/games' element={
         <MiniGames />
+      }/>
+      <Route path='/statistics' element={
+        <SprintGame />
       }/>
       </Routes>
 
