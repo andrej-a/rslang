@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Colors, WindowSizes } from '../../styles/constansts';
-import Audio from '../../assets/Audio.svg';
+import audio_play from '../../assets/audio_play.svg';
 import LevelHint from '../../assets/levelHint.svg';
 
 const { textBookSize }  = WindowSizes;
@@ -123,7 +123,7 @@ export const AudioButton = styled.button`
   margin-top: 30px;
   width: 38px;
   height: 38px;
-  background: url('${Audio}');
+  background: url('${audio_play}');
   cursor: pointer;
 `;
 export const CardTitleWrapper = styled.div`
