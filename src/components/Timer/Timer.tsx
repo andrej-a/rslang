@@ -3,10 +3,6 @@ import { ProgressBarInfo } from '../../styles/constansts';
 
 import { CircleContainer, TimerContainer } from '../Timer/Timer.styled';
 
-type Props = {
-  percent: number;
-};
-
 const Timer = () => {
   const timeLimit = 60;
   const [counter, setCounter] = useState(timeLimit);

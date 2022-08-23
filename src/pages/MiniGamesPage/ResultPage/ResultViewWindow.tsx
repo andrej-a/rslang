@@ -2,12 +2,12 @@ import React from 'react';
 
 import { ResultStatistic, ResultTextInfo, ResultViewWindowContainer } from './ResultPage.styled';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
-import { IWord } from '../../../components/Interfaces';
-import { GameResultInfo, ProgressBarInfo, TextMessageResult } from '../../../styles/constansts';
+import { IWordResult } from '../../../components/Interfaces';
+import { GameResultInfo, TextMessageResult } from '../../../styles/constansts';
 
 type Props = {
-  rightAnswers: IWord[];
-  wrongAnswers: IWord[];
+  rightAnswers: IWordResult[];
+  wrongAnswers: IWordResult[];
 };
 const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
   const allWordNumber = GameResultInfo.WORD_COUNT;

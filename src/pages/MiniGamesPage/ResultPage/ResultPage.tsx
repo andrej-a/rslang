@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { IWord } from '../../../components/Interfaces';
+import { IWordResult } from '../../../components/Interfaces';
 import {
   ButtonContainer,
   HeaderButtonContainer,
@@ -15,7 +15,7 @@ import ResultViewWindow from './ResultViewWindow';
 import WordViewWindow from './WordViewWindow';
 
 type Props = {
-  result: IWord[];
+  result: IWordResult[];
 };
 
 const ResultPage = ({ result }: Props) => {

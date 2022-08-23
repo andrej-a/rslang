@@ -1,12 +1,12 @@
 import React from 'react';
-import { IWord } from '../../../components/Interfaces';
+import { IWordResult } from '../../../components/Interfaces';
 
 import { RightAnswers, WrongAnswers } from './ResultAnswers';
 import { WorldViewWindowContainer, RightAnswersTitle, WrongAnswersTitle } from './ResultPage.styled';
 
 type Props = {
-  rightAnswers: IWord[];
-  wrongAnswers: IWord[];
+  rightAnswers: IWordResult[];
+  wrongAnswers: IWordResult[];
 };
 
 const WorldViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
