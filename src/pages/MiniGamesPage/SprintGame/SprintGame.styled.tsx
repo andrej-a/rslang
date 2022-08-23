@@ -1,20 +1,24 @@
 import styled from 'styled-components';
+import { Button } from '@mui/material';
+
 import { Colors } from '../../../styles/constansts';
 
 export const SprintGameWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  gap: 198px;
+  gap: 40px;
+  height: auto;
   color: ${Colors.WHITE};
+  margin-bottom: 140px;
 `;
 
 export const GameContent = styled.div`
   display: flex;
-  height: 100vh;
+  margin-top: 80px;
   flex-direction: column;
-  gap: 24px;
+  gap: 10px;
   justify-content: center;
   align-items: center;
   h3 {
@@ -27,22 +31,35 @@ export const GameContent = styled.div`
     font-size: 26px;
     line-height: 40px;
   }
+  @media (max-width: 768px) {
+    margin-left: 116px;
+  }
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
+  @media (max-width: 500px) {
+    gap: 0;
+  }
 `;
 
 export const GameLifes = styled.div`
   display: flex;
-  gap: 18px;
+  gap: 28px;
+  margin-top: 10px;
   div {
     width: 34px;
     height: 34px;
     border-radius: 50%;
     border: 3px solid ${Colors.WHITE};
     background-color: transparent;
+    &.active {
+      background-color: ${Colors.WHITE};
+    }
   }
 `;
 export const GameCard = styled.div`
-  width: 484px;
-  height: 278px;
+  width: 460px;
+  height: 240px;
   color: ${Colors.BLACK};
   background-color: ${Colors.WHITE};
   display: flex;
@@ -50,6 +67,11 @@ export const GameCard = styled.div`
   border-radius: 8px;
   justify-content: center;
   align-items: center;
+  margin-top: 40px;
+  @media (max-width: 500px) {
+    width: 320px;
+    height: 200px;
+  }
 `;
 export const EngWord = styled.p`
   font-weight: 500;
@@ -65,14 +87,41 @@ export const ButtonContainer = styled.div`
   display: flex;
   margin-top: 30px;
   gap: 42px;
+  @media (max-width: 500px) {
+    gap: 20px;
+  }
 `;
-export const ButtonRight = styled.button`
-  width: 178px;
-  height: 58px;
-  border-radius: 4px;
-  color: ${Colors.WHITE};
-  background-color: ${Colors.LIGHT_GREEN};
+export const ButtonRight = styled(Button)`
+  &.MuiButton-contained {
+    width: 178px;
+    height: 58px;
+    background-color: ${Colors.LIGHT_GREEN};
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    @media (max-width: 500px) {
+      width: 140px;
+      height: 40px;
+    }
+  }
+  &.MuiButton-contained:hover {
+    box-shadow: 2px 4px 10px rgba(114, 114, 114, 0.5);
+    background-color: ${Colors.LIGHT_GREEN};
+  }
 `;
-export const ButtonWrong = styled(ButtonRight)`
-  background-color: ${Colors.RED};
+export const ButtonWrong = styled(Button)`
+  &.MuiButton-contained {
+    width: 178px;
+    height: 58px;
+    background-color: ${Colors.RED};
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    @media (max-width: 500px) {
+      width: 140px;
+      height: 40px;
+    }
+  }
+  &.MuiButton-contained:hover {
+    box-shadow: 2px 4px 10px rgba(114, 114, 114, 0.5);
+    background-color: ${Colors.RED};
+  }
 `;

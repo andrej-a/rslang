@@ -89,5 +89,6 @@ export const StyledPlayButton = styled(Button)`
     }
     &.MuiButton-contained:hover {
         box-shadow: 2px 4px 10px rgba(0, 186, 137, 0.5);
+        
     }
 `;
