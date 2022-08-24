@@ -1,7 +1,7 @@
 import React from 'react';
 import Timer from '../../../components/Timer/Timer';
 
-import { ButtonRight, ButtonWrong, EngWord, GameCard, GameContent, GameLifes, RuWord, SprintGameWrapper, ButtonContainer } from './SprintGame.styled';
+import { EngWord, GameCard, GameContent, GameLifes, RuWord, SprintGameWrapper, ButtonContainer, ButtonAnswer } from './SprintGame.styled';
 
 const SprintGame = () => {
   return (
@@ -18,8 +18,8 @@ const SprintGame = () => {
           <EngWord>catch</EngWord>
           <RuWord>ловить</RuWord>
           <ButtonContainer>
-            <ButtonRight variant="contained">Right</ButtonRight>
-            <ButtonWrong variant="contained">Wrong</ButtonWrong>
+            <ButtonAnswer variant="contained" color="success" size="large">Right</ButtonAnswer>
+            <ButtonAnswer variant="contained" color="warning" size="large">Wrong</ButtonAnswer>
           </ButtonContainer>
         </GameCard>
       </GameContent>

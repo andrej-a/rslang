@@ -9,9 +9,15 @@ export const SprintGameWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 40px;
+  width: 100%;
+  min-height: 100vh;
   height: auto;
   color: ${Colors.WHITE};
-  margin-bottom: 140px;
+  padding-left: 10%;
+  padding-bottom: 100px;
+  @media (max-width: 700px) {
+    padding-left: 0;
+  }
 `;
 
 export const GameContent = styled.div`
@@ -30,12 +36,6 @@ export const GameContent = styled.div`
     font-weight: 500;
     font-size: 26px;
     line-height: 40px;
-  }
-  @media (max-width: 768px) {
-    margin-left: 116px;
-  }
-  @media (max-width: 768px) {
-    margin-left: 0;
   }
   @media (max-width: 500px) {
     gap: 0;
@@ -78,11 +78,7 @@ export const EngWord = styled.p`
   font-size: 30px;
   line-height: 28px;
 `;
-export const RuWord = styled.p`
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 28px;
-`;
+export const RuWord = styled(EngWord)``;
 export const ButtonContainer = styled.div`
   display: flex;
   margin-top: 30px;
@@ -91,37 +87,10 @@ export const ButtonContainer = styled.div`
     gap: 20px;
   }
 `;
-export const ButtonRight = styled(Button)`
+export const ButtonAnswer = styled(Button)`
   &.MuiButton-contained {
-    width: 178px;
-    height: 58px;
-    background-color: ${Colors.LIGHT_GREEN};
     border-radius: 4px;
     transition: all 0.3s ease;
-    @media (max-width: 500px) {
-      width: 140px;
-      height: 40px;
-    }
-  }
-  &.MuiButton-contained:hover {
-    box-shadow: 2px 4px 10px rgba(114, 114, 114, 0.5);
-    background-color: ${Colors.LIGHT_GREEN};
-  }
-`;
-export const ButtonWrong = styled(Button)`
-  &.MuiButton-contained {
-    width: 178px;
-    height: 58px;
-    background-color: ${Colors.RED};
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    @media (max-width: 500px) {
-      width: 140px;
-      height: 40px;
-    }
-  }
-  &.MuiButton-contained:hover {
-    box-shadow: 2px 4px 10px rgba(114, 114, 114, 0.5);
-    background-color: ${Colors.RED};
+    color: ${Colors.WHITE};
   }
 `;

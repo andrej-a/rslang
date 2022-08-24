@@ -167,7 +167,7 @@ export const AboutAppItemsWrapper = styled.div`
   }
 `;
 export const AboutAppItemWrapper = styled.div`
-  align-item: center;
+  align-items: center;
   justify-content: center;
   gap: 10%;
   display: flex;
@@ -205,7 +205,7 @@ export const AboutAppItemTextBlock = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-item: center;
+  align-items: center;
   @media (max-width: 1024px) {
     width: 40%;
   }
@@ -272,7 +272,7 @@ export const OurTeam = styled.div`
   h2{
     margin-top: 240px;
     margin-bottom: 48px;
-    color ${Colors.WHITE};
+    color: ${Colors.WHITE};
     text-align: center;
   }
   @media (max-width: 1280px){
