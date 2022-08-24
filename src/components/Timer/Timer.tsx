@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ProgressBarInfo } from '../../styles/constansts';
+import { ProgressBarInfo, TimerInfo } from '../../styles/constansts';
 
 import { CircleContainer, TimerContainer } from '../Timer/Timer.styled';
 
 const Timer = () => {
-  const timeLimit = 60;
+  const timeLimit = TimerInfo.TIMER_LIMIT_MINUTE;
   const [counter, setCounter] = useState(timeLimit);
-  const radius = ProgressBarInfo.SIZE_MEDIUM;
+  const radius = TimerInfo.SIZE_MEDIUM;
   const circumference = ProgressBarInfo.FOR_CIRCLE_LENGTH * radius;
   const [offset, setOffset] = useState(timeLimit);
 
