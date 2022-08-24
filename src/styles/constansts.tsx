@@ -3,6 +3,7 @@ export enum Colors {
   BLACK = '#000',
   MIDDLE_BLACK = '#222222',
   GRAY = '#ABABAB',
+  DARK_GRAY = '#898989',
   LIGHT_GREEN = '#4EE57E',
   GREEN = '#07D6A0',
   RED = '#FD1E1E',
@@ -20,15 +21,16 @@ export enum Colors {
 }
   
 export enum WindowSizes {
-  mobile = '320px',
-  tablet = '768px',
-  laptop = '1024px',
+  mobile = '320',
+  tablet = '768',
+  laptop = '1024',
+  textBookSize = '1230',
 }
   
 export const device = {
-  mobile: `(min-width: ${WindowSizes.mobile})`,
-  tablet: `(min-width: ${WindowSizes.mobile})`,
-  laptop: `(min-width: ${WindowSizes.mobile})`,
+  mobile: `(min-width: ${WindowSizes.mobile}px)`,
+  tablet: `(min-width: ${WindowSizes.tablet}px)`,
+  laptop: `(min-width: ${WindowSizes.laptop}px)`,
 };
 
 export enum Values {
@@ -54,6 +56,13 @@ export enum TextMessageResult {
   NORMAL = 'You can better! Repeat the words and come back',
   BAD = 'Not bad, but you need more practice',
 }
+export const levels = new Map([
+  ['A1', { color: Colors.BOOK_GRREN, fullname: 'Elementary 1' }],
+  ['A2', { color: Colors.BOOK_YELLOW, fullname: 'Elementary 2' }],
+  ['B1', { color: Colors.BOOK_AZURE_BLUE, fullname: 'Elementary 1' }],
+  ['B2', { color: Colors.BOOK_BLUE, fullname: 'Elementary 2' }],
+  ['C1', { color: Colors.BOOK_ORANGE, fullname: 'Elementary 1' }],
+  ['C2', { color: Colors.BOOK_RED, fullname: 'Elementary 4' }]]);
 
 export enum ProgressBarInfo {
   SIZE_MEDIUM = 53,
@@ -67,5 +76,3 @@ export enum GameResultInfo {
   HALF_WORD_COUNT = 10,
   PERSENT = 100,
 }
-
-
