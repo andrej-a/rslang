@@ -269,19 +269,19 @@ export const OurTeam = styled.div`
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position-y: top;
-  h2{
+  h2 {
     margin-top: 240px;
     margin-bottom: 48px;
     color: ${Colors.WHITE};
     text-align: center;
   }
-  @media (max-width: 1280px){
-    h2{
+  @media (max-width: 1280px) {
+    h2 {
       margin-top: 160px;
     }
   }
-  @media (max-width: 1024px){
-    h2{
+  @media (max-width: 1024px) {
+    h2 {
       margin-top: 140px;
     }
   }
