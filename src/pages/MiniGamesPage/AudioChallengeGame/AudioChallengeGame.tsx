@@ -1,18 +1,24 @@
 import React from 'react';
+
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
+
 import Audio from '../../../assets/AudioBlack.svg';
 import CorrectAnswer from '../../../assets/CorrectAnswer.svg';
 import TestAnswerPicture from '../../../assets/test_answer.jpg';
+
 import {
   AnswerButton,
   AudioChallengeWrapper,
   ButtonBlock,
   InnerBlock,
   MainBlock,
+  NextButton,
+  NextButtonWrapper,
   Picture,
   PictureBlock,
   PlayAudioInAnswerCard,
   PrimaryPicture,
+  ProgressBarWrapper,
   RedCircle,
   SkipQuestion,
   SoundPictureWrapper,
@@ -25,7 +31,11 @@ const AudioChallengeGame = () => {
   return (
     <AudioChallengeWrapper>
       <MainBlock>
-        <ProgressBar percent={10} />
+
+        <ProgressBarWrapper>
+          <ProgressBar percent={10} />
+        </ProgressBarWrapper>
+
         <InnerBlock>
           <ButtonBlock>
             <AnswerButton className="current">Current variant</AnswerButton>
@@ -48,9 +58,9 @@ const AudioChallengeGame = () => {
                 <img src={Audio} alt="play_button" />
               </SoundPictureWrapper>
             </PrimaryPicture>
- */}
+            */} {/* тут будет либо primary подложка (если ответа еще не было), либо картинка от слова */}
             <Picture>
-              <img src={TestAnswerPicture} alt="word_picture" />
+              <img className='answer_picture' src={TestAnswerPicture} alt="word_picture" />
               <WordWrapper>
                 <PlayAudioInAnswerCard>
                   <img src={Audio} alt="play_button" />
@@ -63,6 +73,11 @@ const AudioChallengeGame = () => {
             </Picture>
           </PictureBlock>
         </InnerBlock>
+
+        <NextButtonWrapper>
+          <NextButton>Next</NextButton>
+        </NextButtonWrapper>
+
       </MainBlock>
     </AudioChallengeWrapper>
   );
