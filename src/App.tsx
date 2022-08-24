@@ -7,9 +7,11 @@ import 'typeface-rubik';
 
 import Registration from './pages/Registration/Registration';
 import MainPage from './pages/MainPage/MainPage';
+
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MiniGames from './pages/MiniGamesPage/MiniGame';
+
 import TextBook from './pages/TextBook/TextBook';
 import { GetTitle } from './utils/utils';
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { ResultStatistic, ResultTextInfo, ResultViewWindowContainer } from './ResultPage.styled';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { IWordResult } from '../../../components/Interfaces';
-import { GameResultInfo, TextMessageResult } from '../../../styles/constansts';
+import { Colors, GameResultInfo, TextMessageResult } from '../../../styles/constansts';
 
 type Props = {
   rightAnswers: IWordResult[];
@@ -24,7 +24,10 @@ const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
         <span>{rightAnswers.length}</span> words studied, <span>{wrongAnswers.length}</span> words to learn
       </ResultTextInfo>
       <ResultStatistic>
-        <ProgressBar percent={(rightAnswers.length * GameResultInfo.PERSENT) / allWordNumber } />
+        <ProgressBar
+          percent={(rightAnswers.length * GameResultInfo.PERSENT) / allWordNumber}
+          color={Colors.LIGHT_GRAY}
+        />
         <p>Accurancy</p>
       </ResultStatistic>
     </ResultViewWindowContainer>

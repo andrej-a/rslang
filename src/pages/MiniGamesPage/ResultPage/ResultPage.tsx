@@ -35,15 +35,11 @@ const ResultPage = ({ result }: Props) => {
         <SeeResultButton
           onClick={() => onActive()}
           className={isActiveResult ? 'active' : ''}
-          disabled={!isActiveResult}
+          disabled={isActiveResult}
         >
           Results
         </SeeResultButton>
-        <SeeWordButton
-          onClick={() => onActive()}
-          className={isActiveWord ? 'active' : ''}
-          disabled={!isActiveResult}
-        >
+        <SeeWordButton onClick={() => onActive()} className={isActiveWord ? 'active' : ''} disabled={!isActiveResult}>
           View words
         </SeeWordButton>
       </HeaderButtonContainer>
