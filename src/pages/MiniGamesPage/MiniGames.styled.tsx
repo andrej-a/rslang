@@ -21,7 +21,7 @@ export const MiniGamesWrapper = styled.div`
     padding-left: 10%;
     padding-bottom: 100px;
 
-    @media (max-width: ${laptop}) {
+    @media (max-width: ${laptop}px) {
         flex-direction: column;
         align-items: center;
         padding-left: 0;
@@ -45,7 +45,7 @@ export const Card = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media (max-width: ${laptop}) {
+    @media (max-width: ${laptop}px) {
         margin-top: 0px;
     }
 `;
@@ -72,7 +72,7 @@ export const Description = styled.div`
         letter-spacing: 0.015em;
     }
 
-    @media (max-width: ${tablet}) {
+    @media (max-width: ${tablet}px) {
         padding: 0 20px;
     }
 

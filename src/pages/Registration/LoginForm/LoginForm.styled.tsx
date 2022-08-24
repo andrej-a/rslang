@@ -12,7 +12,7 @@ export const RegistrationWrapper = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media (max-width: ${tablet}) {
+    @media (max-width: ${tablet}px) {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -33,7 +33,7 @@ export const Form = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media (max-width: ${tablet}) {
+    @media (max-width: ${tablet}px) {
         margin-left: 0;
         width: 60%;
         margin-top: 60px;
@@ -45,7 +45,7 @@ export const Form = styled.div`
         padding-right: 86px;
         width: 100%;
 
-        @media (max-width: ${tablet}) {
+        @media (max-width: ${tablet}px) {
             padding-left: 30px;
             padding-right: 30px;
         }
@@ -56,7 +56,7 @@ export const Form = styled.div`
         height: 60px;
         margin-top: 24px;
 
-        @media (max-width: ${tablet}) {
+        @media (max-width: ${tablet}px) {
             width: 100%;
         }
     }
@@ -106,7 +106,7 @@ export const StyledButton = styled(Button)`
         border-radius: 15px;
         background-color: ${Colors.LIGHT_GREEN};
 
-        @media (max-width: ${tablet}) {
+        @media (max-width: ${tablet}px) {
             margin-left: 0;
             padding: 3px 50px;
             width: 100%;
@@ -134,7 +134,7 @@ export const ToggleToAnotherForm = styled.div`
         letter-spacing: 0.015em;
     }
 
-    @media (max-width: ${tablet}) {
+    @media (max-width: ${tablet}px) {
         margin-left: 0;
         p {
             font-size: 16px;
