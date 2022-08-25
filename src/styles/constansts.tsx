@@ -4,6 +4,7 @@ export enum Colors {
   MIDDLE_BLACK = '#222222',
   GRAY = '#ABABAB',
   DARK_GRAY = '#898989',
+  LIGHT_GRAY = '#E2DEDE',
   LIGHT_GREEN = '#4EE57E',
   GREEN = '#07D6A0',
   RED = '#FD1E1E',
@@ -22,7 +23,7 @@ export enum Colors {
   GREY_GRADIENT = 'linear-gradient(1.8deg, #fefefe -43.56%, #e6e6e6 123.62%)',
   LIGHT_GREY = '#9b9b9b',
 }
-  
+
 export enum WindowSizes {
   mobile = '320',
   tablet = '768',
@@ -30,7 +31,7 @@ export enum WindowSizes {
   textBookSize = '1230',
   ultraWidth = '1900',
 }
-  
+
 export const device = {
   mobile: `(min-width: ${WindowSizes.mobile}px)`,
   tablet: `(min-width: ${WindowSizes.tablet}px)`,
@@ -53,7 +54,8 @@ export enum Values {
   NAME_ERROR_MESSAGE = 'Name is required field',
 }
 
-export const mailRegularCheeker = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+export const mailRegularCheeker =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export enum TextMessageResult {
   GOOD = 'Good job! All your answers are right!',
@@ -61,12 +63,13 @@ export enum TextMessageResult {
   BAD = 'Not bad, but you need more practice',
 }
 export const levels = new Map([
-  ['A1', { color: Colors.BOOK_GRREN, fullname: 'Elementary 1' }],
-  ['A2', { color: Colors.BOOK_YELLOW, fullname: 'Elementary 2' }],
-  ['B1', { color: Colors.BOOK_AZURE_BLUE, fullname: 'Elementary 1' }],
-  ['B2', { color: Colors.BOOK_BLUE, fullname: 'Elementary 2' }],
-  ['C1', { color: Colors.BOOK_ORANGE, fullname: 'Elementary 1' }],
-  ['C2', { color: Colors.BOOK_RED, fullname: 'Elementary 4' }]]);
+  ['A1', { color: Colors.BOOK_GRREN, fullname: 'Beginner' }],
+  ['A2', { color: Colors.BOOK_YELLOW, fullname: 'Elementary' }],
+  ['B1', { color: Colors.BOOK_AZURE_BLUE, fullname: 'Intermediate' }],
+  ['B2', { color: Colors.BOOK_BLUE, fullname: 'Up-Intermediate' }],
+  ['C1', { color: Colors.BOOK_ORANGE, fullname: 'Advanced' }],
+  ['C2', { color: Colors.BOOK_RED, fullname: 'Proficiency' }],
+]);
 
 export enum ProgressBarInfo {
   SIZE_MEDIUM = 53,
@@ -79,4 +82,9 @@ export enum GameResultInfo {
   WORD_COUNT = 10,
   HALF_WORD_COUNT = 10,
   PERSENT = 100,
+}
+
+export enum TimerInfo {
+  TIMER_LIMIT_MINUTE = 60,
+  SIZE_MEDIUM = 53,
 }

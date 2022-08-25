@@ -75,6 +75,7 @@ export const MenuIconDiv = styled.div`
     height: 3px;
     background-color: ${Colors.BLACK};
     transition: transform 0.2s ease-in-out;
+    opacity: 100;
   }
   &.active {
     &::before {
