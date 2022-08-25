@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { IWord } from '../../../components/Interfaces';
+import { IWordResult } from '../../../components/Interfaces';
 import { AudioButton, RightAnswersContainer, Word, WordEng, WordRu, WrongAnswersContainer } from './ResultPage.styled';
 import ListenIcon from '../../../assets/listen.svg';
 
 type Props = {
-  answers: IWord[];
+  answers: IWordResult[];
 };
 
-export const WordItem = ({ wordEng, wordRu, audioUrl }: IWord) => {
+export const WordItem = ({ wordEng, wordRu, audioUrl }: IWordResult) => {
 
   const startSong = (url:string | undefined) => {
     const audio = new Audio();

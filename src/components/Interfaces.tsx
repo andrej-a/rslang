@@ -29,7 +29,7 @@ export interface IGameCommomInfo {
   img: string;
 }
 
-export interface IWord {
+export interface IWordResult {
   key?: number;
   wordEng?: string;
   wordRu?: string;

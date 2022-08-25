@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Colors } from '../../styles/constansts';
 
-export const ProgressBarContainer = styled.div`
+export const TimerContainer = styled.div`
   width: 122px;
   height: 122px;
   position: relative;
@@ -16,23 +16,16 @@ export const ProgressBarContainer = styled.div`
   }
 `;
 
-export const CircleContainer = styled.svg.attrs((props: { stroke: string }) => props)`
-  position: relative;
-  z-index: 100;
+export const CircleContainer = styled.svg`
   width: 122px;
   height: 122px;
   circle {
-    stroke: ${(props) => props.stroke};
-    stroke-width: 4px;
+    stroke: ${Colors.WHITE};
+    stroke-width: 16px;
     border-radius: 116px;
     transform-origin: center;
     fill: transparent;
     transform: rotate(-90deg);
     transition: stroke-dashoffest 0.3s;
-    z-index: 10;
-    &.active {
-      stroke: ${Colors.GREEN};
-      z-index: 100;
-    }
   }
 `;

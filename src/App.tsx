@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { GlobalStyle } from '../src/styles/global';
+
 import './App.scss';
 import 'typeface-rubik';
 
@@ -10,6 +11,7 @@ import MainPage from './pages/MainPage/MainPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import MiniGames from './pages/MiniGamesPage/MiniGame';
+
 import TextBook from './pages/TextBook/TextBook';
 import { GetTitle } from './utils/utils';
 
@@ -25,22 +27,13 @@ function App() {
       <Header title={pageTitle} />
 
       <Routes>
-        <Route path='/' element={
-          <MainPage />
-        } />
-        <Route path='/registration' element={
-          <Registration />
-        } />
-        <Route path='/textbook' element={
-          <TextBook />
-        } />
-        <Route path='/games' element={
-          <MiniGames />
-        } />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/textbook" element={<TextBook />} />
+        <Route path="/games" element={<MiniGames />} />
       </Routes>
 
       <Footer />
-
     </div>
   );
 }
