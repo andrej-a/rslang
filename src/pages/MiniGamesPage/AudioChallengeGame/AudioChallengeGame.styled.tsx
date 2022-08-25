@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import '../../../index.scss';
 import { Colors, WindowSizes } from '../../../styles/constansts';
 const { laptop, tablet, ultraWidth } = WindowSizes;
-const { PRIMARY_PICTURE_GREY, WHITE, GREY_GRADIENT, BLACK, GRADIENT, RED, GREEN, LIGHT_GREY } = Colors;
+const { PRIMARY_PICTURE_GREY, WHITE, GREY_GRADIENT, BLACK, GRADIENT, RED, GREEN, LIGHT_GREY, PLAY_BUTTON_GRADIENT } = Colors;
 
 
 export const AudioChallengeWrapper = styled.div`
@@ -84,7 +84,7 @@ export const AnswerButton = styled.button`
 
   &.correct {
     border: 2px solid ${WHITE};
-    background: ${GRADIENT};
+    background: ${PLAY_BUTTON_GRADIENT};
   }
 
   &.wrong {

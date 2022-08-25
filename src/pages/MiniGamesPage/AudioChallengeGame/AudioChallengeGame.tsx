@@ -6,6 +6,8 @@ import Audio from '../../../assets/AudioBlack.svg';
 import CorrectAnswer from '../../../assets/CorrectAnswer.svg';
 import TestAnswerPicture from '../../../assets/test_answer.jpg';
 
+import { Colors } from '../../../styles/constansts';
+
 import {
   AnswerButton,
   AudioChallengeWrapper,
@@ -31,9 +33,8 @@ const AudioChallengeGame = () => {
   return (
     <AudioChallengeWrapper>
       <MainBlock>
-
         <ProgressBarWrapper>
-          <ProgressBar percent={10} />
+          <ProgressBar percent={10} color={Colors.WHITE as string} />
         </ProgressBarWrapper>
 
         <InnerBlock>
@@ -58,9 +59,10 @@ const AudioChallengeGame = () => {
                 <img src={Audio} alt="play_button" />
               </SoundPictureWrapper>
             </PrimaryPicture>
-            */} {/* тут будет либо primary подложка (если ответа еще не было), либо картинка от слова */}
+            */}{' '}
+            {/* тут будет либо primary подложка (если ответа еще не было), либо картинка от слова */}
             <Picture>
-              <img className='answer_picture' src={TestAnswerPicture} alt="word_picture" />
+              <img className="answer_picture" src={TestAnswerPicture} alt="word_picture" />
               <WordWrapper>
                 <PlayAudioInAnswerCard>
                   <img src={Audio} alt="play_button" />
@@ -77,7 +79,6 @@ const AudioChallengeGame = () => {
         <NextButtonWrapper>
           <NextButton>Next</NextButton>
         </NextButtonWrapper>
-
       </MainBlock>
     </AudioChallengeWrapper>
   );
