@@ -13,5 +13,8 @@ export const theme = createTheme({
     warning: {
       main: Colors.RED,
     },
+    primary: {
+      main: Colors.GREEN,
+    },
   },
 });
