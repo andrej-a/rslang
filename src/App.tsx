@@ -12,6 +12,7 @@ import Footer from './components/Footer/Footer';
 import MiniGames from './pages/MiniGamesPage/MiniGame';
 import TextBook from './pages/TextBook/TextBook';
 import { GetTitle } from './utils/utils';
+import Statistics from './pages/Statistics/Statistics';
 
 function App() {
   const [pageTitle, setPageTitle] = useState<string>(GetTitle(global.location.pathname) ?? 'Easy English');
@@ -36,6 +37,9 @@ function App() {
         } />
         <Route path='/games' element={
           <MiniGames />
+        } />
+        <Route path='/statistics' element={
+          <Statistics />
         } />
       </Routes>
 
