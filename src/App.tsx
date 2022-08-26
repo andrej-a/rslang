@@ -14,9 +14,14 @@ import MiniGames from './pages/MiniGamesPage/MiniGame';
 
 import TextBook from './pages/TextBook/TextBook';
 import { GetTitle } from './utils/utils';
+import { GamesData } from './pages/MiniGamesPage/InitialPage/GamesData';
+import InitialGame from './pages/MiniGamesPage/InitialPage/InitialGame';
+import AudioChallengeGame from './pages/MiniGamesPage/AudioChallengeGame/AudioChallengeGame';
 
 function App() {
-  const [pageTitle, setPageTitle] = useState<string>(GetTitle(global.location.pathname) ?? 'Easy English');
+  const [pageTitle, setPageTitle] = useState<string>(
+    GetTitle(global.location.pathname) ?? 'Easy English'
+  );
   useEffect(() => {
     setPageTitle(() => GetTitle(global.location.pathname) ?? 'Easy English');
   }, [useLocation()]);
@@ -31,6 +36,8 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/textbook" element={<TextBook />} />
         <Route path="/games" element={<MiniGames />} />
+        <Route path="/games/:game" element={<InitialGame />} />
+        <Route path="/games/audiochallenge/start" element={<AudioChallengeGame />} />
       </Routes>
 
       <Footer />

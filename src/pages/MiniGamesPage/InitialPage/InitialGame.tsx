@@ -1,9 +1,12 @@
 import React from 'react';
-
-import { IGameCommomInfo } from '../../../components/Interfaces';
+import { useParams } from 'react-router-dom';
+import getGameInformation from '../../../utils/getGameInformation';
 import { GameWrapper, LevelDiv, LevelButtonsContainer, LevelButton, GameImage } from './InitialGame.styled';
 
-const InitialGame = ({ title, img }: IGameCommomInfo) => {
+const InitialGame = () => {
+  const { game } = useParams();
+  const { title, img } = getGameInformation(game as string);
+  
   return (
     <GameWrapper>
       <GameImage>
