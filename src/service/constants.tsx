@@ -9,7 +9,8 @@ export const enum Errors {
 }
 
 export enum ResponseCode {
-  USER_DELETED_SUCCESS = 204,
+  DELETED_SUCCESS = 204,
+  WORD_CREATE_SUCCESS = 200,
 }
 export enum Difficulty {
   LEARNED,  // добавлено в изученное
