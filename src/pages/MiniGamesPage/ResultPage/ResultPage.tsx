@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { IWord } from '../../../components/Interfaces';
+import { IWordResult } from '../../../components/Interfaces';
 import {
   ButtonContainer,
   HeaderButtonContainer,
@@ -15,7 +15,7 @@ import ResultViewWindow from './ResultViewWindow';
 import WordViewWindow from './WordViewWindow';
 
 type Props = {
-  result: IWord[];
+  result: IWordResult[];
 };
 
 const ResultPage = ({ result }: Props) => {
@@ -35,15 +35,11 @@ const ResultPage = ({ result }: Props) => {
         <SeeResultButton
           onClick={() => onActive()}
           className={isActiveResult ? 'active' : ''}
-          disabled={!isActiveResult}
+          disabled={isActiveResult}
         >
           Results
         </SeeResultButton>
-        <SeeWordButton
-          onClick={() => onActive()}
-          className={isActiveWord ? 'active' : ''}
-          disabled={!isActiveResult}
-        >
+        <SeeWordButton onClick={() => onActive()} className={isActiveWord ? 'active' : ''} disabled={!isActiveResult}>
           View words
         </SeeWordButton>
       </HeaderButtonContainer>

@@ -1,9 +1,44 @@
 import React from 'react';
+import Timer from '../../../components/Timer/Timer';
 
-import { GameSprintWrapper } from './SprintGame.styled';
+import {
+  EngWord,
+  GameCard,
+  GameContent,
+  GameLifes,
+  RuWord,
+  SprintGameWrapper,
+  ButtonContainer,
+  ButtonAnswer,
+} from './SprintGame.styled';
 
 const SprintGame = () => {
-  
+  return (
+    <SprintGameWrapper>
+      <GameContent>
+        <h3>0</h3>
+        <p>+10 points</p>
+        <GameLifes>
+          <div id="circle1" className="active"></div>
+          <div id="circle2"></div>
+          <div id="circle3"></div>
+        </GameLifes>
+        <GameCard>
+          <EngWord>catch</EngWord>
+          <RuWord>ловить</RuWord>
+          <ButtonContainer>
+            <ButtonAnswer variant="contained" color="success" size="large">
+              Right
+            </ButtonAnswer>
+            <ButtonAnswer variant="contained" color="warning" size="large">
+              Wrong
+            </ButtonAnswer>
+          </ButtonContainer>
+        </GameCard>
+      </GameContent>
+      <Timer />
+    </SprintGameWrapper>
+  );
 };
 
 export default SprintGame;

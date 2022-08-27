@@ -4,6 +4,7 @@ export enum Colors {
   MIDDLE_BLACK = '#222222',
   GRAY = '#ABABAB',
   DARK_GRAY = '#898989',
+  LIGHT_GRAY = '#E2DEDE',
   LIGHT_GREEN = '#4EE57E',
   GREEN = '#07D6A0',
   RED = '#FD1E1E',
@@ -18,6 +19,9 @@ export enum Colors {
   BOOK_PURPLE = '#AF00ED',
   DISABLED = '#D5D8D6',
   FORM_BLUE = '#0252CC',
+  PRIMARY_PICTURE_GREY = '#ffffff63',
+  GREY_GRADIENT = 'linear-gradient(1.8deg, #fefefe -43.56%, #e6e6e6 123.62%)',
+  LIGHT_GREY = '#9b9b9b',
 }
 
 export enum WindowSizes {
@@ -25,6 +29,7 @@ export enum WindowSizes {
   tablet = '768',
   laptop = '1024',
   textBookSize = '1230',
+  ultraWidth = '1900',
 }
 
 export const device = {
@@ -77,4 +82,10 @@ export enum GameResultInfo {
   WORD_COUNT = 10,
   HALF_WORD_COUNT = 10,
   PERSENT = 100,
+}
+
+
+export enum TimerInfo {
+  TIMER_LIMIT_MINUTE = 60,
+  SIZE_MEDIUM = 53,
 }

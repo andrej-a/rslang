@@ -12,6 +12,7 @@ export function GetTitle(path: string) {
     ['/registration', 'Easy English'],
     ['/textbook', 'Text Book'],
     ['/statistics', 'Statistics'],
-    ['/games', 'MiniGames']]);
+    ['/games', 'MiniGames'],
+    ['/games/audiochallenge/start', 'MiniGames']]);
   return titles.get(path) ?? 'Easy English';
 }
