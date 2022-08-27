@@ -1,8 +1,8 @@
-import { Errors, IUser, IUserAllInfo, ResponseCode, ISignInInfo } from './constants';
+import { Errors, IUser, IUserAllInfo, ResponseCode, ISignInInfo, IInfoRequestUser } from './constants';
 import { path } from './url';
 
 //Создание пользователя
-export const createUser = async (user: IUser): Promise<void> => {
+export const createUser = async (user: IUser): Promise<IInfoRequestUser> => {
   const rawResponse = await fetch(path.users, {
     method: 'POST',
     headers: {
@@ -27,7 +27,7 @@ export const createUser = async (user: IUser): Promise<void> => {
 };
 
 //Получить информацию о пользователе по ID
-export const getUser = async (): Promise<IUser> => {
+export const getUser = async (): Promise<IInfoRequestUser> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}`, {
     method: 'GET',
     headers: {
@@ -52,7 +52,7 @@ export const getUser = async (): Promise<IUser> => {
 };
 
 //Изменить информацию о пользователе
-export const editUser = async (user: ISignInInfo): Promise<IUser> => {
+export const editUser = async (user: ISignInInfo): Promise<IInfoRequestUser> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}`, {
     method: 'PUT',
     headers: {
@@ -81,7 +81,7 @@ export const deleteUser = async (id: string, token: string): Promise<void> => {
   const rawResponse = await fetch(`${path.users}/${id}`, {
     method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${localStorage.getItem('userToken')}`,
     },
   });
 

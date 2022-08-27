@@ -1,4 +1,4 @@
-import { Errors, IUserWord, ResponseCode, IWordsSetter } from './constants';
+import { Errors, IUserWord, ResponseCode, IWordsSetter, IUserWordCreateResponse } from './constants';
 import { path } from './url';
 
 //Получение списка сложных слов для конкретного пользователя
@@ -53,7 +53,7 @@ export const createUserWord = async ({
   userId,
   wordId,
   word,
-}: IWordsSetter): Promise<IUserWord> => {
+}: IWordsSetter): Promise<IUserWordCreateResponse> => {
   const rawResponse = await fetch(`${path.users}/${userId}/words/${wordId}`, {
     method: 'POST',
     headers: {

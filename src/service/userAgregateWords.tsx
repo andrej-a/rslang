@@ -1,5 +1,5 @@
 import { IWord } from '../models/IWord';
-import { Errors} from './constants';
+import { Errors } from './constants';
 import { path } from './url';
 
 ///Получить слова определенной группы, определенной страницы c возможностью фильтрации

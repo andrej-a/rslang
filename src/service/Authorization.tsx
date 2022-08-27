@@ -1,8 +1,8 @@
-import { Errors, ISignInInfo } from './constants';
+import { Errors, ISignInInfo, IUserAllInfo } from './constants';
 import { path } from './url';
 
 //Вход в систему
-export const signIn = async (info: ISignInInfo): Promise<void> => {
+export const signIn = async (info: ISignInInfo): Promise<IUserAllInfo> => {
   const rawResponse = await fetch(`${path.signIn}`, {
     method: 'POST',
     headers: {

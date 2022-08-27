@@ -12,7 +12,11 @@ export enum ResponseCode {
   DELETED_SUCCESS = 204,
   WORD_CREATE_SUCCESS = 200,
 }
-
+export interface IInfoRequestUser {
+  id: string;
+  name: string;
+  email: string;
+}
 export interface ISignInInfo {
   email: string;
   password: string;
@@ -31,29 +35,33 @@ export interface IUserAllInfo {
   userId: string;
   name: string;
 }
-
 export interface IWordsSetter {
   userId: string;
   wordId: string;
   word: IUserWord;
 }
+//Без понятия какие поля должны быть в optional
 export interface IUserWord {
   difficulty: 'easy' | 'normal' | 'hard';
   optional: {
     newWord: boolean;
-    active: boolean;
     views: number;
     errors: number;
-    repeat: boolean;
-    wordId: string;
-    lastView: string;
-    nextView: string;
-    correct: number;
-    interval: number;
-    wordIndicator: number;
   };
 }
+export interface IUserWordCreateResponse {
+  userId: string,
+  difficulty: 'easy' | 'normal' | 'hard';
+  optional: {
+    newWord: boolean;
+    views: number;
+    errors: number;
+  };
+  wordId: string;
+}
 
+  
+//На вскидку написала поля в optional
 export interface IUserStatistic {
   learnedWords: number;
   optional: {
