@@ -1,22 +1,5 @@
-
-import { string } from 'prop-types';
-import { SignInInfo } from './Authorization';
-import { Errors, ResponseCode } from './constants';
+import { Errors, IUser, IUserAllInfo, ResponseCode, ISignInInfo } from './constants';
 import { path } from './url';
-
-interface IUser {
-  name: string;
-  email: string;
-  password: string;
-}
-
-interface IUserAllInfo {
-  message: string,
-  token: string,
-  refreshToken: string,
-  userId: string,
-  name: string,
-}
 
 //Создание пользователя
 export const createUser = async (user: IUser): Promise<void> => {
@@ -69,7 +52,7 @@ export const getUser = async (): Promise<IUser> => {
 };
 
 //Изменить информацию о пользователе
-export const editUser = async (user: SignInInfo): Promise<IUser> => {
+export const editUser = async (user: ISignInInfo): Promise<IUser> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}`, {
     method: 'PUT',
     headers: {
@@ -93,7 +76,7 @@ export const editUser = async (user: SignInInfo): Promise<IUser> => {
   return content;
 };
 
-//Удалить пользователя 
+//Удалить пользователя
 export const deleteUser = async (id: string, token: string): Promise<void> => {
   const rawResponse = await fetch(`${path.users}/${id}`, {
     method: 'DELETE',
@@ -105,12 +88,12 @@ export const deleteUser = async (id: string, token: string): Promise<void> => {
   if (rawResponse.status === Errors.MISSING_TOKEN) {
     throw new Error('Access token is missing or invalid');
   }
-  if (rawResponse.status === ResponseCode.USER_DELETED_SUCCESS) {
+  if (rawResponse.status === ResponseCode.DELETED_SUCCESS) {
     console.log('The user has been deleted');
   }
 };
 
-//Получить новый токен 
+//Получить новый токен
 export const getNewUserToken = async (id: string, refreshtoken: string): Promise<IUserAllInfo> => {
   const rawResponse = await fetch(`${path.users}/${id}/tokens`, {
     method: 'GET',
@@ -119,7 +102,6 @@ export const getNewUserToken = async (id: string, refreshtoken: string): Promise
       Accept: 'application/json',
     },
   });
-
 
   if (!rawResponse.ok) {
     throw new Error('Something wrong!');

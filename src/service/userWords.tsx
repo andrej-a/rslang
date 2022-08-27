@@ -1,27 +1,5 @@
-import { Errors, ResponseCode } from './constants';
+import { Errors, IUserWord, ResponseCode, IWordsSetter } from './constants';
 import { path } from './url';
-
-interface IWordsSetter {
-  userId: string;
-  wordId: string;
-  word: IUserWord;
-}
-export interface IUserWord {
-  difficulty: 'easy' | 'normal' | 'hard';
-  optional: {
-    newWord: boolean;
-    active: boolean;
-    views: number;
-    errors: number;
-    repeat: boolean;
-    wordId: string;
-    lastView: string;
-    nextView: string;
-    correct: number;
-    interval: number;
-    wordIndicator: number;
-  }
-}
 
 //Получение списка сложных слов для конкретного пользователя
 export const getUserWords = async (): Promise<IUserWord[]> => {
@@ -71,7 +49,11 @@ export const getUserWordsById = async (userId: string, wordId: string): Promise<
 };
 
 //Добавить слово в список сложных слов конкретного пользователя
-export const createUserWord = async ({ userId, wordId, word } : IWordsSetter): Promise<IUserWord> => {
+export const createUserWord = async ({
+  userId,
+  wordId,
+  word,
+}: IWordsSetter): Promise<IUserWord> => {
   const rawResponse = await fetch(`${path.users}/${userId}/words/${wordId}`, {
     method: 'POST',
     headers: {
@@ -98,7 +80,11 @@ export const createUserWord = async ({ userId, wordId, word } : IWordsSetter): P
 };
 
 //Обновить слово в список сложных слов конкретного пользователя
-export const updateUserWord = async ({ userId, wordId, word } : IWordsSetter): Promise<IUserWord> => {
+export const updateUserWord = async ({
+  userId,
+  wordId,
+  word,
+}: IWordsSetter): Promise<IUserWord> => {
   const rawResponse = await fetch(`${path.users}/${userId}/words/${wordId}`, {
     method: 'PUT',
     headers: {
@@ -125,7 +111,7 @@ export const updateUserWord = async ({ userId, wordId, word } : IWordsSetter): P
 };
 
 //Удалить слово из списка сложных слов конкретного пользователя
-export const deleteUserWord = async ( userId: string, wordId: string ): Promise<void> => {
+export const deleteUserWord = async (userId: string, wordId: string): Promise<void> => {
   const rawResponse = await fetch(`${path.users}/${userId}/words/${wordId}`, {
     method: 'DELETE',
     headers: {
