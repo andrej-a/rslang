@@ -20,7 +20,7 @@ import AudioChallengeGame from './pages/MiniGamesPage/AudioChallengeGame/AudioCh
 
 function App() {
   const [pageTitle, setPageTitle] = useState<string>(
-    GetTitle(global.location.pathname) ?? 'Easy English'
+    GetTitle(global.location.pathname) ?? 'Easy English',
   );
   useEffect(() => {
     setPageTitle(() => GetTitle(global.location.pathname) ?? 'Easy English');

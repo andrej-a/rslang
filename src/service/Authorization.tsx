@@ -15,6 +15,7 @@ export const signIn = async (info: ISignInInfo): Promise<IUserAllInfo> => {
   if (rawResponse.status === Errors.WRONG_INPUT_LOGIN) {
     throw new Error('Incorrect e-mail or password');
   }
+
   if (!rawResponse.ok) {
     throw new Error('Something wrong!');
   }
@@ -23,6 +24,6 @@ export const signIn = async (info: ISignInInfo): Promise<IUserAllInfo> => {
 
   localStorage.setItem('userId', content.userId);
   localStorage.setItem('userToken', content.token);
-
+  console.log('signIn', content);
   return content;
 };

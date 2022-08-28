@@ -2,7 +2,7 @@ import { IUserStatistic, Errors } from './constants';
 import { path } from './url';
 
 //Обновить данные в статистике
-export const createStatistic = async (statisticObj: IUserStatistic): Promise<IUserStatistic> => {
+export const updateStatistic = async (statisticObj: IUserStatistic): Promise<IUserStatistic> => {
   const statistic = statisticObj;
 
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/statistics`, {
@@ -10,6 +10,7 @@ export const createStatistic = async (statisticObj: IUserStatistic): Promise<IUs
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
       Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ learnedWords: statistic.learnedWords, optional: statistic.optional }),
   });

@@ -1,4 +1,11 @@
-import { Errors, IUser, IUserAllInfo, ResponseCode, ISignInInfo, IInfoRequestUser } from './constants';
+import {
+  Errors,
+  IUser,
+  IUserAllInfo,
+  ResponseCode,
+  ISignInInfo,
+  IInfoRequestUser,
+} from './constants';
 import { path } from './url';
 
 //Создание пользователя
@@ -22,7 +29,7 @@ export const createUser = async (user: IUser): Promise<IInfoRequestUser> => {
   const content = await rawResponse.json();
 
   localStorage.setItem('userId', content.userId);
-
+  console.log('createUser', content);
   return content;
 };
 
@@ -47,7 +54,7 @@ export const getUser = async (): Promise<IInfoRequestUser> => {
   }
 
   const content = await rawResponse.json();
-
+  console.log('getUser', content);
   return content;
 };
 
@@ -72,7 +79,7 @@ export const editUser = async (user: ISignInInfo): Promise<IInfoRequestUser> => 
   }
 
   const content = await rawResponse.json();
-
+  console.log('editUser', content);
   return content;
 };
 

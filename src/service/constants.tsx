@@ -42,25 +42,30 @@ export interface IWordsSetter {
 }
 //Без понятия какие поля должны быть в optional
 export interface IUserWord {
-  difficulty: 'easy' | 'normal' | 'hard';
+  difficulty: 'learned' | 'study' | 'hard';
   optional: {
     newWord: boolean;
-    views: number;
-    errors: number;
+    rightAnswers: number;
+    rightAudio: number;
+    wrongAudio: number;
+    rightSprint: number;
+    wrongSprint: number;
   };
 }
 export interface IUserWordCreateResponse {
-  userId: string,
-  difficulty: 'easy' | 'normal' | 'hard';
+  userId: string;
+  difficulty: 'learned' | 'study' | 'hard';
   optional: {
     newWord: boolean;
-    views: number;
-    errors: number;
+    rightAnswers: number;
+    rightAudio: number;
+    wrongAudio: number;
+    rightSprint: number;
+    wrongSprint: number;
   };
   wordId: string;
 }
 
-  
 //На вскидку написала поля в optional
 export interface IUserStatistic {
   learnedWords: number;
@@ -69,7 +74,6 @@ export interface IUserStatistic {
       visitDate: number;
       wordsToday: number;
       newWordsToday: number;
-      lastWord: number;
       weekDay: number;
       errors: number;
       correct: number;

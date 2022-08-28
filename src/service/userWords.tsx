@@ -1,4 +1,10 @@
-import { Errors, IUserWord, ResponseCode, IWordsSetter, IUserWordCreateResponse } from './constants';
+import {
+  Errors,
+  IUserWord,
+  ResponseCode,
+  IWordsSetter,
+  IUserWordCreateResponse,
+} from './constants';
 import { path } from './url';
 
 //Получение списка сложных слов для конкретного пользователя
@@ -19,7 +25,7 @@ export const getUserWords = async (): Promise<IUserWord[]> => {
   }
 
   const content = await rawResponse.json();
-
+  console.log('getUserWords', content);
   return content;
 };
 
@@ -44,7 +50,7 @@ export const getUserWordsById = async (userId: string, wordId: string): Promise<
   }
 
   const content = await rawResponse.json();
-  console.log('getUserWord', content);
+  console.log('getUserWordById', content);
   return content;
 };
 
