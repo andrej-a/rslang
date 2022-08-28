@@ -85,7 +85,7 @@ export interface IUserStatistic {
         accurancy: number;
         inRow: number;
       };
-      ownGame: {
+      audioChallenge: {
         words: number;
         accurancy: number;
         inRow: number;
