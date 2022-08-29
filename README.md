@@ -1,58 +1,58 @@
 # Task RS Lang
 
-"RS Lang" – приложение для изучения иностранных слов, включающее электронный учебник с базой слов для изучения, мини-игры для их повторения, страницу статистики для отслеживания индивидуального прогресса.
+"RS Lang" – an application for learning english words, including an textbook with a database of words to study, mini-games for repeating them, a statistics page for tracking individual progress.
 
 Task: PASTE LINK <br/>
 Deploy: PASTE LINK <br/>
 Backend: https://react-rslang-back.herokuapp.com
 ![image](https://user-images.githubusercontent.com/81522781/187300410-8eef69b0-ea47-405b-9cac-f66575e9a9c1.png)
 
-## Структура приложения
-- страница авторизации
-- главная страница приложения
-- страница статистики
-- словарь с вкладками уровней слов и вкладкой "Сложные слова"
-- мини-игры AudioChallenge, Scrint
+## Application Structure
+- Authorization page
+- The main page of the application
+- Statistics page
+- A dictionary with word level tabs and a "Hard Words" tab
+- Minigames AudioChallenge, Scrint
 
-## Исходные данные
-Коллекция "4000 essential english words". Коллекция содержит 3600 часто употребляемых английских слов, изучение которых вам необходимо организовать. Слова в коллекции отсортированы от более простых и известных до более сложных. Первые 400 наиболее часто употребляемых слов в коллекцию не вошли. Считается, что это базовый запас взрослого человека, оставшийся от школы/вуза или предыдущих попыток изучения языка. Слова разделены на группы по 20 слов. Вся коллекция разбита на шесть частей по 600 слов в каждой.
+## Source data
+Collection "4000 essential English words". The collection contains 3600 frequently used English words, the study of which you need to organize. The words in the collection are sorted from simpler and more famous to more complex. The first 400 most frequently used words were not included in the collection. It is believed that this is the basic stock of an adult left over from school / university or previous attempts to learn a language. The words are divided into groups of 20 words. The whole collection is divided into six parts of 600 words each
 
-## Используемые технологии
+## Technologies that we used
 
 -  ***React*** <br/>
-1. Основным преимуществом выбранной технологии является возможность создавать инкапсулированные компоненты с собственным состоянием, а затем объединять их в сложные пользовательские интерфейсы. Это было рещающим фактором при выборе технологии для командной разработки<br/>
-2. React создаёт кэш-структуру в памяти, что позволяет вычислять разницу между предыдущим и текущим состояниями интерфейса для оптимального обновления DOM браузера <br/>
-3. Еще одно преимущество React — TypeScript XML (TSX) — это расширение синтаксиса TypeScript, которое позволяет использовать HTML-подобный синтаксис для описания структуры интерфейса.
+1. The main advantage of the chosen technology is the ability to create encapsulated components with their own state, and then combine them into complex user interfaces. This was a decisive factor when choosing a technology for team development
+2. React creates a cache structure in memory, which allows you to calculate the difference between the previous and current interface states for optimal updating of the browser DOM 
+3. Another advantage of React — TypeScript XML (TSX) is the extension of TypeScript syntax, which allows you to use HTML-like syntax to describe the structure of the interface
 
 -  ***React Hooks*** 
-1. Легче шарить логику состояния(кастомные хуки).
-2. Не нужно помнить о this.
-3. Упрощение логики, связанной с жизненным циклом.
-4. Гибче возможности оптимизации за счет мемоизации.
+1. It's easier to share state logic (custom hooks)
+2. No need to remember about 'this'
+3. Simplification of the logic associated with the lifecycle
+
 
 - ***TypeScript***
-1. Строгая типизация
-2. Больше возможностей ООП: модификаторы доступа, интерфейсы, абстрактные классы и т.д.
-3. Более понятный и читаемый код
-4. Минимизация возможных ошибок
+1. Strict typing
+2. More OOP features: access modifiers, interfaces, abstract classes, etc.
+3. Clearer and more readable code
+4. Minimizing possible errors
   
-- ***Webpack*** - для сборки приложения, в режимах development и production
-- ***Material UI*** - для создания компонентов с готовыми стилями
-- ***Styled-components*** - для упрощения работы со стилями
-- ***Plotly*** - для визуализации данных и построение графиков статистики
-- ***Postman*** - проверка запросов на сервер
-- ***Netlify*** - автоматическая сборка и деплой текущего состояния ветки для разработки
-- ***Eslint / Prettier*** -  для единого стиля кода всей команды + исключение некоторых ошибок
-- ***react-router-dom*** - для организации навигации (в том числе и в браузере) между страницами
-- ***Trello*** - использовался для распределения задач и отслеживания процесса их выполнения всеми участниками, в целях соблюдения дедлайнов и избежания дублирования
-- ***Telegram*** - для регулярных видеозвонков и коллективного обсуждения поставленных задач, трудностей их выполенния и полученных результатов
+- ***Webpack*** - to build an application, in the modesdevelopment и production
+- ***Material UI*** - to create components with ready-made styles
+- ***Styled-components*** - to simplify working with styles
+- ***Plotly*** - to visualize data and plot statistics
+- ***Postman*** - checking server requests
+- ***Netlify*** - automatic assembly and deployment of the current state of the development branch
+- ***Eslint / Prettier*** -  for a single code style of the whole team + exclusion of some errors
+- ***react-router-dom*** - to organize navigation (including in the browser) between pages
+- ***Trello*** - it was used to distribute tasks and track the process of their implementation by all participants, in order to meet deadlines and avoid duplication
+- ***Telegram*** - for regular calls and collective discussion of the tasks set, the difficulties of their fulfillment and the results obtained
 
-## Контроль качества кода
-Для обеспечения контроля качества использованы программные средства (linter, prettier) и разделение разработки на разные ветки используя систему контроля версий Git. Основное, рабочее приложение располагается в ветке develop, в которое участники разработки делают pull Request. Правило для проверки PR: обязателная проверка тим-лидом и одним участником проекта.
+## Code quality control
+To ensure quality control, software tools (linter, prettier) and the division of development into different branches using the Git version control system were used. The main, working application is located in the develop branch, to which the development participants make a pull Request. Rule for PR verification: mandatory verification by a team lead and one project participant.
 
-## Авторы
+## Creators
 ### Team 21
-- Andrej Amelyanovitsch -  регистрация/авторизация, игра AudioChallenge
-- Anastasia Polivoda - словарь пользователя, статистика
-- Lizaveta Petrova - главная страница, игра Sprint
+- Andrej Amelyanovitsch -  Authorization page, minigame AudioChallenge
+- Anastasia Polivoda - Textbook, Statistics page
+- Lizaveta Petrova - Mainpage, minigame Sprint
 
