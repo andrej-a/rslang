@@ -1,16 +1,17 @@
-import { IUserStatistic, Errors } from './constants';
+import { IUserStatistic, Errors, HttpMetod } from './constants';
 import { path } from './url';
+const { GET, PUT, CONTENT_TYPE } = HttpMetod;
 
 //Обновить данные в статистике
 export const updateStatistic = async (statisticObj: IUserStatistic): Promise<IUserStatistic> => {
   const statistic = statisticObj;
 
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/statistics`, {
-    method: 'PUT',
+    method: PUT,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: CONTENT_TYPE,
+      'Content-Type': CONTENT_TYPE,
     },
     body: JSON.stringify({ learnedWords: statistic.learnedWords, optional: statistic.optional }),
   });
@@ -32,10 +33,10 @@ export const updateStatistic = async (statisticObj: IUserStatistic): Promise<IUs
 //Получить данные из статистики
 export const getStatistic = async () => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/statistics`, {
-    method: 'GET',
+    method: GET,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-      Accept: 'application/json',
+      Accept: CONTENT_TYPE,
     },
   });
   if (rawResponse.status === Errors.BAD_REQUEST) {

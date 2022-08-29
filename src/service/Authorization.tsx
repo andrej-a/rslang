@@ -1,13 +1,14 @@
-import { Errors, ISignInInfo, IUserAllInfo } from './constants';
+import { Errors, ISignInInfo, IUserAllInfo, HttpMetod } from './constants';
 import { path } from './url';
+const { POST, CONTENT_TYPE } = HttpMetod;
 
 //Вход в систему
 export const signIn = async (info: ISignInInfo): Promise<IUserAllInfo> => {
   const rawResponse = await fetch(`${path.signIn}`, {
-    method: 'POST',
+    method: POST,
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: CONTENT_TYPE,
+      'Content-Type': CONTENT_TYPE,
     },
     body: JSON.stringify(info),
   });

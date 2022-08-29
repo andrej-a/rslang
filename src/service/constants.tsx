@@ -12,6 +12,14 @@ export enum ResponseCode {
   DELETED_SUCCESS = 204,
   WORD_CREATE_SUCCESS = 200,
 }
+
+export enum HttpMetod {
+  POST = 'POST',
+  GET = 'GET',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+  CONTENT_TYPE = 'application/json',
+}
 export interface IInfoRequestUser {
   id: string;
   name: string;
@@ -74,10 +82,8 @@ export interface IUserStatistic {
       visitDate: number;
       wordsToday: number;
       newWordsToday: number;
-      weekDay: number;
       errors: number;
       correct: number;
-      dayProgress: number;
     };
     games: {
       sprint: {

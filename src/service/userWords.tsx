@@ -4,16 +4,18 @@ import {
   ResponseCode,
   IWordsSetter,
   IUserWordCreateResponse,
+  HttpMetod,
 } from './constants';
 import { path } from './url';
+const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
 //Получение списка сложных слов для конкретного пользователя
 export const getUserWords = async (): Promise<IUserWord[]> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/words`, {
-    method: 'GET',
+    method: GET,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-      Accept: 'application/json',
+      Accept: CONTENT_TYPE,
     },
   });
 
@@ -32,10 +34,10 @@ export const getUserWords = async (): Promise<IUserWord[]> => {
 //Получить слово из списка сложных слов конкретного пользователя
 export const getUserWordsById = async (userId: string, wordId: string): Promise<IUserWord> => {
   const rawResponse = await fetch(`${path.users}/${userId}/words/${wordId}`, {
-    method: 'GET',
+    method: GET,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-      Accept: 'application/json',
+      Accept: CONTENT_TYPE,
     },
   });
 
@@ -61,11 +63,11 @@ export const createUserWord = async ({
   word,
 }: IWordsSetter): Promise<IUserWordCreateResponse> => {
   const rawResponse = await fetch(`${path.users}/${userId}/words/${wordId}`, {
-    method: 'POST',
+    method: POST,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: CONTENT_TYPE,
+      'Content-Type': CONTENT_TYPE,
     },
     body: JSON.stringify(word),
   });
@@ -92,11 +94,11 @@ export const updateUserWord = async ({
   word,
 }: IWordsSetter): Promise<IUserWord> => {
   const rawResponse = await fetch(`${path.users}/${userId}/words/${wordId}`, {
-    method: 'PUT',
+    method: PUT,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: CONTENT_TYPE,
+      'Content-Type': CONTENT_TYPE,
     },
     body: JSON.stringify(word),
   });
@@ -119,7 +121,7 @@ export const updateUserWord = async ({
 //Удалить слово из списка сложных слов конкретного пользователя
 export const deleteUserWord = async (userId: string, wordId: string): Promise<void> => {
   const rawResponse = await fetch(`${path.users}/${userId}/words/${wordId}`, {
-    method: 'DELETE',
+    method: DELETE,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
     },

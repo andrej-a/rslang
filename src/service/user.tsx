@@ -5,16 +5,18 @@ import {
   ResponseCode,
   ISignInInfo,
   IInfoRequestUser,
+  HttpMetod,
 } from './constants';
 import { path } from './url';
+const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
 //Создание пользователя
 export const createUser = async (user: IUser): Promise<IInfoRequestUser> => {
   const rawResponse = await fetch(path.users, {
-    method: 'POST',
+    method: POST,
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: CONTENT_TYPE,
+      'Content-Type': CONTENT_TYPE,
     },
     body: JSON.stringify(user),
   });
@@ -36,10 +38,10 @@ export const createUser = async (user: IUser): Promise<IInfoRequestUser> => {
 //Получить информацию о пользователе по ID
 export const getUser = async (): Promise<IInfoRequestUser> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}`, {
-    method: 'GET',
+    method: GET,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-      Accept: 'application/json',
+      Accept: CONTENT_TYPE,
     },
   });
 
@@ -61,10 +63,10 @@ export const getUser = async (): Promise<IInfoRequestUser> => {
 //Изменить информацию о пользователе
 export const editUser = async (user: ISignInInfo): Promise<IInfoRequestUser> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}`, {
-    method: 'PUT',
+    method: PUT,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-      Accept: 'application/json',
+      Accept: CONTENT_TYPE,
     },
     body: JSON.stringify(user),
   });
@@ -84,9 +86,9 @@ export const editUser = async (user: ISignInInfo): Promise<IInfoRequestUser> => 
 };
 
 //Удалить пользователя
-export const deleteUser = async (id: string, token: string): Promise<void> => {
+export const deleteUser = async (id: string): Promise<void> => {
   const rawResponse = await fetch(`${path.users}/${id}`, {
-    method: 'DELETE',
+    method: DELETE,
     headers: {
       Authorization: `Bearer ${localStorage.getItem('userToken')}`,
     },
@@ -103,10 +105,10 @@ export const deleteUser = async (id: string, token: string): Promise<void> => {
 //Получить новый токен
 export const getNewUserToken = async (id: string, refreshtoken: string): Promise<IUserAllInfo> => {
   const rawResponse = await fetch(`${path.users}/${id}/tokens`, {
-    method: 'GET',
+    method: GET,
     headers: {
       Authorization: `Bearer ${refreshtoken}`,
-      Accept: 'application/json',
+      Accept: CONTENT_TYPE,
     },
   });
 

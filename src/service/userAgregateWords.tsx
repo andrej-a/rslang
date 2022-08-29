@@ -1,6 +1,7 @@
 import { IWord } from '../models/IWord';
-import { Errors } from './constants';
+import { Errors, HttpMetod } from './constants';
 import { path } from './url';
+const { GET, CONTENT_TYPE } = HttpMetod;
 
 ///Получить слова определенной группы, определенной страницы c возможностью фильтрации
 export const getAggregatedWordsList = async (options: {
@@ -20,10 +21,10 @@ export const getAggregatedWordsList = async (options: {
   const rawResponse = await fetch(
     `${path.users}/${options.userId}/aggregatedWords?${finalFilter}`,
     {
-      method: 'GET',
+      method: GET,
       headers: {
         Authorization: `Bearer ${localStorage.getItem('userToken')}`,
-        Accept: 'application/json',
+        Accept: CONTENT_TYPE,
       },
     },
   );

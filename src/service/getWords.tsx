@@ -1,12 +1,14 @@
 import { IWord } from '../models/IWord';
+import { HttpMetod } from './constants';
 import { path } from './url';
+const { GET, CONTENT_TYPE } = HttpMetod;
 
 //Получение слов из определенной группы и страницы
 export const getWords = async (group?: number, page?: number): Promise<{ items: IWord[] }> => {
   const response = await fetch(`${path.words}?group=${group || 0}&page=${page || 0}`, {
-    method: 'GET',
+    method: GET,
     headers: {
-      Accept: 'application/json',
+      Accept: CONTENT_TYPE,
     },
   });
 
@@ -18,9 +20,9 @@ export const getWords = async (group?: number, page?: number): Promise<{ items: 
 // Получение слова по id
 export const getWordById = async (id: string): Promise<IWord> => {
   const response = await fetch(`${path.words}/${id}`, {
-    method: 'GET',
+    method: GET,
     headers: {
-      Accept: 'application/json',
+      Accept: CONTENT_TYPE,
     },
   });
   const content = await response.json();
