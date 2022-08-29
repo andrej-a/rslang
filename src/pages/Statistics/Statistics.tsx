@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
-import { Colors } from '../../styles/constansts';
+import { Colors, ProgressBarInfo } from '../../styles/constansts';
 import {
   StatisticsCommonCard,
   StatisticsCommonUpperElement,
@@ -112,7 +112,7 @@ const Statistics = () => {
                     </StatisticsCommonUpperElement>
 
                     <StatisticsCommonUpperElement>
-                        <div style={{ width: 184, height: 184 }}><ProgressBar percent={50}></ProgressBar></div>
+                        <div style={{ width: 184, height: 184 }}><ProgressBar percent={90} color={Colors.WHITE} diametr={ ProgressBarInfo.SIZE_LARGE } strokeWidth={6}></ProgressBar></div>
                         <h4>Accurancy</h4>
                     </StatisticsCommonUpperElement>
                     {cards}
