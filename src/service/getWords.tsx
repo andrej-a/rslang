@@ -6,12 +6,15 @@ const { GET, CONTENT_TYPE } = HttpMetod;
 
 //Получение слов из определенной группы и страницы
 export const getWords = async (group?: number, page?: number): Promise<{ items: IWord[] }> => {
-  const response = await fetch(`${path.words}?group=${group || DefaultNumber.NULL}&page=${page || DefaultNumber.NULL}`, {
-    method: GET,
-    headers: {
-      Accept: CONTENT_TYPE,
+  const response = await fetch(
+    `${path.words}?group=${group || DefaultNumber.NULL}&page=${page || DefaultNumber.NULL}`,
+    {
+      method: GET,
+      headers: {
+        Accept: CONTENT_TYPE,
+      },
     },
-  });
+  );
 
   const content = await response.json();
   console.log('getWords', content);

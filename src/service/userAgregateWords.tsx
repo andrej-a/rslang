@@ -14,7 +14,9 @@ export const getAggregatedWordsList = async (options: {
 }): Promise<IWord[]> => {
   const filterGroup: string = options.group ? `&group=${options.group}` : '';
   const filterPage: string = options.page ? `&page=${options.page}` : '';
-  const filterWordsPerPage: string = options.wordsPerPage ? `&wordsPerPage=${options.wordsPerPage}` : '';
+  const filterWordsPerPage: string = options.wordsPerPage
+    ? `&wordsPerPage=${options.wordsPerPage}`
+    : '';
   const filterFilter: string = options.filter ? `&filter=${options.filter}` : '';
   const sumFilter: string = filterGroup + filterPage + filterWordsPerPage + filterFilter;
   const finalFilter = `?${sumFilter.slice(1)}`;
