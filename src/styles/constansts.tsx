@@ -29,7 +29,7 @@ export enum WindowSizes {
   tablet = '768',
   laptop = '1024',
   textBookSize = '1230',
-  ultraWidth = '1900',
+  ultraWidth = '2100',
 }
 
 export const device = {

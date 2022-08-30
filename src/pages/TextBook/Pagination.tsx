@@ -1,8 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { PaginationButton, PaginationWrapper, NextButton, PreviousButton } from './Pagination.styled';
+import {
+  PaginationButton,
+  PaginationWrapper,
+  NextButton,
+  PreviousButton,
+} from './Pagination.styled';
 
-const Pagination = ({ pagination, currentPage, totalCount }:
-{ pagination: (direction: number, numButt?: boolean) => void, currentPage: number, totalCount: number }) => {
+const Pagination = ({
+  pagination,
+  currentPage,
+  totalCount,
+}: {
+  pagination: (direction: number, numButt?: boolean) => void;
+  currentPage: number;
+  totalCount: number;
+}) => {
   const [firstButton, setFirstButton] = useState<number | string>(1);
   const [firstButtonState, setFirstButtonState] = useState<boolean>(firstButton === currentPage);
 
@@ -17,30 +29,64 @@ const Pagination = ({ pagination, currentPage, totalCount }:
 
   const [fifthButton, setFifthButton] = useState<number | string>(totalCount);
   const [fifthButtonState, setFifthButtonState] = useState<boolean>(fifthButton === currentPage);
-  
-  useEffect(
-    () => {
-      setFirstButtonState(() => (firstButton === currentPage));
-      setSecondButton(() => (currentPage <= 3 ? 2 : '...'));
-      setSecondButtonState(() => (secondButton === currentPage));
-      setThirdButton(() => currentPage <= 3 ? 3 : currentPage < totalCount - 2 ? currentPage : totalCount - 2 );
-      setThirdButtonState(() => (currentPage >= 3 && currentPage <= totalCount - 2 ? true : false));
-      setFourthButton(() => (currentPage < totalCount - 2 ? '...' : totalCount - 1));
-      setFourthButtonState(() => (fourthButton === currentPage));
-      setFifthButtonState(() => (fifthButton === currentPage));      
-    }
-    , [currentPage, fifthButton, firstButton, fourthButton, secondButton, totalCount]);
+
+  useEffect(() => {
+    setFirstButtonState(() => firstButton === currentPage);
+    setSecondButton(() => (currentPage <= 3 ? 2 : '...'));
+    setSecondButtonState(() => secondButton === currentPage);
+    setThirdButton(() =>
+      currentPage <= 3 ? 3 : currentPage < totalCount - 2 ? currentPage : totalCount - 2,
+    );
+    setThirdButtonState(() => (currentPage >= 3 && currentPage <= totalCount - 2 ? true : false));
+    setFourthButton(() => (currentPage < totalCount - 2 ? '...' : totalCount - 1));
+    setFourthButtonState(() => fourthButton === currentPage);
+    setFifthButtonState(() => fifthButton === currentPage);
+  }, [currentPage, fifthButton, firstButton, fourthButton, secondButton, totalCount]);
 
   return (
-        <PaginationWrapper>
-            <PreviousButton state={false} onClick={() => pagination(-1)} disabled={currentPage === 1}></PreviousButton>
-            <PaginationButton state={firstButtonState} onClick={() => pagination(firstButton as number, true)} disabled={currentPage === 1}>{firstButton}</PaginationButton>
-            <PaginationButton state={secondButtonState} onClick={() => pagination(secondButton as number, true)}>{secondButton}</PaginationButton>
-            <PaginationButton state={thirdButtonState} onClick={() => pagination(thirdButton as number, true)}>{thirdButton}</PaginationButton>
-            <PaginationButton state={fourthButtonState} onClick={() => pagination(fourthButton as number, true)}>{fourthButton}</PaginationButton>
-            <PaginationButton state={fifthButtonState} onClick={() => pagination(fifthButton as number, true)}>{fifthButton}</PaginationButton>
-            <NextButton state={false} onClick={() => pagination(1)} disabled={(totalCount) <= currentPage}></NextButton>
-        </PaginationWrapper>
+    <PaginationWrapper>
+      <PreviousButton
+        state={false}
+        onClick={() => pagination(-1)}
+        disabled={currentPage === 1}
+      ></PreviousButton>
+      <PaginationButton
+        state={firstButtonState}
+        onClick={() => pagination(firstButton as number, true)}
+        disabled={currentPage === 1}
+      >
+        {firstButton}
+      </PaginationButton>
+      <PaginationButton
+        state={secondButtonState}
+        onClick={() => pagination(secondButton as number, true)}
+      >
+        {secondButton}
+      </PaginationButton>
+      <PaginationButton
+        state={thirdButtonState}
+        onClick={() => pagination(thirdButton as number, true)}
+      >
+        {thirdButton}
+      </PaginationButton>
+      <PaginationButton
+        state={fourthButtonState}
+        onClick={() => pagination(fourthButton as number, true)}
+      >
+        {fourthButton}
+      </PaginationButton>
+      <PaginationButton
+        state={fifthButtonState}
+        onClick={() => pagination(fifthButton as number, true)}
+      >
+        {fifthButton}
+      </PaginationButton>
+      <NextButton
+        state={false}
+        onClick={() => pagination(1)}
+        disabled={totalCount <= currentPage}
+      ></NextButton>
+    </PaginationWrapper>
   );
 };
 

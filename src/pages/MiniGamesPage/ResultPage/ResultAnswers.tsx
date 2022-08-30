@@ -1,7 +1,14 @@
 import React from 'react';
 
 import { IWordResult } from '../../../components/Interfaces';
-import { AudioButton, RightAnswersContainer, Word, WordEng, WordRu, WrongAnswersContainer } from './ResultPage.styled';
+import {
+  AudioButton,
+  RightAnswersContainer,
+  Word,
+  WordEng,
+  WordRu,
+  WrongAnswersContainer,
+} from './ResultPage.styled';
 import ListenIcon from '../../../assets/listen.svg';
 
 type Props = {
@@ -9,17 +16,16 @@ type Props = {
 };
 
 export const WordItem = ({ wordEng, wordRu, audioUrl }: IWordResult) => {
-
-  const startSong = (url:string | undefined) => {
+  const startSong = (url: string | undefined) => {
     const audio = new Audio();
     audio.src = `${url}`;
-    audio.autoplay = true; 
+    audio.autoplay = true;
   };
- 
+
   return (
     <Word>
-      <AudioButton onClick={()=>startSong(audioUrl)}>
-      <img src={ListenIcon} alt="icon" /> 
+      <AudioButton onClick={() => startSong(audioUrl)}>
+        <img src={ListenIcon} alt="icon" />
       </AudioButton>
       <WordEng>{wordEng} - </WordEng>
       <WordRu> {wordRu}</WordRu>

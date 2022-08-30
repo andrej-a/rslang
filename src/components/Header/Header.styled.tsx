@@ -214,4 +214,15 @@ export const GroupMenuItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  .activeLink {
+    p {
+      color: ${Colors.GREEN};
+    }
+    div {
+      background-color: ${Colors.GREEN};
+      outline: solid 6px ${Colors.GREEN};
+      border-radius: 12px;
+    }
+  }
 `;

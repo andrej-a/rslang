@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import {
   DivAppNavigation,
@@ -23,22 +23,22 @@ export const Navigation = ({ active }: Props) => {
     <DivAppNavigation data-testid="navbar" className={active ? 'active' : ''}>
       <Blur className={active ? 'active' : ''} />
       <GroupMenuItem>
-        <Link to={'/'}>
+        <NavLink to="/" className={({ isActive }) => (isActive ? ' activeLink' : '')}>
           <HomeIconDiv />
           <p>Main</p>{' '}
-        </Link>
-        <Link to={'/textbook'}>
+        </NavLink>
+        <NavLink to={'/textbook'} className={({ isActive }) => (isActive ? ' activeLink' : '')}>
           <TextBookIconDiv />
           <p>Textbook</p>
-        </Link>
-        <Link to={'/games'}>
+        </NavLink>
+        <NavLink to={'/games'} className={({ isActive }) => (isActive ? ' activeLink' : '')}>
           <GamesIconDiv />
           <p>Minigames</p>
-        </Link>
-        <Link to={'/statistics'}>
+        </NavLink>
+        <NavLink to={'/statistics'} className={({ isActive }) => (isActive ? ' activeLink' : '')}>
           <StatisticsIconDiv />
           <p>Statistics</p>
-        </Link>
+        </NavLink>
       </GroupMenuItem>
       <Link to={'/'}>
         <SignoutIconIconDiv />

@@ -32,7 +32,7 @@ const data: IAboutAppItem[] = [
     text: 'Memorizing English words can be fun and challenging. Check how much points you can get in one minute, making educated guesses about what is right and what is wrong',
     img: `${Image2}`,
     textButton: 'Get started',
-    linkPage: '/sprint',
+    linkPage: 'games/sprint',
     alignImage: 'row-reverse',
   },
   {
@@ -41,7 +41,7 @@ const data: IAboutAppItem[] = [
     text: 'Check your listening skills, trying to pick the right meaning after hearing a word. Be careful, as you just have one guess.  With our app, learning is a joy',
     img: `${Image3}`,
     textButton: 'Get started',
-    linkPage: '/audio',
+    linkPage: 'games/audiochallenge',
     alignImage: 'row',
   },
   {

@@ -4,7 +4,6 @@ import { MemberItem, MembersInfo } from './Footer.styled';
 import { IContact } from '../Interfaces';
 import gitLogo from '../../assets/gitHub.svg';
 
-
 const data: IContact[] = [
   {
     key: 1,
