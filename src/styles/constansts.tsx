@@ -84,7 +84,6 @@ export enum GameResultInfo {
   PERSENT = 100,
 }
 
-
 export enum TimerInfo {
   TIMER_LIMIT_MINUTE = 60,
   SIZE_MEDIUM = 53,
