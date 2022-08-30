@@ -11,15 +11,13 @@ const Registration = () => {
     setFormToggler(value);
   };
   return (
-        <RegistrationWrapper>
-            {formToggler === LOGIN_FORM_STATE ? 
-            <LoginForm 
-            onSetFormToggler={onSetFormToggler}
-            /> : 
-            <RegistrationForm 
-            onSetFormToggler={onSetFormToggler}
-            />}
-        </RegistrationWrapper>
+    <RegistrationWrapper>
+      {formToggler === LOGIN_FORM_STATE ? (
+        <LoginForm onSetFormToggler={onSetFormToggler} />
+      ) : (
+        <RegistrationForm onSetFormToggler={onSetFormToggler} />
+      )}
+    </RegistrationWrapper>
   );
 };
 

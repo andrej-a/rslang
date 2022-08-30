@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 import { Colors } from '../../styles/constansts';
 
-export const ProgressBarContainer = styled.div.attrs((props: { radius: number, strokeWidth: number }) => props)`
+export const ProgressBarContainer = styled.div.attrs(
+  (props: { radius: number; strokeWidth: number }) => props,
+)`
   width: calc((${(props) => props.radius + props.strokeWidth * 2}px) * 2);
   height: calc((${(props) => props.radius + props.strokeWidth * 2}px) * 2);
   position: relative;
@@ -16,7 +18,9 @@ export const ProgressBarContainer = styled.div.attrs((props: { radius: number, s
   }
 `;
 
-export const CircleContainer = styled.svg.attrs((props: { stroke: string, radius: number, strokeWidth: number }) => props)`
+export const CircleContainer = styled.svg.attrs(
+  (props: { stroke: string; radius: number; strokeWidth: number }) => props,
+)`
   position: relative;
   z-index: 100;
   width: calc((${(props) => props.radius + props.strokeWidth * 2}px) * 2);

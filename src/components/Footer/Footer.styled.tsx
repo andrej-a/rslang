@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Colors } from '../../styles/constansts';
 import footerBackground from '../../assets/FooterBackground.png';
 
-
 export const WrapperFooter = styled.div`
   background-image: url(${footerBackground});
   background-size: 100% auto;

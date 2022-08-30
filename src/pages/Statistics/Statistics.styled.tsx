@@ -6,7 +6,6 @@ import { WrapperFooter } from '../../components/Footer/Footer.styled';
 import Ellipse from '../../assets/ellipse.svg';
 import EllipseGreen from '../../assets/ellipseGreen.svg';
 
-
 const { textBookSize, mobile, tablet } = WindowSizes;
 
 export const StatisticsWraper = styled.div`
@@ -20,9 +19,9 @@ export const StatisticsWraper = styled.div`
     position: relative;
     right: 0;
     width: calc(100% - 117px);
-    &.upper{      
-    left: 93px;
-    margin: 116px auto 93px 0;
+    &.upper {
+      left: 93px;
+      margin: 116px auto 93px 0;
     }
   }
   @media (max-width: ${tablet}px) {
@@ -31,11 +30,10 @@ export const StatisticsWraper = styled.div`
     left: 0;
     margin: 0 auto;
     width: calc(100% - 117px);
-    &.upper{      
-    left: 0;
-    margin: 116px auto;
+    &.upper {
+      left: 0;
+      margin: 116px auto;
     }
-   
   }
 `;
 export const WaveBlock = styled(WrapperFooter)`
@@ -46,15 +44,14 @@ export const WaveBlock = styled(WrapperFooter)`
   margin: 0 auto -146px auto;
   @media (max-width: ${tablet}px) {
     margin: 0 auto;
-    padding-left: 0 ;
-   
+    padding-left: 0;
   }
 `;
 export const StatisticsTitle = styled.h2.attrs((props: { color: string }) => props)`
   font-weight: 600;
   font-size: 30px;
   line-height: 40px;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
   text-align: center;
 `;
 export const StatisticsSubtitle = styled.h3`
@@ -84,7 +81,7 @@ export const StatisticsCommonUpperElement = styled.div`
   display: flex;
   gap: 24px;
   align-items: center;
-  & div{
+  & div {
     margin-left: 19px;
     font-weight: 500;
     font-size: 120px;
@@ -92,12 +89,12 @@ export const StatisticsCommonUpperElement = styled.div`
     letter-spacing: 0.015em;
     color: ${Colors.WHITE};
   }
-  & h4{
-   font-weight: 500;
-  font-size: 30px;
-  line-height: 40px;
-  letter-spacing: 0.015em;
-  color: ${Colors.WHITE}; 
+  & h4 {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 40px;
+    letter-spacing: 0.015em;
+    color: ${Colors.WHITE};
   }
 `;
 export const StatisticsCommonCard = styled.div`
@@ -105,7 +102,7 @@ export const StatisticsCommonCard = styled.div`
   border-radius: 8px;
   width: 389px;
   height: 184px;
-  & h4{
+  & h4 {
     font-weight: 500;
     font-size: 24px;
     line-height: 40px;
@@ -113,16 +110,16 @@ export const StatisticsCommonCard = styled.div`
     color: ${Colors.MIDDLE_BLACK};
     margin: 18px 0 0 38px;
   }
-  & div.wrapper{
+  & div.wrapper {
     display: flex;
     gap: 0 65px;
     align-items: center;
     padding-left: 38px;
-    img{
+    img {
       width: 54.81px;
       height: 54.81px;
     }
-    table{
+    table {
       font-weight: 500;
       font-size: 22px;
       line-height: 25px;
@@ -131,19 +128,17 @@ export const StatisticsCommonCard = styled.div`
       margin: 0 -25px;
       border-spacing: 25px 12px;
     }
-
   }
-
 `;
 export const ImageWrapper = styled.div`
-    min-width: 78px;
-    height: 78px;
-    margin-top: -12px;
-    border-radius: 100%;
-    background: ${(props: { inputColor: string }) => props.inputColor || Colors.WHITE};
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-width: 78px;
+  height: 78px;
+  margin-top: -12px;
+  border-radius: 100%;
+  background: ${(props: { inputColor: string }) => props.inputColor || Colors.WHITE};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StatisticsWaveBlock = styled.div`
@@ -170,52 +165,50 @@ export const StatisticsWaveBlock = styled.div`
   }
 `;
 export const RadioWrapper = styled.div`
-display: flex;
-gap: 52px;
-margin-top: 44px;
-
+  display: flex;
+  gap: 52px;
+  margin-top: 44px;
 `;
 export const Radio = styled.div`
-display: flex;
-gap: 21px;
-justify-content: center;
-align-items: center;
-transform: translateY(-50%);
+  display: flex;
+  gap: 21px;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%);
 
-input{
-  height: 19px;
-  width: 19px;
-cursor: pointer;
-  &:checked + label{
-    color: ${Colors.LIGHT_GREEN};
+  input {
+    height: 19px;
+    width: 19px;
+    cursor: pointer;
+    &:checked + label {
+      color: ${Colors.LIGHT_GREEN};
+    }
+    &:checked {
+      &::before {
+        content: '';
+        border: 2px solid ${Colors.LIGHT_GREEN};
+        background-image: url(${EllipseGreen});
+      }
+    }
+    &::before {
+      content: '';
+      min-width: 19px;
+      min-height: 19px;
+      position: absolute;
+      border: 2px solid ${Colors.BLACK};
+      background-image: url(${Ellipse});
+      background-repeat: no-repeat;
+      background-position: 20%;
+      border-radius: 50%;
+      padding: 0;
+      margin: 0;
+    }
   }
-  &:checked{
-    &::before{
-    content: '';
-    border: 2px solid ${Colors.LIGHT_GREEN};
-    background-image: url(${EllipseGreen});
+  label {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 24px;
   }
-
-  }
-  &::before{
-    content: '';
-    min-width: 19px;
-    min-height: 19px;
-    position: absolute;
-    border: 2px solid ${Colors.BLACK};
-    background-image: url(${Ellipse});
-    background-repeat: no-repeat;
-    background-position: 20%;
-    border-radius: 50%;
-    padding: 0;
-    margin: 0;
-  }
-}
-label{
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 24px;
-}
 `;
 
 export const StyledPlot = styled(Plot)`
@@ -224,23 +217,24 @@ export const StyledPlot = styled(Plot)`
   position: relative;
   min-height: clamp(100px, 500px, 500px);
   min-width: clamp(200px, 918px, 80vw);
-  .xtick text{
+  .xtick text {
     font-size: min(22px, 2vmin) !important;
     margin-top: 35px;
   }
-  &::before{
+  &::before {
     content: 'period';
     position: absolute;
     top: 100%;
     left: 50%;
 
-letter-spacing: 0.015em;
-.user-select-none, .svg-container{
-  width: 100%;
-  height: 100%;
-}
+    letter-spacing: 0.015em;
+    .user-select-none,
+    .svg-container {
+      width: 100%;
+      height: 100%;
+    }
   }
-  &::after{
+  &::after {
     content: 'number learned words';
     position: absolute;
     top: 50%;
@@ -250,8 +244,8 @@ letter-spacing: 0.015em;
     vertical-align: bottom;
     margin-right: -94px;
   }
-  &::after, &::before{
-    
+  &::after,
+  &::before {
     font-weight: 500;
     font-size: 22px;
     line-height: 24px;

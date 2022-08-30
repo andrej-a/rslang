@@ -16,5 +16,11 @@ type TCardsArray = ICard[];
 
 export const cards: TCardsArray = [
   { id: 1, TITLE: 'Sprint', inputColor: GREEN, src: SPRINT, link: '/games/sprint' },
-  { id: 2, TITLE: 'Audio challenge', inputColor: LIGHT_GREEN, src: AUDIO, link: '/games/audiochallenge' },
+  {
+    id: 2,
+    TITLE: 'Audio challenge',
+    inputColor: LIGHT_GREEN,
+    src: AUDIO,
+    link: '/games/audiochallenge',
+  },
 ];

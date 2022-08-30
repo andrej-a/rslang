@@ -22,6 +22,7 @@ import Pagination from './Pagination';
 import WordCard from './WordCard';
 import Sprint from '../../assets/TrackField.svg';
 import AudioChallenge from '../../assets/ListenMusic.svg';
+import { Link } from 'react-router-dom';
 
 const TextBook = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -94,7 +95,11 @@ const TextBook = () => {
               margin: '0 auto',
             }}
           >
-            <WordCard word={activeWord} color={levels.get(activeLevel)?.color ?? ''} isModal={true} />
+            <WordCard
+              word={activeWord}
+              color={levels.get(activeLevel)?.color ?? ''}
+              isModal={true}
+            />
           </Box>
         </Modal>
       ) : (
@@ -104,14 +109,18 @@ const TextBook = () => {
       <Pagination currentPage={currentPage} pagination={paginate} totalCount={totalCountPages} />
 
       <ProceedToGameButtonsWrapper>
-        <ProceedToGameButton imagePath={Sprint} iconColor={Colors.GREEN}>
-          <div className="button__icon"></div>
-          Sprint
-        </ProceedToGameButton>
-        <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN}>
-          <div className="button__icon"></div>
-          Audio challenge
-        </ProceedToGameButton>
+        <Link to={'../games/sprint/start'}>
+          <ProceedToGameButton imagePath={Sprint} iconColor={Colors.GREEN}>
+            <div className="button__icon"></div>
+            Sprint
+          </ProceedToGameButton>
+        </Link>
+        <Link to={'../games/audiochallenge/start'}>
+          <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN}>
+            <div className="button__icon"></div>
+            Audio challenge
+          </ProceedToGameButton>
+        </Link>
       </ProceedToGameButtonsWrapper>
     </TextBookWrapper>
   );

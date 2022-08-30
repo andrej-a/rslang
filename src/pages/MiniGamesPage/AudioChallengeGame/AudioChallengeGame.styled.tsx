@@ -2,8 +2,17 @@ import styled from 'styled-components';
 import '../../../index.scss';
 import { Colors, WindowSizes } from '../../../styles/constansts';
 const { laptop, tablet, ultraWidth } = WindowSizes;
-const { PRIMARY_PICTURE_GREY, WHITE, GREY_GRADIENT, BLACK, GRADIENT, RED, GREEN, LIGHT_GREY, PLAY_BUTTON_GRADIENT } = Colors;
-
+const {
+  PRIMARY_PICTURE_GREY,
+  WHITE,
+  GREY_GRADIENT,
+  BLACK,
+  GRADIENT,
+  RED,
+  GREEN,
+  LIGHT_GREY,
+  PLAY_BUTTON_GRADIENT,
+} = Colors;
 
 export const AudioChallengeWrapper = styled.div`
   width: 100%;
@@ -75,7 +84,7 @@ export const AnswerButton = styled.button`
   align-items: center;
   gap: 15px;
   cursor: pointer;
-  
+
   font-weight: 500;
   font-size: 20px;
   line-height: 40px;
@@ -98,7 +107,6 @@ export const AnswerButton = styled.button`
   @media (max-width: ${tablet}px) {
     width: 280px;
   }
-
 `;
 
 export const SkipQuestion = styled(AnswerButton)`
@@ -111,7 +119,6 @@ export const SkipQuestion = styled(AnswerButton)`
   @media (max-width: ${tablet}px) {
     width: 280px;
   }
-
 `;
 
 export const PictureBlock = styled.div`
@@ -145,7 +152,6 @@ export const PrimaryPicture = styled.div`
   @media (max-width: ${tablet}px) {
     width: 280px;
   }
-
 `;
 
 export const SoundPictureWrapper = styled.div`
@@ -182,9 +188,8 @@ export const Picture = styled(PrimaryPicture)`
 
   .answer_picture {
     @media (max-width: ${tablet}px) {
-    width: 280px;
-  }
-
+      width: 280px;
+    }
   }
 `;
 
@@ -201,7 +206,6 @@ export const WordWrapper = styled.div`
 export const PlayAudioInAnswerCard = styled.div`
   width: 20%;
   height: 100%;
-  padding-top: 27px;
   padding-left: 35px;
   display: flex;
   flex-direction: column;
@@ -220,7 +224,6 @@ export const Word = styled.div`
 
   .word {
     margin-right: 53px;
-    margin-top: 22px;
     font-weight: 500;
     font-size: 24px;
     line-height: 40px;
@@ -237,11 +240,12 @@ export const Word = styled.div`
 `;
 
 export const NextButtonWrapper = styled.div`
+  max-width: 404px;
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   padding-top: 51px;
 
@@ -251,23 +255,21 @@ export const NextButtonWrapper = styled.div`
 
   @media (max-width: ${laptop}px) {
     justify-content: center;
+    padding-top: 15px;
   }
-
-
 `;
 export const NextButton = styled.button`
   width: 189px;
   height: 46px;
   background: ${WHITE};
   border-radius: 46px;
-  margin-right: 20%;
   font-weight: 500;
   font-size: 20px;
   line-height: 40px;
   letter-spacing: 0.015em;
   color: ${BLACK};
   cursor: pointer;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
     color: ${GREEN};
@@ -282,15 +284,15 @@ export const NextButton = styled.button`
 `;
 
 export const ProgressBarWrapper = styled(NextButtonWrapper)`
-    padding-top: 0;
-    padding-right: 22%;
-    margin-top: 80px;
+  padding-top: 0;
+  margin-top: 80px;
+  margin-bottom: 15px;
 
-    @media (min-width: ${ultraWidth}px) {
-      padding-right: 0;
-    }
+  @media (min-width: ${ultraWidth}px) {
+    padding-right: 0;
+  }
 
-    @media (max-width: ${laptop}px) {
-      padding-right: 0;
-    }
+  @media (max-width: ${laptop}px) {
+    padding-right: 0;
+  }
 `;

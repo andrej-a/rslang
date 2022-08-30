@@ -21,7 +21,8 @@ const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
     <ResultViewWindowContainer>
       <h4> {textMessage}</h4>
       <ResultTextInfo>
-        <span>{rightAnswers.length}</span> words studied, <span>{wrongAnswers.length}</span> words to learn
+        <span>{rightAnswers.length}</span> words studied, <span>{wrongAnswers.length}</span> words
+        to learn
       </ResultTextInfo>
       <ResultStatistic>
         <ProgressBar
