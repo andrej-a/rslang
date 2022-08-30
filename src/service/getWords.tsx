@@ -1,11 +1,12 @@
 import { IWord } from '../models/IWord';
-import { HttpMetod } from './constants';
+import { HttpMetod, DefaultNumber } from './constants';
 import { path } from './url';
+
 const { GET, CONTENT_TYPE } = HttpMetod;
 
 //Получение слов из определенной группы и страницы
 export const getWords = async (group?: number, page?: number): Promise<{ items: IWord[] }> => {
-  const response = await fetch(`${path.words}?group=${group || 0}&page=${page || 0}`, {
+  const response = await fetch(`${path.words}?group=${group || DefaultNumber.NULL}&page=${page || DefaultNumber.NULL}`, {
     method: GET,
     headers: {
       Accept: CONTENT_TYPE,

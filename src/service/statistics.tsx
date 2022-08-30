@@ -1,10 +1,10 @@
 import { IUserStatistic, Errors, HttpMetod } from './constants';
 import { path } from './url';
+
 const { GET, PUT, CONTENT_TYPE } = HttpMetod;
 
 //Обновить данные в статистике
-export const updateStatistic = async (statisticObj: IUserStatistic): Promise<IUserStatistic> => {
-  const statistic = statisticObj;
+export const updateStatistic = async ({ learnedWords, optional }: IUserStatistic): Promise<IUserStatistic> => {
 
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/statistics`, {
     method: PUT,
@@ -13,7 +13,7 @@ export const updateStatistic = async (statisticObj: IUserStatistic): Promise<IUs
       Accept: CONTENT_TYPE,
       'Content-Type': CONTENT_TYPE,
     },
-    body: JSON.stringify({ learnedWords: statistic.learnedWords, optional: statistic.optional }),
+    body: JSON.stringify({ learnedWords: learnedWords, optional: optional }),
   });
   if (rawResponse.status === Errors.BAD_REQUEST) {
     throw new Error('Bad request');

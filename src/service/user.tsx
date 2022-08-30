@@ -8,6 +8,7 @@ import {
   HttpMetod,
 } from './constants';
 import { path } from './url';
+
 const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
 //Создание пользователя

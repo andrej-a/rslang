@@ -7,6 +7,7 @@ import {
   HttpMetod,
 } from './constants';
 import { path } from './url';
+
 const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
 //Получение списка сложных слов для конкретного пользователя

@@ -12,7 +12,9 @@ export enum ResponseCode {
   DELETED_SUCCESS = 204,
   WORD_CREATE_SUCCESS = 200,
 }
-
+export const enum DefaultNumber {
+  NULL = 0,
+}
 export enum HttpMetod {
   POST = 'POST',
   GET = 'GET',
