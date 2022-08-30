@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 import Timer from '../../../components/Timer/Timer';
 
 import {
@@ -13,6 +14,10 @@ import {
 } from './SprintGame.styled';
 
 const SprintGame = () => {
+  const { onSetFooterVisibility } = useContext(ApplicationContext);
+  useEffect(() => {
+    onSetFooterVisibility(false);
+  }, []);
   return (
     <SprintGameWrapper>
       <GameContent>

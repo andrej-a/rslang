@@ -2,9 +2,9 @@ import SprintIcon from '../../../assets/sprint.svg';
 import AudioIcon from '../../../assets/audio.svg';
 
 export interface IGame {
-  id: string,
-  title: string,
-  img: string,
+  id: string;
+  title: string;
+  img: string;
 }
 export type TGame = IGame[];
 

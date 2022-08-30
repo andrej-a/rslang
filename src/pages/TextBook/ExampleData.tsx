@@ -11,7 +11,8 @@ export const words: IWord[] = [
     audioMeaning: 'files/01_0002_meaning.mp3',
     audioExample: 'files/01_0002_example.mp3',
     textMeaning: '<i>Alcohol</i> is a type of drink that can make people drunk.',
-    textExample: 'A person should not drive a car after he or she has been drinking <b>alcohol</b>.',
+    textExample:
+      'A person should not drive a car after he or she has been drinking <b>alcohol</b>.',
     transcription: '[ǽlkəhɔ̀ːl]',
     textExampleTranslate: 'Человек не должен водить машину после того, как он выпил алкоголь',
     textMeaningTranslate: 'Алкоголь - это тип напитка, который может сделать людей пьяными',
@@ -46,7 +47,8 @@ export const words: IWord[] = [
     textExample: 'The students <b>agree</b> they have too much homework.',
     transcription: '[əgríː]',
     textExampleTranslate: 'Студенты согласны, что у них слишком много домашней работы',
-    textMeaningTranslate: 'Согласиться - значит иметь то же мнение или убеждение, что и другой человек',
+    textMeaningTranslate:
+      'Согласиться - значит иметь то же мнение или убеждение, что и другой человек',
     wordTranslate: 'согласна',
   },
   {
@@ -270,7 +272,8 @@ export const words: IWord[] = [
     textExample: 'She wants to <b>visit</b> her grandmother.',
     transcription: '[vízit]',
     textExampleTranslate: 'Она хочет навестить свою бабушку',
-    textMeaningTranslate: 'Посетить - значит пойти и провести время в другом месте или увидеть другого человека',
+    textMeaningTranslate:
+      'Посетить - значит пойти и провести время в другом месте или увидеть другого человека',
     wordTranslate: 'посещение',
   },
   {

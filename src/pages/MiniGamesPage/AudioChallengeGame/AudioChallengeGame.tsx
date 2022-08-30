@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
+import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
 import Audio from '../../../assets/AudioBlack.svg';
 import CorrectAnswer from '../../../assets/CorrectAnswer.svg';
@@ -30,13 +31,14 @@ import {
 } from './AudioChallengeGame.styled';
 
 const AudioChallengeGame = () => {
+  const { onSetFooterVisibility } = useContext(ApplicationContext);
+  useEffect(() => {
+    onSetFooterVisibility(false);
+  }, []);
+
   return (
     <AudioChallengeWrapper>
       <MainBlock>
-        <ProgressBarWrapper>
-          <ProgressBar percent={10} color={Colors.WHITE as string} />
-        </ProgressBarWrapper>
-
         <InnerBlock>
           <ButtonBlock>
             <AnswerButton className="current">Current variant</AnswerButton>
@@ -46,6 +48,9 @@ const AudioChallengeGame = () => {
             <SkipQuestion>Don`t know</SkipQuestion>
           </ButtonBlock>
           <PictureBlock>
+            <ProgressBarWrapper>
+              <ProgressBar percent={10} color={Colors.WHITE as string} />
+            </ProgressBarWrapper>
             {/*             <PrimaryPicture>
               <WrongAnswerPictureWrapper>
                 <RedCircle>
@@ -73,12 +78,11 @@ const AudioChallengeGame = () => {
                 </Word>
               </WordWrapper>
             </Picture>
+            <NextButtonWrapper>
+              <NextButton>Next</NextButton>
+            </NextButtonWrapper>
           </PictureBlock>
         </InnerBlock>
-
-        <NextButtonWrapper>
-          <NextButton>Next</NextButton>
-        </NextButtonWrapper>
       </MainBlock>
     </AudioChallengeWrapper>
   );

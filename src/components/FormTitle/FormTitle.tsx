@@ -3,7 +3,6 @@ import { FormTitleStyled } from './FormTitle.styled';
 
 interface IFormTitle {
   TITLE: string;
-
 }
 const FormTitle = ({ TITLE }: IFormTitle) => {
   return (

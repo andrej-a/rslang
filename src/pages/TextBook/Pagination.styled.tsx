@@ -14,19 +14,19 @@ export const PaginationButton = styled.button.attrs((props: { state: boolean }) 
   height: 44px;
   width: 44px;
   display: inline-block;
-  background-color: ${props => props.state ? Colors.WHITE : 'rgba(255, 255, 255, 0.4)'};
-  color: ${props => props.state ? Colors.BLACK : Colors.WHITE};
+  background-color: ${(props) => (props.state ? Colors.WHITE : 'rgba(255, 255, 255, 0.4)')};
+  color: ${(props) => (props.state ? Colors.BLACK : Colors.WHITE)};
   font-weight: 500;
   font-size: 22px;
   line-height: 35px;
   border-radius: 50%;
   cursor: pointer;
 `;
-export const PreviousButton =  styled(PaginationButton)`
+export const PreviousButton = styled(PaginationButton)`
   background: url('${previous}');
   background-position: center;
 `;
-export const NextButton =  styled(PaginationButton)`
+export const NextButton = styled(PaginationButton)`
   background: url('${next}');
   background-position: center;
 `;

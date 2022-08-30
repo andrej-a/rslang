@@ -2,7 +2,11 @@ import React from 'react';
 import { IWordResult } from '../../../components/Interfaces';
 
 import { RightAnswers, WrongAnswers } from './ResultAnswers';
-import { WorldViewWindowContainer, RightAnswersTitle, WrongAnswersTitle } from './ResultPage.styled';
+import {
+  WorldViewWindowContainer,
+  RightAnswersTitle,
+  WrongAnswersTitle,
+} from './ResultPage.styled';
 
 type Props = {
   rightAnswers: IWordResult[];
