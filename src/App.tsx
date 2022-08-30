@@ -16,6 +16,7 @@ import TextBook from './pages/TextBook/TextBook';
 import { GamesData } from './pages/MiniGamesPage/InitialPage/GamesData';
 import InitialGame from './pages/MiniGamesPage/InitialPage/InitialGame';
 import AudioChallengeGame from './pages/MiniGamesPage/AudioChallengeGame/AudioChallengeGame';
+import Statistics from './pages/Statistics/Statistics';
 import SprintGame from './pages/MiniGamesPage/SprintGame/SprintGame';
 import { ApplicationContext } from './components/Context/ApplicationContext';
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/games/:game" element={<InitialGame />} />
         <Route path="/games/audiochallenge/start" element={<AudioChallengeGame />} />
         <Route path="/games/sprint/start" element={<SprintGame />} />
+        <Route path="/statistics" element={<Statistics />} />
       </Routes>
 
       {footerVisibility && <Footer />}

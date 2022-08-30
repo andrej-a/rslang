@@ -194,13 +194,12 @@ export const WordDescritionBlockTranslation = styled.h3`
 export const ProceedToGameButtonsWrapper = styled.div`
   display: flex;
   gap: 13px;
+
   @media (max-width: ${textBookSize}px) {
     justify-content: center;
   }
 `;
-export const ProceedToGameButton = styled.button.attrs(
-  (props: { imagePath: string; iconColor: string }) => props,
-)`
+export const ProceedToGameButton = styled.button.attrs((props: { imagePath: string; iconColor: string }) => props)`
   background-color: transparent;
   display: flex;
   flex-direction: row;

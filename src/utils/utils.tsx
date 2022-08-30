@@ -11,6 +11,7 @@ export function GetTitle(path: string) {
     ['/', 'Easy English'],
     ['/registration', 'Easy English'],
     ['/textbook', 'Text Book'],
+    ['/statistics', 'Statistics'],
     ['/games', 'MiniGames'],
     ['/games/audiochallenge/start', 'MiniGames'],
     ['/games/sprint/start', 'MiniGames'],

@@ -72,7 +72,7 @@ export const levels = new Map([
 ]);
 
 export enum ProgressBarInfo {
-  SIZE_MEDIUM = 53,
+  SIZE_MEDIUM = 122,
   SIZE_LARGE = 184,
   PERSENT = 100,
   FOR_CIRCLE_LENGTH = Math.PI * 2,
@@ -83,6 +83,7 @@ export enum GameResultInfo {
   HALF_WORD_COUNT = 10,
   PERSENT = 100,
 }
+
 
 export enum TimerInfo {
   TIMER_LIMIT_MINUTE = 60,
