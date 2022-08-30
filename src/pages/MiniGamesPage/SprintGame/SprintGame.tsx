@@ -13,6 +13,7 @@ import {
   ButtonAnswer,
 } from './SprintGame.styled';
 
+
 const SprintGame = () => {
   const { onSetFooterVisibility } = useContext(ApplicationContext);
   useEffect(() => {
