@@ -6,6 +6,7 @@ import {
   ISignInInfo,
   IInfoRequestUser,
   HttpMetod,
+  IRegistredUser,
 } from './constants';
 import { path } from './url';
 
@@ -29,9 +30,9 @@ export const createUser = async (user: IUser): Promise<IInfoRequestUser> => {
     throw new Error('Something wrong!');
   }
 
-  const content = await rawResponse.json();
+  const content: IRegistredUser = await rawResponse.json();
 
-  localStorage.setItem('userId', content.userId);
+  localStorage.setItem('userId', content.id);
   console.log('createUser', content);
   return content;
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box } from '@mui/material';
 import { useForm, FieldValues } from 'react-hook-form';
 import { ThemeProvider } from '@mui/system';
@@ -13,11 +13,12 @@ import {
 } from '../LoginForm/LoginForm.styled';
 
 import FormTitle from '../../../components/FormTitle/FormTitle';
+import { createUser } from '../../../service/user';
+import { IUser } from '../../../service/constants';
+import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
-interface IRegistrationForm {
-  onSetFormToggler: (value: string) => void;
-}
-const RegistrationForm = ({ onSetFormToggler }: IRegistrationForm) => {
+const RegistrationForm = () => {
+  const { onSetFormToggler } = useContext(ApplicationContext);
   const {
     REGISTRATION_FORM_TITLE,
     LOGIN_FORM_STATE,
@@ -40,7 +41,11 @@ const RegistrationForm = ({ onSetFormToggler }: IRegistrationForm) => {
   } = useForm({ mode: 'onChange' });
 
   const onSubmit = (data: FieldValues) => {
-    alert(JSON.stringify(data)); //IN DATA ARE AN INFORMATION FROM INPUTS
+    createUser(data as IUser).then((result) => {
+      if (result.id) {
+        onSetFormToggler(LOGIN_FORM_STATE);
+      }
+    });
     reset();
   };
 

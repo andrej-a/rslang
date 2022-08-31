@@ -22,7 +22,7 @@ export const signIn = async (info: ISignInInfo): Promise<IUserAllInfo> => {
     throw new Error('Something wrong!');
   }
 
-  const content = await rawResponse.json();
+  const content: IUserAllInfo = await rawResponse.json();
 
   localStorage.setItem('userId', content.userId);
   localStorage.setItem('userToken', content.token);
