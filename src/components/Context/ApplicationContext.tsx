@@ -22,6 +22,7 @@ export const ApplicationProvider = (props: Props) => {
   const userValue = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo') as string)
     : null;
+
   const [footerVisibility, setFooterVisibility] = useState(true);
   const [isAuthorized, setIsAuthorized] = useState(defaultAuthorizedValue);
   const [userInformation, setUserInformation] = useState<IUserInfo>(

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -13,12 +13,14 @@ import {
   TextBookIconDiv,
   Blur,
 } from './Header.styled';
+import { ApplicationContext } from '../Context/ApplicationContext';
 
 type Props = {
   active: boolean;
 };
 
 export const Navigation = ({ active }: Props) => {
+  const { isAuthorized } = useContext(ApplicationContext);
   return (
     <DivAppNavigation data-testid="navbar" className={active ? 'active' : ''}>
       <Blur className={active ? 'active' : ''} />
@@ -36,8 +38,8 @@ export const Navigation = ({ active }: Props) => {
           <p>Minigames</p>
         </NavLink>
         <NavLink to={'/statistics'} className={({ isActive }) => (isActive ? ' activeLink' : '')}>
-          <StatisticsIconDiv />
-          <p>Statistics</p>
+          {isAuthorized && <StatisticsIconDiv />}
+          {isAuthorized && <p>Statistics</p>}
         </NavLink>
       </GroupMenuItem>
       <Link to={'/'}>
