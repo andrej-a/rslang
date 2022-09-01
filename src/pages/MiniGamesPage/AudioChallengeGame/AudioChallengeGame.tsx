@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
-
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
-import Audio from '../../../assets/AudioBlack.svg';
+import AudioImage from '../../../assets/AudioBlack.svg';
 import CorrectAnswer from '../../../assets/CorrectAnswer.svg';
 import TestAnswerPicture from '../../../assets/test_answer.jpg';
 
@@ -30,17 +29,25 @@ import {
   WrongAnswerPictureWrapper,
 } from './AudioChallengeGame.styled';
 import { IWord } from '../../../models/IWord';
+import { getWords } from '../../../service/getWords';
 
 const AudioChallengeGame = () => {
   //тут отслеживание футера и его скрытие в игре
-  const { onSetFooterVisibility, textBookWords } = useContext(ApplicationContext);
+  const { onSetFooterVisibility, currentPage, wordsGroup, onSetTextBookWords, textBookWords } =
+    useContext(ApplicationContext);
+
   useEffect(() => {
     onSetFooterVisibility(false);
+    getWords(wordsGroup, currentPage - 1).then((data) =>
+      onSetTextBookWords(data as unknown as IWord[]),
+    );
   }, []);
   //текущее слово для ответа
   const [currentWord, setCurrentWord] = useState(textBookWords[0]);
   //отслеживание слова в массиве
   const [wordNumber, setWordNumber] = useState(0);
+  //процент прогресса
+  const [progressPercent, setProgressPercent] = useState(0);
 
   const onSetCurrentWord = (word: IWord) => {
     setCurrentWord(word);
@@ -49,16 +56,29 @@ const AudioChallengeGame = () => {
   const onSetWordNumber = (number: number) => {
     setWordNumber(number);
   };
+
+  const onSetProgressPercent = (percent: number) => {
+    setProgressPercent(percent);
+  };
+
   useEffect(() => {
-    onSetCurrentWord(textBookWords[0]);
-  }, textBookWords);
+    onSetCurrentWord(textBookWords[wordNumber]);
+    console.log(currentWord, 'PREVIOUS');
+  }, [textBookWords]);
+
+  useEffect(() => {
+    onSetCurrentWord(textBookWords[wordNumber]);
+    onSetProgressPercent(Math.floor((wordNumber / 20) * 100));
+    //здесь делакм рандомный массив ответов
+    console.log(currentWord, 'AFTER CHANGE');
+  }, [wordNumber]);
 
   return (
     <AudioChallengeWrapper>
       <MainBlock>
         <InnerBlock>
           <ButtonBlock>
-            <AnswerButton className="current">Current variant</AnswerButton>
+            <AnswerButton>Current variant</AnswerButton>
             <AnswerButton className="correct">Correct variant</AnswerButton>
             <AnswerButton className="wrong">Wrong variant</AnswerButton>
             <AnswerButton>Variant</AnswerButton>
@@ -66,10 +86,10 @@ const AudioChallengeGame = () => {
           </ButtonBlock>
           <PictureBlock>
             <ProgressBarWrapper>
-              <ProgressBar percent={10} color={Colors.WHITE as string} />
+              <ProgressBar percent={progressPercent} color={Colors.WHITE as string} />
             </ProgressBarWrapper>
-            {/*             <PrimaryPicture>
-              <WrongAnswerPictureWrapper>
+            <PrimaryPicture>
+              {/*               <WrongAnswerPictureWrapper>
                 <RedCircle>
                   <p>X</p>
                 </RedCircle>
@@ -77,13 +97,20 @@ const AudioChallengeGame = () => {
               <SoundPictureWrapper>
                 <img src={CorrectAnswer} alt="correct_answer" />
               </SoundPictureWrapper>
-              <SoundPictureWrapper>
-                <img src={Audio} alt="play_button" />
+ */}{' '}
+              <SoundPictureWrapper
+                onClick={() => {
+                  const audioExample = new Audio(
+                    `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+                  );
+                  audioExample.play();
+                }}
+              >
+                <img src={AudioImage} alt="play_button" />
               </SoundPictureWrapper>
             </PrimaryPicture>
-            */}{' '}
             {/* тут будет либо primary подложка (если ответа еще не было), либо картинка от слова */}
-            <Picture>
+            {/*             <Picture>
               <img className="answer_picture" src={TestAnswerPicture} alt="word_picture" />
               <WordWrapper>
                 <PlayAudioInAnswerCard>
@@ -95,8 +122,16 @@ const AudioChallengeGame = () => {
                 </Word>
               </WordWrapper>
             </Picture>
+ */}{' '}
             <NextButtonWrapper>
-              <NextButton>Next</NextButton>
+              <NextButton
+                onClick={() => {
+                  const nextNumber = wordNumber === 20 ? wordNumber : wordNumber + 1;
+                  onSetWordNumber(nextNumber);
+                }}
+              >
+                Next
+              </NextButton>
             </NextButtonWrapper>
           </PictureBlock>
         </InnerBlock>

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ApplicationContext } from '../../components/Context/ApplicationContext';
 import { LevelButtonStyled } from './TextBook.styled';
 
 interface ILevelButton {
@@ -8,18 +9,10 @@ interface ILevelButton {
   fullname: string;
   activeLevel: string;
   changeLevel: (level: string) => void;
-  onSetGroup: (value: number) => void;
 }
 
-const LevelButton = ({
-  name,
-  group,
-  color,
-  fullname,
-  activeLevel,
-  changeLevel,
-  onSetGroup,
-}: ILevelButton) => {
+const LevelButton = ({ name, group, color, fullname, activeLevel, changeLevel }: ILevelButton) => {
+  const { onSetGroup } = useContext(ApplicationContext);
   return (
     <>
       <LevelButtonStyled

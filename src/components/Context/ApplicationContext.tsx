@@ -18,6 +18,10 @@ interface IContext {
   onSetIsLoading: (value: boolean) => void;
   textBookWords: IWord[];
   onSetTextBookWords: (data: IWord[]) => void;
+  wordsGroup: number;
+  onSetGroup: (value: number) => void;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 export const ApplicationContext = createContext({} as IContext);
 
@@ -41,7 +45,10 @@ export const ApplicationProvider = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   //массив слов
   const [textBookWords, setTextBookWords] = useState<IWord[]>([]);
-
+  //группа слов
+  const [wordsGroup, setGroup] = useState(0);
+  //страница слов
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const onSetFooterVisibility = (value: boolean) => {
     setFooterVisibility(value);
   };
@@ -66,6 +73,10 @@ export const ApplicationProvider = (props: Props) => {
     setTextBookWords(data);
   };
 
+  const onSetGroup = (value: number) => {
+    setGroup(value);
+  };
+
   return (
     <ApplicationContext.Provider
       value={{
@@ -81,6 +92,10 @@ export const ApplicationProvider = (props: Props) => {
         onSetIsLoading,
         textBookWords: textBookWords,
         onSetTextBookWords,
+        wordsGroup: wordsGroup,
+        onSetGroup,
+        currentPage: currentPage,
+        setCurrentPage,
       }}
     >
       {props.children}

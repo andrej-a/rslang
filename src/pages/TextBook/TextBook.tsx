@@ -23,16 +23,13 @@ import WordCard from './WordCard';
 import Sprint from '../../assets/TrackField.svg';
 import AudioChallenge from '../../assets/ListenMusic.svg';
 import { Link } from 'react-router-dom';
-import { getWords } from '../../service/getWords';
 import { ApplicationContext } from '../../components/Context/ApplicationContext';
 
 const TextBook = () => {
-  const { onSetTextBookWords } = useContext(ApplicationContext);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const { currentPage, setCurrentPage } = useContext(ApplicationContext);
   const [activeLevel, setActiveLevel] = useState<string>('A1');
   const [activeWord, setActiveWord] = useState<IWord>(words[0] ?? emptyWord);
   const [open, setOpen] = React.useState(false);
-  const [wordsGroup, setGroup] = useState(0);
   const handleOpen = () => setOpen(() => true);
   const handleClose = () => {
     setOpen(() => false);
@@ -50,9 +47,6 @@ const TextBook = () => {
     if (numButt) setCurrentPage(() => direction);
     else setCurrentPage((page) => page + direction);
   };
-  const onSetGroup = (value: number) => {
-    setGroup(value);
-  };
 
   const levelsButtons = [];
   for (const [level, { color, fullname, group }] of levels) {
@@ -64,7 +58,6 @@ const TextBook = () => {
         fullname={fullname}
         activeLevel={activeLevel}
         changeLevel={changeLevel}
-        onSetGroup={onSetGroup}
         key={`levelButton${color}`}
       />,
     );
@@ -125,11 +118,11 @@ const TextBook = () => {
           </ProceedToGameButton>
         </Link>
         <Link
-          onClick={() =>
+          /* onClick={() =>
             getWords(wordsGroup, currentPage - 1).then((data) =>
               onSetTextBookWords(data as unknown as IWord[]),
             )
-          }
+          } */
           to={'../games/audiochallenge/start'}
         >
           <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN}>

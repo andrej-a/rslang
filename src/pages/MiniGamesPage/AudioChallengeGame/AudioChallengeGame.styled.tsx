@@ -84,7 +84,7 @@ export const AnswerButton = styled.button`
   align-items: center;
   gap: 15px;
   cursor: pointer;
-
+  transition: all 0.3s ease;
   font-weight: 500;
   font-size: 20px;
   line-height: 40px;
@@ -100,7 +100,7 @@ export const AnswerButton = styled.button`
     color: ${RED};
   }
 
-  &.current {
+  &:hover {
     color: ${GREEN};
   }
 
