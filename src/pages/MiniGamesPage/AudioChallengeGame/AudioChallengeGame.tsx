@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
@@ -29,12 +29,29 @@ import {
   WordWrapper,
   WrongAnswerPictureWrapper,
 } from './AudioChallengeGame.styled';
+import { IWord } from '../../../models/IWord';
 
 const AudioChallengeGame = () => {
-  const { onSetFooterVisibility } = useContext(ApplicationContext);
+  //тут отслеживание футера и его скрытие в игре
+  const { onSetFooterVisibility, textBookWords } = useContext(ApplicationContext);
   useEffect(() => {
     onSetFooterVisibility(false);
   }, []);
+  //текущее слово для ответа
+  const [currentWord, setCurrentWord] = useState(textBookWords[0]);
+  //отслеживание слова в массиве
+  const [wordNumber, setWordNumber] = useState(0);
+
+  const onSetCurrentWord = (word: IWord) => {
+    setCurrentWord(word);
+  };
+
+  const onSetWordNumber = (number: number) => {
+    setWordNumber(number);
+  };
+  useEffect(() => {
+    onSetCurrentWord(textBookWords[0]);
+  }, textBookWords);
 
   return (
     <AudioChallengeWrapper>

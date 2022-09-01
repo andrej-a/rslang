@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import { IWord } from '../../models/IWord';
 import { IUserInfo } from '../../service/constants';
 import { Values } from '../../styles/constansts';
 type Props = {
@@ -15,6 +16,8 @@ interface IContext {
   onSetFormToggler: (value: string) => void;
   isLoading: boolean;
   onSetIsLoading: (value: boolean) => void;
+  textBookWords: IWord[];
+  onSetTextBookWords: (data: IWord[]) => void;
 }
 export const ApplicationContext = createContext({} as IContext);
 
@@ -24,14 +27,20 @@ export const ApplicationProvider = (props: Props) => {
   const userValue = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo') as string)
     : null;
-
+  //отображение футера
   const [footerVisibility, setFooterVisibility] = useState(true);
+  //статус авторизации
   const [isAuthorized, setIsAuthorized] = useState(defaultAuthorizedValue);
+  //информация о юзере, name, ID
   const [userInformation, setUserInformation] = useState<IUserInfo>(
     userValue || { name: '', userID: '' },
   );
+  //переключалка формы
   const [formToggler, setFormToggler] = useState<string>(LOGIN_FORM_STATE);
+  //спиннер
   const [isLoading, setIsLoading] = useState(false);
+  //массив слов
+  const [textBookWords, setTextBookWords] = useState<IWord[]>([]);
 
   const onSetFooterVisibility = (value: boolean) => {
     setFooterVisibility(value);
@@ -53,6 +62,10 @@ export const ApplicationProvider = (props: Props) => {
     setIsLoading(value);
   };
 
+  const onSetTextBookWords = (data: IWord[]) => {
+    setTextBookWords(data);
+  };
+
   return (
     <ApplicationContext.Provider
       value={{
@@ -66,6 +79,8 @@ export const ApplicationProvider = (props: Props) => {
         onSetFormToggler,
         isLoading: isLoading,
         onSetIsLoading,
+        textBookWords: textBookWords,
+        onSetTextBookWords,
       }}
     >
       {props.children}
