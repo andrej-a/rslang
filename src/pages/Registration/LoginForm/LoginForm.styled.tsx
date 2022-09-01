@@ -45,11 +45,6 @@ export const Form = styled.div`
     padding-right: 86px;
     width: 100%;
 
-    .spinner {
-      height: 15px;
-      margin-left: 45%;
-    }
-
     @media (max-width: ${tablet}px) {
       padding-left: 30px;
       padding-right: 30px;

@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { useForm, FieldValues } from 'react-hook-form';
 import { ThemeProvider } from '@mui/system';
-import FadeLoader from 'react-spinners/FadeLoader';
+
 import { mailRegularCheeker, Values } from '../../../styles/constansts';
 import { theme } from '../../../styles/theme';
 import {
@@ -13,12 +13,11 @@ import {
 } from '../LoginForm/LoginForm.styled';
 
 import FormTitle from '../../../components/FormTitle/FormTitle';
-import { createUser } from '../../../service/user';
-import { IUser } from '../../../service/constants';
-import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
-const RegistrationForm = () => {
-  const { onSetFormToggler, onSetIsLoading, isLoading } = useContext(ApplicationContext);
+interface IRegistrationForm {
+  onSetFormToggler: (value: string) => void;
+}
+const RegistrationForm = ({ onSetFormToggler }: IRegistrationForm) => {
   const {
     REGISTRATION_FORM_TITLE,
     LOGIN_FORM_STATE,
@@ -41,11 +40,7 @@ const RegistrationForm = () => {
   } = useForm({ mode: 'onChange' });
 
   const onSubmit = (data: FieldValues) => {
-    createUser(data as IUser, onSetIsLoading).then((result) => {
-      if (result.id) {
-        onSetFormToggler(LOGIN_FORM_STATE);
-      }
-    });
+    alert(JSON.stringify(data)); //IN DATA ARE AN INFORMATION FROM INPUTS
     reset();
   };
 
@@ -114,13 +109,9 @@ const RegistrationForm = () => {
               {errors.password && ((errors?.password?.message as string) || PASSWORD_ERROR_MESSAGE)}
             </p>
           </div>
-          {!isLoading ? (
-            <StyledButton disabled={!isValid} type="submit" variant="contained">
-              Sign Up
-            </StyledButton>
-          ) : (
-            <FadeLoader className="spinner" color="#07D6A0" />
-          )}
+          <StyledButton disabled={!isValid} type="submit" variant="contained">
+            Sign Up
+          </StyledButton>
         </Box>
       </ThemeProvider>
       <ToggleToAnotherForm onClick={() => onSetFormToggler(LOGIN_FORM_STATE)}>

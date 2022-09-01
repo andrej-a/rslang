@@ -31,21 +31,11 @@ export interface ISignInInfo {
   email: string;
   password: string;
 }
-export interface IUserInfo {
-  name: string;
-  userID: string;
-}
 
 export interface IUser {
   name: string;
   email: string;
   password: string;
-}
-
-export interface IRegistredUser {
-  id: string;
-  name: string;
-  email: string;
 }
 
 export interface IUserAllInfo {

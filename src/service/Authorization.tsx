@@ -4,11 +4,7 @@ import { path } from './url';
 const { POST, CONTENT_TYPE } = HttpMetod;
 
 //Вход в систему
-export const signIn = async (
-  info: ISignInInfo,
-  showSpinner: (value: boolean) => void,
-): Promise<IUserAllInfo> => {
-  showSpinner(true);
+export const signIn = async (info: ISignInInfo): Promise<IUserAllInfo> => {
   const rawResponse = await fetch(`${path.signIn}`, {
     method: POST,
     headers: {
@@ -19,20 +15,17 @@ export const signIn = async (
   });
 
   if (rawResponse.status === Errors.WRONG_INPUT_LOGIN) {
-    showSpinner(false);
     throw new Error('Incorrect e-mail or password');
   }
 
   if (!rawResponse.ok) {
-    showSpinner(false);
     throw new Error('Something wrong!');
   }
 
-  const content: IUserAllInfo = await rawResponse.json();
+  const content = await rawResponse.json();
 
   localStorage.setItem('userId', content.userId);
   localStorage.setItem('userToken', content.token);
   console.log('signIn', content);
-  showSpinner(false);
   return content;
 };

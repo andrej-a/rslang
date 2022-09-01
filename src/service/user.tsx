@@ -6,18 +6,13 @@ import {
   ISignInInfo,
   IInfoRequestUser,
   HttpMetod,
-  IRegistredUser,
 } from './constants';
 import { path } from './url';
 
 const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
 //Создание пользователя
-export const createUser = async (
-  user: IUser,
-  showSpinner: (value: boolean) => void,
-): Promise<IInfoRequestUser> => {
-  showSpinner(true);
+export const createUser = async (user: IUser): Promise<IInfoRequestUser> => {
   const rawResponse = await fetch(path.users, {
     method: POST,
     headers: {
@@ -28,19 +23,16 @@ export const createUser = async (
   });
 
   if (rawResponse.status === Errors.WRONG_INPUT_CREATE_USER) {
-    showSpinner(false);
     throw new Error('Incorrect e-mail or password');
   }
   if (!rawResponse.ok) {
-    showSpinner(false);
     throw new Error('Something wrong!');
   }
 
-  const content: IRegistredUser = await rawResponse.json();
+  const content = await rawResponse.json();
 
-  localStorage.setItem('userId', content.id);
+  localStorage.setItem('userId', content.userId);
   console.log('createUser', content);
-  showSpinner(false);
   return content;
 };
 

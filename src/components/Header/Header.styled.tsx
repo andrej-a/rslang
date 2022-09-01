@@ -185,20 +185,6 @@ export const UserProfile = styled.div`
   }
 `;
 
-export const UserAvatar = styled.div`
-  width: 48px;
-  height: 48px;
-  background: ${Colors.WHITE};
-  color: ${Colors.GRADIENT};
-  border-radius: 100%;
-  font-size: 36px;
-  font-weight: 700;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const PageTitle = styled.p`
   z-index: 102;
   position: absolute;
