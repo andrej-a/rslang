@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import Box from '@mui/material/Box';
-
+import FadeLoader from 'react-spinners/FadeLoader';
 import {
   ForgetPassword,
   Form,
@@ -14,11 +14,14 @@ import { mailRegularCheeker, Values } from '../../../styles/constansts';
 import FormTitle from '../../../components/FormTitle/FormTitle';
 import { ThemeProvider } from '@mui/system';
 import { theme } from '../../../styles/theme';
+import { signIn } from '../../../service/Authorization';
+import { ISignInInfo } from '../../../service/constants';
+import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
-interface ILoginForm {
-  onSetFormToggler: (value: string) => void;
-}
-const LoginForm = ({ onSetFormToggler }: ILoginForm) => {
+const LoginForm = () => {
+  const { onSetIsAuthorized, onSetUserInformation, onSetFormToggler, onSetIsLoading, isLoading } =
+    useContext(ApplicationContext);
+
   const {
     LOGIN_FORM_TITLE,
     REGISTRATION_FORM_STATE,
@@ -38,7 +41,15 @@ const LoginForm = ({ onSetFormToggler }: ILoginForm) => {
   } = useForm({ mode: 'onChange' });
 
   const onSubmit = (data: FieldValues) => {
-    alert(JSON.stringify(data)); //IN DATA ARE AN INFORMATION FROM INPUTS
+    signIn(data as ISignInInfo, onSetIsLoading).then((result) => {
+      if (result.userId) {
+        const value = { name: result.name, userID: result.userId };
+        onSetUserInformation(value);
+        localStorage.setItem('userInfo', JSON.stringify(value));
+        onSetIsAuthorized(true);
+        window.location.assign('/');
+      }
+    });
     reset();
   };
 
@@ -91,9 +102,13 @@ const LoginForm = ({ onSetFormToggler }: ILoginForm) => {
           <ForgetPassword>
             <p>Forget password?</p>
           </ForgetPassword>
-          <StyledButton disabled={!isValid} type="submit" variant="contained">
-            Sign in
-          </StyledButton>
+          {!isLoading ? (
+            <StyledButton disabled={!isValid} type="submit" variant="contained">
+              Sign in
+            </StyledButton>
+          ) : (
+            <FadeLoader className="spinner" color="#07D6A0" />
+          )}
         </Box>
       </ThemeProvider>
       <ToggleToAnotherForm onClick={() => onSetFormToggler(REGISTRATION_FORM_STATE)}>

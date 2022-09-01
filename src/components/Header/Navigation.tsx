@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -13,12 +13,15 @@ import {
   TextBookIconDiv,
   Blur,
 } from './Header.styled';
+import { ApplicationContext } from '../Context/ApplicationContext';
+import { removeItemsFromStorage } from '../../utils/removeItemsFromStorage';
 
 type Props = {
   active: boolean;
 };
 
 export const Navigation = ({ active }: Props) => {
+  const { isAuthorized, onSetIsAuthorized, onSetUserInformation } = useContext(ApplicationContext);
   return (
     <DivAppNavigation data-testid="navbar" className={active ? 'active' : ''}>
       <Blur className={active ? 'active' : ''} />
@@ -36,12 +39,18 @@ export const Navigation = ({ active }: Props) => {
           <p>Minigames</p>
         </NavLink>
         <NavLink to={'/statistics'} className={({ isActive }) => (isActive ? ' activeLink' : '')}>
-          <StatisticsIconDiv />
-          <p>Statistics</p>
+          {isAuthorized && <StatisticsIconDiv />}
+          {isAuthorized && <p>Statistics</p>}
         </NavLink>
       </GroupMenuItem>
       <Link to={'/'}>
-        <SignoutIconIconDiv />
+        <SignoutIconIconDiv
+          onClick={() => {
+            onSetIsAuthorized(false);
+            onSetUserInformation({ name: '', userID: '' });
+            removeItemsFromStorage('userId', 'userInfo', 'userToken');
+          }}
+        />
         <p>Sign Out</p>
       </Link>
     </DivAppNavigation>
