@@ -36,7 +36,7 @@ export const LevelButtonsContainer = styled.div`
   gap: 10px;
   flex-wrap: wrap;
 `;
-export const LevelButton = styled.button`
+export const LevelButtonStyled = styled.button`
   width: 52px;
   height: 52px;
   border: 3px solid ${Colors.WHITE};

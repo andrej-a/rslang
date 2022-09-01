@@ -199,7 +199,9 @@ export const ProceedToGameButtonsWrapper = styled.div`
     justify-content: center;
   }
 `;
-export const ProceedToGameButton = styled.button.attrs((props: { imagePath: string; iconColor: string }) => props)`
+export const ProceedToGameButton = styled.button.attrs(
+  (props: { imagePath: string; iconColor: string }) => props,
+)`
   background-color: transparent;
   display: flex;
   flex-direction: row;
