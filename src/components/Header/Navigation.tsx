@@ -14,13 +14,14 @@ import {
   Blur,
 } from './Header.styled';
 import { ApplicationContext } from '../Context/ApplicationContext';
+import { removeItemsFromStorage } from '../../utils/removeItemsFromStorage';
 
 type Props = {
   active: boolean;
 };
 
 export const Navigation = ({ active }: Props) => {
-  const { isAuthorized } = useContext(ApplicationContext);
+  const { isAuthorized, onSetIsAuthorized, onSetUserInformation } = useContext(ApplicationContext);
   return (
     <DivAppNavigation data-testid="navbar" className={active ? 'active' : ''}>
       <Blur className={active ? 'active' : ''} />
@@ -43,7 +44,13 @@ export const Navigation = ({ active }: Props) => {
         </NavLink>
       </GroupMenuItem>
       <Link to={'/'}>
-        <SignoutIconIconDiv />
+        <SignoutIconIconDiv
+          onClick={() => {
+            onSetIsAuthorized(false);
+            onSetUserInformation({ name: '', userID: '' });
+            removeItemsFromStorage('userId', 'userInfo', 'userToken');
+          }}
+        />
         <p>Sign Out</p>
       </Link>
     </DivAppNavigation>

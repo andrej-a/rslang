@@ -13,7 +13,11 @@ import { path } from './url';
 const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
 //Создание пользователя
-export const createUser = async (user: IUser): Promise<IInfoRequestUser> => {
+export const createUser = async (
+  user: IUser,
+  showSpinner: (value: boolean) => void,
+): Promise<IInfoRequestUser> => {
+  showSpinner(true);
   const rawResponse = await fetch(path.users, {
     method: POST,
     headers: {
@@ -24,9 +28,11 @@ export const createUser = async (user: IUser): Promise<IInfoRequestUser> => {
   });
 
   if (rawResponse.status === Errors.WRONG_INPUT_CREATE_USER) {
+    showSpinner(false);
     throw new Error('Incorrect e-mail or password');
   }
   if (!rawResponse.ok) {
+    showSpinner(false);
     throw new Error('Something wrong!');
   }
 
@@ -34,6 +40,7 @@ export const createUser = async (user: IUser): Promise<IInfoRequestUser> => {
 
   localStorage.setItem('userId', content.id);
   console.log('createUser', content);
+  showSpinner(false);
   return content;
 };
 

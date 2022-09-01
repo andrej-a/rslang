@@ -9,7 +9,7 @@ import { ApplicationContext } from '../Context/ApplicationContext';
 const Header = ({ title }: { title: string }) => {
   const [isActive, setActive] = useState(false);
   const { isAuthorized, userInformation } = useContext(ApplicationContext);
-  const firstNamesLetter = userInformation.name[0];
+  const firstNamesLetter = userInformation.name ? userInformation.name[0].toUpperCase() : null;
   return (
     <WrapperHeader>
       <MenuIconDiv onClick={() => setActive(!isActive)} className={isActive ? 'active' : ''}>

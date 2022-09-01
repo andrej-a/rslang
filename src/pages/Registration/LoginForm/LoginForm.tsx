@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import Box from '@mui/material/Box';
-
+import FadeLoader from 'react-spinners/FadeLoader';
 import {
   ForgetPassword,
   Form,
@@ -19,7 +19,7 @@ import { ISignInInfo } from '../../../service/constants';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
 const LoginForm = () => {
-  const { onSetIsAuthorized, onSetUserInformation, onSetFormToggler } =
+  const { onSetIsAuthorized, onSetUserInformation, onSetFormToggler, onSetIsLoading, isLoading } =
     useContext(ApplicationContext);
 
   const {
@@ -41,7 +41,7 @@ const LoginForm = () => {
   } = useForm({ mode: 'onChange' });
 
   const onSubmit = (data: FieldValues) => {
-    signIn(data as ISignInInfo).then((result) => {
+    signIn(data as ISignInInfo, onSetIsLoading).then((result) => {
       if (result.userId) {
         const value = { name: result.name, userID: result.userId };
         onSetUserInformation(value);
@@ -102,9 +102,13 @@ const LoginForm = () => {
           <ForgetPassword>
             <p>Forget password?</p>
           </ForgetPassword>
-          <StyledButton disabled={!isValid} type="submit" variant="contained">
-            Sign in
-          </StyledButton>
+          {!isLoading ? (
+            <StyledButton disabled={!isValid} type="submit" variant="contained">
+              Sign in
+            </StyledButton>
+          ) : (
+            <FadeLoader className="spinner" color="#07D6A0" />
+          )}
         </Box>
       </ThemeProvider>
       <ToggleToAnotherForm onClick={() => onSetFormToggler(REGISTRATION_FORM_STATE)}>

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Box } from '@mui/material';
 import { useForm, FieldValues } from 'react-hook-form';
 import { ThemeProvider } from '@mui/system';
-
+import FadeLoader from 'react-spinners/FadeLoader';
 import { mailRegularCheeker, Values } from '../../../styles/constansts';
 import { theme } from '../../../styles/theme';
 import {
@@ -18,7 +18,7 @@ import { IUser } from '../../../service/constants';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
 const RegistrationForm = () => {
-  const { onSetFormToggler } = useContext(ApplicationContext);
+  const { onSetFormToggler, onSetIsLoading, isLoading } = useContext(ApplicationContext);
   const {
     REGISTRATION_FORM_TITLE,
     LOGIN_FORM_STATE,
@@ -41,7 +41,7 @@ const RegistrationForm = () => {
   } = useForm({ mode: 'onChange' });
 
   const onSubmit = (data: FieldValues) => {
-    createUser(data as IUser).then((result) => {
+    createUser(data as IUser, onSetIsLoading).then((result) => {
       if (result.id) {
         onSetFormToggler(LOGIN_FORM_STATE);
       }
@@ -114,9 +114,13 @@ const RegistrationForm = () => {
               {errors.password && ((errors?.password?.message as string) || PASSWORD_ERROR_MESSAGE)}
             </p>
           </div>
-          <StyledButton disabled={!isValid} type="submit" variant="contained">
-            Sign Up
-          </StyledButton>
+          {!isLoading ? (
+            <StyledButton disabled={!isValid} type="submit" variant="contained">
+              Sign Up
+            </StyledButton>
+          ) : (
+            <FadeLoader className="spinner" color="#07D6A0" />
+          )}
         </Box>
       </ThemeProvider>
       <ToggleToAnotherForm onClick={() => onSetFormToggler(LOGIN_FORM_STATE)}>
