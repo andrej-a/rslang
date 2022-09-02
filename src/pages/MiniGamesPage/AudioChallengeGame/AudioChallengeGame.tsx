@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 import React, { useState, useContext, useEffect } from 'react';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
@@ -32,20 +33,8 @@ import { IWord } from '../../../models/IWord';
 import { getWords } from '../../../service/getWords';
 import { shuffle } from '../../../utils/shuffleArray';
 import { Capitalize } from '../../../utils/utils';
-const getRandomWordsFromArray = (array: IWord[], length: number, currentWord: IWord) => {
-  const copy = [...array];
-  const result = [];
-  for (let i = 0; i < length; i++) {
-    const ind = Math.floor(Math.random() * copy.length);
-    if (copy[ind].id !== currentWord.id) {
-      result.push(copy[ind]);
-    } else {
-      i--;
-    }
-    copy.splice(ind, 1);
-  }
-  return result;
-};
+import { getRandomWordsFromArray } from '../../../utils/getRandomWordsFromArray';
+
 const AudioChallengeGame = () => {
   //тут отслеживание футера и его скрытие в игре
   const { onSetFooterVisibility, currentPage, wordsGroup, onSetTextBookWords, textBookWords } =
@@ -65,6 +54,12 @@ const AudioChallengeGame = () => {
   const [progressPercent, setProgressPercent] = useState(0);
   //массив рандомных ответов с одним правильным
   const [randomArray, setRandomArray] = useState<IWord[]>([]);
+  //смотрим, ответил ли пользователь
+  const [isAnswered, setIsAnswered] = useState(false);
+  //смотрим, верный ли ответ
+  const [statusAnswered, setStatusAnswered] = useState('');
+  //показываем ответ
+  const [showAnswer, setShowAnswer] = useState(false);
   const onSetCurrentWord = (word: IWord) => {
     setCurrentWord(word);
   };
@@ -81,6 +76,18 @@ const AudioChallengeGame = () => {
     setRandomArray(data);
   };
 
+  const onSetIsAnswered = (value: boolean) => {
+    setIsAnswered(value);
+  };
+
+  const onSetStatusAnswered = (value: string) => {
+    setStatusAnswered(value);
+  };
+
+  const onSetShowAnswer = (value: boolean) => {
+    setShowAnswer(value);
+  };
+
   useEffect(() => {
     onSetCurrentWord(textBookWords[wordNumber]);
     onSetProgressPercent(Math.ceil((wordNumber / 20) * 100));
@@ -94,7 +101,31 @@ const AudioChallengeGame = () => {
   }, [wordNumber, currentWord, textBookWords]);
 
   const buttons = randomArray.map((item) => {
-    return <AnswerButton key={item.id}>{Capitalize(item.word)}</AnswerButton>;
+    return (
+      <AnswerButton
+        className={
+          isAnswered && item.id === currentWord.id && statusAnswered
+            ? 'correct'
+            : isAnswered && item.id !== currentWord.id && statusAnswered
+            ? 'wrong'
+            : ''
+        }
+        onClick={() => {
+          onSetIsAnswered(true);
+          if (item.id === currentWord.id) {
+            onSetStatusAnswered('correct');
+          } else {
+            onSetStatusAnswered('wrong');
+          }
+          setTimeout(() => {
+            onSetShowAnswer(true);
+          }, 1000);
+        }}
+        key={item.id}
+      >
+        {Capitalize(item.wordTranslate)}
+      </AnswerButton>
+    );
   });
   return (
     <AudioChallengeWrapper>
@@ -102,52 +133,88 @@ const AudioChallengeGame = () => {
         <InnerBlock>
           <ButtonBlock>
             {buttons}
-            <SkipQuestion>Don`t know</SkipQuestion>
+            <SkipQuestion
+              onClick={() => {
+                onSetIsAnswered(true);
+                onSetStatusAnswered('wrong');
+                setTimeout(() => {
+                  onSetShowAnswer(true);
+                }, 1000);
+              }}
+            >
+              {'Я не знаю :('}
+            </SkipQuestion>
           </ButtonBlock>
           <PictureBlock>
             <ProgressBarWrapper>
               <ProgressBar percent={progressPercent} color={Colors.WHITE as string} />
             </ProgressBarWrapper>
-            <PrimaryPicture>
-              {/*               <WrongAnswerPictureWrapper>
-                <RedCircle>
-                  <p>X</p>
-                </RedCircle>
-              </WrongAnswerPictureWrapper>
-              <SoundPictureWrapper>
-                <img src={CorrectAnswer} alt="correct_answer" />
-              </SoundPictureWrapper>
- */}{' '}
-              <SoundPictureWrapper
-                onClick={() => {
-                  const audioExample = new Audio(
-                    `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
-                  );
-                  audioExample.play();
-                }}
-              >
-                <img src={AudioImage} alt="play_button" />
-              </SoundPictureWrapper>
-            </PrimaryPicture>
-            {/* тут будет либо primary подложка (если ответа еще не было), либо картинка от слова */}
-            {/*             <Picture>
-              <img className="answer_picture" src={TestAnswerPicture} alt="word_picture" />
-              <WordWrapper>
-                <PlayAudioInAnswerCard>
-                  <img src={Audio} alt="play_button" />
-                </PlayAudioInAnswerCard>
-                <Word>
-                  <p className="word">Academic</p>
-                  <p className="translate">Перевод</p>
-                </Word>
-              </WordWrapper>
-            </Picture>
- */}{' '}
+
+            {!showAnswer && (
+              <PrimaryPicture>
+                {statusAnswered === 'wrong' && (
+                  <WrongAnswerPictureWrapper>
+                    <RedCircle>
+                      <p>X</p>
+                    </RedCircle>
+                  </WrongAnswerPictureWrapper>
+                )}
+                {statusAnswered === 'correct' && (
+                  <SoundPictureWrapper>
+                    <img src={CorrectAnswer} alt="correct_answer" />
+                  </SoundPictureWrapper>
+                )}
+
+                {!statusAnswered && (
+                  <SoundPictureWrapper
+                    onClick={() => {
+                      const audioExample = new Audio(
+                        `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+                      );
+                      audioExample.play();
+                    }}
+                  >
+                    <img src={AudioImage} alt="play_button" />
+                  </SoundPictureWrapper>
+                )}
+              </PrimaryPicture>
+            )}
+
+            {showAnswer && (
+              <Picture>
+                <img
+                  className="answer_picture"
+                  src={`https://react-rslang-back.herokuapp.com/${currentWord.image}`}
+                  alt="word_picture"
+                />
+                <WordWrapper>
+                  <PlayAudioInAnswerCard
+                    onClick={() => {
+                      const audioExample = new Audio(
+                        `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+                      );
+                      audioExample.play();
+                    }}
+                  >
+                    <img src={AudioImage} alt="play_button" />
+                  </PlayAudioInAnswerCard>
+                  <Word>
+                    <p className="word">{currentWord.word}</p>
+                    <p className="translate">{currentWord.wordTranslate}</p>
+                  </Word>
+                </WordWrapper>
+              </Picture>
+            )}
+
             <NextButtonWrapper>
               <NextButton
+                disabled={!isAnswered}
                 onClick={() => {
                   const nextNumber = wordNumber === 20 ? wordNumber : wordNumber + 1;
                   onSetWordNumber(nextNumber);
+                  onSetIsAnswered(false);
+                  onSetStatusAnswered('');
+                  onSetShowAnswer(false);
                 }}
               >
                 Next

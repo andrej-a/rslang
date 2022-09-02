@@ -7,7 +7,7 @@ const {
   WHITE,
   GREY_GRADIENT,
   BLACK,
-  GRADIENT,
+  DISABLED,
   RED,
   GREEN,
   LIGHT_GREY,
@@ -187,6 +187,8 @@ export const Picture = styled(PrimaryPicture)`
   }
 
   .answer_picture {
+    min-height: 350px;
+    width: 100%;
     @media (max-width: ${tablet}px) {
       width: 280px;
     }
@@ -273,6 +275,12 @@ export const NextButton = styled.button`
 
   &:hover {
     color: ${GREEN};
+  }
+
+  &:disabled {
+    background: ${DISABLED};
+    cursor: not-allowed;
+    color: ${BLACK};
   }
   @media (min-width: ${ultraWidth}px) {
     margin-right: 0;
