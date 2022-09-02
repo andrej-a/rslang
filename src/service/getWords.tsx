@@ -8,7 +8,7 @@ const { GET, CONTENT_TYPE } = HttpMetod;
 export const getWords = async (
   group?: number | string,
   page?: number | string,
-): Promise<{ items: IWord[] }> => {
+): Promise<IWord[]> => {
   const response = await fetch(
     `${path.words}?group=${group || DefaultNumber.NULL}&page=${page || DefaultNumber.NULL}`,
     {

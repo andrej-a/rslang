@@ -7,6 +7,7 @@ import App from './App';
 import { theme } from './styles/theme';
 import { ThemeProvider } from '@mui/material/styles';
 import { ApplicationProvider } from './components/Context/ApplicationContext';
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLDivElement);
 root.render(
   <React.StrictMode>
@@ -19,3 +20,5 @@ root.render(
     </Router>
   </React.StrictMode>,
 );
+
+

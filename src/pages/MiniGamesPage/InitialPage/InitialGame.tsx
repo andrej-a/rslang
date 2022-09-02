@@ -1,29 +1,52 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { levels } from '../../../styles/constansts';
+import { levels, TextbookInfo } from '../../../styles/constansts';
 import getGameInformation from '../../../utils/getGameInformation';
 import { LevelButton } from './LevelButtonAction';
-import { GameWrapper, LevelDiv, LevelButtonsContainer, GameImage } from './InitialGame.styled';
+import {
+  GameWrapper,
+  LevelDiv,
+  LevelButtonsContainer,
+  GameImage,
+  ButtonStartGame,
+} from './InitialGame.styled';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 import { getWords } from '../../../service/getWords';
 import { IWord } from '../../../models/IWord';
+const { MAX_PAGE, MIN_PAGE } = TextbookInfo;
 
 const InitialGame = () => {
+  const { onSetInitialPage, onSetInitialLevel } = useContext(ApplicationContext);
   const { game } = useParams();
   const { title, img } = getGameInformation(game as string);
-  const [wordList, setWordList] = useState<IWord[]>([]);
+  const [isReady, setIsReady] = useState(true);
+  const [activeLevel, setActiveLevel] = useState<string>('');
+  const { initialLevel, initialPage, onSetWordsList } = useContext(ApplicationContext);
 
-  const { initialLevel, initialPage } = useContext(ApplicationContext);
+  const changeLevel = (level: string) => {
+    setActiveLevel(() => level);
+    setIsReady(false);
+    onSetInitialLevel(level);
+    const randomPage = Math.floor(MIN_PAGE + Math.random() * (MAX_PAGE + 1 - MIN_PAGE));
+    onSetInitialPage(String(randomPage));
+  };
 
-  useEffect(() => {
-    const words = getWords(initialLevel, initialPage);
-
-    setWordList(words);
-  }, [initialLevel, initialPage]);
+  const onRequest = async (level: string, page: string) => {
+    const words = await getWords(level, page);
+    onSetWordsList(words);
+  };
 
   const levelsButtons = [];
   for (const [level, { difficulty }] of levels) {
-    levelsButtons.push(<LevelButton name={level} id={difficulty} key={`levelButton${level}}`} />);
+    levelsButtons.push(
+      <LevelButton
+        name={level}
+        id={difficulty}
+        key={`levelButton${level}`}
+        activeLevel={activeLevel}
+        changeLevel={changeLevel}
+      />,
+    );
   }
 
   return (
@@ -34,8 +57,11 @@ const InitialGame = () => {
       <h2>{title}</h2>
       <LevelDiv>
         <h3>Select the level</h3>
+        <LevelButtonsContainer>{levelsButtons}</LevelButtonsContainer>
         <Link to={`/games/${game}/start`}>
-          <LevelButtonsContainer>{levelsButtons}</LevelButtonsContainer>
+          <ButtonStartGame disabled={isReady} onClick={() => onRequest(initialLevel, initialPage)}>
+            Start
+          </ButtonStartGame>
         </Link>
       </LevelDiv>
     </GameWrapper>

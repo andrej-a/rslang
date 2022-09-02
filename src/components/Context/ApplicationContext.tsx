@@ -1,4 +1,6 @@
 import React, { createContext, useState } from 'react';
+import { IWord } from '../../models/IWord';
+import { words } from '../../pages/TextBook/ExampleData';
 type Props = {
   children?: JSX.Element | JSX.Element[];
 };
@@ -9,6 +11,8 @@ interface IContext {
   onSetInitialLevel: (value: string) => void;
   initialPage: string;
   onSetInitialPage: (value: string) => void;
+  wordsList: [] | IWord[];
+  onSetWordsList: (value: IWord[] | []) => void;
 }
 
 export const ApplicationContext = createContext({} as IContext);
@@ -17,6 +21,7 @@ export const ApplicationProvider = (props: Props) => {
   const [footerVisibility, setFooterVisibility] = useState(true);
   const [initialLevel, setInitialLevel] = useState('1');
   const [initialPage, setInitialPage] = useState('1');
+  const [wordsList, setWordsList] = useState<[] | IWord[]>([]);
   const onSetFooterVisibility = (value: boolean) => {
     setFooterVisibility(value);
   };
@@ -25,6 +30,9 @@ export const ApplicationProvider = (props: Props) => {
   };
   const onSetInitialPage = (value: string) => {
     setInitialPage(value);
+  };
+  const onSetWordsList = (value: IWord[] | []) => {
+    setWordsList(value);
   };
 
   return (
@@ -36,6 +44,8 @@ export const ApplicationProvider = (props: Props) => {
         onSetInitialLevel,
         initialPage: initialPage,
         onSetInitialPage,
+        wordsList: wordsList,
+        onSetWordsList,
       }}
     >
       {props.children}
