@@ -30,7 +30,22 @@ import {
 } from './AudioChallengeGame.styled';
 import { IWord } from '../../../models/IWord';
 import { getWords } from '../../../service/getWords';
-
+import { shuffle } from '../../../utils/shuffleArray';
+import { Capitalize } from '../../../utils/utils';
+const getRandomWordsFromArray = (array: IWord[], length: number, currentWord: IWord) => {
+  const copy = [...array];
+  const result = [];
+  for (let i = 0; i < length; i++) {
+    const ind = Math.floor(Math.random() * copy.length);
+    if (copy[ind].id !== currentWord.id) {
+      result.push(copy[ind]);
+    } else {
+      i--;
+    }
+    copy.splice(ind, 1);
+  }
+  return result;
+};
 const AudioChallengeGame = () => {
   //тут отслеживание футера и его скрытие в игре
   const { onSetFooterVisibility, currentPage, wordsGroup, onSetTextBookWords, textBookWords } =
@@ -38,9 +53,9 @@ const AudioChallengeGame = () => {
 
   useEffect(() => {
     onSetFooterVisibility(false);
-    getWords(wordsGroup, currentPage - 1).then((data) =>
-      onSetTextBookWords(data as unknown as IWord[]),
-    );
+    getWords(wordsGroup, currentPage - 1)
+      .then((data) => shuffle(data as unknown as IWord[]))
+      .then((data) => onSetTextBookWords(data as unknown as IWord[]));
   }, []);
   //текущее слово для ответа
   const [currentWord, setCurrentWord] = useState(textBookWords[0]);
@@ -48,7 +63,8 @@ const AudioChallengeGame = () => {
   const [wordNumber, setWordNumber] = useState(0);
   //процент прогресса
   const [progressPercent, setProgressPercent] = useState(0);
-
+  //массив рандомных ответов с одним правильным
+  const [randomArray, setRandomArray] = useState<IWord[]>([]);
   const onSetCurrentWord = (word: IWord) => {
     setCurrentWord(word);
   };
@@ -61,27 +77,31 @@ const AudioChallengeGame = () => {
     setProgressPercent(percent);
   };
 
-  useEffect(() => {
-    onSetCurrentWord(textBookWords[wordNumber]);
-    console.log(currentWord, 'PREVIOUS');
-  }, [textBookWords]);
+  const onSetRandomArray = (data: IWord[]) => {
+    setRandomArray(data);
+  };
 
   useEffect(() => {
     onSetCurrentWord(textBookWords[wordNumber]);
-    onSetProgressPercent(Math.floor((wordNumber / 20) * 100));
+    onSetProgressPercent(Math.ceil((wordNumber / 20) * 100));
+    onSetRandomArray([]);
+    if (currentWord) {
+      onSetRandomArray(
+        shuffle([...getRandomWordsFromArray(textBookWords, 4, currentWord), currentWord]),
+      );
+    }
     //здесь делакм рандомный массив ответов
-    console.log(currentWord, 'AFTER CHANGE');
-  }, [wordNumber]);
+  }, [wordNumber, currentWord, textBookWords]);
 
+  const buttons = randomArray.map((item) => {
+    return <AnswerButton key={item.id}>{Capitalize(item.word)}</AnswerButton>;
+  });
   return (
     <AudioChallengeWrapper>
       <MainBlock>
         <InnerBlock>
           <ButtonBlock>
-            <AnswerButton>Current variant</AnswerButton>
-            <AnswerButton className="correct">Correct variant</AnswerButton>
-            <AnswerButton className="wrong">Wrong variant</AnswerButton>
-            <AnswerButton>Variant</AnswerButton>
+            {buttons}
             <SkipQuestion>Don`t know</SkipQuestion>
           </ButtonBlock>
           <PictureBlock>

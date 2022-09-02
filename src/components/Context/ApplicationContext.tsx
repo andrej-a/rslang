@@ -24,7 +24,6 @@ interface IContext {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 export const ApplicationContext = createContext({} as IContext);
-
 export const ApplicationProvider = (props: Props) => {
   const { LOGIN_FORM_STATE } = Values;
   const defaultAuthorizedValue = localStorage.getItem('userId') ? true : false;
