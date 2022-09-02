@@ -1,13 +1,15 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
 import { ResultStatistic, ResultTextInfo, ResultViewWindowContainer } from './ResultPage.styled';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { IWordResult } from '../../../components/Interfaces';
 import { Colors, GameResultInfo, TextMessageResult } from '../../../styles/constansts';
+import { IWord } from '../../../models/IWord';
 
 type Props = {
-  rightAnswers: IWordResult[];
-  wrongAnswers: IWordResult[];
+  rightAnswers: IWord[];
+  wrongAnswers: IWord[];
 };
 const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
   const allWordNumber = GameResultInfo.WORD_COUNT;
@@ -26,7 +28,7 @@ const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
       </ResultTextInfo>
       <ResultStatistic>
         <ProgressBar
-          percent={(rightAnswers.length * GameResultInfo.PERSENT) / allWordNumber}
+          percent={(rightAnswers.length / (rightAnswers.length + wrongAnswers.length)) * 100}
           color={Colors.LIGHT_GRAY}
         />
         <p>Accurancy</p>
