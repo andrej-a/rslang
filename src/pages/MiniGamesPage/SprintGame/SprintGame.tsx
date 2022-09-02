@@ -15,7 +15,6 @@ const SprintGame = () => {
   const [isStart, setIsStart] = useState<boolean>(wordsList.length < 2 ? true : false);
   const [words, setWords] = useState<IWordsForPlay[] | []>([]);
   let wordsForPlay: IWordsForPlay[] = [];
-  
   useEffect(() => {
     onSetFooterVisibility(false);
   }, []);
@@ -27,7 +26,6 @@ const SprintGame = () => {
       setIsStart(false);
     }
   }, [wordsList]);
-
 
   const content = isStart ? <Spinner /> : <Play wordsForPlay={words} />;
   return <GameContentWrapper>{content}</GameContentWrapper>;

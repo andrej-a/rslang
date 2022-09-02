@@ -4,13 +4,15 @@ import { ResultStatistic, ResultTextInfo, ResultViewWindowContainer } from './Re
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { IWordResult } from '../../../components/Interfaces';
 import { Colors, GameResultInfo, TextMessageResult } from '../../../styles/constansts';
+import { IWord } from '../../../models/IWord';
 
 type Props = {
-  rightAnswers: IWordResult[];
-  wrongAnswers: IWordResult[];
+  rightAnswers: IWord[];
+  wrongAnswers: IWord[];
+  allWordNumber: number;
 };
-const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
-  const allWordNumber = GameResultInfo.WORD_COUNT;
+const ResultViewWindow = ({ rightAnswers, wrongAnswers, allWordNumber }: Props) => {
+  // const allWordNumber = GameResultInfo.WORD_COUNT;
   const textMessage =
     rightAnswers.length === allWordNumber
       ? TextMessageResult.GOOD
@@ -26,7 +28,7 @@ const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
       </ResultTextInfo>
       <ResultStatistic>
         <ProgressBar
-          percent={(rightAnswers.length * GameResultInfo.PERSENT) / allWordNumber}
+          percent={Math.round((rightAnswers.length * GameResultInfo.PERSENT) / allWordNumber)}
           color={Colors.LIGHT_GRAY}
         />
         <p>Accurancy</p>

@@ -48,14 +48,14 @@ export const Card = ({
   const rightAnswer = () => {
     setTotalPoints(totalPoints + coefficient * 10);
     setLineRightAnswers(lineRightAnswers + 1);
-    setCheckCircles(coefficient + 1);
-    if (checkCircles === 3) {
-      setCoefficient(coefficient + 1);
-      setCheckCircles(0);
+    if (checkCircles !== 0 && checkCircles % 3 === 0) {
+      coefficient = coefficient + 1;
     }
-    if (lineRightAnswers > maxLineRightAnswers) {
-      setMaxLineRightAnswers(lineRightAnswers);
-    }
+    setCoefficient(coefficient);
+    setCheckCircles(checkCircles + 1);
+    // if (lineRightAnswers > maxLineRightAnswers) {
+    //   setMaxLineRightAnswers(lineRightAnswers);
+    // }
     setWordIndex(wordIndex + 1);
     correctList.push(allWords[wordIndex]);
     setCorrectList(correctList);
@@ -71,6 +71,7 @@ export const Card = ({
   };
 
   const checkAnswer = (res: number) => {
+    console.log('coefficient', coefficient);
     if (wordIndex < allWords.length - 1) {
       if (res === couple.yes) {
         rightAnswer();

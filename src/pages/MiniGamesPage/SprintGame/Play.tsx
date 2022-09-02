@@ -6,17 +6,19 @@ import { IWord } from '../../../models/IWord';
 import { GameContent, GameLifes, SprintGameWrapper } from './SprintGame.styled';
 import { IWordsForPlay } from './CreateCouples';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
+import ResultPage from '../ResultPage/ResultPage';
 
 interface Props {
   wordsForPlay: IWordsForPlay[];
 }
 export const Play = ({ wordsForPlay }: Props) => {
-  const [playMode, setPlayMode] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [playMode, setPlayMode] = useState<boolean>(true);
   const [wordIndex, setWordIndex] = useState<number>(0);
   const [totalPoints, setTotalPoints] = useState<number>(0);
   const [lineRightAnswers, setLineRightAnswers] = useState(0);
   const [maxLineRightAnswers, setMaxLineRightAnswers] = useState(0);
-  const [coefficient, setCoefficient] = useState(1);
+  const [coefficient, setCoefficient] = useState<number>(1);
   const [checkCircles, setCheckCircles] = useState(0);
   const [isResultsOpen, setIsResultsOpen] = useState<boolean>(false);
   const [correctList, setCorrectList] = useState<IWord[]>([]);
@@ -27,14 +29,37 @@ export const Play = ({ wordsForPlay }: Props) => {
 
   return (
     <SprintGameWrapper>
-      {/* <ResultPage /> */}
+      <ResultPage
+        correctAnswers={correctList}
+        wrongAnswers={wrongList}
+        isResultOpen={isActive}
+        countAnswers={wrongList.length + correctList.length}
+      />
       <GameContent>
         <h3>{totalPoints}</h3>
         <p>+{coefficient * 10} points</p>
         <GameLifes>
-          <div id="circle1" className={checkCircles >= 1 ? 'active' : ''}></div>
-          <div id="circle2" className={checkCircles >= 2 ? 'active' : ''}></div>
-          <div id="circle3" className={checkCircles === 3 ? 'active' : ''}></div>
+          <div
+            id="circle1"
+            className={
+              checkCircles % 4 === 1 ||
+              checkCircles % 4 === 2 ||
+              checkCircles % 4 === 3 ||
+              checkCircles >= 12
+                ? 'active'
+                : ''
+            }
+          ></div>
+          <div
+            id="circle2"
+            className={
+              checkCircles % 4 === 2 || checkCircles % 4 === 3 || checkCircles >= 12 ? 'active' : ''
+            }
+          ></div>
+          <div
+            id="circle3"
+            className={checkCircles % 4 === 3 || checkCircles >= 12 ? 'active' : ''}
+          ></div>
         </GameLifes>
         <Card
           allWords={words}
@@ -46,7 +71,10 @@ export const Play = ({ wordsForPlay }: Props) => {
           wrongList={wrongList}
           setWrongList={(value) => setWrongList(value)}
           coefficient={coefficient}
-          setCoefficient={(value) => setCoefficient(value)}
+          setCoefficient={(value) => {
+            console.log('coefficient', value);
+            setCoefficient(value);
+          }}
           totalPoints={totalPoints}
           setTotalPoints={(value) => setTotalPoints(value)}
           checkCircles={checkCircles}
@@ -57,7 +85,13 @@ export const Play = ({ wordsForPlay }: Props) => {
           setMaxLineRightAnswers={(value) => setMaxLineRightAnswers(value)}
         />
       </GameContent>
-      <Timer />
+      <Timer
+        playMode={playMode}
+        setPlayMode={(mode: boolean) => setPlayMode(mode)}
+        isActive={isActive}
+        setIsActive={(active: boolean) => setIsActive(active)}
+        className={playMode ? '' : 'hidden'}
+      />
     </SprintGameWrapper>
   );
 };

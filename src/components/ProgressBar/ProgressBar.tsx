@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ProgressBarInfo } from '../../styles/constansts';
+import { Colors, ProgressBarInfo } from '../../styles/constansts';
 
 import { CircleContainer, ProgressBarContainer } from './ProgressBar.styled';
 
@@ -23,7 +23,7 @@ const ProgressBar = ({
 
   return (
     <ProgressBarContainer className="Container" radius={radius} strokeWidth={strokeWidth}>
-      <p>{percent}%</p>
+      <p color={Colors.BLACK}>{percent}%</p>
       <CircleContainer radius={radius} strokeWidth={strokeWidth}>
         <circle r={radius} cy={radius + strokeWidth} cx={radius + strokeWidth} stroke={color} />
         <circle

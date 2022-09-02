@@ -1,5 +1,6 @@
 import React from 'react';
 import { IWordResult } from '../../../components/Interfaces';
+import { IWord } from '../../../models/IWord';
 
 import { RightAnswers, WrongAnswers } from './ResultAnswers';
 import {
@@ -9,8 +10,8 @@ import {
 } from './ResultPage.styled';
 
 type Props = {
-  rightAnswers: IWordResult[];
-  wrongAnswers: IWordResult[];
+  rightAnswers: IWord[];
+  wrongAnswers: IWord[];
 };
 
 const WorldViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {

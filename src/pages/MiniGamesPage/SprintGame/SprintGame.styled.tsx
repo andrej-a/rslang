@@ -13,7 +13,6 @@ export const GameContentWrapper = styled.div`
   min-height: 100vh;
   height: auto;
   color: ${Colors.WHITE};
-  padding-left: 10%;
   padding-bottom: 100px;
   @media (max-width: 700px) {
     padding-left: 0;

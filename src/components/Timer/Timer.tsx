@@ -3,7 +3,15 @@ import { ProgressBarInfo, TimerInfo } from '../../styles/constansts';
 
 import { CircleContainer, TimerContainer } from '../Timer/Timer.styled';
 
-const Timer = () => {
+interface ITimerProps {
+  playMode: boolean;
+  setPlayMode: (playMode: boolean) => void;
+  isActive: boolean;
+  setIsActive: (isActive: boolean) => void;
+  className: string;
+}
+
+const Timer = ({ playMode, setPlayMode, isActive, setIsActive, className }: ITimerProps) => {
   const timeLimit = TimerInfo.TIMER_LIMIT_MINUTE;
   const [counter, setCounter] = useState(timeLimit);
   const radius = TimerInfo.SIZE_MEDIUM;
@@ -21,6 +29,10 @@ const Timer = () => {
         clearInterval(id);
       };
     }
+    if (counter < 0) {
+      setPlayMode(false);
+      setIsActive(true);
+    }
     return undefined;
   }, [circumference, counter, timeLimit]);
 
@@ -33,7 +45,7 @@ const Timer = () => {
   };
 
   return (
-    <TimerContainer>
+    <TimerContainer className={className}>
       <p>{formatTimeLeft(counter)}</p>
       <CircleContainer>
         <circle

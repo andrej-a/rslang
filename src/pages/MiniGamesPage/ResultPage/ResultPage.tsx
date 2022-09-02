@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-import { IWordResult } from '../../../components/Interfaces';
+import { IWord } from '../../../models/IWord';
 import {
   ButtonContainer,
   HeaderButtonContainer,
@@ -15,14 +15,17 @@ import ResultViewWindow from './ResultViewWindow';
 import WordViewWindow from './WordViewWindow';
 
 type Props = {
-  result: IWordResult[];
+  correctAnswers: IWord[];
+  wrongAnswers: IWord[];
+  isResultOpen: boolean;
+  countAnswers: number;
 };
 
-const ResultPage = ({ result }: Props) => {
+const ResultPage = ({ correctAnswers, wrongAnswers, isResultOpen, countAnswers }: Props) => {
   const [resultToggler, setResultToggler] = useState(false);
   const [isActiveResult, setActiveResult] = useState(true);
   const [isActiveWord, setActiveWord] = useState(false);
-
+  const { game } = useParams();
   const onActive = () => {
     setResultToggler(!resultToggler);
     setActiveResult(!isActiveResult);
@@ -30,7 +33,7 @@ const ResultPage = ({ result }: Props) => {
   };
 
   return (
-    <ResultWrapper>
+    <ResultWrapper className={isResultOpen ? '' : 'hidden'}>
       <HeaderButtonContainer>
         <SeeResultButton
           onClick={() => onActive()}
@@ -48,12 +51,16 @@ const ResultPage = ({ result }: Props) => {
         </SeeWordButton>
       </HeaderButtonContainer>
       {resultToggler === false ? (
-        <ResultViewWindow rightAnswers={result} wrongAnswers={result} />
+        <ResultViewWindow
+          rightAnswers={correctAnswers}
+          wrongAnswers={wrongAnswers}
+          allWordNumber={countAnswers}
+        />
       ) : (
-        <WordViewWindow rightAnswers={result} wrongAnswers={result} />
+        <WordViewWindow rightAnswers={correctAnswers} wrongAnswers={wrongAnswers} />
       )}
       <ButtonContainer>
-        <Link to={'/sprint'}>
+        <Link to={`/games/${game}/start`}>
           <PlayAgainButton>Play again</PlayAgainButton>
         </Link>
         <Link to={'/textbook'}>
