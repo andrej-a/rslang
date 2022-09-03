@@ -11,7 +11,7 @@ import { path } from './url';
 const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
 //Получение списка сложных слов для конкретного пользователя
-export const getUserWords = async (): Promise<IUserWord[]> => {
+export const getUserWords = async (): Promise<IUserWordCreateResponse[]> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/words`, {
     method: GET,
     headers: {
@@ -27,7 +27,7 @@ export const getUserWords = async (): Promise<IUserWord[]> => {
     throw new Error('Something wrong!');
   }
 
-  const content = await rawResponse.json();
+  const content: IUserWordCreateResponse[] = await rawResponse.json();
   console.log('getUserWords', content);
   return content;
 };

@@ -35,20 +35,50 @@ import { shuffle } from '../../../utils/shuffleArray';
 import { Capitalize } from '../../../utils/utils';
 import { getRandomWordsFromArray } from '../../../utils/getRandomWordsFromArray';
 import ResultPage from '../ResultPage/ResultPage';
-
+import { getNoStudiedWordsFromServer } from '../../../utils/getNoStudiedWordsFromServer';
+const defaultWord = {
+  audio: 'files/01_0002.mp3',
+  audioExample: 'files/01_0002_example.mp3',
+  audioMeaning: 'files/01_0002_meaning.mp3',
+  group: 0,
+  id: '5e9f5ee35eb9e72bc21af4a0',
+  image: 'files/01_0002.jpg',
+  page: 0,
+  textExample: 'A person should not drive a car after he or she has been drinking <b>alcohol</b>.',
+  textExampleTranslate: 'Человек не должен водить машину после того, как он выпил алкоголь',
+  textMeaning: '<i>Alcohol</i> is a type of drink that can make people drunk.',
+  textMeaningTranslate: 'Алкоголь - это тип напитка, который может сделать людей пьяными',
+  transcription: '[ǽlkəhɔ̀ːl]',
+  word: 'alcohol',
+  wordTranslate: 'алкоголь',
+};
+const sortedArray: IWord[] = [];
 const AudioChallengeGame = () => {
   //тут отслеживание футера и его скрытие в игре
-  const { onSetFooterVisibility, currentPage, wordsGroup, onSetTextBookWords, textBookWords } =
-    useContext(ApplicationContext);
+  const {
+    onSetFooterVisibility,
+    currentPage,
+    wordsGroup,
+    onSetTextBookWords,
+    textBookWords,
+    isAuthorized,
+  } = useContext(ApplicationContext);
 
   useEffect(() => {
     onSetFooterVisibility(false);
-    getWords(wordsGroup, currentPage - 1)
-      .then((data) => shuffle(data as unknown as IWord[]))
-      .then((data) => onSetTextBookWords(data as unknown as IWord[]));
+    if (isAuthorized) {
+      getNoStudiedWordsFromServer(wordsGroup, currentPage, sortedArray, 20).then((data) => {
+        onSetTextBookWords(shuffle(data.items));
+      });
+    } else {
+      console.log('NO AUTHORIZADE');
+      getWords(wordsGroup, currentPage - 1)
+        .then((data) => shuffle(data as unknown as IWord[]))
+        .then((data) => onSetTextBookWords(data as unknown as IWord[]));
+    }
   }, []);
   //текущее слово для ответа
-  const [currentWord, setCurrentWord] = useState(textBookWords[0]);
+  const [currentWord, setCurrentWord] = useState(defaultWord);
   //отслеживание слова в массиве
   const [wordNumber, setWordNumber] = useState(0);
   //процент прогресса
@@ -102,24 +132,26 @@ const AudioChallengeGame = () => {
 
   useEffect(() => {
     onSetFooterVisibility(false);
-    onSetCurrentWord(textBookWords[wordNumber]);
+    if (textBookWords.length) {
+      onSetCurrentWord(textBookWords[wordNumber]);
+    }
     onSetProgressPercent(Math.ceil((wordNumber / textBookWords.length) * 100));
     onSetRandomArray([]);
-    if (currentWord) {
+    if (currentWord && textBookWords.length) {
       onSetRandomArray(
         shuffle([...getRandomWordsFromArray(textBookWords, 4, currentWord), currentWord]),
       );
     }
   }, [wordNumber, currentWord, textBookWords]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (currentWord && wordNumber <= textBookWords.length) {
       const audioExample = new Audio(
         `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
       );
       audioExample.play();
     }
-  }, [currentWord]);
+  }, [currentWord]); */
 
   const buttons = randomArray.map((item) => {
     return (
@@ -152,7 +184,7 @@ const AudioChallengeGame = () => {
   });
   return (
     <AudioChallengeWrapper>
-      {textBookWords.length && wordNumber < 20 && (
+      {textBookWords.length && wordNumber < textBookWords.length && (
         <MainBlock>
           <InnerBlock>
             <ButtonBlock>
