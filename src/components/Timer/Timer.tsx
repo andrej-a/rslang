@@ -6,12 +6,10 @@ import { CircleContainer, TimerContainer } from '../Timer/Timer.styled';
 interface ITimerProps {
   playMode: boolean;
   setPlayMode: (playMode: boolean) => void;
-  isActive: boolean;
-  setIsActive: (isActive: boolean) => void;
   className: string;
 }
 
-const Timer = ({ playMode, setPlayMode, isActive, setIsActive, className }: ITimerProps) => {
+const Timer = ({ playMode, setPlayMode, className }: ITimerProps) => {
   const timeLimit = TimerInfo.TIMER_LIMIT_MINUTE;
   const [counter, setCounter] = useState(timeLimit);
   const radius = TimerInfo.SIZE_MEDIUM;
@@ -31,7 +29,6 @@ const Timer = ({ playMode, setPlayMode, isActive, setIsActive, className }: ITim
     }
     if (counter < 0) {
       setPlayMode(false);
-      setIsActive(true);
     }
     return undefined;
   }, [circumference, counter, timeLimit]);

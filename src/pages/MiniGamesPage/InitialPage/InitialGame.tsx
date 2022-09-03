@@ -21,20 +21,25 @@ const InitialGame = () => {
   const { title, img } = getGameInformation(game as string);
   const [isReady, setIsReady] = useState(true);
   const [activeLevel, setActiveLevel] = useState<string>('');
-  const { initialLevel, initialPage, onSetWordsList } = useContext(ApplicationContext);
+  const { initialLevel, initialPage, onSetWordsList, onSetFooterVisibility } =
+    useContext(ApplicationContext);
+
+  useEffect(() => {
+    onSetFooterVisibility(false);
+  }, []);
 
   const changeLevel = (level: string) => {
     setActiveLevel(() => level);
     setIsReady(false);
     onSetInitialLevel(level);
-    const randomPage = Math.floor(MIN_PAGE + Math.random() * (MAX_PAGE + 1 - MIN_PAGE));
-    onSetInitialPage(String(randomPage));
+    // const randomPage = Math.floor(MIN_PAGE + Math.random() * (MAX_PAGE + 1 - MIN_PAGE));
+    // onSetInitialPage(String(randomPage));
   };
 
-  const onRequest = async (level: string, page: string) => {
-    const words = await getWords(level, page);
-    onSetWordsList(words);
-  };
+  // const onRequest = async (level: string, page: string) => {
+  //   const words = await getWords(level, page);
+  //   onSetWordsList(words);
+  // };
 
   const levelsButtons = [];
   for (const [level, { difficulty }] of levels) {
@@ -59,9 +64,7 @@ const InitialGame = () => {
         <h3>Select the level</h3>
         <LevelButtonsContainer>{levelsButtons}</LevelButtonsContainer>
         <Link to={`/games/${game}/start`}>
-          <ButtonStartGame disabled={isReady} onClick={() => onRequest(initialLevel, initialPage)}>
-            Start
-          </ButtonStartGame>
+          <ButtonStartGame disabled={isReady}>Start</ButtonStartGame>
         </Link>
       </LevelDiv>
     </GameWrapper>
@@ -69,3 +72,4 @@ const InitialGame = () => {
 };
 
 export default InitialGame;
+// onClick={() => onRequest(initialLevel, initialPage)}

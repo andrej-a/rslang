@@ -6,7 +6,7 @@ export interface IWordsForPlay {
   translate: string;
 }
 
-const randomNumber = (min = 1, max = 19): number => {
+const randomNumber = (min = 1, max = 59): number => {
   const rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
 };
@@ -31,7 +31,7 @@ export const createCouples = (words: IWord[]): IWordsForPlay[] => {
       wordsForPlay.push({
         yes: 0,
         word: firstWordsArray[i].word,
-        translate: firstWordsArray[(i + randomNumber()) % 20].translate,
+        translate: firstWordsArray[(i + randomNumber()) % 60].translate,
       });
     }
   }

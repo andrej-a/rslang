@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
 import { IWord } from '../../../models/IWord';
 import {
@@ -17,7 +18,7 @@ import WordViewWindow from './WordViewWindow';
 type Props = {
   correctAnswers: IWord[];
   wrongAnswers: IWord[];
-  isResultOpen: boolean;
+  isResultOpen: string;
   countAnswers: number;
 };
 
@@ -33,7 +34,7 @@ const ResultPage = ({ correctAnswers, wrongAnswers, isResultOpen, countAnswers }
   };
 
   return (
-    <ResultWrapper className={isResultOpen ? '' : 'hidden'}>
+    <ResultWrapper className={isResultOpen}>
       <HeaderButtonContainer>
         <SeeResultButton
           onClick={() => onActive()}

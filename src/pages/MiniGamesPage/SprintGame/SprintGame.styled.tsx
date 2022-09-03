@@ -5,10 +5,8 @@ import { Colors } from '../../../styles/constansts';
 
 export const GameContentWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
   width: 100%;
   min-height: 100vh;
   height: auto;
@@ -24,12 +22,6 @@ export const SprintGameWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 40px;
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-  color: ${Colors.WHITE};
-  padding-left: 10%;
-  padding-bottom: 100px;
   @media (max-width: 700px) {
     padding-left: 0;
   }
@@ -54,6 +46,9 @@ export const GameContent = styled.div`
   }
   @media (max-width: 500px) {
     gap: 0;
+  }
+  &.hidden {
+    display: none;
   }
 `;
 

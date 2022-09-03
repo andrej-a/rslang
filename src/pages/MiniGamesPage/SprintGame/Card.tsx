@@ -52,10 +52,17 @@ export const Card = ({
       coefficient = coefficient + 1;
     }
     setCoefficient(coefficient);
-    setCheckCircles(checkCircles + 1);
-    // if (lineRightAnswers > maxLineRightAnswers) {
-    //   setMaxLineRightAnswers(lineRightAnswers);
-    // }
+    if (checkCircles === 3) {
+      checkCircles = 0;
+    } else {
+      checkCircles++;
+    }
+    setCheckCircles(checkCircles);
+    lineRightAnswers++;
+    setLineRightAnswers(lineRightAnswers);
+    if (lineRightAnswers > maxLineRightAnswers) {
+      setMaxLineRightAnswers(lineRightAnswers);
+    }
     setWordIndex(wordIndex + 1);
     correctList.push(allWords[wordIndex]);
     setCorrectList(correctList);

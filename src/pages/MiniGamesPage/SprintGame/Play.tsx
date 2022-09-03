@@ -7,62 +7,50 @@ import { GameContent, GameLifes, SprintGameWrapper } from './SprintGame.styled';
 import { IWordsForPlay } from './CreateCouples';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 import ResultPage from '../ResultPage/ResultPage';
+import { setStatisticGame, setStatisticWord } from './setStatistic';
 
 interface Props {
   wordsForPlay: IWordsForPlay[];
+  allWords: IWord[];
+  setAllWords: (words: []) => void;
 }
-export const Play = ({ wordsForPlay }: Props) => {
-  const [isActive, setIsActive] = useState<boolean>(false);
-  const [playMode, setPlayMode] = useState<boolean>(true);
-  const [wordIndex, setWordIndex] = useState<number>(0);
-  const [totalPoints, setTotalPoints] = useState<number>(0);
+export const Play = ({ wordsForPlay, allWords, setAllWords }: Props) => {
+  const [playMode, setPlayMode] = useState(true);
+  const [wordIndex, setWordIndex] = useState(0);
+  const [totalPoints, setTotalPoints] = useState(0);
   const [lineRightAnswers, setLineRightAnswers] = useState(0);
   const [maxLineRightAnswers, setMaxLineRightAnswers] = useState(0);
-  const [coefficient, setCoefficient] = useState<number>(1);
+  const [coefficient, setCoefficient] = useState(1);
   const [checkCircles, setCheckCircles] = useState(0);
-  const [isResultsOpen, setIsResultsOpen] = useState<boolean>(false);
   const [correctList, setCorrectList] = useState<IWord[]>([]);
   const [wrongList, setWrongList] = useState<IWord[]>([]);
-  const { wordsList } = useContext(ApplicationContext);
-  const words = wordsList;
-  console.log('wordsForPlay[wordIndex]', wordsForPlay);
+
+  useEffect(() => {
+    if (playMode === false) {
+      setAllWords([]);
+    }
+    setStatisticGame(wrongList, correctList, maxLineRightAnswers);
+    setStatisticWord(wrongList, correctList);
+  }, [playMode]);
 
   return (
     <SprintGameWrapper>
       <ResultPage
         correctAnswers={correctList}
         wrongAnswers={wrongList}
-        isResultOpen={isActive}
+        isResultOpen={playMode ? 'hidden' : ''}
         countAnswers={wrongList.length + correctList.length}
       />
-      <GameContent>
+      <GameContent className={playMode ? '' : 'hidden'}>
         <h3>{totalPoints}</h3>
         <p>+{coefficient * 10} points</p>
         <GameLifes>
-          <div
-            id="circle1"
-            className={
-              checkCircles % 4 === 1 ||
-              checkCircles % 4 === 2 ||
-              checkCircles % 4 === 3 ||
-              checkCircles >= 12
-                ? 'active'
-                : ''
-            }
-          ></div>
-          <div
-            id="circle2"
-            className={
-              checkCircles % 4 === 2 || checkCircles % 4 === 3 || checkCircles >= 12 ? 'active' : ''
-            }
-          ></div>
-          <div
-            id="circle3"
-            className={checkCircles % 4 === 3 || checkCircles >= 12 ? 'active' : ''}
-          ></div>
+          <div id="circle1" className={checkCircles >= 1 ? 'active' : ''}></div>
+          <div id="circle2" className={checkCircles >= 2 ? 'active' : ''}></div>
+          <div id="circle3" className={checkCircles >= 3 ? 'active' : ''}></div>
         </GameLifes>
         <Card
-          allWords={words}
+          allWords={allWords}
           couple={wordsForPlay[wordIndex]}
           wordIndex={wordIndex}
           setWordIndex={(value) => setWordIndex(value)}
@@ -71,25 +59,26 @@ export const Play = ({ wordsForPlay }: Props) => {
           wrongList={wrongList}
           setWrongList={(value) => setWrongList(value)}
           coefficient={coefficient}
-          setCoefficient={(value) => {
-            console.log('coefficient', value);
-            setCoefficient(value);
-          }}
+          setCoefficient={(value) => setCoefficient(value)}
           totalPoints={totalPoints}
           setTotalPoints={(value) => setTotalPoints(value)}
           checkCircles={checkCircles}
           setCheckCircles={(value) => setCheckCircles(value)}
           lineRightAnswers={lineRightAnswers}
-          setLineRightAnswers={(value) => setLineRightAnswers(value)}
+          setLineRightAnswers={(value) => {
+            console.log('lineRightAnswers', value);
+            setLineRightAnswers(value);
+          }}
           maxLineRightAnswers={maxLineRightAnswers}
-          setMaxLineRightAnswers={(value) => setMaxLineRightAnswers(value)}
+          setMaxLineRightAnswers={(value) => {
+            console.log('MaxLineRightAnswers', value);
+            setMaxLineRightAnswers(value);
+          }}
         />
       </GameContent>
       <Timer
         playMode={playMode}
         setPlayMode={(mode: boolean) => setPlayMode(mode)}
-        isActive={isActive}
-        setIsActive={(active: boolean) => setIsActive(active)}
         className={playMode ? '' : 'hidden'}
       />
     </SprintGameWrapper>
