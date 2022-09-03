@@ -64,7 +64,6 @@ export interface IWordsSetter {
 export interface IUserWord {
   difficulty: 'learned' | 'study' | 'hard';
   optional: {
-    newWord: boolean;
     rightAnswers: number;
     rightAudio: number;
     wrongAudio: number;
@@ -72,6 +71,7 @@ export interface IUserWord {
     wrongSprint: number;
   };
 }
+
 export interface IUserWordCreateResponse {
   userId: string;
   difficulty: 'learned' | 'study' | 'hard';

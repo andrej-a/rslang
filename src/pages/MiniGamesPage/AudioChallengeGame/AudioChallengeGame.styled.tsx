@@ -94,14 +94,25 @@ export const AnswerButton = styled.button`
   &.correct {
     border: 2px solid ${WHITE};
     background: ${PLAY_BUTTON_GRADIENT};
+    color: ${WHITE};
+    &:hover {
+      color: ${WHITE};
+    }
   }
 
   &.wrong {
     color: ${RED};
+    &:hover {
+      color: ${RED};
+    }
   }
 
   &:hover {
     color: ${GREEN};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
   }
 
   @media (max-width: ${tablet}px) {
@@ -115,7 +126,12 @@ export const SkipQuestion = styled(AnswerButton)`
   border-radius: 38px;
   padding-left: 0;
   justify-content: center;
-
+  &:disabled {
+    cursor: not-allowed;
+    &:hover {
+      color: ${BLACK};
+    }
+  }
   @media (max-width: ${tablet}px) {
     width: 280px;
   }

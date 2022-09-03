@@ -6,6 +6,7 @@ import { ApplicationContext } from '../../../components/Context/ApplicationConte
 import AudioImage from '../../../assets/AudioBlack.svg';
 import CorrectAnswer from '../../../assets/CorrectAnswer.svg';
 import TestAnswerPicture from '../../../assets/test_answer.jpg';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import { Colors } from '../../../styles/constansts';
 
@@ -36,6 +37,7 @@ import { Capitalize } from '../../../utils/utils';
 import { getRandomWordsFromArray } from '../../../utils/getRandomWordsFromArray';
 import ResultPage from '../ResultPage/ResultPage';
 import { getNoStudiedWordsFromServer } from '../../../utils/getNoStudiedWordsFromServer';
+import { UpdateOrCreateUserWord } from '../../../service/userWords';
 const defaultWord = {
   audio: 'files/01_0002.mp3',
   audioExample: 'files/01_0002_example.mp3',
@@ -52,7 +54,7 @@ const defaultWord = {
   word: 'alcohol',
   wordTranslate: 'алкоголь',
 };
-const sortedArray: IWord[] = [];
+let sortedArray: IWord[] = [];
 const AudioChallengeGame = () => {
   //тут отслеживание футера и его скрытие в игре
   const {
@@ -94,6 +96,8 @@ const AudioChallengeGame = () => {
   //правильные и неправильные ответы
   const [correctAnswers, setCorrectAnswers] = useState<IWord[]>([]);
   const [wrongAnswers, setWrongAnswers] = useState<IWord[]>([]);
+  //disabled кнопок
+  const [isDisabled, setIsDisabled] = useState(false);
   const onSetCurrentWord = (word: IWord) => {
     setCurrentWord(word);
   };
@@ -130,6 +134,10 @@ const AudioChallengeGame = () => {
     setWrongAnswers([...wrongAnswers, value]);
   };
 
+  const onSetDisabled = (value: boolean) => {
+    setIsDisabled(value);
+  };
+
   useEffect(() => {
     onSetFooterVisibility(false);
     if (textBookWords.length) {
@@ -144,18 +152,10 @@ const AudioChallengeGame = () => {
     }
   }, [wordNumber, currentWord, textBookWords]);
 
-  /* useEffect(() => {
-    if (currentWord && wordNumber <= textBookWords.length) {
-      const audioExample = new Audio(
-        `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
-      );
-      audioExample.play();
-    }
-  }, [currentWord]); */
-
   const buttons = randomArray.map((item) => {
     return (
       <AnswerButton
+        disabled={isDisabled}
         className={
           isAnswered && item.id === currentWord.id && statusAnswered
             ? 'correct'
@@ -164,7 +164,7 @@ const AudioChallengeGame = () => {
             : ''
         }
         onClick={() => {
-          onSetIsAnswered(true);
+          onSetDisabled(true);
           if (item.id === currentWord.id) {
             onSetStatusAnswered('correct');
             onSetCorrectAnswers(currentWord);
@@ -173,6 +173,7 @@ const AudioChallengeGame = () => {
             onSetWrongAnswers(currentWord);
           }
           setTimeout(() => {
+            onSetIsAnswered(true);
             onSetShowAnswer(true);
           }, 1000);
         }}
@@ -184,17 +185,19 @@ const AudioChallengeGame = () => {
   });
   return (
     <AudioChallengeWrapper>
-      {textBookWords.length && wordNumber < textBookWords.length && (
+      {textBookWords.length && wordNumber < textBookWords.length ? (
         <MainBlock>
           <InnerBlock>
             <ButtonBlock>
               {buttons}
               <SkipQuestion
+                disabled={isDisabled}
                 onClick={() => {
-                  onSetIsAnswered(true);
+                  onSetDisabled(true);
                   onSetStatusAnswered('wrong');
                   onSetWrongAnswers(currentWord);
                   setTimeout(() => {
+                    onSetIsAnswered(true);
                     onSetShowAnswer(true);
                   }, 1000);
                 }}
@@ -267,12 +270,56 @@ const AudioChallengeGame = () => {
                 <NextButton
                   disabled={!isAnswered}
                   onClick={() => {
+                    onSetDisabled(false);
                     const nextNumber =
                       wordNumber === textBookWords.length ? wordNumber : wordNumber + 1;
                     onSetWordNumber(nextNumber);
                     onSetIsAnswered(false);
                     onSetStatusAnswered('');
                     onSetShowAnswer(false);
+                    sortedArray = [];
+                    if (isAuthorized && wordNumber === textBookWords.length - 1) {
+                      onSetTextBookWords([]);
+                      const userID = localStorage.getItem('userId') as string;
+                      correctAnswers.forEach((word) => {
+                        UpdateOrCreateUserWord(
+                          userID,
+                          word.id,
+                          {
+                            difficulty: 'learned',
+                            optional: {
+                              rightAnswers: 1,
+                              rightAudio: 1,
+                              wrongAudio: 0,
+                              rightSprint: 0,
+                              wrongSprint: 0,
+                            },
+                          },
+                          1,
+                          1,
+                          0,
+                        );
+                      });
+                      wrongAnswers.forEach((word) => {
+                        UpdateOrCreateUserWord(
+                          userID,
+                          word.id,
+                          {
+                            difficulty: 'learned',
+                            optional: {
+                              rightAnswers: 0,
+                              rightAudio: 0,
+                              wrongAudio: 1,
+                              rightSprint: 0,
+                              wrongSprint: 0,
+                            },
+                          },
+                          0,
+                          0,
+                          1,
+                        );
+                      });
+                    }
                   }}
                 >
                   Next
@@ -281,6 +328,8 @@ const AudioChallengeGame = () => {
             </PictureBlock>
           </InnerBlock>
         </MainBlock>
+      ) : (
+        <MoonLoader color="#fff" />
       )}
       {wordNumber < 20 ? null : (
         <ResultPage correctAnswers={correctAnswers} wrongAnswers={wrongAnswers}></ResultPage>
