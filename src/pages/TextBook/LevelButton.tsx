@@ -6,17 +6,18 @@ interface ILevelButton {
   color: string;
   fullname: string;
   activeLevel: string;
-  changeLevel: (level: string) => void;
+  group: number;
+  changeLevel: (level: string, group: number) => void;
 }
 
-const LevelButton = ({ name, color, fullname, activeLevel, changeLevel }: ILevelButton) => {
+const LevelButton = ({ name, color, fullname, activeLevel, group, changeLevel }: ILevelButton) => {
   return (
     <>
       <LevelButtonStyled
         levelColor={color}
         title={fullname}
         state={activeLevel === name}
-        onClick={() => changeLevel(name)}
+        onClick={() => changeLevel(name, group)}
       >
         {name}
       </LevelButtonStyled>
