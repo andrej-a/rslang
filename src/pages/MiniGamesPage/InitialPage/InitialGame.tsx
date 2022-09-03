@@ -16,13 +16,12 @@ import { IWord } from '../../../models/IWord';
 const { MAX_PAGE, MIN_PAGE } = TextbookInfo;
 
 const InitialGame = () => {
-  const { onSetInitialPage, onSetInitialLevel } = useContext(ApplicationContext);
+  const { onSetInitialLevel } = useContext(ApplicationContext);
   const { game } = useParams();
   const { title, img } = getGameInformation(game as string);
   const [isReady, setIsReady] = useState(true);
   const [activeLevel, setActiveLevel] = useState<string>('');
-  const { initialLevel, initialPage, onSetWordsList, onSetFooterVisibility } =
-    useContext(ApplicationContext);
+  const { onSetFooterVisibility } = useContext(ApplicationContext);
 
   useEffect(() => {
     onSetFooterVisibility(false);
@@ -32,14 +31,7 @@ const InitialGame = () => {
     setActiveLevel(() => level);
     setIsReady(false);
     onSetInitialLevel(level);
-    // const randomPage = Math.floor(MIN_PAGE + Math.random() * (MAX_PAGE + 1 - MIN_PAGE));
-    // onSetInitialPage(String(randomPage));
   };
-
-  // const onRequest = async (level: string, page: string) => {
-  //   const words = await getWords(level, page);
-  //   onSetWordsList(words);
-  // };
 
   const levelsButtons = [];
   for (const [level, { difficulty }] of levels) {
@@ -72,4 +64,3 @@ const InitialGame = () => {
 };
 
 export default InitialGame;
-// onClick={() => onRequest(initialLevel, initialPage)}

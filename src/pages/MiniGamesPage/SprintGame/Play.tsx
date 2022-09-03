@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Timer from '../../../components/Timer/Timer';
 import { Card } from './Card';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IWord } from '../../../models/IWord';
 import { GameContent, GameLifes, SprintGameWrapper } from './SprintGame.styled';
 import { IWordsForPlay } from './CreateCouples';
-import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 import ResultPage from '../ResultPage/ResultPage';
-import { setStatisticGame, setStatisticWord } from './setStatistic';
 
 interface Props {
   wordsForPlay: IWordsForPlay[];
@@ -29,8 +27,8 @@ export const Play = ({ wordsForPlay, allWords, setAllWords }: Props) => {
     if (playMode === false) {
       setAllWords([]);
     }
-    setStatisticGame(wrongList, correctList, maxLineRightAnswers);
-    setStatisticWord(wrongList, correctList);
+    // setStatisticGame(wrongList, correctList, maxLineRightAnswers);
+    // setStatisticWord(wrongList, correctList);
   }, [playMode]);
 
   return (
