@@ -40,7 +40,7 @@ const TextBook = () => {
   const { userLearnedWords, onSetUserLearnedWords } = useContext(ApplicationContext);
   const { userWords, onSetUserWords } = useContext(ApplicationContext);
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const { currentPage, setCurrentPage, onSetIsTextBookInitGame } = useContext(ApplicationContext);
   const [currentGroup, setCurrentGroup] = useState<number>(0);
   const [words, setWords] = useState<IWord[]>([]);
   const [activeLevel, setActiveLevel] = useState<string>('A1');
@@ -75,6 +75,11 @@ const TextBook = () => {
       onSetUserDictionary(await data.dictionary);
       onSetUserLearnedWords(await data.learned);
     });
+  }, []);
+
+
+  useEffect(() => {
+    onSetIsTextBookInitGame(true);
   }, []);
 
   const handleOpen = () => setOpen(() => true);
@@ -241,7 +246,14 @@ const TextBook = () => {
             Sprint
           </ProceedToGameButton>
         </Link>
-        <Link to={'../games/audiochallenge/start'}>
+        <Link
+          /* onClick={() =>
+            getWords(wordsGroup, currentPage - 1).then((data) =>
+              onSetTextBookWords(data as unknown as IWord[]),
+            )
+          } */
+          to={'../games/audiochallenge/start'}
+        >
           <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN}>
             <div className="button__icon"></div>
             Audio challenge

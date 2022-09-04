@@ -10,41 +10,41 @@ import {
   WrongAnswersContainer,
 } from './ResultPage.styled';
 import ListenIcon from '../../../assets/listen.svg';
+import { IWord } from '../../../models/IWord';
 
 type Props = {
-  answers: IWordResult[];
+  answers: IWord[];
 };
 
-export const WordItem = ({ wordEng, wordRu, audioUrl }: IWordResult) => {
+export const WordItem = ({ word, wordTranslate, audio }: IWord) => {
   const startSong = (url: string | undefined) => {
-    const audio = new Audio();
-    audio.src = `${url}`;
-    audio.autoplay = true;
+    const audioExample = new Audio(`https://react-rslang-back.herokuapp.com/${url}`);
+    audioExample.play();
   };
 
   return (
     <Word>
-      <AudioButton onClick={() => startSong(audioUrl)}>
+      <AudioButton onClick={() => startSong(audio)}>
         <img src={ListenIcon} alt="icon" />
       </AudioButton>
-      <WordEng>{wordEng} - </WordEng>
-      <WordRu> {wordRu}</WordRu>
+      <WordEng>{word} - </WordEng>
+      <WordRu> {wordTranslate}</WordRu>
     </Word>
   );
 };
 
 export const RightAnswers = ({ answers }: Props) => {
   const data = answers;
-  const items = data.map(({ key, ...itemProps }) => {
-    return <WordItem key={key} {...itemProps} />;
+  const items = data.map(({ ...itemProps }, id) => {
+    return <WordItem key={id} {...itemProps} />;
   });
   return <RightAnswersContainer>{items}</RightAnswersContainer>;
 };
 
 export const WrongAnswers = ({ answers }: Props) => {
   const data = answers;
-  const items = data.map(({ key, ...itemProps }) => {
-    return <WordItem key={key} {...itemProps} />;
+  const items = data.map(({ ...itemProps }, id) => {
+    return <WordItem key={id} {...itemProps} />;
   });
   return <WrongAnswersContainer>{items}</WrongAnswersContainer>;
 };

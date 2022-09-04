@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react';
 import { IWord } from '../../models/IWord';
 import { IUserInfo, IUserWord } from '../../service/constants';
 import { Values } from '../../styles/constansts';
+
 type Props = {
   children?: JSX.Element | JSX.Element[];
 };
@@ -20,32 +21,52 @@ interface IContext {
   onSetUserDictionary: (value: IWord[]) => void;
   userLearnedWords: IWord[];
   onSetUserLearnedWords: (value: IWord[]) => void;
-  textBookWords: IWord[];
-  onSetTextBookWords: (value: IWord[]) => void;
   userWords: IUserWord[];
   onSetUserWords: (value: IUserWord[]) => void;
+  textBookWords: IWord[];
+  onSetTextBookWords: (data: IWord[]) => void;
+  wordsGroup: number;
+  onSetGroup: (value: number) => void;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  isTextBookInitGame: boolean;
+  onSetIsTextBookInitGame: (value: boolean) => void;
 }
 export const ApplicationContext = createContext({} as IContext);
-
 export const ApplicationProvider = (props: Props) => {
   const { LOGIN_FORM_STATE } = Values;
   const defaultAuthorizedValue = localStorage.getItem('userId') ? true : false;
   const userValue = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo') as string)
     : null;
-
+  //отображение футера
   const [footerVisibility, setFooterVisibility] = useState(true);
+  //статус авторизации
   const [isAuthorized, setIsAuthorized] = useState(defaultAuthorizedValue);
+  //информация о юзере, name, ID
   const [userInformation, setUserInformation] = useState<IUserInfo>(
     userValue || { name: '', userID: '' },
   );
+  //переключалка формы
   const [formToggler, setFormToggler] = useState<string>(LOGIN_FORM_STATE);
+  //спиннер
   const [isLoading, setIsLoading] = useState(false);
   const [userDictionary, setUserDictionary] = useState([] as IWord[]);
   const [userLearnedWords, setUserLearnedWords] = useState([] as IWord[]);
   const [textBookWords, setTextBookWords] = useState([] as IWord[]);
   const [userWords, setUserWords] = useState([] as IUserWord[]);
+  //массив слов
+  const [textBookWords, setTextBookWords] = useState<IWord[]>([]);
+  //группа слов
+  const [wordsGroup, setGroup] = useState(0);
+  //страница слов
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  //отслеживание игры
+  const [isTextBookInitGame, setIsTextBookInitGame] = useState(false);
 
+  const onSetIsTextBookInitGame = (value: boolean) => {
+    setIsTextBookInitGame(value);
+  };
   const onSetFooterVisibility = (value: boolean) => {
     setFooterVisibility(value);
   };
@@ -82,6 +103,10 @@ export const ApplicationProvider = (props: Props) => {
     setUserWords(value);
   };
 
+  const onSetGroup = (value: number) => {
+    setGroup(value);
+  };
+
   return (
     <ApplicationContext.Provider
       value={{
@@ -103,6 +128,12 @@ export const ApplicationProvider = (props: Props) => {
         onSetTextBookWords,
         userWords: userWords,
         onSetUserWords,
+        wordsGroup: wordsGroup,
+        onSetGroup,
+        currentPage: currentPage,
+        setCurrentPage,
+        isTextBookInitGame: isTextBookInitGame,
+        onSetIsTextBookInitGame,
       }}
     >
       {props.children}

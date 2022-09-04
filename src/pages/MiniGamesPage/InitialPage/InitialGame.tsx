@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 import getGameInformation from '../../../utils/getGameInformation';
 import {
   GameWrapper,
@@ -12,7 +13,10 @@ import {
 const InitialGame = () => {
   const { game } = useParams();
   const { title, img } = getGameInformation(game as string);
-
+  const { onSetIsTextBookInitGame } = useContext(ApplicationContext);
+  useEffect(() => {
+    onSetIsTextBookInitGame(false);
+  }, []);
   return (
     <GameWrapper>
       <GameImage>

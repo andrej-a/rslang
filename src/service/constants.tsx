@@ -80,6 +80,7 @@ export interface IUserWord {
     wrongSprint: number;
   };
 }
+
 export interface IUserWordCreateResponse {
   userId: string;
   difficulty: 'learned' | 'study' | 'hard';
