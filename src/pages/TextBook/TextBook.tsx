@@ -38,10 +38,10 @@ const TextBook = () => {
   const { isAuthorized, userInformation } = useContext(ApplicationContext);
   const { userDictionary, onSetUserDictionary } = useContext(ApplicationContext);
   const { userLearnedWords, onSetUserLearnedWords } = useContext(ApplicationContext);
-  const { userWords, onSetUserWords } = useContext(ApplicationContext);
-
   const { currentPage, setCurrentPage, onSetIsTextBookInitGame } = useContext(ApplicationContext);
-  const [currentGroup, setCurrentGroup] = useState<number>(0);
+  const { onSetIsDifficultWord } = useContext(ApplicationContext);
+
+  const { wordsGroup, onSetGroup } = useContext(ApplicationContext);
   const [words, setWords] = useState<IWord[]>([]);
   const [activeLevel, setActiveLevel] = useState<string>('A1');
   const [activeWord, setActiveWord] = useState<IWord>(emptyWord);
@@ -51,9 +51,9 @@ const TextBook = () => {
   const updateInfo = () => {
     async function setData() {
       const data =
-        currentGroup === levels.get('D')!.group
+        wordsGroup === levels.get('D')!.group
           ? userDictionary.slice(currentPage * wPerPage - wPerPage, currentPage * wPerPage)
-          : await getWords(currentGroup, currentPage);
+          : await getWords(wordsGroup, currentPage);
       setWords(data);
       return data;
     }
@@ -65,10 +65,10 @@ const TextBook = () => {
   };
   useEffect(() => {
     setWords([]);
-  }, [currentGroup, currentPage]);
+  }, [wordsGroup, currentPage]);
   useEffect(() => {
     updateInfo();
-  }, [currentGroup, currentPage, updateArrays, activeLevel === 'D' ? userDictionary : null]);
+  }, [wordsGroup, currentPage, updateArrays, activeLevel === 'D' ? userDictionary : null]);
 
   useEffect(() => {
     getUserWordsArray().then(async (data) => {
@@ -76,7 +76,6 @@ const TextBook = () => {
       onSetUserLearnedWords(await data.learned);
     });
   }, []);
-
 
   useEffect(() => {
     onSetIsTextBookInitGame(true);
@@ -90,8 +89,8 @@ const TextBook = () => {
 
   const changeLevel = (level: string, group: number) => {
     setActiveLevel(() => level);
-    console.log('curr group', group);
-    setCurrentGroup(() => group);
+    onSetIsDifficultWord(group < levels.get('D')!.group ? false : true);
+    onSetGroup(group);
   };
 
   const selectWord = (wordId: string) => {
@@ -153,6 +152,9 @@ const TextBook = () => {
             userLearnedWords.splice(userLearnedWords.indexOf(findInLearned), 1);
             onSetUserLearnedWords(userLearnedWords);
             if (difficulty === 'hard') onSetUserDictionary([...userDictionary, word]);
+          } else if (!findInDictionary && !findInLearned) {
+            if (difficulty === 'hard') onSetUserDictionary([...userDictionary, word]);
+            else if (difficulty === 'learned') onSetUserLearnedWords([...userLearnedWords, word]);
           }
           setUpdateArrays(() => !updateArrays);
         });
@@ -233,7 +235,7 @@ const TextBook = () => {
         currentPage={currentPage}
         pagination={paginate}
         totalCount={
-          currentGroup === levels.get('D')!.group
+          wordsGroup === levels.get('D')!.group
             ? Math.ceil(userDictionary.length / wPerPage)
             : totalCountPages
         }
@@ -246,14 +248,7 @@ const TextBook = () => {
             Sprint
           </ProceedToGameButton>
         </Link>
-        <Link
-          /* onClick={() =>
-            getWords(wordsGroup, currentPage - 1).then((data) =>
-              onSetTextBookWords(data as unknown as IWord[]),
-            )
-          } */
-          to={'../games/audiochallenge/start'}
-        >
+        <Link to={'../games/audiochallenge/start'}>
           <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN}>
             <div className="button__icon"></div>
             Audio challenge

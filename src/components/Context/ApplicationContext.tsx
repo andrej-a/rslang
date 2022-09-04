@@ -31,6 +31,8 @@ interface IContext {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   isTextBookInitGame: boolean;
   onSetIsTextBookInitGame: (value: boolean) => void;
+  isDifficultWord: boolean;
+  onSetIsDifficultWord: (value: boolean) => void;
 }
 export const ApplicationContext = createContext({} as IContext);
 export const ApplicationProvider = (props: Props) => {
@@ -53,7 +55,6 @@ export const ApplicationProvider = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [userDictionary, setUserDictionary] = useState([] as IWord[]);
   const [userLearnedWords, setUserLearnedWords] = useState([] as IWord[]);
-  const [textBookWords, setTextBookWords] = useState([] as IWord[]);
   const [userWords, setUserWords] = useState([] as IUserWord[]);
   //массив слов
   const [textBookWords, setTextBookWords] = useState<IWord[]>([]);
@@ -63,6 +64,7 @@ export const ApplicationProvider = (props: Props) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   //отслеживание игры
   const [isTextBookInitGame, setIsTextBookInitGame] = useState(false);
+  const [isDifficultWord, setIsDifficulWord] = useState(false);
 
   const onSetIsTextBookInitGame = (value: boolean) => {
     setIsTextBookInitGame(value);
@@ -107,6 +109,10 @@ export const ApplicationProvider = (props: Props) => {
     setGroup(value);
   };
 
+  const onSetIsDifficultWord = (value: boolean) => {
+    setIsDifficulWord(value);
+  };
+
   return (
     <ApplicationContext.Provider
       value={{
@@ -134,6 +140,8 @@ export const ApplicationProvider = (props: Props) => {
         setCurrentPage,
         isTextBookInitGame: isTextBookInitGame,
         onSetIsTextBookInitGame,
+        isDifficultWord: isDifficultWord,
+        onSetIsDifficultWord,
       }}
     >
       {props.children}

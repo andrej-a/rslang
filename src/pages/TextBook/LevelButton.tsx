@@ -8,7 +8,6 @@ interface ILevelButton {
   color: string;
   fullname: string;
   activeLevel: string;
-  group: number;
   changeLevel: (level: string, group: number) => void;
 }
 

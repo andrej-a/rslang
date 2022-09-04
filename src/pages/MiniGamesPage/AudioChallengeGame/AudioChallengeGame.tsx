@@ -57,6 +57,8 @@ const AudioChallengeGame = () => {
     textBookWords,
     isAuthorized,
     isTextBookInitGame,
+    userDictionary,
+    isDifficultWord,
   } = useContext(ApplicationContext);
 
   //текущее слово для ответа
@@ -115,8 +117,9 @@ const AudioChallengeGame = () => {
 
   useEffect(() => {
     onSetBooleanState(false, setShowResult);
-
-    if (isAuthorized && isTextBookInitGame) {
+    if (isAuthorized && isDifficultWord) {
+      onSetTextBookWords(userDictionary);
+    } else if (isAuthorized && isTextBookInitGame && !isDifficultWord) {
       getNoStudiedWordsFromServer(wordsGroup, currentPage, sortedArray, 20).then((data) => {
         onSetTextBookWords(shuffle(data.items));
       });
@@ -155,8 +158,8 @@ const AudioChallengeGame = () => {
   useEffect(() => {
     const onKeyPress = (e: KeyboardEvent) => {
       if (Number(e.key) > 0 && Number(e.key) <= randomArray.length && !statusAnswered) {
+        onSetBooleanState(true, setIsDisabled);
         if (randomArray[+e.key - 1].id === currentWord.id) {
-          onSetBooleanState(true, setIsDisabled);
           onSetStatusAnswered('correct');
           onSetCorrectAnswers(currentWord);
         } else {
@@ -316,7 +319,7 @@ const AudioChallengeGame = () => {
                 <NextButton
                   disabled={!isAnswered}
                   onClick={() => {
-                    onSetBooleanState(true, setIsDisabled);
+                    onSetBooleanState(false, setIsDisabled);
                     const nextNumber =
                       wordNumber === textBookWords.length ? wordNumber : wordNumber + 1;
                     onSetWordNumber(nextNumber);

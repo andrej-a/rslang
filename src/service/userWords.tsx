@@ -13,7 +13,7 @@ import { path } from './url';
 const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
 //Получение списка сложных слов для конкретного пользователя
-export const getUserWords = async (): Promise<IUserWordCreateResponse[]> => {
+export const getUserWords = async (): Promise<IUserWord[]> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/words`, {
     method: GET,
     headers: {
@@ -29,7 +29,7 @@ export const getUserWords = async (): Promise<IUserWordCreateResponse[]> => {
     throw new Error('Something wrong!');
   }
 
-  const content: IUserWordCreateResponse[] = await rawResponse.json();
+  const content: IUserWord[] = await rawResponse.json();
   console.log('getUserWords', content);
   return content;
 };
@@ -168,7 +168,7 @@ export const deleteUserWord = async (userId: string, wordId: string): Promise<vo
 export const UpdateOrCreateUserWord = async (
   userId: string,
   wordId: string,
-  primaryData: IUserWord,
+  primaryData: Pick<IUserWord, 'difficulty' | 'optional'>,
   //это значение добавляется только к rightAnswerrs
   // для блока с правильными ответами оно всегда 1, для неправильных -- 0
   value = 0,
