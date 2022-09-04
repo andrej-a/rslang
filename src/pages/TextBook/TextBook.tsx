@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
@@ -26,10 +26,15 @@ import { Link } from 'react-router-dom';
 import { ApplicationContext } from '../../components/Context/ApplicationContext';
 
 const TextBook = () => {
-  const { currentPage, setCurrentPage } = useContext(ApplicationContext);
+  const { currentPage, setCurrentPage, onSetIsTextBookInitGame } = useContext(ApplicationContext);
   const [activeLevel, setActiveLevel] = useState<string>('A1');
   const [activeWord, setActiveWord] = useState<IWord>(words[0] ?? emptyWord);
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    onSetIsTextBookInitGame(true);
+  }, []);
+
   const handleOpen = () => setOpen(() => true);
   const handleClose = () => {
     setOpen(() => false);

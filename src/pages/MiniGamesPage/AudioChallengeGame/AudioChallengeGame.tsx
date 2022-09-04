@@ -1,16 +1,11 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/indent */
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import MoonLoader from 'react-spinners/MoonLoader';
+/* COMPONENTS */
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
-
-import AudioImage from '../../../assets/AudioBlack.svg';
-import CorrectAnswer from '../../../assets/CorrectAnswer.svg';
-import TestAnswerPicture from '../../../assets/test_answer.jpg';
-import MoonLoader from 'react-spinners/MoonLoader';
-
-import { Colors } from '../../../styles/constansts';
-
+import ResultPage from '../ResultPage/ResultPage';
 import {
   AnswerButton,
   AudioChallengeWrapper,
@@ -31,33 +26,29 @@ import {
   WordWrapper,
   WrongAnswerPictureWrapper,
 } from './AudioChallengeGame.styled';
+
+/* ASSETS */
+import AudioImage from '../../../assets/AudioBlack.svg';
+import CorrectAnswer from '../../../assets/CorrectAnswer.svg';
+import TestAnswerPicture from '../../../assets/test_answer.jpg';
+/* CONSTANTS */
+import { Colors } from '../../../styles/constansts';
+/* MODELS */
 import { IWord } from '../../../models/IWord';
+import { defaultWord } from '../../../models/defaultValueToAudioGame';
+import { generateRandomPage } from '../../../models/randomPage';
+/* SERVICE */
 import { getWords } from '../../../service/getWords';
+import { primaryCorrectObject, primaryWrongObject, sentResultsToServer } from '../../../service/sentResultsToServer';
+/* UTILS */
 import { shuffle } from '../../../utils/shuffleArray';
 import { Capitalize } from '../../../utils/utils';
 import { getRandomWordsFromArray } from '../../../utils/getRandomWordsFromArray';
-import ResultPage from '../ResultPage/ResultPage';
 import { getNoStudiedWordsFromServer } from '../../../utils/getNoStudiedWordsFromServer';
-import { UpdateOrCreateUserWord } from '../../../service/userWords';
-const defaultWord = {
-  audio: 'files/01_0002.mp3',
-  audioExample: 'files/01_0002_example.mp3',
-  audioMeaning: 'files/01_0002_meaning.mp3',
-  group: 0,
-  id: '5e9f5ee35eb9e72bc21af4a0',
-  image: 'files/01_0002.jpg',
-  page: 0,
-  textExample: 'A person should not drive a car after he or she has been drinking <b>alcohol</b>.',
-  textExampleTranslate: 'Человек не должен водить машину после того, как он выпил алкоголь',
-  textMeaning: '<i>Alcohol</i> is a type of drink that can make people drunk.',
-  textMeaningTranslate: 'Алкоголь - это тип напитка, который может сделать людей пьяными',
-  transcription: '[ǽlkəhɔ̀ːl]',
-  word: 'alcohol',
-  wordTranslate: 'алкоголь',
-};
+
 let sortedArray: IWord[] = [];
+
 const AudioChallengeGame = () => {
-  //тут отслеживание футера и его скрытие в игре
   const {
     onSetFooterVisibility,
     currentPage,
@@ -65,6 +56,7 @@ const AudioChallengeGame = () => {
     onSetTextBookWords,
     textBookWords,
     isAuthorized,
+    isTextBookInitGame,
   } = useContext(ApplicationContext);
 
   //текущее слово для ответа
@@ -89,6 +81,10 @@ const AudioChallengeGame = () => {
   //окно результата
   const [showResult, setShowResult] = useState(false);
 
+  const onSetBooleanState = (value: boolean, callback: React.Dispatch<React.SetStateAction<boolean>>) => {
+    callback(value);
+  };
+
   const onSetCurrentWord = (word: IWord) => {
     setCurrentWord(word);
   };
@@ -105,16 +101,8 @@ const AudioChallengeGame = () => {
     setRandomArray(data);
   };
 
-  const onSetIsAnswered = (value: boolean) => {
-    setIsAnswered(value);
-  };
-
   const onSetStatusAnswered = (value: string) => {
     setStatusAnswered(value);
-  };
-
-  const onSetShowAnswer = (value: boolean) => {
-    setShowAnswer(value);
   };
 
   const onSetCorrectAnswers = (value: IWord) => {
@@ -125,24 +113,15 @@ const AudioChallengeGame = () => {
     setWrongAnswers([...wrongAnswers, value]);
   };
 
-  const onSetDisabled = (value: boolean) => {
-    setIsDisabled(value);
-  };
-
-  const onSetShowResult = (value: boolean) => {
-    setShowResult(value);
-  };
-
   useEffect(() => {
-    onSetFooterVisibility(false);
-    onSetShowResult(false);
-    if (isAuthorized) {
+    onSetBooleanState(false, setShowResult);
+
+    if (isAuthorized && isTextBookInitGame) {
       getNoStudiedWordsFromServer(wordsGroup, currentPage, sortedArray, 20).then((data) => {
         onSetTextBookWords(shuffle(data.items));
       });
     } else {
-      console.log('NO AUTHORIZADE');
-      getWords(wordsGroup, currentPage - 1)
+      getWords(wordsGroup, isTextBookInitGame ? currentPage - 1 : generateRandomPage(0, 29))
         .then((data) => shuffle(data as unknown as IWord[]))
         .then((data) => onSetTextBookWords(data as unknown as IWord[]));
     }
@@ -154,11 +133,14 @@ const AudioChallengeGame = () => {
 
   useEffect(() => {
     onSetFooterVisibility(false);
+
     if (textBookWords.length) {
       onSetCurrentWord(textBookWords[wordNumber]);
     }
+
     onSetProgressPercent(Math.ceil((wordNumber / textBookWords.length) * 100));
     onSetRandomArray([]);
+
     if (currentWord && textBookWords.length > 0) {
       const maxWordsNumber = textBookWords.length > 4 ? 4 : textBookWords.length - 1;
       onSetRandomArray(
@@ -174,7 +156,7 @@ const AudioChallengeGame = () => {
     const onKeyPress = (e: KeyboardEvent) => {
       if (Number(e.key) > 0 && Number(e.key) <= randomArray.length && !statusAnswered) {
         if (randomArray[+e.key - 1].id === currentWord.id) {
-          onSetDisabled(true);
+          onSetBooleanState(true, setIsDisabled);
           onSetStatusAnswered('correct');
           onSetCorrectAnswers(currentWord);
         } else {
@@ -182,8 +164,8 @@ const AudioChallengeGame = () => {
           onSetWrongAnswers(currentWord);
         }
         setTimeout(() => {
-          onSetIsAnswered(true);
-          onSetShowAnswer(true);
+          onSetBooleanState(true, setIsAnswered);
+          onSetBooleanState(true, setShowAnswer);
         }, 1000);
       }
       if (e.code === 'Space') {
@@ -193,59 +175,21 @@ const AudioChallengeGame = () => {
         audioExample.play();
       }
       if (e.code === 'Enter' && statusAnswered) {
-        onSetDisabled(false);
+        onSetBooleanState(false, setIsDisabled);
         const nextNumber = wordNumber === textBookWords.length ? wordNumber : wordNumber + 1;
         onSetWordNumber(nextNumber);
-        onSetIsAnswered(false);
+        onSetBooleanState(false, setIsAnswered);
         onSetStatusAnswered('');
-        onSetShowAnswer(false);
+        onSetBooleanState(false, setShowAnswer);
         sortedArray = [];
         if (wordNumber === textBookWords.length - 1) {
-          onSetShowResult(true);
+          onSetBooleanState(true, setShowResult);
           onSetTextBookWords([]);
         }
         if (isAuthorized && wordNumber === textBookWords.length - 1) {
-          const userID = localStorage.getItem('userId') as string;
-          correctAnswers.forEach((word) => {
-            UpdateOrCreateUserWord(
-              userID,
-              word.id,
-              {
-                difficulty: 'learned',
-                optional: {
-                  rightAnswers: 1,
-                  rightAudio: 1,
-                  wrongAudio: 0,
-                  rightSprint: 0,
-                  wrongSprint: 0,
-                },
-              },
-              1,
-              1,
-              0,
-            );
-          });
-          wrongAnswers.forEach((word) => {
-            UpdateOrCreateUserWord(
-              userID,
-              word.id,
-              {
-                difficulty: 'learned',
-                optional: {
-                  rightAnswers: 0,
-                  rightAudio: 0,
-                  wrongAudio: 1,
-                  rightSprint: 0,
-                  wrongSprint: 0,
-                },
-              },
-              0,
-              0,
-              1,
-            );
-          });
+          sentResultsToServer(correctAnswers, primaryCorrectObject, 1, 1, 0);
+          sentResultsToServer(wrongAnswers, primaryWrongObject, 0, 0, 1);
         }
-
       }
     };
     window.addEventListener('keyup', onKeyPress);
@@ -266,7 +210,7 @@ const AudioChallengeGame = () => {
               : ''
         }
         onClick={() => {
-          onSetDisabled(true);
+          onSetBooleanState(true, setIsDisabled);
           if (item.id === currentWord.id) {
             onSetStatusAnswered('correct');
             onSetCorrectAnswers(currentWord);
@@ -275,8 +219,8 @@ const AudioChallengeGame = () => {
             onSetWrongAnswers(currentWord);
           }
           setTimeout(() => {
-            onSetIsAnswered(true);
-            onSetShowAnswer(true);
+            onSetBooleanState(true, setIsAnswered);
+            onSetBooleanState(true, setShowAnswer);
           }, 1000);
         }}
         key={item.id}
@@ -295,16 +239,16 @@ const AudioChallengeGame = () => {
               <SkipQuestion
                 disabled={isDisabled}
                 onClick={() => {
-                  onSetDisabled(true);
+                  onSetBooleanState(true, setIsDisabled);
                   onSetStatusAnswered('wrong');
                   onSetWrongAnswers(currentWord);
                   setTimeout(() => {
-                    onSetIsAnswered(true);
-                    onSetShowAnswer(true);
+                    onSetBooleanState(true, setIsAnswered);
+                    onSetBooleanState(true, setShowAnswer);
                   }, 1000);
                 }}
               >
-                {'Я не знаю :('}
+                {'Пропустить вопрос'}
               </SkipQuestion>
             </ButtonBlock>
             <PictureBlock>
@@ -372,58 +316,21 @@ const AudioChallengeGame = () => {
                 <NextButton
                   disabled={!isAnswered}
                   onClick={() => {
-                    onSetDisabled(false);
+                    onSetBooleanState(true, setIsDisabled);
                     const nextNumber =
                       wordNumber === textBookWords.length ? wordNumber : wordNumber + 1;
                     onSetWordNumber(nextNumber);
-                    onSetIsAnswered(false);
+                    onSetBooleanState(false, setIsAnswered);
                     onSetStatusAnswered('');
-                    onSetShowAnswer(false);
+                    onSetBooleanState(false, setShowAnswer);
                     sortedArray = [];
                     if (wordNumber === textBookWords.length - 1) {
-                      onSetShowResult(true);
+                      onSetBooleanState(true, setShowResult);
                       onSetTextBookWords([]);
                     }
                     if (isAuthorized && wordNumber === textBookWords.length - 1) {
-                      const userID = localStorage.getItem('userId') as string;
-                      correctAnswers.forEach((word) => {
-                        UpdateOrCreateUserWord(
-                          userID,
-                          word.id,
-                          {
-                            difficulty: 'learned',
-                            optional: {
-                              rightAnswers: 1,
-                              rightAudio: 1,
-                              wrongAudio: 0,
-                              rightSprint: 0,
-                              wrongSprint: 0,
-                            },
-                          },
-                          1,
-                          1,
-                          0,
-                        );
-                      });
-                      wrongAnswers.forEach((word) => {
-                        UpdateOrCreateUserWord(
-                          userID,
-                          word.id,
-                          {
-                            difficulty: 'learned',
-                            optional: {
-                              rightAnswers: 0,
-                              rightAudio: 0,
-                              wrongAudio: 1,
-                              rightSprint: 0,
-                              wrongSprint: 0,
-                            },
-                          },
-                          0,
-                          0,
-                          1,
-                        );
-                      });
+                      sentResultsToServer(correctAnswers, primaryCorrectObject, 1, 1, 0);                      
+                      sentResultsToServer(wrongAnswers, primaryWrongObject, 0, 0, 1);                    
                     }
                   }}
                 >
