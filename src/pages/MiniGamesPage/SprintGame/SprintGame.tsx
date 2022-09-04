@@ -38,7 +38,6 @@ const SprintGame = () => {
     console.log(result, 'res');
     setWordsList(result);
   };
-console.log('textBookCurrentPage', textBookCurrentPage);
 
   const getUserWordTextBook = async () => {
     const words = await getNoStudiedWordsFromServer(initialLevel, textBookCurrentPage, [], 60);

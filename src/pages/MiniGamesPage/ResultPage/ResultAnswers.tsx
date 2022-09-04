@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { IWordResult } from '../../../components/Interfaces';
 import {
   AudioButton,
   RightAnswersContainer,
@@ -18,7 +17,7 @@ type Props = {
 
 export const WordItem = ({ word, wordTranslate, audio }: IWord) => {
   const startSong = (url: string | undefined) => {
-    const audioExample = new Audio(`//https://react-rslang-back.herokuapp.com/${url}`);
+    const audioExample = new Audio(`https://react-rslang-back.herokuapp.com/${url}`);
     audioExample.play();
   };
 
@@ -35,7 +34,7 @@ export const WordItem = ({ word, wordTranslate, audio }: IWord) => {
 
 export const RightAnswers = ({ answers }: Props) => {
   const data = answers;
-  const items = data.map(({...itemProps }, id) => {
+  const items = data.map(({ ...itemProps }, id) => {
     return <WordItem key={id} {...itemProps} />;
   });
   return <RightAnswersContainer>{items}</RightAnswersContainer>;
@@ -43,7 +42,7 @@ export const RightAnswers = ({ answers }: Props) => {
 
 export const WrongAnswers = ({ answers }: Props) => {
   const data = answers;
-  const items = data.map(({...itemProps }, id) => {
+  const items = data.map(({ ...itemProps }, id) => {
     return <WordItem key={id} {...itemProps} />;
   });
   return <WrongAnswersContainer>{items}</WrongAnswersContainer>;

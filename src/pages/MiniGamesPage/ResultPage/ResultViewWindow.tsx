@@ -2,7 +2,6 @@ import React from 'react';
 
 import { ResultStatistic, ResultTextInfo, ResultViewWindowContainer } from './ResultPage.styled';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
-import { IWordResult } from '../../../components/Interfaces';
 import { Colors, GameResultInfo, TextMessageResult } from '../../../styles/constansts';
 import { IWord } from '../../../models/IWord';
 
