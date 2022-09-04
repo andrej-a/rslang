@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const enum Errors {
   BAD_REQUEST = 400,
   MISSING_TOKEN = 401,
@@ -83,7 +84,7 @@ export interface IUserWordCreateResponse {
     rightSprint: number;
     wrongSprint: number;
   };
-  wordId: string;
+  id: string;
 }
 
 //На вскидку написала поля в optional
@@ -91,22 +92,22 @@ export interface IUserStatistic {
   learnedWords: number;
   optional: {
     common: {
-      visitDate: number;
-      wordsToday: number;
-      newWordsToday: number;
-      errors: number;
-      correct: number;
+      visitDate: any;
+      wordsToday: any;
+      newWordsToday: any;
+      errors: any;
+      correct: any;
     };
     games: {
       sprint: {
-        words: number;
-        accurancy: number;
-        inRow: number;
+        words: any;
+        accurancy: any;
+        inRow: any;
       };
       audioChallenge: {
-        words: number;
-        accurancy: number;
-        inRow: number;
+        words: any;
+        accurancy: any;
+        inRow: any;
       };
     };
   };

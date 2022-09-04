@@ -4,10 +4,8 @@ import { path } from './url';
 const { GET, PUT, CONTENT_TYPE } = HttpMetod;
 
 //Обновить данные в статистике
-export const updateStatistic = async ({
-  learnedWords,
-  optional,
-}: IUserStatistic): Promise<IUserStatistic> => {
+export const updateStatistic = async (statisticObj: IUserStatistic): Promise<IUserStatistic> => {
+  const { learnedWords, optional } = statisticObj;
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/statistics`, {
     method: PUT,
     headers: {
@@ -33,7 +31,7 @@ export const updateStatistic = async ({
 };
 
 //Получить данные из статистики
-export const getStatistic = async () => {
+export const getStatistic = async (): Promise<IUserStatistic> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/statistics`, {
     method: GET,
     headers: {

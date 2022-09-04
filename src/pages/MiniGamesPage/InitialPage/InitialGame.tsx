@@ -11,9 +11,6 @@ import {
   ButtonStartGame,
 } from './InitialGame.styled';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
-import { getWords } from '../../../service/getWords';
-import { IWord } from '../../../models/IWord';
-const { MAX_PAGE, MIN_PAGE } = TextbookInfo;
 
 const InitialGame = () => {
   const { onSetInitialLevel } = useContext(ApplicationContext);

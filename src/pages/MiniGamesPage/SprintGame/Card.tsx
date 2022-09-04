@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from 'react';
 import { IWord } from '../../../models/IWord';
 import { IWordsForPlay } from './CreateCouples';
 import { GameCard, EngWord, RuWord, ButtonContainer, ButtonAnswer } from './SprintGame.styled';
@@ -78,7 +79,6 @@ export const Card = ({
   };
 
   const checkAnswer = (res: number) => {
-    console.log('coefficient', coefficient);
     if (wordIndex < allWords.length - 1) {
       if (res === couple.yes) {
         rightAnswer();
@@ -87,6 +87,23 @@ export const Card = ({
       }
     }
   };
+
+  useEffect(() => {
+    const onKeypress = (e: KeyboardEvent) => {
+      if (e.key == 'ArrowRight') {
+        checkAnswer(0);
+      }
+      if (e.key == 'ArrowLeft') {
+        checkAnswer(1);
+      }
+    };
+
+    window.addEventListener('keydown', onKeypress);
+
+    return () => {
+      window.removeEventListener('keydown', onKeypress);
+    };
+  }, [couple]);
 
   return (
     <GameCard>

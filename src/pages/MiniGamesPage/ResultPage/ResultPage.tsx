@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
 import { IWord } from '../../../models/IWord';
+import getGameInformation from '../../../utils/getGameInformation';
 import {
   ButtonContainer,
   HeaderButtonContainer,

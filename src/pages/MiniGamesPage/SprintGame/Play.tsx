@@ -63,15 +63,9 @@ export const Play = ({ wordsForPlay, allWords, setAllWords }: Props) => {
           checkCircles={checkCircles}
           setCheckCircles={(value) => setCheckCircles(value)}
           lineRightAnswers={lineRightAnswers}
-          setLineRightAnswers={(value) => {
-            console.log('lineRightAnswers', value);
-            setLineRightAnswers(value);
-          }}
+          setLineRightAnswers={(value) => setLineRightAnswers(value)}
           maxLineRightAnswers={maxLineRightAnswers}
-          setMaxLineRightAnswers={(value) => {
-            console.log('MaxLineRightAnswers', value);
-            setMaxLineRightAnswers(value);
-          }}
+          setMaxLineRightAnswers={(value) => setMaxLineRightAnswers(value)}
         />
       </GameContent>
       <Timer
