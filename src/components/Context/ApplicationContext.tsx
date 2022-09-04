@@ -17,6 +17,10 @@ interface IContext {
   onSetFormToggler: (value: string) => void;
   isLoading: boolean;
   onSetIsLoading: (value: boolean) => void;
+  isTextBookInitGame: boolean;
+  onSetIsTextBookInitGame: (value: boolean) => void;
+  textBookCurrentPage: number;
+  onSetTextBookCurrentPage: (value: number) => void;
 }
 
 export const ApplicationContext = createContext({} as IContext);
@@ -35,6 +39,8 @@ export const ApplicationProvider = (props: Props) => {
   );
   const [formToggler, setFormToggler] = useState<string>(LOGIN_FORM_STATE);
   const [isLoading, setIsLoading] = useState(false);
+  const [isTextBookInitGame, setIsTextBookInitGame] = useState(false);
+  const [textBookCurrentPage, setTextBookCurrentPage] = useState(1);
 
   const onSetFooterVisibility = (value: boolean) => {
     setFooterVisibility(value);
@@ -54,6 +60,12 @@ export const ApplicationProvider = (props: Props) => {
   const onSetIsLoading = (value: boolean) => {
     setIsLoading(value);
   };
+  const onSetIsTextBookInitGame = (value: boolean) => {
+    setIsTextBookInitGame(value);
+  };
+  const onSetTextBookCurrentPage = (value: number) => {
+    setTextBookCurrentPage(value);
+  };
 
   return (
     <ApplicationContext.Provider
@@ -70,6 +82,10 @@ export const ApplicationProvider = (props: Props) => {
         onSetFormToggler,
         isLoading: isLoading,
         onSetIsLoading,
+        isTextBookInitGame: isTextBookInitGame,
+        onSetIsTextBookInitGame,
+        textBookCurrentPage: textBookCurrentPage,
+        onSetTextBookCurrentPage,
       }}
     >
       {props.children}

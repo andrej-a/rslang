@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
@@ -23,10 +23,13 @@ import WordCard from './WordCard';
 import Sprint from '../../assets/TrackField.svg';
 import AudioChallenge from '../../assets/ListenMusic.svg';
 import { Link } from 'react-router-dom';
+import { ApplicationContext } from '../../components/Context/ApplicationContext';
 
 const TextBook = () => {
+  const { onSetIsTextBookInitGame, onSetTextBookCurrentPage, onSetInitialLevel } =
+    useContext(ApplicationContext);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [activeLevel, setActiveLevel] = useState<string>('A1');
+  const [activeLevel, setActiveLevel] = useState<string>('0');
   const [activeWord, setActiveWord] = useState<IWord>(words[0] ?? emptyWord);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(() => true);
@@ -34,6 +37,14 @@ const TextBook = () => {
     setOpen(() => false);
     setActiveWord(() => emptyWord);
   };
+  useEffect(() => {
+    onSetTextBookCurrentPage(currentPage);
+    onSetInitialLevel(activeLevel);
+  }, [currentPage, activeLevel]);
+
+  useEffect(() => {
+    onSetIsTextBookInitGame(true);
+  }, []);
 
   const changeLevel = (level: string) => {
     setActiveLevel(() => level);
@@ -48,11 +59,12 @@ const TextBook = () => {
   };
 
   const levelsButtons = [];
-  for (const [level, { color, fullname }] of levels) {
+  for (const [level, { color, fullname, difficulty }] of levels) {
     levelsButtons.push(
       <LevelButton
         name={level}
         color={color}
+        id={difficulty}
         fullname={fullname}
         activeLevel={activeLevel}
         changeLevel={changeLevel}

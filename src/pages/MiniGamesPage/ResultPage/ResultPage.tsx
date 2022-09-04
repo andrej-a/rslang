@@ -4,6 +4,8 @@ import { ApplicationContext } from '../../../components/Context/ApplicationConte
 
 import { IWord } from '../../../models/IWord';
 import getGameInformation from '../../../utils/getGameInformation';
+import { getNoStudiedWordsFromServer } from '../SprintGame/getNotStudiedWord';
+import { UpdateOrCreateUserWord } from '../SprintGame/UpdateOrCreateUserWord';
 import {
   ButtonContainer,
   HeaderButtonContainer,
@@ -33,6 +35,39 @@ const ResultPage = ({ correctAnswers, wrongAnswers, isResultOpen, countAnswers }
     setActiveResult(!isActiveResult);
     setActiveWord(!isActiveWord);
   };
+  //изменение точно касается еня не уверена на счет применяемости в других играх
+  if (isResultOpen.length === 0) {
+    const userId = localStorage.getItem('userId');
+    console.log(userId);
+
+    correctAnswers.map((word) => {
+      const obj = {
+        difficulty: 'learned',
+        optional: {
+          rightAnswers: 0,
+          rightAudio: 0,
+          wrongAudio: 0,
+          rightSprint: 1,
+          wrongSprint: 0,
+        },
+      };
+      UpdateOrCreateUserWord(userId, word.id, obj, 1, 0, 0, 1, 0);
+    });
+    wrongAnswers.map((word) => {
+      const obj = {
+        difficulty: 'learned',
+        optional: {
+          rightAnswers: 0,
+          rightAudio: 0,
+          wrongAudio: 0,
+          rightSprint: 0,
+          wrongSprint: 1,
+        },
+      };
+      UpdateOrCreateUserWord(userId, word.id, obj, 0, 0, 0, 0, 1);
+    });
+  }
+  //--------------------------------------------------------------------
 
   return (
     <ResultWrapper className={isResultOpen}>

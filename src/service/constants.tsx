@@ -57,15 +57,14 @@ export interface IUserAllInfo {
   name: string;
 }
 export interface IWordsSetter {
-  userId: string;
+  userId: string | null;
   wordId: string;
   word: IUserWord;
 }
 //Без понятия какие поля должны быть в optional
 export interface IUserWord {
-  difficulty: 'learned' | 'study' | 'hard';
+  difficulty: string; //'learned' | 'study' | 'hard'
   optional: {
-    newWord: boolean;
     rightAnswers: number;
     rightAudio: number;
     wrongAudio: number;

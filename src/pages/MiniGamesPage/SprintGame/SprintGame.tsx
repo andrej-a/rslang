@@ -8,9 +8,16 @@ import { createCouples, IWordsForPlay } from './CreateCouples';
 import { Play } from './Play';
 
 import { GameContentWrapper } from './SprintGame.styled';
+import { getNoStudiedWordsFromServer } from './getNotStudiedWord';
 
 const SprintGame = () => {
-  const { onSetFooterVisibility, initialLevel } = useContext(ApplicationContext);
+  const {
+    onSetFooterVisibility,
+    initialLevel,
+    isAuthorized,
+    isTextBookInitGame,
+    textBookCurrentPage,
+  } = useContext(ApplicationContext);
   const [wordsList, setWordsList] = useState<IWord[]>([]);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [wordsForPlay, setwordsForPlay] = useState<IWordsForPlay[] | []>([]);
@@ -20,10 +27,10 @@ const SprintGame = () => {
     return page;
   };
 
-  const onRequest = async (level: string) => {
-    const firstPage = generateRandomPage(1, 9);
-    const secondPage = generateRandomPage(10, 19);
-    const thirtyPage = generateRandomPage(20, 29);
+  const onRequest = async (level: string, first = 0, second = 0, thirty = 0) => {
+    const firstPage = first ?? generateRandomPage(1, 9);
+    const secondPage = second ?? generateRandomPage(10, 19);
+    const thirtyPage = thirty ?? generateRandomPage(20, 29);
     const words1 = await getWords(level, firstPage);
     const words2 = await getWords(level, secondPage);
     const words3 = await getWords(level, thirtyPage);
@@ -31,10 +38,29 @@ const SprintGame = () => {
     console.log(result, 'res');
     setWordsList(result);
   };
+console.log('textBookCurrentPage', textBookCurrentPage);
+
+  const getUserWordTextBook = async () => {
+    const words = await getNoStudiedWordsFromServer(initialLevel, textBookCurrentPage, [], 60);
+    setWordsList(words);
+  };
 
   useEffect(() => {
     onSetFooterVisibility(false);
-    onRequest(initialLevel);
+
+    if (isTextBookInitGame) {
+      if (isAuthorized) {
+        getUserWordTextBook();
+      } else {
+        const secondPage =
+          textBookCurrentPage >= 2 ? textBookCurrentPage - 1 : textBookCurrentPage + 1;
+        const thirtyPage =
+          textBookCurrentPage <= 29 ? textBookCurrentPage + 2 : textBookCurrentPage - 1;
+        onRequest(initialLevel, textBookCurrentPage, secondPage, thirtyPage);
+      }
+    } else {
+      onRequest(initialLevel);
+    }
   }, []);
 
   useEffect(() => {

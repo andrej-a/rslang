@@ -7,6 +7,7 @@ import App from './App';
 import { theme } from './styles/theme';
 import { ThemeProvider } from '@mui/material/styles';
 import { ApplicationProvider } from './components/Context/ApplicationContext';
+import { getUserWords } from './service/userWords';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLDivElement);
 root.render(
@@ -20,4 +21,3 @@ root.render(
     </Router>
   </React.StrictMode>,
 );
-

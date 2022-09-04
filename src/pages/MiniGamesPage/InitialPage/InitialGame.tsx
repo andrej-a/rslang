@@ -13,7 +13,7 @@ import {
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
 const InitialGame = () => {
-  const { onSetInitialLevel } = useContext(ApplicationContext);
+  const { onSetInitialLevel, onSetIsTextBookInitGame } = useContext(ApplicationContext);
   const { game } = useParams();
   const { title, img } = getGameInformation(game as string);
   const [isReady, setIsReady] = useState(true);
@@ -21,6 +21,7 @@ const InitialGame = () => {
   const { onSetFooterVisibility } = useContext(ApplicationContext);
 
   useEffect(() => {
+    onSetIsTextBookInitGame(false);
     onSetFooterVisibility(false);
   }, []);
 
