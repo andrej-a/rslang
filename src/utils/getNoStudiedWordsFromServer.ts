@@ -1,14 +1,9 @@
 import { IWord } from '../models/IWord';
-import { IUserWordCreateResponse } from '../service/constants';
+import { IUserWord } from '../service/constants';
 import { getWords } from '../service/getWords';
 import { getUserWords } from '../service/userWords';
 
-function search(
-  a: IWord[],
-  b: IUserWordCreateResponse[],
-  sortedArray: IWord[],
-  maxWordsNumber: number,
-): IWord[] {
+function search(a: IWord[], b: IUserWord[], sortedArray: IWord[], maxWordsNumber: number): IWord[] {
   for (const akey in a) {
     let found = false;
     for (const bkey in b) {

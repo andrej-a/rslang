@@ -1,3 +1,4 @@
+import { IWord } from '../models/IWord';
 import {
   Errors,
   IUserWord,
@@ -6,12 +7,13 @@ import {
   IUserWordCreateResponse,
   HttpMetod,
 } from './constants';
+import { getWordById } from './getWords';
 import { path } from './url';
 
 const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
 //Получение списка сложных слов для конкретного пользователя
-export const getUserWords = async (): Promise<IUserWordCreateResponse[]> => {
+export const getUserWords = async (): Promise<IUserWord[]> => {
   const rawResponse = await fetch(`${path.users}/${localStorage.getItem('userId')}/words`, {
     method: GET,
     headers: {
@@ -27,9 +29,35 @@ export const getUserWords = async (): Promise<IUserWordCreateResponse[]> => {
     throw new Error('Something wrong!');
   }
 
-  const content: IUserWordCreateResponse[] = await rawResponse.json();
+  const content: IUserWord[] = await rawResponse.json();
   console.log('getUserWords', content);
   return content;
+};
+export const getUserWordsArray = async (): Promise<{
+  dictionary: Promise<IWord[]>;
+  learned: Promise<IWord[]>;
+  study: Promise<IWord[]>;
+}> => {
+  const userWords = await getUserWords();
+  const dictionaryWords: Promise<IWord>[] = userWords
+    .filter((word) => word.difficulty === 'hard')
+    .map((word) => getWordById(word.wordId));
+
+  const learnedWords: Promise<IWord>[] = userWords
+    .filter((word) => word.difficulty === 'learned')
+    .map((word) => getWordById(word.wordId));
+  const sudyWords: Promise<IWord>[] = userWords
+    .filter((word) => word.difficulty === 'study')
+    .map((word) => getWordById(word.wordId));
+  return {
+    dictionary: Promise.all(dictionaryWords),
+    learned: Promise.all(learnedWords),
+    study: Promise.all(sudyWords),
+  };
+};
+export const getUserWordByCommonWordId = async (wordId: string): Promise<IUserWord | undefined> => {
+  const userWords = await getUserWords();
+  return userWords.find((word) => word.wordId === wordId);
 };
 
 //Получить слово из списка сложных слов конкретного пользователя
@@ -62,7 +90,7 @@ export const createUserWord = async ({
   userId,
   wordId,
   word,
-}: IWordsSetter): Promise<IUserWordCreateResponse> => {
+}: IWordsSetter): Promise<IUserWord> => {
   const rawResponse = await fetch(`${path.users}/${userId}/words/${wordId}`, {
     method: POST,
     headers: {
@@ -140,7 +168,7 @@ export const deleteUserWord = async (userId: string, wordId: string): Promise<vo
 export const UpdateOrCreateUserWord = async (
   userId: string,
   wordId: string,
-  primaryData: IUserWord,
+  primaryData: Pick<IUserWord, 'difficulty' | 'optional'>,
   //это значение добавляется только к rightAnswerrs
   // для блока с правильными ответами оно всегда 1, для неправильных -- 0
   value = 0,

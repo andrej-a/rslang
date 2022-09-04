@@ -5,7 +5,10 @@ import { path } from './url';
 const { GET, CONTENT_TYPE } = HttpMetod;
 
 //Получение слов из определенной группы и страницы
-export const getWords = async (group?: number, page?: number): Promise<{ items: IWord[] }> => {
+export const getWords = async (
+  group?: number | string,
+  page?: number | string,
+): Promise<IWord[]> => {
   const response = await fetch(
     `${path.words}?group=${group || DefaultNumber.NULL}&page=${page || DefaultNumber.NULL}`,
     {

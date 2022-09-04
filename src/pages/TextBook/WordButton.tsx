@@ -6,6 +6,7 @@ interface IWordButton {
   activeWord: string;
   selectWord: (wordId: string) => void;
   handleClick: () => void;
+  className?: string;
 }
 
 const WordButton = ({
@@ -15,6 +16,7 @@ const WordButton = ({
   activeWord,
   selectWord,
   handleClick,
+  className = '',
 }: Partial<IWord> & IWordButton) => {
   return (
     <>
@@ -24,6 +26,7 @@ const WordButton = ({
           selectWord(id as string);
           handleClick();
         }}
+        className={className}
       >
         {id === activeWord ? wordTranslate : word}
       </WordButtonStyled>

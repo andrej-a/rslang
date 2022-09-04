@@ -1,3 +1,10 @@
+export const emptyOtional = {
+  rightAnswers: 0,
+  rightAudio: 0,
+  wrongAudio: 0,
+  rightSprint: 0,
+  wrongSprint: 0,
+};
 export const enum Errors {
   BAD_REQUEST = 400,
   MISSING_TOKEN = 401,
@@ -58,11 +65,13 @@ export interface IUserAllInfo {
 export interface IWordsSetter {
   userId: string;
   wordId: string;
-  word: IUserWord;
+  word: Pick<IUserWord, 'difficulty' | 'optional'>;
 }
 //Без понятия какие поля должны быть в optional
 export interface IUserWord {
   difficulty: 'learned' | 'study' | 'hard';
+  wordId: string; //id слова в общем словаре
+  id: string; // id слова у пользователя
   optional: {
     rightAnswers: number;
     rightAudio: number;

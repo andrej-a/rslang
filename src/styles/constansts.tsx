@@ -69,6 +69,7 @@ export const levels = new Map([
   ['B2', { color: Colors.BOOK_BLUE, fullname: 'Up-Intermediate', group: 3 }],
   ['C1', { color: Colors.BOOK_ORANGE, fullname: 'Advanced', group: 4 }],
   ['C2', { color: Colors.BOOK_RED, fullname: 'Proficiency', group: 5 }],
+  ['D', { color: Colors.BOOK_PURPLE, fullname: 'Dictionary', group: 6 }],
 ]);
 
 export enum ProgressBarInfo {
@@ -88,3 +89,5 @@ export enum TimerInfo {
   TIMER_LIMIT_MINUTE = 60,
   SIZE_MEDIUM = 53,
 }
+
+export const wPerPage = 20;

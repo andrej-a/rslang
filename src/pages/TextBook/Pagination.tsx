@@ -37,10 +37,13 @@ const Pagination = ({
     setThirdButton(() =>
       currentPage <= 3 ? 3 : currentPage < totalCount - 2 ? currentPage : totalCount - 2,
     );
-    setThirdButtonState(() => (currentPage >= 3 && currentPage <= totalCount - 2 ? true : false));
+    setThirdButtonState(() =>
+      currentPage >= 3 && currentPage <= totalCount - 2 ? true : false || currentPage === 3,
+    );
     setFourthButton(() => (currentPage < totalCount - 2 ? '...' : totalCount - 1));
     setFourthButtonState(() => fourthButton === currentPage);
     setFifthButtonState(() => fifthButton === currentPage);
+    console.log('PAGE', totalCount);
   }, [currentPage, fifthButton, firstButton, fourthButton, secondButton, totalCount]);
 
   return (
@@ -54,30 +57,35 @@ const Pagination = ({
         state={firstButtonState}
         onClick={() => pagination(firstButton as number, true)}
         disabled={currentPage === 1}
+        style={totalCount < 1 ? { display: 'none' } : {}}
       >
         {firstButton}
       </PaginationButton>
       <PaginationButton
         state={secondButtonState}
         onClick={() => pagination(secondButton as number, true)}
+        style={totalCount < 2 ? { display: 'none' } : {}}
       >
         {secondButton}
       </PaginationButton>
       <PaginationButton
         state={thirdButtonState}
         onClick={() => pagination(thirdButton as number, true)}
+        style={totalCount < 3 ? { display: 'none' } : {}}
       >
         {thirdButton}
       </PaginationButton>
       <PaginationButton
         state={fourthButtonState}
         onClick={() => pagination(fourthButton as number, true)}
+        style={totalCount < 4 ? { display: 'none' } : {}}
       >
         {fourthButton}
       </PaginationButton>
       <PaginationButton
         state={fifthButtonState}
         onClick={() => pagination(fifthButton as number, true)}
+        style={totalCount < 5 ? { display: 'none' } : {}}
       >
         {fifthButton}
       </PaginationButton>

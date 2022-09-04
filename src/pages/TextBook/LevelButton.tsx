@@ -8,7 +8,7 @@ interface ILevelButton {
   color: string;
   fullname: string;
   activeLevel: string;
-  changeLevel: (level: string) => void;
+  changeLevel: (level: string, group: number) => void;
 }
 
 const LevelButton = ({ name, group, color, fullname, activeLevel, changeLevel }: ILevelButton) => {
@@ -20,7 +20,7 @@ const LevelButton = ({ name, group, color, fullname, activeLevel, changeLevel }:
         title={fullname}
         state={activeLevel === name}
         onClick={() => {
-          changeLevel(name);
+          changeLevel(name, group);
           onSetGroup(group);
         }}
       >
