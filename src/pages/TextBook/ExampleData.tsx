@@ -16,4 +16,4 @@ export const emptyWord: IWord = {
   textMeaningTranslate: '',
   wordTranslate: '',
 };
-export const totalCountPages = 29;
+export const totalCountPages = 30;
