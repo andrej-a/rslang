@@ -22,6 +22,14 @@ export const AudioChallengeWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .userMessage {
+    font-size: 36px;
+    color: ${WHITE};
+    margin-top: 20px;
+    padding: 0 20px;
+    text-align: center;
+  }
 `;
 
 export const MainBlock = styled.div`

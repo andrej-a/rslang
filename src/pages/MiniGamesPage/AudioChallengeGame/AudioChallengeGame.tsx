@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/indent */
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
@@ -145,6 +146,10 @@ const AudioChallengeGame = () => {
         .then((data) => shuffle(data as unknown as IWord[]))
         .then((data) => onSetTextBookWords(data as unknown as IWord[]));
     }
+    return () => {
+      onSetTextBookWords([]);
+      sortedArray = [];
+    };
   }, []);
 
   useEffect(() => {
@@ -155,7 +160,6 @@ const AudioChallengeGame = () => {
     onSetProgressPercent(Math.ceil((wordNumber / textBookWords.length) * 100));
     onSetRandomArray([]);
     if (currentWord && textBookWords.length > 0) {
-      console.log(textBookWords);
       const maxWordsNumber = textBookWords.length > 4 ? 4 : textBookWords.length - 1;
       onSetRandomArray(
         shuffle([
@@ -166,17 +170,10 @@ const AudioChallengeGame = () => {
     }
   }, [wordNumber, currentWord, textBookWords]);
 
-  //события клавиатуры
-  interface IKey {
-    key: string;
-  }
-  const useKeyPress = (keyTarget: string) => {
-    const upHandler = ({ key }: IKey) => {
-      if (key === keyTarget) {
-        console.log(keyTarget);
-
-        if (!isNaN(key as unknown as number) && randomArray[+key - 1].id === currentWord.id) {
-          console.log('TRUE WORD');
+  useEffect(() => {
+    const onKeyPress = (e: KeyboardEvent) => {
+      if (Number(e.key) > 0 && Number(e.key) <= randomArray.length && !statusAnswered) {
+        if (randomArray[+e.key - 1].id === currentWord.id) {
           onSetDisabled(true);
           onSetStatusAnswered('correct');
           onSetCorrectAnswers(currentWord);
@@ -189,20 +186,73 @@ const AudioChallengeGame = () => {
           onSetShowAnswer(true);
         }, 1000);
       }
-    };
+      if (e.code === 'Space') {
+        const audioExample = new Audio(
+          `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+        );
+        audioExample.play();
+      }
+      if (e.code === 'Enter' && statusAnswered) {
+        onSetDisabled(false);
+        const nextNumber = wordNumber === textBookWords.length ? wordNumber : wordNumber + 1;
+        onSetWordNumber(nextNumber);
+        onSetIsAnswered(false);
+        onSetStatusAnswered('');
+        onSetShowAnswer(false);
+        sortedArray = [];
+        if (wordNumber === textBookWords.length - 1) {
+          onSetShowResult(true);
+          onSetTextBookWords([]);
+        }
+        if (isAuthorized && wordNumber === textBookWords.length - 1) {
+          const userID = localStorage.getItem('userId') as string;
+          correctAnswers.forEach((word) => {
+            UpdateOrCreateUserWord(
+              userID,
+              word.id,
+              {
+                difficulty: 'learned',
+                optional: {
+                  rightAnswers: 1,
+                  rightAudio: 1,
+                  wrongAudio: 0,
+                  rightSprint: 0,
+                  wrongSprint: 0,
+                },
+              },
+              1,
+              1,
+              0,
+            );
+          });
+          wrongAnswers.forEach((word) => {
+            UpdateOrCreateUserWord(
+              userID,
+              word.id,
+              {
+                difficulty: 'learned',
+                optional: {
+                  rightAnswers: 0,
+                  rightAudio: 0,
+                  wrongAudio: 1,
+                  rightSprint: 0,
+                  wrongSprint: 0,
+                },
+              },
+              0,
+              0,
+              1,
+            );
+          });
+        }
 
-    useEffect(() => {
-      window.addEventListener('keyup', upHandler, { once: true });
-      return () => {
-        window.removeEventListener('keyup', upHandler);
-      };
-    }, [randomArray]);
-  };
-  useKeyPress('1');
-  useKeyPress('2');
-  useKeyPress('3');
-  useKeyPress('4');
-  useKeyPress('5');
+      }
+    };
+    window.addEventListener('keyup', onKeyPress);
+    return () => {
+      window.removeEventListener('keyup', onKeyPress);
+    };
+  }, [randomArray, statusAnswered]);
 
   const buttons = randomArray.map((item, id) => {
     return (
@@ -212,8 +262,8 @@ const AudioChallengeGame = () => {
           isAnswered && item.id === currentWord.id && statusAnswered
             ? 'correct'
             : isAnswered && item.id !== currentWord.id && statusAnswered
-            ? 'wrong'
-            : ''
+              ? 'wrong'
+              : ''
         }
         onClick={() => {
           onSetDisabled(true);
@@ -384,7 +434,10 @@ const AudioChallengeGame = () => {
           </InnerBlock>
         </MainBlock>
       ) : showResult ? null : (
-        <MoonLoader color="#fff" />
+        <>
+          <MoonLoader color="#fff" />
+          <p className='userMessage'>Слова еще не загрузились, либо вы уже все выучили!</p>
+        </>
       )}
       {showResult && (
         <ResultPage correctAnswers={correctAnswers} wrongAnswers={wrongAnswers}></ResultPage>

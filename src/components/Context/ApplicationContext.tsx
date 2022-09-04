@@ -22,6 +22,8 @@ interface IContext {
   onSetGroup: (value: number) => void;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  isTextBookInitGame: boolean;
+  onSetIsTextBookInitGame: (value: boolean) => void;
 }
 export const ApplicationContext = createContext({} as IContext);
 export const ApplicationProvider = (props: Props) => {
@@ -48,6 +50,12 @@ export const ApplicationProvider = (props: Props) => {
   const [wordsGroup, setGroup] = useState(0);
   //страница слов
   const [currentPage, setCurrentPage] = useState<number>(1);
+  //отслеживание игры
+  const [isTextBookInitGame, setIsTextBookInitGame] = useState(false);
+
+  const onSetIsTextBookInitGame = (value: boolean) => {
+    setIsTextBookInitGame(value);
+  };
   const onSetFooterVisibility = (value: boolean) => {
     setFooterVisibility(value);
   };
@@ -95,6 +103,8 @@ export const ApplicationProvider = (props: Props) => {
         onSetGroup,
         currentPage: currentPage,
         setCurrentPage,
+        isTextBookInitGame: isTextBookInitGame,
+        onSetIsTextBookInitGame,
       }}
     >
       {props.children}
