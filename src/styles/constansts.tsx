@@ -89,3 +89,5 @@ export enum TimerInfo {
   TIMER_LIMIT_MINUTE = 60,
   SIZE_MEDIUM = 53,
 }
+
+export const wPerPage = 20;

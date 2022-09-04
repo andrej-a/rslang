@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { IWord } from '../../models/IWord';
-import { IUserInfo } from '../../service/constants';
+import { IUserInfo, IUserWord } from '../../service/constants';
 import { Values } from '../../styles/constansts';
 type Props = {
   children?: JSX.Element | JSX.Element[];
@@ -22,6 +22,8 @@ interface IContext {
   onSetUserLearnedWords: (value: IWord[]) => void;
   textBookWords: IWord[];
   onSetTextBookWords: (value: IWord[]) => void;
+  userWords: IUserWord[];
+  onSetUserWords: (value: IUserWord[]) => void;
 }
 export const ApplicationContext = createContext({} as IContext);
 
@@ -42,6 +44,7 @@ export const ApplicationProvider = (props: Props) => {
   const [userDictionary, setUserDictionary] = useState([] as IWord[]);
   const [userLearnedWords, setUserLearnedWords] = useState([] as IWord[]);
   const [textBookWords, setTextBookWords] = useState([] as IWord[]);
+  const [userWords, setUserWords] = useState([] as IUserWord[]);
 
   const onSetFooterVisibility = (value: boolean) => {
     setFooterVisibility(value);
@@ -72,7 +75,11 @@ export const ApplicationProvider = (props: Props) => {
   };
 
   const onSetTextBookWords = (value: IWord[]) => {
-    onSetTextBookWords(value);
+    setTextBookWords(value);
+  };
+
+  const onSetUserWords = (value: IUserWord[]) => {
+    setUserWords(value);
   };
 
   return (
@@ -94,6 +101,8 @@ export const ApplicationProvider = (props: Props) => {
         onSetUserLearnedWords,
         textBookWords: textBookWords,
         onSetTextBookWords,
+        userWords: userWords,
+        onSetUserWords,
       }}
     >
       {props.children}

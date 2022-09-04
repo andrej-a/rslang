@@ -42,6 +42,7 @@ export const getUserWordsArray = async (): Promise<{
   const dictionaryWords: Promise<IWord>[] = userWords
     .filter((word) => word.difficulty === 'hard')
     .map((word) => getWordById(word.wordId));
+
   const learnedWords: Promise<IWord>[] = userWords
     .filter((word) => word.difficulty === 'learned')
     .map((word) => getWordById(word.wordId));

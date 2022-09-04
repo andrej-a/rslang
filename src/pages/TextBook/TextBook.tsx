@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 import { IWord } from '../../models/IWord';
-import { Colors, levels, WindowSizes } from '../../styles/constansts';
+import { Colors, levels, WindowSizes, wPerPage } from '../../styles/constansts';
 import { Capitalize } from '../../utils/utils';
 import { emptyWord, totalCountPages } from './ExampleData';
 
@@ -38,6 +38,7 @@ const TextBook = () => {
   const { isAuthorized, userInformation } = useContext(ApplicationContext);
   const { userDictionary, onSetUserDictionary } = useContext(ApplicationContext);
   const { userLearnedWords, onSetUserLearnedWords } = useContext(ApplicationContext);
+  const { userWords, onSetUserWords } = useContext(ApplicationContext);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentGroup, setCurrentGroup] = useState<number>(0);
@@ -48,15 +49,10 @@ const TextBook = () => {
   const [updateArrays, setUpdateArrays] = useState<boolean>(false);
 
   const updateInfo = () => {
-    getUserWordsArray().then(async (data) => {
-      onSetUserDictionary(await data.dictionary);
-      onSetUserLearnedWords(await data.learned);
-    });
-
     async function setData() {
       const data =
         currentGroup === levels.get('D')!.group
-          ? userDictionary
+          ? userDictionary.slice(currentPage * wPerPage - wPerPage, currentPage * wPerPage)
           : await getWords(currentGroup, currentPage);
       setWords(data);
       return data;
@@ -68,8 +64,18 @@ const TextBook = () => {
     );
   };
   useEffect(() => {
+    setWords([]);
+  }, [currentGroup, currentPage]);
+  useEffect(() => {
     updateInfo();
   }, [currentGroup, currentPage, updateArrays, activeLevel === 'D' ? userDictionary : null]);
+
+  useEffect(() => {
+    getUserWordsArray().then(async (data) => {
+      onSetUserDictionary(await data.dictionary);
+      onSetUserLearnedWords(await data.learned);
+    });
+  }, []);
 
   const handleOpen = () => setOpen(() => true);
   const handleClose = () => {
@@ -102,7 +108,6 @@ const TextBook = () => {
 
   const updateCreateUserWord = async (word: IWord, difficulty: 'learned' | 'study' | 'hard') => {
     getUserWordByCommonWordId(word.id).then((userWord) => {
-      console.log('СЛОВО', userWord, word);
       if (!userWord)
         createUserWord({
           userId: userInformation.userID,
@@ -111,7 +116,17 @@ const TextBook = () => {
             difficulty: difficulty,
             optional: emptyOtional,
           },
-        }).then(() => setUpdateArrays(() => !updateArrays));
+        }).then(() => {
+          switch (difficulty) {
+            case 'hard':
+              onSetUserDictionary([...userDictionary, word]);
+              break;
+            case 'learned':
+              onSetUserLearnedWords([...userLearnedWords, word]);
+              break;
+          }
+          setUpdateArrays(() => !updateArrays);
+        });
       else
         updateUserWord({
           userId: userInformation.userID,
@@ -120,7 +135,22 @@ const TextBook = () => {
             difficulty: difficulty === userWord.difficulty ? 'study' : difficulty,
             optional: userWord.optional,
           },
-        }).then(() => setUpdateArrays(() => !updateArrays));
+        }).then(() => {
+          const findInDictionary = userDictionary.find(
+            (dictionaryWord) => dictionaryWord.id === word.id,
+          );
+          const findInLearned = userLearnedWords.find((learndWord) => learndWord.id === word.id);
+          if (findInDictionary) {
+            userDictionary.splice(userDictionary.indexOf(findInDictionary), 1);
+            onSetUserDictionary(userDictionary);
+            if (difficulty === 'learned') onSetUserLearnedWords([...userLearnedWords, word]);
+          } else if (findInLearned) {
+            userLearnedWords.splice(userLearnedWords.indexOf(findInLearned), 1);
+            onSetUserLearnedWords(userLearnedWords);
+            if (difficulty === 'hard') onSetUserDictionary([...userDictionary, word]);
+          }
+          setUpdateArrays(() => !updateArrays);
+        });
     });
   };
 
@@ -194,7 +224,15 @@ const TextBook = () => {
         />
       )}
 
-      <Pagination currentPage={currentPage} pagination={paginate} totalCount={totalCountPages} />
+      <Pagination
+        currentPage={currentPage}
+        pagination={paginate}
+        totalCount={
+          currentGroup === levels.get('D')!.group
+            ? Math.ceil(userDictionary.length / wPerPage)
+            : totalCountPages
+        }
+      />
 
       <ProceedToGameButtonsWrapper>
         <Link to={'../games/sprint/start'}>
