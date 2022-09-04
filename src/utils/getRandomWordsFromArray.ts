@@ -1,6 +1,9 @@
 import { IWord } from '../models/IWord';
 
 export const getRandomWordsFromArray = (array: IWord[], length: number, currentWord: IWord) => {
+  if (!array.length) {
+    return array;
+  }
   const copy = [...array];
   const result = [];
   for (let i = 0; i < length; i++) {

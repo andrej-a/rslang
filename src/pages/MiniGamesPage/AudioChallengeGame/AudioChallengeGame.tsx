@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/indent */
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
@@ -66,19 +66,6 @@ const AudioChallengeGame = () => {
     isAuthorized,
   } = useContext(ApplicationContext);
 
-  useEffect(() => {
-    onSetFooterVisibility(false);
-    if (isAuthorized) {
-      getNoStudiedWordsFromServer(wordsGroup, currentPage, sortedArray, 20).then((data) => {
-        onSetTextBookWords(shuffle(data.items));
-      });
-    } else {
-      console.log('NO AUTHORIZADE');
-      getWords(wordsGroup, currentPage - 1)
-        .then((data) => shuffle(data as unknown as IWord[]))
-        .then((data) => onSetTextBookWords(data as unknown as IWord[]));
-    }
-  }, []);
   //текущее слово для ответа
   const [currentWord, setCurrentWord] = useState(defaultWord);
   //отслеживание слова в массиве
@@ -98,6 +85,9 @@ const AudioChallengeGame = () => {
   const [wrongAnswers, setWrongAnswers] = useState<IWord[]>([]);
   //disabled кнопок
   const [isDisabled, setIsDisabled] = useState(false);
+  //окно результата
+  const [showResult, setShowResult] = useState(false);
+
   const onSetCurrentWord = (word: IWord) => {
     setCurrentWord(word);
   };
@@ -138,6 +128,25 @@ const AudioChallengeGame = () => {
     setIsDisabled(value);
   };
 
+  const onSetShowResult = (value: boolean) => {
+    setShowResult(value);
+  };
+
+  useEffect(() => {
+    onSetFooterVisibility(false);
+    onSetShowResult(false);
+    if (isAuthorized) {
+      getNoStudiedWordsFromServer(wordsGroup, currentPage, sortedArray, 20).then((data) => {
+        onSetTextBookWords(shuffle(data.items));
+      });
+    } else {
+      console.log('NO AUTHORIZADE');
+      getWords(wordsGroup, currentPage - 1)
+        .then((data) => shuffle(data as unknown as IWord[]))
+        .then((data) => onSetTextBookWords(data as unknown as IWord[]));
+    }
+  }, []);
+
   useEffect(() => {
     onSetFooterVisibility(false);
     if (textBookWords.length) {
@@ -145,14 +154,57 @@ const AudioChallengeGame = () => {
     }
     onSetProgressPercent(Math.ceil((wordNumber / textBookWords.length) * 100));
     onSetRandomArray([]);
-    if (currentWord && textBookWords.length) {
+    if (currentWord && textBookWords.length > 0) {
+      console.log(textBookWords);
+      const maxWordsNumber = textBookWords.length > 4 ? 4 : textBookWords.length - 1;
       onSetRandomArray(
-        shuffle([...getRandomWordsFromArray(textBookWords, 4, currentWord), currentWord]),
+        shuffle([
+          ...getRandomWordsFromArray(textBookWords, maxWordsNumber, currentWord),
+          currentWord,
+        ]),
       );
     }
   }, [wordNumber, currentWord, textBookWords]);
 
-  const buttons = randomArray.map((item) => {
+  //события клавиатуры
+  interface IKey {
+    key: string;
+  }
+  const useKeyPress = (keyTarget: string) => {
+    const upHandler = ({ key }: IKey) => {
+      if (key === keyTarget) {
+        console.log(keyTarget);
+
+        if (!isNaN(key as unknown as number) && randomArray[+key - 1].id === currentWord.id) {
+          console.log('TRUE WORD');
+          onSetDisabled(true);
+          onSetStatusAnswered('correct');
+          onSetCorrectAnswers(currentWord);
+        } else {
+          onSetStatusAnswered('wrong');
+          onSetWrongAnswers(currentWord);
+        }
+        setTimeout(() => {
+          onSetIsAnswered(true);
+          onSetShowAnswer(true);
+        }, 1000);
+      }
+    };
+
+    useEffect(() => {
+      window.addEventListener('keyup', upHandler, { once: true });
+      return () => {
+        window.removeEventListener('keyup', upHandler);
+      };
+    }, [randomArray]);
+  };
+  useKeyPress('1');
+  useKeyPress('2');
+  useKeyPress('3');
+  useKeyPress('4');
+  useKeyPress('5');
+
+  const buttons = randomArray.map((item, id) => {
     return (
       <AnswerButton
         disabled={isDisabled}
@@ -179,13 +231,13 @@ const AudioChallengeGame = () => {
         }}
         key={item.id}
       >
-        {Capitalize(item.wordTranslate)}
+        <p className="number">{id + 1}</p> {Capitalize(item.wordTranslate)}
       </AnswerButton>
     );
   });
   return (
     <AudioChallengeWrapper>
-      {textBookWords.length && wordNumber < textBookWords.length ? (
+      {textBookWords.length && wordNumber < textBookWords.length && !showResult ? (
         <MainBlock>
           <InnerBlock>
             <ButtonBlock>
@@ -278,8 +330,11 @@ const AudioChallengeGame = () => {
                     onSetStatusAnswered('');
                     onSetShowAnswer(false);
                     sortedArray = [];
-                    if (isAuthorized && wordNumber === textBookWords.length - 1) {
+                    if (wordNumber === textBookWords.length - 1) {
+                      onSetShowResult(true);
                       onSetTextBookWords([]);
+                    }
+                    if (isAuthorized && wordNumber === textBookWords.length - 1) {
                       const userID = localStorage.getItem('userId') as string;
                       correctAnswers.forEach((word) => {
                         UpdateOrCreateUserWord(
@@ -328,10 +383,10 @@ const AudioChallengeGame = () => {
             </PictureBlock>
           </InnerBlock>
         </MainBlock>
-      ) : (
+      ) : showResult ? null : (
         <MoonLoader color="#fff" />
       )}
-      {wordNumber < 20 ? null : (
+      {showResult && (
         <ResultPage correctAnswers={correctAnswers} wrongAnswers={wrongAnswers}></ResultPage>
       )}
     </AudioChallengeWrapper>

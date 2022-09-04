@@ -115,6 +115,12 @@ export const AnswerButton = styled.button`
     cursor: not-allowed;
   }
 
+  .number {
+    font-size: 20px;
+    font-weight: 300;
+    margin-right: 10px;
+  }
+
   @media (max-width: ${tablet}px) {
     width: 280px;
   }
@@ -134,6 +140,7 @@ export const SkipQuestion = styled(AnswerButton)`
   }
   @media (max-width: ${tablet}px) {
     width: 280px;
+    margin-bottom: 30px;
   }
 `;
 

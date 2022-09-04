@@ -28,7 +28,7 @@ const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
       </ResultTextInfo>
       <ResultStatistic>
         <ProgressBar
-          percent={(rightAnswers.length / (rightAnswers.length + wrongAnswers.length)) * 100}
+          percent={Math.floor((rightAnswers.length / (rightAnswers.length + wrongAnswers.length)) * 100)}
           color={Colors.LIGHT_GRAY}
         />
         <p>Accurancy</p>
