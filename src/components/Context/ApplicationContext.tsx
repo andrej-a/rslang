@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react';
 import { IWord } from '../../models/IWord';
 import { IUserInfo } from '../../service/constants';
 import { Values } from '../../styles/constansts';
+
 type Props = {
   children?: JSX.Element | JSX.Element[];
 };
