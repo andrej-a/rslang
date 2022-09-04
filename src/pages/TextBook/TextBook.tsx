@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
@@ -23,12 +23,18 @@ import WordCard from './WordCard';
 import Sprint from '../../assets/TrackField.svg';
 import AudioChallenge from '../../assets/ListenMusic.svg';
 import { Link } from 'react-router-dom';
+import { ApplicationContext } from '../../components/Context/ApplicationContext';
 
 const TextBook = () => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const { currentPage, setCurrentPage, onSetIsTextBookInitGame } = useContext(ApplicationContext);
   const [activeLevel, setActiveLevel] = useState<string>('A1');
   const [activeWord, setActiveWord] = useState<IWord>(words[0] ?? emptyWord);
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    onSetIsTextBookInitGame(true);
+  }, []);
+
   const handleOpen = () => setOpen(() => true);
   const handleClose = () => {
     setOpen(() => false);
@@ -48,10 +54,11 @@ const TextBook = () => {
   };
 
   const levelsButtons = [];
-  for (const [level, { color, fullname }] of levels) {
+  for (const [level, { color, fullname, group }] of levels) {
     levelsButtons.push(
       <LevelButton
         name={level}
+        group={group}
         color={color}
         fullname={fullname}
         activeLevel={activeLevel}
@@ -115,7 +122,14 @@ const TextBook = () => {
             Sprint
           </ProceedToGameButton>
         </Link>
-        <Link to={'../games/audiochallenge/start'}>
+        <Link
+          /* onClick={() =>
+            getWords(wordsGroup, currentPage - 1).then((data) =>
+              onSetTextBookWords(data as unknown as IWord[]),
+            )
+          } */
+          to={'../games/audiochallenge/start'}
+        >
           <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN}>
             <div className="button__icon"></div>
             Audio challenge

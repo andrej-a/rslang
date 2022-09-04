@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { IWordResult } from '../../../components/Interfaces';
+import { IWord } from '../../../models/IWord';
 import {
   ButtonContainer,
   HeaderButtonContainer,
@@ -15,10 +16,11 @@ import ResultViewWindow from './ResultViewWindow';
 import WordViewWindow from './WordViewWindow';
 
 type Props = {
-  result: IWordResult[];
+  correctAnswers: IWord[];
+  wrongAnswers: IWord[];
 };
 
-const ResultPage = ({ result }: Props) => {
+const ResultPage = ({ correctAnswers, wrongAnswers }: Props) => {
   const [resultToggler, setResultToggler] = useState(false);
   const [isActiveResult, setActiveResult] = useState(true);
   const [isActiveWord, setActiveWord] = useState(false);
@@ -48,9 +50,9 @@ const ResultPage = ({ result }: Props) => {
         </SeeWordButton>
       </HeaderButtonContainer>
       {resultToggler === false ? (
-        <ResultViewWindow rightAnswers={result} wrongAnswers={result} />
+        <ResultViewWindow rightAnswers={correctAnswers} wrongAnswers={wrongAnswers} />
       ) : (
-        <WordViewWindow rightAnswers={result} wrongAnswers={result} />
+        <WordViewWindow rightAnswers={correctAnswers} wrongAnswers={wrongAnswers} />
       )}
       <ButtonContainer>
         <Link to={'/sprint'}>

@@ -63,12 +63,12 @@ export enum TextMessageResult {
   BAD = 'Not bad, but you need more practice',
 }
 export const levels = new Map([
-  ['A1', { color: Colors.BOOK_GRREN, fullname: 'Beginner' }],
-  ['A2', { color: Colors.BOOK_YELLOW, fullname: 'Elementary' }],
-  ['B1', { color: Colors.BOOK_AZURE_BLUE, fullname: 'Intermediate' }],
-  ['B2', { color: Colors.BOOK_BLUE, fullname: 'Up-Intermediate' }],
-  ['C1', { color: Colors.BOOK_ORANGE, fullname: 'Advanced' }],
-  ['C2', { color: Colors.BOOK_RED, fullname: 'Proficiency' }],
+  ['A1', { color: Colors.BOOK_GRREN, fullname: 'Beginner', group: 0 }],
+  ['A2', { color: Colors.BOOK_YELLOW, fullname: 'Elementary', group: 1 }],
+  ['B1', { color: Colors.BOOK_AZURE_BLUE, fullname: 'Intermediate', group: 2 }],
+  ['B2', { color: Colors.BOOK_BLUE, fullname: 'Up-Intermediate', group: 3 }],
+  ['C1', { color: Colors.BOOK_ORANGE, fullname: 'Advanced', group: 4 }],
+  ['C2', { color: Colors.BOOK_RED, fullname: 'Proficiency', group: 5 }],
 ]);
 
 export enum ProgressBarInfo {
