@@ -191,7 +191,7 @@ const WordCard = ({
               <tr>
                 <td></td>
                 <td className="right">Right: </td>
-                <td className="right">{userWord?.optional.rightSprint ?? 0}</td>
+                <td className="right">{userWord?.optional.rightAudio ?? 0}</td>
               </tr>
               <tr>
                 <td></td>

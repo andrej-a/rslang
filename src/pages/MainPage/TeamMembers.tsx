@@ -14,9 +14,9 @@ const data: IMembers[] = [
     img: `${ImageAndrej}`,
     role: 'Team leader, frontend developer',
     aboutMember:
-      'Did basic project settings, initial layout, redux setup, router setup, login form, part of the TextBook page, "Audio Challenge" game, "Savannah" game, backend',
+      "Junior frontend-developer. I like React and green tests. Two my main problems during developing are sometimes my code doesn't work and I dont't know why and sometimes my code works and I don't know why.",
     projectWork:
-      'Did basic project settings, initial layout, redux setup, router setup, login form, part of the TextBook page, "Audio Challenge" game, "Savannah" game, backend',
+      'Development of the registration and login form, AudioChallenge game, common game page, formrouter setup, helped to think through the logic of the app. Created few bugs and костылей ',
     link: 'https://github.com/andrej-a',
   },
   {
@@ -27,7 +27,7 @@ const data: IMembers[] = [
     aboutMember:
       'Did basic project settings, initial layout, redux setup, router setup, login form, part of the TextBook page, "Audio Challenge" game, "Savannah" game, backend',
     projectWork:
-      'Did basic project settings, initial layout, redux setup, router setup, login form, part of the TextBook page, "Audio Challenge" game, "Savannah" game, backend',
+      'Conducted the development of the pages of the textbook and dictionary. Made a card for words, implemented textbook settings and output of word statistics in the dictionary, backend setup, statistic page view',
     link: 'https://github.com/polivodichka',
   },
   {
@@ -36,9 +36,9 @@ const data: IMembers[] = [
     img: `${ImageLiza}`,
     role: 'Frontend developer, designer',
     aboutMember:
-      'Did basic project settings, initial layout, redux setup, router setup, login form, part of the TextBook page, "Audio Challenge" game, "Savannah" game, backend',
+      'Our friendship with frontend have been starting 8 mounth ago and now we are inseparable. In this project I fell in love with teamwork',
     projectWork:
-      'Did basic project settings, initial layout, redux setup, router setup, login form, part of the TextBook page, "Audio Challenge" game, "Savannah" game, backend',
+      'Designed layout of the application, made main page,burger navigation and sprint game, made games results view',
     link: 'https://github.com/Lizaveta01',
   },
 ];

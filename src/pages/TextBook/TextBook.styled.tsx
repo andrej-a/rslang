@@ -147,7 +147,7 @@ export const WordCardImage = styled.div.attrs((props: { imgPath: string }) => pr
 `;
 export const AudioButton = styled.button`
   margin-top: 30px;
-  width: 38px;
+  min-width: 38px;
   height: 38px;
   background: url('${audio_play}');
   cursor: pointer;

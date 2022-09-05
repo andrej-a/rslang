@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ApplicationContext } from '../../components/Context/ApplicationContext';
 import FormTitle from '../../components/FormTitle/FormTitle';
 import { cards } from './cardsDB';
 import {
@@ -10,6 +11,10 @@ import {
   StyledPlayButton,
 } from './MiniGames.styled';
 const MiniGames = () => {
+  const { onSetFooterVisibility } = useContext(ApplicationContext);
+  useEffect(() => {
+    onSetFooterVisibility(false);
+  });
   const items = cards.map((card) => {
     const { id, TITLE, inputColor, src, link } = card;
     return (
