@@ -2,7 +2,7 @@
 
 "RS Lang" – an application for learning english words, including an textbook with a database of words to study, mini-games for repeating them, a statistics page for tracking individual progress.
 
-Task: PASTE LINK <br/>
+Task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-2/rs-lang/rslang.md <br/>
 Deploy: PASTE LINK <br/>
 Backend: https://react-rslang-back.herokuapp.com
 ![image](https://user-images.githubusercontent.com/81522781/187300410-8eef69b0-ea47-405b-9cac-f66575e9a9c1.png)
@@ -36,7 +36,7 @@ Collection "4000 essential English words". The collection contains 3600 frequent
 3. Clearer and more readable code
 4. Minimizing possible errors
   
-- ***Webpack*** - to build an application, in the modesdevelopment и production
+
 - ***Material UI*** - to create components with ready-made styles
 - ***Styled-components*** - to simplify working with styles
 - ***Plotly*** - to visualize data and plot statistics
