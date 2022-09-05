@@ -52,7 +52,6 @@ const WordCard = ({
   const [disableAudioBtn, setDisableAudioBtn] = useState<boolean>(false);
   const [userWord, setUserWord] = useState<IUserWord>();
   useEffect(() => {
-    console.log('ATTENTION', userInformation.userID, 'AND', word.id);
     getUserWordByCommonWordId(word.id).then((data: IUserWord | undefined) => {
       setUserWord(data);
     });
@@ -191,7 +190,7 @@ const WordCard = ({
               <tr>
                 <td></td>
                 <td className="right">Right: </td>
-                <td className="right">{userWord?.optional.rightSprint ?? 0}</td>
+                <td className="right">{userWord?.optional.rightAudio ?? 0}</td>
               </tr>
               <tr>
                 <td></td>

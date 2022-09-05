@@ -20,7 +20,6 @@ export const getWords = async (
   );
 
   const content = await response.json();
-  console.log('getWords', content);
   return content;
 };
 
@@ -33,6 +32,6 @@ export const getWordById = async (id: string): Promise<IWord> => {
     },
   });
   const content = await response.json();
-  console.log('getWordById', content);
+
   return content;
 };

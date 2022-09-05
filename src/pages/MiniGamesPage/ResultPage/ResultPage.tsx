@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { IWordResult } from '../../../components/Interfaces';
 import { IWord } from '../../../models/IWord';
 import {
   ButtonContainer,
@@ -24,7 +23,6 @@ const ResultPage = ({ correctAnswers, wrongAnswers }: Props) => {
   const [resultToggler, setResultToggler] = useState(false);
   const [isActiveResult, setActiveResult] = useState(true);
   const [isActiveWord, setActiveWord] = useState(false);
-
   const onActive = () => {
     setResultToggler(!resultToggler);
     setActiveResult(!isActiveResult);
@@ -55,7 +53,7 @@ const ResultPage = ({ correctAnswers, wrongAnswers }: Props) => {
         <WordViewWindow rightAnswers={correctAnswers} wrongAnswers={wrongAnswers} />
       )}
       <ButtonContainer>
-        <Link to={'/sprint'}>
+        <Link to={'/games'}>
           <PlayAgainButton>Play again</PlayAgainButton>
         </Link>
         <Link to={'/textbook'}>

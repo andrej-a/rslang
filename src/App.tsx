@@ -30,6 +30,7 @@ function App() {
     setPageTitle(() => GetTitle(global.location.pathname) ?? 'Easy English');
     onSetFooterVisibility(true);
   }, [useLocation()]);
+
   return (
     <div className="App">
       <GlobalStyle />

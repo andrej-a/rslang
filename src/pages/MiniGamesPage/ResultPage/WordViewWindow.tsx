@@ -1,6 +1,6 @@
 import React from 'react';
-import { IWord } from '../../../models/IWord';
 
+import { IWord } from '../../../models/IWord';
 import { RightAnswers, WrongAnswers } from './ResultAnswers';
 import {
   WorldViewWindowContainer,

@@ -43,7 +43,6 @@ const Pagination = ({
     setFourthButton(() => (currentPage < totalCount - 2 ? '...' : totalCount - 1));
     setFourthButtonState(() => fourthButton === currentPage);
     setFifthButtonState(() => fifthButton === currentPage);
-    console.log('PAGE', totalCount);
   }, [currentPage, fifthButton, firstButton, fourthButton, secondButton, totalCount]);
 
   return (

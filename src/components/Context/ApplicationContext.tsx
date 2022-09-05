@@ -34,6 +34,7 @@ interface IContext {
   isDifficultWord: boolean;
   onSetIsDifficultWord: (value: boolean) => void;
 }
+
 export const ApplicationContext = createContext({} as IContext);
 export const ApplicationProvider = (props: Props) => {
   const { LOGIN_FORM_STATE } = Values;
@@ -41,9 +42,7 @@ export const ApplicationProvider = (props: Props) => {
   const userValue = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo') as string)
     : null;
-  //отображение футера
   const [footerVisibility, setFooterVisibility] = useState(true);
-  //статус авторизации
   const [isAuthorized, setIsAuthorized] = useState(defaultAuthorizedValue);
   //информация о юзере, name, ID
   const [userInformation, setUserInformation] = useState<IUserInfo>(
@@ -66,27 +65,23 @@ export const ApplicationProvider = (props: Props) => {
   const [isTextBookInitGame, setIsTextBookInitGame] = useState(false);
   const [isDifficultWord, setIsDifficulWord] = useState(false);
 
-  const onSetIsTextBookInitGame = (value: boolean) => {
-    setIsTextBookInitGame(value);
-  };
   const onSetFooterVisibility = (value: boolean) => {
     setFooterVisibility(value);
   };
-
   const onSetIsAuthorized = (value: boolean) => {
     setIsAuthorized(value);
   };
-
   const onSetUserInformation = (data: IUserInfo) => {
     setUserInformation(data);
   };
-
   const onSetFormToggler = (value: string) => {
     setFormToggler(value);
   };
-
   const onSetIsLoading = (value: boolean) => {
     setIsLoading(value);
+  };
+  const onSetIsTextBookInitGame = (value: boolean) => {
+    setIsTextBookInitGame(value);
   };
 
   const onSetUserDictionary = (value: IWord[]) => {
@@ -96,11 +91,9 @@ export const ApplicationProvider = (props: Props) => {
   const onSetUserLearnedWords = (value: IWord[]) => {
     setUserLearnedWords(value);
   };
-
   const onSetTextBookWords = (value: IWord[]) => {
     setTextBookWords(value);
   };
-
   const onSetUserWords = (value: IUserWord[]) => {
     setUserWords(value);
   };
@@ -108,7 +101,6 @@ export const ApplicationProvider = (props: Props) => {
   const onSetGroup = (value: number) => {
     setGroup(value);
   };
-
   const onSetIsDifficultWord = (value: boolean) => {
     setIsDifficulWord(value);
   };

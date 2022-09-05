@@ -41,6 +41,7 @@ export const SeeResultButton = styled.button`
 `;
 export const SeeWordButton = styled(SeeResultButton)``;
 export const ResultViewWindowContainer = styled.div`
+  color: ${Colors.BLACK};
   height: 308px;
   display: flex;
   flex-direction: column;
@@ -53,6 +54,7 @@ export const ResultViewWindowContainer = styled.div`
     font-size: 22px;
     line-height: 30px;
     text-align: center;
+    color: ${Colors.BLACK};
     @media (max-width: 560px) {
       margin-top: 16px;
       width: 280px;
@@ -96,6 +98,7 @@ export const PlayAgainButton = styled(GreenButton)`
 `;
 export const ToTextbookButton = styled(PlayAgainButton)``;
 export const WorldViewWindowContainer = styled.div`
+  color: ${Colors.BLACK};
   display: flex;
   width: 300px;
   height: 276px;
@@ -140,6 +143,7 @@ export const Word = styled.li`
   display: flex;
   font-weight: 500;
   font-size: 18px;
+  color: ${Colors.BLACK};
   line-height: 40px;
 `;
 export const AudioButton = styled.button`

@@ -11,6 +11,7 @@ export const GameWrapper = styled.div`
   gap: 10px;
   height: 100vh;
   color: ${Colors.WHITE};
+  overflow: hidden;
   h2 {
     font-size: 30px;
   }
@@ -36,16 +37,35 @@ export const LevelButtonsContainer = styled.div`
   gap: 10px;
   flex-wrap: wrap;
 `;
-export const LevelButton = styled.button`
+export const LevelButtonStyled = styled.button.attrs((props: { state: boolean }) => props)`
   width: 52px;
   height: 52px;
   border: 3px solid ${Colors.WHITE};
   font-weight: 500;
-  color: ${Colors.WHITE};
-  background: transparent;
+  color: ${(props) => (props.state ? Colors.BLACK : Colors.WHITE)};
+  background: ${(props) => (props.state ? Colors.WHITE : 'transparent')};
   border-radius: 4px;
   &:hover {
     color: ${Colors.BLACK};
     background: ${Colors.WHITE};
+  }
+`;
+
+export const ButtonStartGame = styled.button`
+  width: 108px;
+  height: 42px;
+  border: 3px solid ${Colors.WHITE};
+  font-weight: 500;
+  color: ${Colors.BLACK};
+  background: ${Colors.WHITE};
+  border-radius: 24px;
+  &:hover {
+    color: ${Colors.GREEN};
+    background: ${Colors.WHITE};
+  }
+  &:disabled {
+    color: ${Colors.LIGHT_GRAY};
+    border-color: ${Colors.LIGHT_GRAY};
+    background: transparent;
   }
 `;

@@ -28,10 +28,3 @@ export interface IGameCommomInfo {
   title: string;
   img: string;
 }
-
-export interface IWordResult {
-  key?: number;
-  wordEng?: string;
-  wordRu?: string;
-  audioUrl?: string;
-}

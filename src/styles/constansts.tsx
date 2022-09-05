@@ -90,4 +90,9 @@ export enum TimerInfo {
   SIZE_MEDIUM = 53,
 }
 
+export enum TextbookInfo {
+  MAX_PAGE = 30,
+  MIN_PAGE = 1,
+}
+
 export const wPerPage = 20;

@@ -18,7 +18,6 @@ export const MiniGamesWrapper = styled.div`
   flex-wrap: wrap;
   gap: 10%;
   padding-left: 10%;
-  padding-bottom: 100px;
 
   @media (max-width: ${laptop}px) {
     flex-direction: column;
@@ -36,7 +35,7 @@ export const Card = styled.div`
   max-width: 404px;
   min-height: 150px;
   height: auto;
-  margin-top: 100px;
+  margin: auto 0;
   background: ${WHITE};
   border-radius: 8px;
   display: flex;

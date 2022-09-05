@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { IWordResult } from '../../../components/Interfaces';
 import {
   AudioButton,
   RightAnswersContainer,

@@ -6,6 +6,7 @@ export const emptyOtional = {
   rightSprint: 0,
   wrongSprint: 0,
 };
+
 export const enum Errors {
   BAD_REQUEST = 400,
   MISSING_TOKEN = 401,
@@ -64,7 +65,7 @@ export interface IUserAllInfo {
   name: string;
 }
 export interface IWordsSetter {
-  userId: string;
+  userId: string | null;
   wordId: string;
   word: Pick<IUserWord, 'difficulty' | 'optional'>;
 }

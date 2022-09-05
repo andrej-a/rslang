@@ -22,12 +22,28 @@ export const primaryWrongObject: IPrimaryObject = {
   rightSprint: 0,
   wrongSprint: 0,
 };
+export const primaryCorrectObjectSprint: IPrimaryObject = {
+  rightAnswers: 1,
+  rightAudio: 0,
+  wrongAudio: 0,
+  rightSprint: 1,
+  wrongSprint: 0,
+};
+export const primaryWrongObjectSprint: IPrimaryObject = {
+  rightAnswers: 0,
+  rightAudio: 0,
+  wrongAudio: 0,
+  rightSprint: 0,
+  wrongSprint: 1,
+};
 export const sentResultsToServer = (
   answers: IWord[],
   primaryOptionalObject: IPrimaryObject,
   value: number,
   rightAudioPoints: number,
   wrongAudioPoints: number,
+  rightSprintPoints?: number,
+  wrongSprintPoints?: number,
 ) => {
   const userID = localStorage.getItem('userId') as string;
   answers.forEach((word) => {
@@ -41,6 +57,8 @@ export const sentResultsToServer = (
       value,
       rightAudioPoints,
       wrongAudioPoints,
+      rightSprintPoints,
+      wrongSprintPoints,
     );
   });
 };

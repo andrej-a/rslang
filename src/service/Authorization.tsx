@@ -32,7 +32,6 @@ export const signIn = async (
 
   localStorage.setItem('userId', content.userId);
   localStorage.setItem('userToken', content.token);
-  console.log('signIn', content);
   showSpinner(false);
   return content;
 };
