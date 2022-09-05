@@ -1,3 +1,4 @@
+import { IWord } from '../models/IWord';
 export const emptyOtional = {
   rightAnswers: 0,
   rightAudio: 0,
@@ -118,4 +119,8 @@ export interface IUserStatistic {
       };
     };
   };
+}
+export interface IAggreagtedWords {
+  paginatedResults: IWord[];
+  totalCount: [{ count: number }];
 }
