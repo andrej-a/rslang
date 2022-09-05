@@ -23,6 +23,7 @@ const InitialGame = () => {
 
   useEffect(() => {
     onSetIsTextBookInitGame(false);
+    onSetGroup(7);
   }, []);
 
   useEffect(() => {

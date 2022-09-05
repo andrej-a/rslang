@@ -36,6 +36,9 @@ const SprintGame = () => {
     const words1 = await getWords(level, firstPage);
     const words2 = await getWords(level, secondPage);
     const words3 = await getWords(level, thirdPage);
+    console.log(firstPage, '1');
+    console.log(secondPage, '2');
+    console.log(thirdPage, '3');
     const result: IWord[] = words3.concat(words1, words2);
     console.log(result, 'res');
     setWordsList(result);
@@ -46,8 +49,6 @@ const SprintGame = () => {
     console.log('wordsGroup', wordsGroup);
     //проверяем если группа слов это сложные слова пользователя
     if (wordsGroup === 6) {
-      //проверить если хватает 60 слов иначе вывести модалку что не хватет слов
-      //если слов хватает установить это значение
       setWordsList(userDictionary);
     } else {
       //если со стандартной группы вызываем то проверяем наличие выученых слов и отбрасывем их
@@ -67,9 +68,11 @@ const SprintGame = () => {
       } else {
         //если пользователь неавторизован то просто выбираем странички относительно той
         //страницы где сейчас находится пользователь
-        const secondPage = currentPage >= 2 ? currentPage - 1 : currentPage + 1;
-        const thirtyPage = currentPage <= 29 ? currentPage + 2 : currentPage - 1;
-        onRequest(wordsGroup, currentPage, secondPage, thirtyPage);
+        let firstPage = currentPage;
+        if (currentPage === 30) firstPage = 29;
+        const secondPage = firstPage >= 1 ? firstPage - 1 : firstPage + 1;
+        const thirtyPage = firstPage <= 27 ? firstPage + 1 : firstPage - 2;
+        onRequest(wordsGroup, firstPage, secondPage, thirtyPage);
       }
       //если со страницы инициализации
     } else {
@@ -94,7 +97,11 @@ const SprintGame = () => {
 
   return (
     <GameContentWrapper>
-      {isStart ? (
+      {wordsGroup === 6 && wordsList.length < 60 ? (
+        <>
+          <p className="userMessage">В группе Dictionary не хватает слов!</p>
+        </>
+      ) : isStart ? (
         <Play
           wordsForPlay={wordsForPlay}
           allWords={wordsList}
