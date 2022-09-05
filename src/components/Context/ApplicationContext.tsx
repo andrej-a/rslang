@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 import React, { createContext, useState } from 'react';
 import { IWord } from '../../models/IWord';
 import { IUserInfo, IUserWord } from '../../service/constants';
@@ -58,9 +59,11 @@ export const ApplicationProvider = (props: Props) => {
   //массив слов
   const [textBookWords, setTextBookWords] = useState<IWord[]>([]);
   //группа слов
-  const [wordsGroup, setGroup] = useState(0);
+  const [wordsGroup, setGroup] = useState(Number(window.localStorage.getItem('group') ?? 0));
   //страница слов
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(
+    Number(window.localStorage.getItem('page') ?? 1),
+  );
   //отслеживание игры
   const [isTextBookInitGame, setIsTextBookInitGame] = useState(false);
   const [isDifficultWord, setIsDifficulWord] = useState(false);
@@ -100,6 +103,7 @@ export const ApplicationProvider = (props: Props) => {
 
   const onSetGroup = (value: number) => {
     setGroup(value);
+    window.localStorage.setItem('group', String(value));
   };
   const onSetIsDifficultWord = (value: boolean) => {
     setIsDifficulWord(value);
