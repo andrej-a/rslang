@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -35,26 +36,42 @@ import {
 } from '../../service/userWords';
 import { emptyOtional, IUserWord } from '../../service/constants';
 
-const TextBook = () => {
-  const { isAuthorized, userInformation } = useContext(ApplicationContext);
-  const { userDictionary, onSetUserDictionary } = useContext(ApplicationContext);
-  const { userLearnedWords, onSetUserLearnedWords } = useContext(ApplicationContext);
-  const { currentPage, setCurrentPage, onSetIsTextBookInitGame } = useContext(ApplicationContext);
-  const { onSetIsDifficultWord } = useContext(ApplicationContext);
+function getLevel(currGroup: number) {
+  for (const [level, { group }] of levels) {
+    if (currGroup === group) return level;
+  }
+  return 'A1';
+}
 
-  const { wordsGroup, onSetGroup } = useContext(ApplicationContext);
+const TextBook = () => {
+  const {
+    isAuthorized,
+    userInformation,
+    userDictionary,
+    onSetUserDictionary,
+    userLearnedWords,
+    onSetUserLearnedWords,
+    currentPage,
+    setCurrentPage,
+    onSetIsTextBookInitGame,
+    onSetIsDifficultWord,
+    wordsGroup,
+    onSetGroup,
+  } = useContext(ApplicationContext);
+
   const [words, setWords] = useState<IWord[]>([]);
-  const [activeLevel, setActiveLevel] = useState<string>('A1');
+  const [activeLevel, setActiveLevel] = useState<string>(getLevel(wordsGroup));
   const [activeWord, setActiveWord] = useState<IWord>(emptyWord);
   const [open, setOpen] = useState<boolean>(false);
   const [updateArrays, setUpdateArrays] = useState<boolean>(false);
+  const [showStat, setShowStat] = useState<boolean>(false);
 
   const updateInfo = () => {
     async function setData() {
       const data =
         wordsGroup === levels.get('D')!.group
           ? userDictionary.slice(currentPage * wPerPage - wPerPage, currentPage * wPerPage)
-          : await getWords(wordsGroup, currentPage);
+          : await getWords(wordsGroup, currentPage - 1);
       setWords(data);
       return data;
     }
@@ -78,6 +95,14 @@ const TextBook = () => {
     });
   }, []);
 
+  useEffect(() => {
+    onSetIsTextBookInitGame(true);
+  }, []);
+
+  const onShowStat = () => {
+    setShowStat(() => !showStat);
+  };
+
   const handleOpen = () => setOpen(() => true);
   const handleClose = () => {
     setOpen(() => false);
@@ -92,10 +117,12 @@ const TextBook = () => {
     setActiveLevel(() => level);
     onSetIsDifficultWord(group < levels.get('D')!.group ? false : true);
     onSetGroup(group);
+    setShowStat(false);
   };
 
   const selectWord = (wordId: string) => {
     setActiveWord(() => words.find((word) => word.id === wordId) as IWord);
+    setShowStat(false);
   };
 
   const paginate = (direction: number, numButt = false) => {
@@ -105,7 +132,7 @@ const TextBook = () => {
   };
 
   const getWordBtnClassName = (word: IWord) => {
-    if (userLearnedWords.find((learnedWord) => learnedWord.id === word.id)) return 'learned';
+    if (userLearnedWords.find((learnedWord) => learnedWord.id === word.id)) return 'study';
     else if (userDictionary.find((dictionaryWord) => dictionaryWord.id === word.id))
       return 'dictionary';
     else return '';
@@ -126,7 +153,7 @@ const TextBook = () => {
             case 'hard':
               onSetUserDictionary([...userDictionary, word]);
               break;
-            case 'learned':
+            case 'study':
               onSetUserLearnedWords([...userLearnedWords, word]);
               break;
           }
@@ -137,7 +164,7 @@ const TextBook = () => {
           userId: userInformation.userID,
           wordId: userWord.wordId,
           word: {
-            difficulty: difficulty === userWord.difficulty ? 'study' : difficulty,
+            difficulty: difficulty === userWord.difficulty ? 'learned' : difficulty,
             optional: userWord.optional,
           },
         }).then(() => {
@@ -148,14 +175,14 @@ const TextBook = () => {
           if (findInDictionary) {
             userDictionary.splice(userDictionary.indexOf(findInDictionary), 1);
             onSetUserDictionary(userDictionary);
-            if (difficulty === 'learned') onSetUserLearnedWords([...userLearnedWords, word]);
+            if (difficulty === 'study') onSetUserLearnedWords([...userLearnedWords, word]);
           } else if (findInLearned) {
             userLearnedWords.splice(userLearnedWords.indexOf(findInLearned), 1);
             onSetUserLearnedWords(userLearnedWords);
             if (difficulty === 'hard') onSetUserDictionary([...userDictionary, word]);
           } else if (!findInDictionary && !findInLearned) {
             if (difficulty === 'hard') onSetUserDictionary([...userDictionary, word]);
-            else if (difficulty === 'learned') onSetUserLearnedWords([...userLearnedWords, word]);
+            else if (difficulty === 'study') onSetUserLearnedWords([...userLearnedWords, word]);
           }
           setUpdateArrays(() => !updateArrays);
         });
@@ -180,12 +207,13 @@ const TextBook = () => {
   }
 
   return (
-    <TextBookWrapper className="TEST">
+    <TextBookWrapper>
       <GameBlock>
         <LevelButtonsWrapper>{levelsButtons}</LevelButtonsWrapper>
         <WordButtonsWrapper>
-          {words.length ? (
-            words.map((word, index) => (
+          {(words.length && userLearnedWords.length && userDictionary.length && isAuthorized) ||
+          (words.length && !isAuthorized) ? (
+              words.map((word, index) => (
               <WordButton
                 word={Capitalize(word.word)}
                 wordTranslate={Capitalize(word.wordTranslate)}
@@ -196,10 +224,10 @@ const TextBook = () => {
                 handleClick={handleOpen}
                 className={getWordBtnClassName(word)}
               />
-            ))
-          ) : (
+              ))
+            ) : (
             <FadeLoader className="spinner" color={Colors.WHITE} />
-          )}
+            )}
         </WordButtonsWrapper>
       </GameBlock>
 
@@ -222,6 +250,8 @@ const TextBook = () => {
               color={levels.get(activeLevel)?.color ?? ''}
               isModal={true}
               updateCreateUserWord={updateCreateUserWord}
+              onShowStat={onShowStat}
+              showStat={showStat}
             />
           </Box>
         </Modal>
@@ -230,6 +260,8 @@ const TextBook = () => {
           word={activeWord}
           color={levels.get(activeLevel)?.color ?? ''}
           updateCreateUserWord={updateCreateUserWord}
+          onShowStat={onShowStat}
+          showStat={showStat}
         />
       )}
 

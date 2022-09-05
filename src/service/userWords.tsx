@@ -44,10 +44,10 @@ export const getUserWordsArray = async (): Promise<{
     .map((word) => getWordById(word.wordId));
 
   const learnedWords: Promise<IWord>[] = userWords
-    .filter((word) => word.difficulty === 'learned')
+    .filter((word) => word.difficulty === 'study')
     .map((word) => getWordById(word.wordId));
   const sudyWords: Promise<IWord>[] = userWords
-    .filter((word) => word.difficulty === 'study')
+    .filter((word) => word.difficulty === 'learned')
     .map((word) => getWordById(word.wordId));
   return {
     dictionary: Promise.all(dictionaryWords),
@@ -57,6 +57,7 @@ export const getUserWordsArray = async (): Promise<{
 };
 export const getUserWordByCommonWordId = async (wordId: string): Promise<IUserWord | undefined> => {
   const userWords = await getUserWords();
+  console.log(userWords.find((word) => word.wordId === wordId));
   return userWords.find((word) => word.wordId === wordId);
 };
 

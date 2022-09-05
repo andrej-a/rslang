@@ -95,7 +95,7 @@ export const WordButtonStyled = styled.button.attrs((props: { state: boolean }) 
     color: ${Colors.WHITE};
   }
   color: ${(props) => (props.state ? Colors.WHITE : Colors.BLACK)};
-  &.learned:before,
+  &.study:before,
   &.dictionary:before {
     display: block;
     position: absolute;
@@ -106,7 +106,7 @@ export const WordButtonStyled = styled.button.attrs((props: { state: boolean }) 
     height: 9px;
     border-radius: 50%;
   }
-  &.learned:before {
+  &.study:before {
     background-color: ${Colors.BOOK_GRREN};
   }
   &.dictionary:before {
@@ -140,6 +140,7 @@ export const WordCardWrapper = styled.div`
 export const WordCardImage = styled.div.attrs((props: { imgPath: string }) => props)`
   width: 100%;
   height: 278px;
+  position: relative;
   border-radius: 9px 9px 0 0;
   background: url('${(props) => props.imgPath}');
   background-size: 100%;
@@ -296,5 +297,78 @@ export const AddToUserWords = styled.button.attrs(
     background-image: url('${(props) => (props.state === 'book' ? BookBlack : DoneBlack)}');
     background-color: ${(props) => props.color};
     border: 2px solid ${(props) => props.color};
+  }
+`;
+export const ShowProgressBtn = styled.button`
+  position: absolute;
+  right: 17px;
+  bottom: 12px;
+  width: 131px;
+  height: 30px;
+  border-radius: 95px;
+  background-color: transparent;
+  border: 2px solid ${Colors.WHITE};
+  color: ${Colors.WHITE};
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  z-index: 7;
+  &:hover {
+    color: ${Colors.BLACK};
+    background-color: ${Colors.WHITE};
+  }
+`;
+export const Mask = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  color: ${Colors.WHITE};
+  transition: all 0.3s ease-in-out;
+`;
+export const StatTable = styled.table.attrs(
+  (props: { imagePath: string; iconColor: string }) => props,
+)`
+  margin: 23px 0 43px 37px;
+  .td__icon {
+    border-radius: 50%;
+    background-image: url('${(props) => props.imagePath}');
+    background-color: ${(props) => props.iconColor};
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 38px;
+    height: 38px;
+    margin-right: 16px;
+  }
+  th {
+    font-size: 22px;
+    line-height: 40px;
+    letter-spacing: 0.015em;
+  }
+  td {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0.015em;
+    padding: 9px 10px;
+    &.right {
+      border-bottom: 3px solid ${Colors.LIGHT_GREEN};
+    }
+    &.wrong {
+      border-bottom: 3px solid ${Colors.RED};
+    }
   }
 `;
