@@ -56,7 +56,7 @@ export const MainPageContent = () => {
           <AboutAppItems />
         </ContentWrapper>
       </AboutApp>
-      <Intro>
+      {/* <Intro>
         <ContentWrapper id="video">
           <h2>Intro</h2>
           <VideoPlayer>
@@ -72,7 +72,7 @@ export const MainPageContent = () => {
             ></iframe>
           </VideoPlayer>
         </ContentWrapper>
-      </Intro>
+      </Intro> */}
       <OurTeam>
         <ContentWrapper>
           <h2>Our team</h2>
