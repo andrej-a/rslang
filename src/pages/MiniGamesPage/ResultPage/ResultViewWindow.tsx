@@ -12,11 +12,13 @@ type Props = {
 };
 const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
   const textMessage =
-    rightAnswers.length === (rightAnswers.length + wrongAnswers.length)
-      ? TextMessageResult.GOOD
-      : rightAnswers.length > GameResultInfo.HALF_WORD_COUNT
-        ? TextMessageResult.NORMAL
-        : TextMessageResult.BAD;
+    rightAnswers.length === 0 && wrongAnswers.length === 0
+      ? ''
+      : rightAnswers.length === (rightAnswers.length + wrongAnswers.length)
+        ? TextMessageResult.GOOD
+        : rightAnswers.length > (rightAnswers.length + wrongAnswers.length) / 2
+          ? TextMessageResult.NORMAL
+          : TextMessageResult.BAD;
   return (
     <ResultViewWindowContainer>
       <h4> {textMessage}</h4>
@@ -26,7 +28,9 @@ const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
       </ResultTextInfo>
       <ResultStatistic>
         <ProgressBar
-          percent={Math.floor((rightAnswers.length / (rightAnswers.length + wrongAnswers.length)) * 100)}
+          percent={Math.floor(
+            (rightAnswers.length / (rightAnswers.length + wrongAnswers.length)) * 100,
+          )}
           color={Colors.LIGHT_GRAY}
         />
         <p>Accurancy</p>

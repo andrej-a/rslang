@@ -36,24 +36,23 @@ const SprintGame = () => {
     const words1 = await getWords(level, firstPage);
     const words2 = await getWords(level, secondPage);
     const words3 = await getWords(level, thirdPage);
-    console.log(firstPage, '1');
-    console.log(secondPage, '2');
-    console.log(thirdPage, '3');
     const result: IWord[] = words3.concat(words1, words2);
-    console.log(result, 'res');
     setWordsList(result);
   };
 
   const onRequestWhenAuthorizedInTextBook = async () => {
-    console.log('запрос со страницы');
-    console.log('wordsGroup', wordsGroup);
     //проверяем если группа слов это сложные слова пользователя
     if (wordsGroup === 6) {
       setWordsList(userDictionary);
     } else {
       //если со стандартной группы вызываем то проверяем наличие выученых слов и отбрасывем их
       const words = await getNoStudiedWordsFromServer(wordsGroup, currentPage, [], 60);
-      setWordsList(words.items);
+      if (words.items.length < 60) {
+        const words2 = await getNoStudiedWordsFromServer(wordsGroup, currentPage + 3, [], 60);
+        setWordsList([...words.items, ...words2.items]);
+      } else {
+        setWordsList(words.items);
+      }
     }
   };
 

@@ -25,7 +25,6 @@ import WordCard from './WordCard';
 import Sprint from '../../assets/TrackField.svg';
 import AudioChallenge from '../../assets/ListenMusic.svg';
 import { Link } from 'react-router-dom';
-
 import { getWords } from '../../service/getWords';
 import { ApplicationContext } from '../../components/Context/ApplicationContext';
 import {
@@ -34,6 +33,7 @@ import {
   getUserWordsArray,
   updateUserWord,
   replaceIdField,
+  getUserWords,
 } from '../../service/userWords';
 import { emptyOtional, IUserWord } from '../../service/constants';
 
@@ -66,6 +66,9 @@ const TextBook = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [updateArrays, setUpdateArrays] = useState<boolean>(false);
   const [showStat, setShowStat] = useState<boolean>(false);
+  const [dictionaryDownloaded, setDictionaryDownloaded] = useState<boolean>(false);
+  const [learnedDownloaded, setLearnedDownloaded] = useState<boolean>(false);
+
 
   const updateInfo = () => {
     async function setData() {
@@ -92,7 +95,9 @@ const TextBook = () => {
   useEffect(() => {
     getUserWordsArray().then(async (data) => {
       onSetUserDictionary(replaceIdField(await data.dictionary));
+      setDictionaryDownloaded(true);
       onSetUserLearnedWords(replaceIdField(await data.learned));
+      setLearnedDownloaded(true);
     });
   }, []);
 
@@ -103,16 +108,11 @@ const TextBook = () => {
   const onShowStat = () => {
     setShowStat(() => !showStat);
   };
-
   const handleOpen = () => setOpen(() => true);
   const handleClose = () => {
     setOpen(() => false);
     setActiveWord(() => emptyWord);
   };
-
-  useEffect(() => {
-    onSetIsTextBookInitGame(true);
-  }, []);
 
   const changeLevel = (level: string, group: number) => {
     setActiveLevel(() => level);
@@ -191,7 +191,6 @@ const TextBook = () => {
   };
 
   const levelsButtons = [];
-
   for (const [level, { color, fullname, group }] of levels) {
     if ((group < levels.get('D')!.group && !isAuthorized) || isAuthorized)
       levelsButtons.push(
@@ -212,7 +211,7 @@ const TextBook = () => {
       <GameBlock>
         <LevelButtonsWrapper>{levelsButtons}</LevelButtonsWrapper>
         <WordButtonsWrapper>
-          {(words.length && userLearnedWords.length && userDictionary.length && isAuthorized) ||
+          {(words.length && learnedDownloaded && dictionaryDownloaded && isAuthorized) ||
           (words.length && !isAuthorized) ? (
               words.map((word, index) => (
               <WordButton
@@ -226,9 +225,12 @@ const TextBook = () => {
                 className={getWordBtnClassName(word)}
               />
               ))
-            ) : (
+            ) : 
+            learnedDownloaded && dictionaryDownloaded && userDictionary.length === 0 ?
+              (<h3 style={{ color: Colors.WHITE }}>No words in dictionary!</h3>) :
+              (
             <FadeLoader className="spinner" color={Colors.WHITE} />
-            )}
+              )}
         </WordButtonsWrapper>
       </GameBlock>
 

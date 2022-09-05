@@ -23,12 +23,12 @@ const InitialGame = () => {
 
   useEffect(() => {
     onSetIsTextBookInitGame(false);
-    onSetGroup(7);
-  }, []);
-
-  useEffect(() => {
     onSetFooterVisibility(false);
   });
+
+  useEffect(() => {
+    onSetGroup(7);
+  }, []);
 
   const changeLevel = (level: number) => {
     setIsReady(false);

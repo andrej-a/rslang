@@ -11,6 +11,7 @@ export const GameWrapper = styled.div`
   gap: 10px;
   height: 100vh;
   color: ${Colors.WHITE};
+  overflow: hidden;
   h2 {
     font-size: 30px;
   }

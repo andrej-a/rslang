@@ -26,7 +26,6 @@ export const getNoStudiedWordsFromServer = async (
 ): Promise<{
   items: IWord[];
 }> => {
-  console.log('currentPage', currentPage);
   const userWords = await getUserWords(); //получаем все слова пользователя
   const studiedWords = userWords.filter((word) => word.difficulty === 'study'); //фильтруем
   const textBookWordsResponce = (await getWords(wordsGroup, currentPage - 1)) as unknown as IWord[]; //слова текущей группы и страницы
@@ -40,7 +39,6 @@ export const getNoStudiedWordsFromServer = async (
     return getNoStudiedWordsFromServer(wordsGroup, currentPage - 1, sortedArray, maxWordsNumber);
   } else {
     //если слов 20 или мы дошли до первой страницы -- возвращаем промис
-    console.log(' items:', { items: search(copyData, studiedWords, sortedArray, maxWordsNumber) });
     return { items: search(copyData, studiedWords, sortedArray, maxWordsNumber) };
   }
 };

@@ -31,7 +31,7 @@ export const getUserWords = async (): Promise<IUserWord[]> => {
   }
 
   const content: IUserWord[] = await rawResponse.json();
-  console.log('getUserWords', content);
+
   return content;
 };
 export const getUserWordsArray = async (): Promise<{
@@ -71,7 +71,7 @@ export const replaceIdField = (dictionaryWords: IWord[]) => {
 };
 export const getUserWordByCommonWordId = async (wordId: string): Promise<IUserWord | undefined> => {
   const userWords = await getUserWords();
-  console.log(userWords.find((word) => word.wordId === wordId));
+
   return userWords.find((word) => word.wordId === wordId);
 };
 
@@ -96,7 +96,7 @@ export const getUserWordsById = async (userId: string, wordId: string): Promise<
   }
 
   const content = await rawResponse.json();
-  console.log('getUserWordById', content);
+
   return content;
 };
 
@@ -122,12 +122,9 @@ export const createUserWord = async ({
   if (rawResponse.status === Errors.BAD_REQUEST) {
     throw new Error('Bad request');
   }
-  if (rawResponse.status === ResponseCode.WORD_CREATE_SUCCESS) {
-    console.log('The user word has been created');
-  }
 
   const content = await rawResponse.json();
-  console.log('createUserWords', content);
+
   return content;
 };
 
@@ -153,12 +150,9 @@ export const updateUserWord = async ({
   if (rawResponse.status === Errors.BAD_REQUEST) {
     throw new Error('Bad request');
   }
-  if (rawResponse.status === ResponseCode.WORD_CREATE_SUCCESS) {
-    console.log('The user word has been updated');
-  }
 
   const content = await rawResponse.json();
-  console.log('updateUserWords', content);
+
   return content;
 };
 
@@ -173,9 +167,6 @@ export const deleteUserWord = async (userId: string, wordId: string): Promise<vo
 
   if (rawResponse.status === Errors.MISSING_TOKEN) {
     throw new Error('Access token is missing or invalid');
-  }
-  if (rawResponse.status === ResponseCode.DELETED_SUCCESS) {
-    console.log('The user word has been created');
   }
 };
 

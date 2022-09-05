@@ -26,7 +26,7 @@ export const updateStatistic = async (statisticObj: IUserStatistic): Promise<IUs
   }
 
   const content = await rawResponse.json();
-  console.log('new statistic', content);
+
   return content;
 };
 
@@ -50,6 +50,6 @@ export const getStatistic = async (): Promise<IUserStatistic> => {
   }
 
   const content = await rawResponse.json();
-  console.log('get statistic', content);
+
   return content;
 };

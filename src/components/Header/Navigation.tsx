@@ -38,10 +38,10 @@ export const Navigation = ({ active }: Props) => {
           <GamesIconDiv />
           <p>Minigames</p>
         </NavLink>
-        <NavLink to={'/statistics'} className={({ isActive }) => (isActive ? ' activeLink' : '')}>
+        {/* <NavLink to={'/statistics'} className={({ isActive }) => (isActive ? ' activeLink' : '')}>
           {isAuthorized && <StatisticsIconDiv />}
           {isAuthorized && <p>Statistics</p>}
-        </NavLink>
+        </NavLink> */}
       </GroupMenuItem>
       <Link to={'/'}>
         <SignoutIconIconDiv

@@ -12,7 +12,6 @@ const randomNumber = (min = 1, max = 59): number => {
 };
 
 export const createCouples = (words: IWord[]): IWordsForPlay[] => {
-  console.log('create', words);
   const firstWordsArray: IWordsForPlay[] = [];
   const wordsForPlay: IWordsForPlay[] = [];
 

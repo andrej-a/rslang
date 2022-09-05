@@ -45,7 +45,6 @@ export const Card = ({
   maxLineRightAnswers,
   setMaxLineRightAnswers,
 }: ICardInfo) => {
-  console.log(couple);
   const rightAnswer = () => {
     setTotalPoints(totalPoints + coefficient * 10);
     setLineRightAnswers(lineRightAnswers + 1);

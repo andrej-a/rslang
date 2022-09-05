@@ -25,7 +25,7 @@ const data: IMembers[] = [
     img: `${ImageNastya}`,
     role: 'Frontend developer',
     aboutMember:
-      'Did basic project settings, initial layout, redux setup, router setup, login form, part of the TextBook page, "Audio Challenge" game, "Savannah" game, backend',
+      'I am optimistic and sociable, although sometimes my shyness gets in the way. I love to learn new things and can do laborious work, I appreciate the creative approach.',
     projectWork:
       'Conducted the development of the pages of the textbook and dictionary. Made a card for words, implemented textbook settings and output of word statistics in the dictionary, backend setup, statistic page view',
     link: 'https://github.com/polivodichka',

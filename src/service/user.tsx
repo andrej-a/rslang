@@ -39,7 +39,7 @@ export const createUser = async (
   const content: IRegistredUser = await rawResponse.json();
 
   localStorage.setItem('userId', content.id);
-  console.log('createUser', content);
+
   showSpinner(false);
   return content;
 };
@@ -65,7 +65,7 @@ export const getUser = async (): Promise<IInfoRequestUser> => {
   }
 
   const content = await rawResponse.json();
-  console.log('getUser', content);
+
   return content;
 };
 
@@ -90,7 +90,7 @@ export const editUser = async (user: ISignInInfo): Promise<IInfoRequestUser> => 
   }
 
   const content = await rawResponse.json();
-  console.log('editUser', content);
+
   return content;
 };
 
@@ -105,9 +105,6 @@ export const deleteUser = async (id: string): Promise<void> => {
 
   if (rawResponse.status === Errors.MISSING_TOKEN) {
     throw new Error('Access token is missing or invalid');
-  }
-  if (rawResponse.status === ResponseCode.DELETED_SUCCESS) {
-    console.log('The user has been deleted');
   }
 };
 

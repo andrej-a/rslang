@@ -40,6 +40,6 @@ export const getAggregatedWordsList = async (options: {
   }
 
   const content = await rawResponse.json();
-  console.log('getAggregatedWordsList', content[0]);
+
   return content[0].paginatedResults;
 };
