@@ -2,7 +2,13 @@ import React, { useContext } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import Box from '@mui/material/Box';
 import FadeLoader from 'react-spinners/FadeLoader';
-import { ForgetPassword, Form, StyledButton, StyledTextField, ToggleToAnotherForm } from './LoginForm.styled';
+import {
+  ForgetPassword,
+  Form,
+  StyledButton,
+  StyledTextField,
+  ToggleToAnotherForm,
+} from './LoginForm.styled';
 import { mailRegularCheeker, Values } from '../../../styles/constansts';
 
 import FormTitle from '../../../components/FormTitle/FormTitle';
@@ -54,7 +60,9 @@ const LoginForm = () => {
         <Box component="form" noValidate autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <StyledTextField
-              sx={[{ '&:focus-within': { outline: 'none', borderColor: theme.palette.success.main } }]}
+              sx={[
+                { '&:focus-within': { outline: 'none', borderColor: theme.palette.success.main } },
+              ]}
               error={!!errors.email}
               className={isValid ? 'valid' : ''}
               id="email"
@@ -71,7 +79,9 @@ const LoginForm = () => {
               {errors.email && ((errors?.email?.message as string) || EMAIL_ERROR_MESSAGE)}
             </p>
             <StyledTextField
-              sx={[{ '&:focus-within': { outline: 'none', borderColor: theme.palette.success.main } }]}
+              sx={[
+                { '&:focus-within': { outline: 'none', borderColor: theme.palette.success.main } },
+              ]}
               error={!!errors.password}
               className={isValid ? 'valid' : ''}
               type="password"
