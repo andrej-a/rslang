@@ -15,13 +15,22 @@ import {
 } from './Header.styled';
 import { ApplicationContext } from '../Context/ApplicationContext';
 import { removeItemsFromStorage } from '../../utils/removeItemsFromStorage';
+import { levels } from '../../styles/constansts';
 
 type Props = {
   active: boolean;
 };
 
 export const Navigation = ({ active }: Props) => {
-  const { isAuthorized, onSetIsAuthorized, onSetUserInformation } = useContext(ApplicationContext);
+  const {
+    isAuthorized,
+    onSetIsAuthorized,
+    onSetUserInformation,
+    onSetUserDictionary,
+    onSetUserLearnedWords,
+    wordsGroup,
+    onSetGroup,
+  } = useContext(ApplicationContext);
   return (
     <DivAppNavigation data-testid="navbar" className={active ? 'active' : ''}>
       <Blur className={active ? 'active' : ''} />
@@ -49,6 +58,12 @@ export const Navigation = ({ active }: Props) => {
             onSetIsAuthorized(false);
             onSetUserInformation({ name: '', userID: '' });
             removeItemsFromStorage('userId', 'userInfo', 'userToken');
+            if (wordsGroup === 6) {
+              window.localStorage.setItem('group', '0');
+              onSetGroup(0);
+            }
+            onSetUserDictionary([]);
+            onSetUserLearnedWords([]);
           }}
         />
         <p>Sign Out</p>

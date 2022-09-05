@@ -112,6 +112,10 @@ export const WordButtonStyled = styled.button.attrs((props: { state: boolean }) 
   &.dictionary:before {
     background-color: ${Colors.BOOK_PURPLE};
   }
+  &.all__learned {
+    background-color: transparent;
+    color: ${Colors.WHITE};
+  }
 `;
 export const WordButtonsWrapper = styled.div`
   flex-wrap: wrap;
@@ -147,7 +151,7 @@ export const WordCardImage = styled.div.attrs((props: { imgPath: string }) => pr
 `;
 export const AudioButton = styled.button`
   margin-top: 30px;
-  min-width: 38px;
+  width: 38px;
   height: 38px;
   background: url('${audio_play}');
   cursor: pointer;

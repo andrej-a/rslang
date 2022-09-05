@@ -6,7 +6,7 @@ import FadeLoader from 'react-spinners/FadeLoader';
 
 import { IWord } from '../../models/IWord';
 import { Colors, levels, WindowSizes, wPerPage } from '../../styles/constansts';
-import { Capitalize } from '../../utils/utils';
+import { Capitalize, compare } from '../../utils/utils';
 import { emptyWord, totalCountPages } from './ExampleData';
 
 import {
@@ -68,15 +68,26 @@ const TextBook = () => {
   const [showStat, setShowStat] = useState<boolean>(false);
   const [dictionaryDownloaded, setDictionaryDownloaded] = useState<boolean>(false);
   const [learnedDownloaded, setLearnedDownloaded] = useState<boolean>(false);
-
+  const [allLearned, setAllLearned] = useState<boolean>(false);
 
   const updateInfo = () => {
     async function setData() {
       const data =
         wordsGroup === levels.get('D')!.group
-          ? userDictionary.slice(currentPage * wPerPage - wPerPage, currentPage * wPerPage)
+          ? currentPage * wPerPage - wPerPage < userDictionary.length
+            ? userDictionary.slice(currentPage * wPerPage - wPerPage, currentPage * wPerPage)
+            : userDictionary.slice(wPerPage - wPerPage, wPerPage)
           : await getWords(wordsGroup, currentPage - 1);
       setWords(data);
+      if (learnedDownloaded && dictionaryDownloaded) setAllLearned(() => compare(userDictionary, userLearnedWords, data));
+      setCurrentPage(
+        wordsGroup === levels.get('D')!.group &&
+          currentPage * wPerPage - wPerPage < userDictionary.length
+          ? currentPage
+          : wordsGroup === levels.get('D')!.group
+            ? 1
+            : currentPage,
+      );
       return data;
     }
     setData().then((data) =>
@@ -128,15 +139,20 @@ const TextBook = () => {
 
   const paginate = (direction: number, numButt = false) => {
     if (typeof direction !== 'number') return;
-    if (numButt) setCurrentPage(() => direction);
-    else setCurrentPage((page) => page + direction);
+    let newPage;
+    if (numButt) newPage = direction;
+    else newPage = currentPage + direction;
+    setCurrentPage(newPage);
+    window.localStorage.setItem('page', String(newPage));
   };
 
   const getWordBtnClassName = (word: IWord) => {
-    if (userLearnedWords.find((learnedWord) => learnedWord.id === word.id)) return 'study';
+    const name = [];
+    if (userLearnedWords.find((learnedWord) => learnedWord.id === word.id)) name.push('study');
     else if (userDictionary.find((dictionaryWord) => dictionaryWord.id === word.id))
-      return 'dictionary';
-    else return '';
+      name.push('dictionary');
+    if (allLearned && wordsGroup !== 6) name.push('all__learned');
+    return name.join(' ');
   };
 
   const updateCreateUserWord = async (word: IWord, difficulty: 'learned' | 'study' | 'hard') => {
@@ -225,12 +241,11 @@ const TextBook = () => {
                 className={getWordBtnClassName(word)}
               />
               ))
-            ) : 
-            learnedDownloaded && dictionaryDownloaded && userDictionary.length === 0 ?
-              (<h3 style={{ color: Colors.WHITE }}>No words in dictionary!</h3>) :
-              (
+            ) : learnedDownloaded && dictionaryDownloaded && userDictionary.length === 0 ? (
+            <h3 style={{ color: Colors.WHITE }}>No words in dictionary!</h3>
+            ) : (
             <FadeLoader className="spinner" color={Colors.WHITE} />
-              )}
+            )}
         </WordButtonsWrapper>
       </GameBlock>
 
@@ -280,13 +295,13 @@ const TextBook = () => {
 
       <ProceedToGameButtonsWrapper>
         <Link to={'../games/sprint/start'}>
-          <ProceedToGameButton imagePath={Sprint} iconColor={Colors.GREEN}>
+          <ProceedToGameButton imagePath={Sprint} iconColor={Colors.GREEN} disabled={allLearned && wordsGroup !== 6}>
             <div className="button__icon"></div>
             Sprint
           </ProceedToGameButton>
         </Link>
         <Link to={'../games/audiochallenge/start'}>
-          <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN}>
+          <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN} disabled={allLearned && wordsGroup !== 6}>
             <div className="button__icon"></div>
             Audio challenge
           </ProceedToGameButton>
