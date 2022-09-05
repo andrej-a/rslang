@@ -9,6 +9,7 @@ import {
 } from './constants';
 import { getWordById } from './getWords';
 import { path } from './url';
+import { getAggregatedWordsList } from './userAgregateWords';
 
 const { POST, GET, PUT, DELETE, CONTENT_TYPE } = HttpMetod;
 
@@ -38,22 +39,35 @@ export const getUserWordsArray = async (): Promise<{
   learned: Promise<IWord[]>;
   study: Promise<IWord[]>;
 }> => {
-  const userWords = await getUserWords();
-  const dictionaryWords: Promise<IWord>[] = userWords
-    .filter((word) => word.difficulty === 'hard')
-    .map((word) => getWordById(word.wordId));
+  //const userWords = await getUserWords();
+  const dictionaryWords: Promise<IWord[]> = getAggregatedWordsList({
+    filter: '{"$and":[{"userWord.difficulty":"hard"}]}',
+    wordsPerPage: '3600',
+    userId: localStorage.getItem('userId') ?? '',
+  });
 
-  const learnedWords: Promise<IWord>[] = userWords
-    .filter((word) => word.difficulty === 'study')
-    .map((word) => getWordById(word.wordId));
-  const sudyWords: Promise<IWord>[] = userWords
-    .filter((word) => word.difficulty === 'learned')
-    .map((word) => getWordById(word.wordId));
+  const learnedWords: Promise<IWord[]> = getAggregatedWordsList({
+    filter: '{"$and":[{"userWord.difficulty":"study"}]}',
+    wordsPerPage: '3600',
+    userId: localStorage.getItem('userId') ?? '',
+  });
+  const sudyWords: Promise<IWord[]> = getAggregatedWordsList({
+    filter: '{"$and":[{"userWord.difficulty":"learned"}]}',
+    wordsPerPage: '3600',
+    userId: localStorage.getItem('userId') ?? '',
+  });
   return {
-    dictionary: Promise.all(dictionaryWords),
-    learned: Promise.all(learnedWords),
-    study: Promise.all(sudyWords),
+    dictionary: dictionaryWords,
+    learned: learnedWords,
+    study: sudyWords,
   };
+};
+export const replaceIdField = (dictionaryWords: IWord[]) => {
+  return dictionaryWords.map((word) => {
+    if (word._id) word.id = word._id;
+    delete word._id;
+    return word;
+  });
 };
 export const getUserWordByCommonWordId = async (wordId: string): Promise<IUserWord | undefined> => {
   const userWords = await getUserWords();
