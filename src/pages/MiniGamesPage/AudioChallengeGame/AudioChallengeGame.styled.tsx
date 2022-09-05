@@ -7,7 +7,7 @@ const {
   WHITE,
   GREY_GRADIENT,
   BLACK,
-  GRADIENT,
+  DISABLED,
   RED,
   GREEN,
   LIGHT_GREY,
@@ -22,6 +22,14 @@ export const AudioChallengeWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .userMessage {
+    font-size: 36px;
+    color: ${WHITE};
+    margin-top: 20px;
+    padding: 0 20px;
+    text-align: center;
+  }
 `;
 
 export const MainBlock = styled.div`
@@ -84,7 +92,7 @@ export const AnswerButton = styled.button`
   align-items: center;
   gap: 15px;
   cursor: pointer;
-
+  transition: all 0.3s ease;
   font-weight: 500;
   font-size: 20px;
   line-height: 40px;
@@ -94,14 +102,31 @@ export const AnswerButton = styled.button`
   &.correct {
     border: 2px solid ${WHITE};
     background: ${PLAY_BUTTON_GRADIENT};
+    color: ${WHITE};
+    &:hover {
+      color: ${WHITE};
+    }
   }
 
   &.wrong {
     color: ${RED};
+    &:hover {
+      color: ${RED};
+    }
   }
 
-  &.current {
+  &:hover {
     color: ${GREEN};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  .number {
+    font-size: 20px;
+    font-weight: 300;
+    margin-right: 10px;
   }
 
   @media (max-width: ${tablet}px) {
@@ -115,9 +140,15 @@ export const SkipQuestion = styled(AnswerButton)`
   border-radius: 38px;
   padding-left: 0;
   justify-content: center;
-
+  &:disabled {
+    cursor: not-allowed;
+    &:hover {
+      color: ${BLACK};
+    }
+  }
   @media (max-width: ${tablet}px) {
     width: 280px;
+    margin-bottom: 30px;
   }
 `;
 
@@ -187,6 +218,8 @@ export const Picture = styled(PrimaryPicture)`
   }
 
   .answer_picture {
+    min-height: 350px;
+    width: 100%;
     @media (max-width: ${tablet}px) {
       width: 280px;
     }
@@ -273,6 +306,12 @@ export const NextButton = styled.button`
 
   &:hover {
     color: ${GREEN};
+  }
+
+  &:disabled {
+    background: ${DISABLED};
+    cursor: not-allowed;
+    color: ${BLACK};
   }
   @media (min-width: ${ultraWidth}px) {
     margin-right: 0;

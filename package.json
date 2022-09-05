@@ -36,6 +36,7 @@
     "typeface-rubik": "^1.1.13",
     "typescript": "^4.7.4",
     "typescript-react": "^0.1.1",
+    "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

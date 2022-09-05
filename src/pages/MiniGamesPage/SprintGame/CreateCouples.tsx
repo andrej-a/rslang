@@ -35,6 +35,6 @@ export const createCouples = (words: IWord[]): IWordsForPlay[] => {
       });
     }
   }
-  console.log(wordsForPlay);
+
   return wordsForPlay;
 };

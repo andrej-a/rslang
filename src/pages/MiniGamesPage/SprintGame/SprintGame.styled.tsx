@@ -5,6 +5,7 @@ import { Colors } from '../../../styles/constansts';
 
 export const GameContentWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -14,6 +15,12 @@ export const GameContentWrapper = styled.div`
   padding-bottom: 100px;
   @media (max-width: 700px) {
     padding-left: 0;
+  }
+  .userMessage {
+    font-size: 36px;
+    margin-top: 20px;
+    padding: 0 20px;
+    text-align: center;
   }
 `;
 export const SprintGameWrapper = styled.div`

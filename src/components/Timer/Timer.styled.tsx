@@ -14,9 +14,6 @@ export const TimerContainer = styled.div`
     text-align: center;
     line-height: 124px;
   }
-  &.hidden {
-    display: none;
-  }
 `;
 
 export const CircleContainer = styled.svg`

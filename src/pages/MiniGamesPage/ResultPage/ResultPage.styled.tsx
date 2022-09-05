@@ -19,9 +19,6 @@ export const ResultWrapper = styled.div`
     width: 320px;
     gap: 0px;
   }
-  &.hidden {
-    display: none;
-  }
 `;
 export const HeaderButtonContainer = styled.div`
   display: flex;

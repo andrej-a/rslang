@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
 import { ResultStatistic, ResultTextInfo, ResultViewWindowContainer } from './ResultPage.styled';
@@ -8,12 +9,10 @@ import { IWord } from '../../../models/IWord';
 type Props = {
   rightAnswers: IWord[];
   wrongAnswers: IWord[];
-  allWordNumber: number;
 };
-const ResultViewWindow = ({ rightAnswers, wrongAnswers, allWordNumber }: Props) => {
-  // const allWordNumber = GameResultInfo.WORD_COUNT;
+const ResultViewWindow = ({ rightAnswers, wrongAnswers }: Props) => {
   const textMessage =
-    rightAnswers.length === allWordNumber
+    rightAnswers.length === (rightAnswers.length + wrongAnswers.length)
       ? TextMessageResult.GOOD
       : rightAnswers.length > GameResultInfo.HALF_WORD_COUNT
         ? TextMessageResult.NORMAL
@@ -27,7 +26,7 @@ const ResultViewWindow = ({ rightAnswers, wrongAnswers, allWordNumber }: Props) 
       </ResultTextInfo>
       <ResultStatistic>
         <ProgressBar
-          percent={Math.round((rightAnswers.length * GameResultInfo.PERSENT) / allWordNumber)}
+          percent={Math.floor((rightAnswers.length / (rightAnswers.length + wrongAnswers.length)) * 100)}
           color={Colors.LIGHT_GRAY}
         />
         <p>Accurancy</p>

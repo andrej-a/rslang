@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { levels, TextbookInfo } from '../../../styles/constansts';
+
+import { levels } from '../../../styles/constansts';
 import getGameInformation from '../../../utils/getGameInformation';
 import { LevelButton } from './LevelButtonAction';
 import {
@@ -13,35 +14,38 @@ import {
 import { ApplicationContext } from '../../../components/Context/ApplicationContext';
 
 const InitialGame = () => {
-  const { onSetInitialLevel, onSetIsTextBookInitGame } = useContext(ApplicationContext);
+  const { onSetGroup, onSetIsTextBookInitGame, wordsGroup, isAuthorized } =
+    useContext(ApplicationContext);
   const { game } = useParams();
   const { title, img } = getGameInformation(game as string);
   const [isReady, setIsReady] = useState(true);
-  const [activeLevel, setActiveLevel] = useState<string>('');
   const { onSetFooterVisibility } = useContext(ApplicationContext);
 
   useEffect(() => {
     onSetIsTextBookInitGame(false);
-    onSetFooterVisibility(false);
   }, []);
 
-  const changeLevel = (level: string) => {
-    setActiveLevel(() => level);
+  useEffect(() => {
+    onSetFooterVisibility(false);
+  });
+
+  const changeLevel = (level: number) => {
     setIsReady(false);
-    onSetInitialLevel(level);
+    onSetGroup(level);
   };
 
   const levelsButtons = [];
-  for (const [level, { difficulty }] of levels) {
-    levelsButtons.push(
-      <LevelButton
-        name={level}
-        id={difficulty}
-        key={`levelButton${level}`}
-        activeLevel={activeLevel}
-        changeLevel={changeLevel}
-      />,
-    );
+  for (const [level, { group }] of levels) {
+    if ((group < levels.get('D')!.group && !isAuthorized) || isAuthorized)
+      levelsButtons.push(
+        <LevelButton
+          name={level}
+          id={group}
+          key={`levelButton${level}`}
+          activeLevel={wordsGroup}
+          changeLevel={changeLevel}
+        />,
+      );
   }
 
   return (

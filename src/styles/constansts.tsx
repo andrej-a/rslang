@@ -63,12 +63,13 @@ export enum TextMessageResult {
   BAD = 'Not bad, but you need more practice',
 }
 export const levels = new Map([
-  ['A1', { color: Colors.BOOK_GRREN, fullname: 'Beginner', difficulty: '0' }],
-  ['A2', { color: Colors.BOOK_YELLOW, fullname: 'Elementary', difficulty: '1' }],
-  ['B1', { color: Colors.BOOK_AZURE_BLUE, fullname: 'Intermediate', difficulty: '2' }],
-  ['B2', { color: Colors.BOOK_BLUE, fullname: 'Up-Intermediate', difficulty: '3' }],
-  ['C1', { color: Colors.BOOK_ORANGE, fullname: 'Advanced', difficulty: '4' }],
-  ['C2', { color: Colors.BOOK_RED, fullname: 'Proficiency', difficulty: '5' }],
+  ['A1', { color: Colors.BOOK_GRREN, fullname: 'Beginner', group: 0 }],
+  ['A2', { color: Colors.BOOK_YELLOW, fullname: 'Elementary', group: 1 }],
+  ['B1', { color: Colors.BOOK_AZURE_BLUE, fullname: 'Intermediate', group: 2 }],
+  ['B2', { color: Colors.BOOK_BLUE, fullname: 'Up-Intermediate', group: 3 }],
+  ['C1', { color: Colors.BOOK_ORANGE, fullname: 'Advanced', group: 4 }],
+  ['C2', { color: Colors.BOOK_RED, fullname: 'Proficiency', group: 5 }],
+  ['D', { color: Colors.BOOK_PURPLE, fullname: 'Dictionary', group: 6 }],
 ]);
 
 export enum ProgressBarInfo {
@@ -93,3 +94,5 @@ export enum TextbookInfo {
   MAX_PAGE = 30,
   MIN_PAGE = 1,
 }
+
+export const wPerPage = 20;

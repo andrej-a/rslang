@@ -1,14 +1,14 @@
 import React, { createContext, useState } from 'react';
-import { IUserInfo } from '../../service/constants';
+import { IWord } from '../../models/IWord';
+import { IUserInfo, IUserWord } from '../../service/constants';
 import { Values } from '../../styles/constansts';
+
 type Props = {
   children?: JSX.Element | JSX.Element[];
 };
 interface IContext {
   footerVisibility: boolean;
   onSetFooterVisibility: (value: boolean) => void;
-  initialLevel: string;
-  onSetInitialLevel: (value: string) => void;
   isAuthorized: boolean;
   onSetIsAuthorized: (value: boolean) => void;
   userInformation: IUserInfo;
@@ -17,14 +17,25 @@ interface IContext {
   onSetFormToggler: (value: string) => void;
   isLoading: boolean;
   onSetIsLoading: (value: boolean) => void;
+  userDictionary: IWord[];
+  onSetUserDictionary: (value: IWord[]) => void;
+  userLearnedWords: IWord[];
+  onSetUserLearnedWords: (value: IWord[]) => void;
+  userWords: IUserWord[];
+  onSetUserWords: (value: IUserWord[]) => void;
+  textBookWords: IWord[];
+  onSetTextBookWords: (data: IWord[]) => void;
+  wordsGroup: number;
+  onSetGroup: (value: number) => void;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   isTextBookInitGame: boolean;
   onSetIsTextBookInitGame: (value: boolean) => void;
-  textBookCurrentPage: number;
-  onSetTextBookCurrentPage: (value: number) => void;
+  isDifficultWord: boolean;
+  onSetIsDifficultWord: (value: boolean) => void;
 }
 
 export const ApplicationContext = createContext({} as IContext);
-
 export const ApplicationProvider = (props: Props) => {
   const { LOGIN_FORM_STATE } = Values;
   const defaultAuthorizedValue = localStorage.getItem('userId') ? true : false;
@@ -32,21 +43,30 @@ export const ApplicationProvider = (props: Props) => {
     ? JSON.parse(localStorage.getItem('userInfo') as string)
     : null;
   const [footerVisibility, setFooterVisibility] = useState(true);
-  const [initialLevel, setInitialLevel] = useState('1');
   const [isAuthorized, setIsAuthorized] = useState(defaultAuthorizedValue);
+  //информация о юзере, name, ID
   const [userInformation, setUserInformation] = useState<IUserInfo>(
     userValue || { name: '', userID: '' },
   );
+  //переключалка формы
   const [formToggler, setFormToggler] = useState<string>(LOGIN_FORM_STATE);
+  //спиннер
   const [isLoading, setIsLoading] = useState(false);
+  const [userDictionary, setUserDictionary] = useState([] as IWord[]);
+  const [userLearnedWords, setUserLearnedWords] = useState([] as IWord[]);
+  const [userWords, setUserWords] = useState([] as IUserWord[]);
+  //массив слов
+  const [textBookWords, setTextBookWords] = useState<IWord[]>([]);
+  //группа слов
+  const [wordsGroup, setGroup] = useState(0);
+  //страница слов
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  //отслеживание игры
   const [isTextBookInitGame, setIsTextBookInitGame] = useState(false);
-  const [textBookCurrentPage, setTextBookCurrentPage] = useState(1);
+  const [isDifficultWord, setIsDifficulWord] = useState(false);
 
   const onSetFooterVisibility = (value: boolean) => {
     setFooterVisibility(value);
-  };
-  const onSetInitialLevel = (value: string) => {
-    setInitialLevel(value);
   };
   const onSetIsAuthorized = (value: boolean) => {
     setIsAuthorized(value);
@@ -63,8 +83,26 @@ export const ApplicationProvider = (props: Props) => {
   const onSetIsTextBookInitGame = (value: boolean) => {
     setIsTextBookInitGame(value);
   };
-  const onSetTextBookCurrentPage = (value: number) => {
-    setTextBookCurrentPage(value);
+
+  const onSetUserDictionary = (value: IWord[]) => {
+    setUserDictionary(value);
+  };
+
+  const onSetUserLearnedWords = (value: IWord[]) => {
+    setUserLearnedWords(value);
+  };
+  const onSetTextBookWords = (value: IWord[]) => {
+    setTextBookWords(value);
+  };
+  const onSetUserWords = (value: IUserWord[]) => {
+    setUserWords(value);
+  };
+
+  const onSetGroup = (value: number) => {
+    setGroup(value);
+  };
+  const onSetIsDifficultWord = (value: boolean) => {
+    setIsDifficulWord(value);
   };
 
   return (
@@ -72,8 +110,6 @@ export const ApplicationProvider = (props: Props) => {
       value={{
         footerVisibility: footerVisibility,
         onSetFooterVisibility,
-        initialLevel: initialLevel,
-        onSetInitialLevel,
         isAuthorized: isAuthorized,
         onSetIsAuthorized,
         userInformation: userInformation,
@@ -82,10 +118,22 @@ export const ApplicationProvider = (props: Props) => {
         onSetFormToggler,
         isLoading: isLoading,
         onSetIsLoading,
+        userDictionary: userDictionary,
+        onSetUserDictionary,
+        userLearnedWords: userLearnedWords,
+        onSetUserLearnedWords,
+        textBookWords: textBookWords,
+        onSetTextBookWords,
+        userWords: userWords,
+        onSetUserWords,
+        wordsGroup: wordsGroup,
+        onSetGroup,
+        currentPage: currentPage,
+        setCurrentPage,
         isTextBookInitGame: isTextBookInitGame,
         onSetIsTextBookInitGame,
-        textBookCurrentPage: textBookCurrentPage,
-        onSetTextBookCurrentPage,
+        isDifficultWord: isDifficultWord,
+        onSetIsDifficultWord,
       }}
     >
       {props.children}

@@ -3,6 +3,11 @@ import { Colors, WindowSizes } from '../../styles/constansts';
 import audio_play from '../../assets/audio_play.svg';
 import LevelHint from '../../assets/levelHint.svg';
 
+import BookBlack from '../../assets/return_book_black.svg';
+import DoneBlack from '../../assets/done_black.svg';
+import BookWhite from '../../assets/return_book_white.png';
+import DoneWhite from '../../assets/done_white.png';
+
 const { textBookSize } = WindowSizes;
 
 export const TextBookWrapper = styled.div`
@@ -83,12 +88,30 @@ export const WordButtonStyled = styled.button.attrs((props: { state: boolean }) 
   border: 3px solid ${Colors.WHITE};
   border-radius: 4px;
   background-color: ${(props) => (props.state ? 'transparent' : Colors.WHITE)};
+  position: relative;
   cursor: pointer;
   &:hover {
     background-color: transparent;
     color: ${Colors.WHITE};
   }
   color: ${(props) => (props.state ? Colors.WHITE : Colors.BLACK)};
+  &.learned:before,
+  &.dictionary:before {
+    display: block;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  &.learned:before {
+    background-color: ${Colors.BOOK_GRREN};
+  }
+  &.dictionary:before {
+    background-color: ${Colors.BOOK_PURPLE};
+  }
 `;
 export const WordButtonsWrapper = styled.div`
   flex-wrap: wrap;
@@ -100,11 +123,13 @@ export const WordButtonsWrapper = styled.div`
 `;
 export const WordCardWrapper = styled.div`
   width: 455px;
+  position: relative;
   min-height: 586px;
   height: fit-content;
   border-radius: 9px;
   padding-bottom: 23px;
   background-color: ${Colors.WHITE};
+  transition: all 0.3s ease-in-out;
 
   @media (max-width: ${textBookSize}px) {
     &.card {
@@ -125,6 +150,9 @@ export const AudioButton = styled.button`
   height: 38px;
   background: url('${audio_play}');
   cursor: pointer;
+  &:disabled {
+    cursor: none;
+  }
 `;
 export const CardTitleWrapper = styled.div`
   display: flex;
@@ -240,5 +268,33 @@ export const ProceedToGameButton = styled.button.attrs(
   &:hover .button__icon,
   &:disabled .button__icon {
     background-color: ${(props) => props.iconColor};
+  }
+`;
+export const AddToUserWordsWrapper = styled.div`
+  position: absolute;
+  top: 19px;
+  right: 25px;
+  width: fit-content;
+  display: flex;
+  gap: 21px;
+`;
+export const AddToUserWords = styled.button.attrs(
+  (props: { color: string; state: string }) => props,
+)`
+  background-color: transparent;
+  background-image: url('${(props) => (props.state === 'book' ? BookWhite : DoneWhite)}');
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  border: 2px solid ${Colors.WHITE};
+  background-size: contain;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &.active,
+  &:hover {
+    background-image: url('${(props) => (props.state === 'book' ? BookBlack : DoneBlack)}');
+    background-color: ${(props) => props.color};
+    border: 2px solid ${(props) => props.color};
   }
 `;

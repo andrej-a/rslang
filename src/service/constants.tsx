@@ -1,4 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+export const emptyOtional = {
+  rightAnswers: 0,
+  rightAudio: 0,
+  wrongAudio: 0,
+  rightSprint: 0,
+  wrongSprint: 0,
+};
+
 export const enum Errors {
   BAD_REQUEST = 400,
   MISSING_TOKEN = 401,
@@ -59,11 +66,13 @@ export interface IUserAllInfo {
 export interface IWordsSetter {
   userId: string | null;
   wordId: string;
-  word: IUserWord;
+  word: Pick<IUserWord, 'difficulty' | 'optional'>;
 }
 //Без понятия какие поля должны быть в optional
 export interface IUserWord {
-  difficulty: string; //'learned' | 'study' | 'hard'
+  difficulty: 'learned' | 'study' | 'hard';
+  wordId: string; //id слова в общем словаре
+  id: string; // id слова у пользователя
   optional: {
     rightAnswers: number;
     rightAudio: number;
@@ -72,18 +81,18 @@ export interface IUserWord {
     wrongSprint: number;
   };
 }
+
 export interface IUserWordCreateResponse {
   userId: string;
   difficulty: 'learned' | 'study' | 'hard';
   optional: {
-    newWord: boolean;
     rightAnswers: number;
     rightAudio: number;
     wrongAudio: number;
     rightSprint: number;
     wrongSprint: number;
   };
-  id: string;
+  wordId: string;
 }
 
 //На вскидку написала поля в optional
@@ -91,22 +100,22 @@ export interface IUserStatistic {
   learnedWords: number;
   optional: {
     common: {
-      visitDate: any;
-      wordsToday: any;
-      newWordsToday: any;
-      errors: any;
-      correct: any;
+      visitDate: number;
+      wordsToday: number;
+      newWordsToday: number;
+      errors: number;
+      correct: number;
     };
     games: {
       sprint: {
-        words: any;
-        accurancy: any;
-        inRow: any;
+        words: number;
+        accurancy: number;
+        inRow: number;
       };
       audioChallenge: {
-        words: any;
-        accurancy: any;
-        inRow: any;
+        words: number;
+        accurancy: number;
+        inRow: number;
       };
     };
   };
