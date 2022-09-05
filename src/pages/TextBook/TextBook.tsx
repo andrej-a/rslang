@@ -32,6 +32,7 @@ import {
   getUserWordByCommonWordId,
   getUserWordsArray,
   updateUserWord,
+  replaceIdField,
 } from '../../service/userWords';
 import { emptyOtional, IUserWord } from '../../service/constants';
 
@@ -89,8 +90,8 @@ const TextBook = () => {
 
   useEffect(() => {
     getUserWordsArray().then(async (data) => {
-      onSetUserDictionary(await data.dictionary);
-      onSetUserLearnedWords(await data.learned);
+      onSetUserDictionary(replaceIdField(await data.dictionary));
+      onSetUserLearnedWords(replaceIdField(await data.learned));
     });
   }, []);
 

@@ -1,5 +1,5 @@
 import { IWord } from '../models/IWord';
-import { Errors, HttpMetod } from './constants';
+import { Errors, HttpMetod, IAggreagtedWords } from './constants';
 import { path } from './url';
 
 const { GET, CONTENT_TYPE } = HttpMetod;
@@ -12,13 +12,13 @@ export const getAggregatedWordsList = async (options: {
   wordsPerPage?: string;
   filter?: string;
 }): Promise<IWord[]> => {
-  const filterGroup: string = options.group ? `&group=${options.group}` : '';
-  const filterPage: string = options.page ? `&page=${options.page}` : '';
+  const filterGroup: string = options.group ? `group=${options.group}` : '';
+  const filterPage: string = options.page ? `page=${options.page}` : '';
   const filterWordsPerPage: string = options.wordsPerPage
-    ? `&wordsPerPage=${options.wordsPerPage}`
+    ? `wordsPerPage=${options.wordsPerPage}`
     : '';
-  const filterFilter: string = options.filter ? `&filter=${options.filter}` : '';
-  const sumFilter: string = filterGroup + filterPage + filterWordsPerPage + filterFilter;
+  const filterFilter: string = options.filter ? `filter=${options.filter}` : '';
+  const sumFilter: string = [filterGroup, filterPage, filterWordsPerPage, filterFilter].join('&');
   const finalFilter = `?${sumFilter.slice(1)}`;
 
   const rawResponse = await fetch(
@@ -40,6 +40,6 @@ export const getAggregatedWordsList = async (options: {
   }
 
   const content = await rawResponse.json();
-  console.log('getAggregatedWordsList', content);
-  return content;
+  console.log('getAggregatedWordsList', content[0]);
+  return content[0].paginatedResults;
 };
