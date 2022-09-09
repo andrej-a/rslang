@@ -3,7 +3,7 @@
 "RS Lang" – an application for learning english words, including an textbook with a database of words to study, mini-games for repeating them, a statistics page for tracking individual progress.
 
 Task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-2/rs-lang/rslang.md <br/>
-Deploy: PASTE LINK <br/>
+Deploy: [App](https://rslang-andrej-a.netlify.app/) <br/>
 Backend: https://react-rslang-back.herokuapp.com
 ![image](https://user-images.githubusercontent.com/81522781/187300410-8eef69b0-ea47-405b-9cac-f66575e9a9c1.png)
 
