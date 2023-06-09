@@ -45,6 +45,7 @@ import { shuffle } from '../../../utils/shuffleArray';
 import { Capitalize } from '../../../utils/utils';
 import { getRandomWordsFromArray } from '../../../utils/getRandomWordsFromArray';
 import { getNoStudiedWordsFromServer } from '../../../utils/getNoStudiedWordsFromServer';
+import { url } from '../../../service/url';
 
 let sortedArray: IWord[] = [];
 
@@ -173,7 +174,7 @@ const AudioChallengeGame = () => {
       }
       if (e.code === 'Space') {
         const audioExample = new Audio(
-          `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+          `${url}/${currentWord.audio}`,
         );
         audioExample.play();
       }
@@ -278,7 +279,7 @@ const AudioChallengeGame = () => {
                     <SoundPictureWrapper
                       onClick={() => {
                         const audioExample = new Audio(
-                          `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+                          `${url}/${currentWord.audio}`,
                         );
                         audioExample.play();
                       }}
@@ -293,14 +294,14 @@ const AudioChallengeGame = () => {
                 <Picture>
                   <img
                     className="answer_picture"
-                    src={`https://react-rslang-back.herokuapp.com/${currentWord.image}`}
+                    src={`${url}/${currentWord.image}`}
                     alt="word_picture"
                   />
                   <WordWrapper>
                     <PlayAudioInAnswerCard
                       onClick={() => {
                         const audioExample = new Audio(
-                          `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+                          `${url}/${currentWord.audio}`,
                         );
                         audioExample.play();
                       }}

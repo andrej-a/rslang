@@ -269,6 +269,7 @@ export const ProceedToGameButton = styled.button.attrs(
   &:disabled {
     background-color: rgba(255, 255, 255, 0.46);
     border: 3px solid transparent;
+    cursor: not-allowed;
   }
   &:hover .button__icon,
   &:disabled .button__icon {
