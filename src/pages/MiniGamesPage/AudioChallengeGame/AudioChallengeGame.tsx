@@ -173,7 +173,7 @@ const AudioChallengeGame = () => {
       }
       if (e.code === 'Space') {
         const audioExample = new Audio(
-          `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+          `https://react-rslang-be-production-97d9.up.railway.app/${currentWord.audio}`,
         );
         audioExample.play();
       }
@@ -278,7 +278,7 @@ const AudioChallengeGame = () => {
                     <SoundPictureWrapper
                       onClick={() => {
                         const audioExample = new Audio(
-                          `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+                          `https://react-rslang-be-production-97d9.up.railway.app/${currentWord.audio}`,
                         );
                         audioExample.play();
                       }}
@@ -293,14 +293,14 @@ const AudioChallengeGame = () => {
                 <Picture>
                   <img
                     className="answer_picture"
-                    src={`https://react-rslang-back.herokuapp.com/${currentWord.image}`}
+                    src={`https://react-rslang-be-production-97d9.up.railway.app/${currentWord.image}`}
                     alt="word_picture"
                   />
                   <WordWrapper>
                     <PlayAudioInAnswerCard
                       onClick={() => {
                         const audioExample = new Audio(
-                          `https://react-rslang-back.herokuapp.com/${currentWord.audio}`,
+                          `https://react-rslang-be-production-97d9.up.railway.app/${currentWord.audio}`,
                         );
                         audioExample.play();
                       }}

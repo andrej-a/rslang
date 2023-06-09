@@ -109,6 +109,7 @@ const TextBook = () => {
       setDictionaryDownloaded(true);
       onSetUserLearnedWords(replaceIdField(await data.learned));
       setLearnedDownloaded(true);
+      setUpdateArrays(() => !updateArrays);
     });
   }, []);
 
@@ -294,13 +295,13 @@ const TextBook = () => {
       />
 
       <ProceedToGameButtonsWrapper>
-        <Link to={'../games/sprint/start'}>
+        <Link to={allLearned && wordsGroup !== 6 ? '' : '../games/sprint/start'}>
           <ProceedToGameButton imagePath={Sprint} iconColor={Colors.GREEN} disabled={allLearned && wordsGroup !== 6}>
             <div className="button__icon"></div>
             Sprint
           </ProceedToGameButton>
         </Link>
-        <Link to={'../games/audiochallenge/start'}>
+        <Link to={allLearned && wordsGroup !== 6 ? '' : '../games/audiochallenge/start'}>
           <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN} disabled={allLearned && wordsGroup !== 6}>
             <div className="button__icon"></div>
             Audio challenge

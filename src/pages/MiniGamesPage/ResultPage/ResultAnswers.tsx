@@ -17,7 +17,7 @@ type Props = {
 
 export const WordItem = ({ word, wordTranslate, audio }: IWord) => {
   const startSong = (url: string | undefined) => {
-    const audioExample = new Audio(`https://react-rslang-back.herokuapp.com/${url}`);
+    const audioExample = new Audio(`https://react-rslang-be-production-97d9.up.railway.app/${url}`);
     audioExample.play();
   };
 

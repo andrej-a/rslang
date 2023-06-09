@@ -58,7 +58,7 @@ const WordCard = ({
   }, [showStat]);
   return (
     <WordCardWrapper className={isModal ? '' : 'card'}>
-      <WordCardImage imgPath={`https://react-rslang-back.herokuapp.com/${word.image}`}>
+      <WordCardImage imgPath={`https://react-rslang-be-production-97d9.up.railway.app/${word.image}`}>
         {isAuthorized && !showStat ? (
           <AddToUserWordsWrapper>
             <AddToUserWords
@@ -121,10 +121,10 @@ const WordCard = ({
               onClick={() => {
                 setDisableAudioBtn(true);
                 const audioMeaning = new Audio(
-                  `https://react-rslang-back.herokuapp.com/${word.audioMeaning}`,
+                  `https://react-rslang-be-production-97d9.up.railway.app/${word.audioMeaning}`,
                 );
                 const audioExample = new Audio(
-                  `https://react-rslang-back.herokuapp.com/${word.audioExample}`,
+                  `https://react-rslang-be-production-97d9.up.railway.app/${word.audioExample}`,
                 );
                 audioMeaning.addEventListener('ended', () => audioExample.play());
                 audioExample.addEventListener('ended', () => setDisableAudioBtn(false));
