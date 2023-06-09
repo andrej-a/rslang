@@ -28,6 +28,7 @@ import Sprint from '../../assets/TrackField.svg';
 import AudioChallenge from '../../assets/ListenMusic.svg';
 import { IUserWord } from '../../service/constants';
 import { getUserWordByCommonWordId, getUserWordsById } from '../../service/userWords';
+import { url } from '../../service/url';
 
 interface IWordCard {
   word: IWord;
@@ -58,7 +59,7 @@ const WordCard = ({
   }, [showStat]);
   return (
     <WordCardWrapper className={isModal ? '' : 'card'}>
-      <WordCardImage imgPath={`https://react-rslang-be-production-97d9.up.railway.app/${word.image}`}>
+      <WordCardImage imgPath={`${url}/${word.image}`}>
         {isAuthorized && !showStat ? (
           <AddToUserWordsWrapper>
             <AddToUserWords
@@ -121,10 +122,10 @@ const WordCard = ({
               onClick={() => {
                 setDisableAudioBtn(true);
                 const audioMeaning = new Audio(
-                  `https://react-rslang-be-production-97d9.up.railway.app/${word.audioMeaning}`,
+                  `${url}/${word.audioMeaning}`,
                 );
                 const audioExample = new Audio(
-                  `https://react-rslang-be-production-97d9.up.railway.app/${word.audioExample}`,
+                  `${url}/${word.audioExample}`,
                 );
                 audioMeaning.addEventListener('ended', () => audioExample.play());
                 audioExample.addEventListener('ended', () => setDisableAudioBtn(false));

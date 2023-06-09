@@ -10,14 +10,15 @@ import {
 } from './ResultPage.styled';
 import ListenIcon from '../../../assets/listen.svg';
 import { IWord } from '../../../models/IWord';
+import { url } from '../../../service/url';
 
 type Props = {
   answers: IWord[];
 };
 
 export const WordItem = ({ word, wordTranslate, audio }: IWord) => {
-  const startSong = (url: string | undefined) => {
-    const audioExample = new Audio(`https://react-rslang-be-production-97d9.up.railway.app/${url}`);
+  const startSong = (songUrl: string | undefined) => {
+    const audioExample = new Audio(`${url}/${songUrl}`);
     audioExample.play();
   };
 
