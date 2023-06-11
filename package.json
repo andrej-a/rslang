@@ -43,7 +43,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint:test": "eslint src --ext .ts,.tsx",
+    "eslint:fix": "eslint --fix src --ext .ts,.tsx",
+    "prettier:base": "prettier --parser typescript --single-quote --semi",
+    "prettier:check": "npx prettier --list-different \"src/**/*.{ts,tsx}\"",
+    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
+
   },
   "eslintConfig": {
     "extends": [

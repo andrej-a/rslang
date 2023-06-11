@@ -79,14 +79,15 @@ const TextBook = () => {
             : userDictionary.slice(wPerPage - wPerPage, wPerPage)
           : await getWords(wordsGroup, currentPage - 1);
       setWords(data);
-      if (learnedDownloaded && dictionaryDownloaded) setAllLearned(() => compare(userDictionary, userLearnedWords, data));
+      if (learnedDownloaded && dictionaryDownloaded)
+        setAllLearned(() => compare(userDictionary, userLearnedWords, data));
       setCurrentPage(
         wordsGroup === levels.get('D')!.group &&
           currentPage * wPerPage - wPerPage < userDictionary.length
           ? currentPage
           : wordsGroup === levels.get('D')!.group
-            ? 1
-            : currentPage,
+          ? 1
+          : currentPage,
       );
       return data;
     }
@@ -230,7 +231,7 @@ const TextBook = () => {
         <WordButtonsWrapper>
           {(words.length && learnedDownloaded && dictionaryDownloaded && isAuthorized) ||
           (words.length && !isAuthorized) ? (
-              words.map((word, index) => (
+            words.map((word, index) => (
               <WordButton
                 word={Capitalize(word.word)}
                 wordTranslate={Capitalize(word.wordTranslate)}
@@ -241,12 +242,12 @@ const TextBook = () => {
                 handleClick={handleOpen}
                 className={getWordBtnClassName(word)}
               />
-              ))
-            ) : learnedDownloaded && dictionaryDownloaded && userDictionary.length === 0 ? (
+            ))
+          ) : learnedDownloaded && dictionaryDownloaded && userDictionary.length === 0 ? (
             <h3 style={{ color: Colors.WHITE }}>No words in dictionary!</h3>
-            ) : (
+          ) : (
             <FadeLoader className="spinner" color={Colors.WHITE} />
-            )}
+          )}
         </WordButtonsWrapper>
       </GameBlock>
 
@@ -296,13 +297,21 @@ const TextBook = () => {
 
       <ProceedToGameButtonsWrapper>
         <Link to={allLearned && wordsGroup !== 6 ? '' : '../games/sprint/start'}>
-          <ProceedToGameButton imagePath={Sprint} iconColor={Colors.GREEN} disabled={allLearned && wordsGroup !== 6}>
+          <ProceedToGameButton
+            imagePath={Sprint}
+            iconColor={Colors.GREEN}
+            disabled={allLearned && wordsGroup !== 6}
+          >
             <div className="button__icon"></div>
             Sprint
           </ProceedToGameButton>
         </Link>
         <Link to={allLearned && wordsGroup !== 6 ? '' : '../games/audiochallenge/start'}>
-          <ProceedToGameButton imagePath={AudioChallenge} iconColor={Colors.LIGHT_GREEN} disabled={allLearned && wordsGroup !== 6}>
+          <ProceedToGameButton
+            imagePath={AudioChallenge}
+            iconColor={Colors.LIGHT_GREEN}
+            disabled={allLearned && wordsGroup !== 6}
+          >
             <div className="button__icon"></div>
             Audio challenge
           </ProceedToGameButton>

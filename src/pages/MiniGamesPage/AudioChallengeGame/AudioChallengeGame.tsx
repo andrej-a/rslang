@@ -39,7 +39,11 @@ import { defaultWord } from '../../../models/defaultValueToAudioGame';
 import { generateRandomPage } from '../../../models/randomPage';
 /* SERVICE */
 import { getWords } from '../../../service/getWords';
-import { primaryCorrectObject, primaryWrongObject, sentResultsToServer } from '../../../service/sentResultsToServer';
+import {
+  primaryCorrectObject,
+  primaryWrongObject,
+  sentResultsToServer,
+} from '../../../service/sentResultsToServer';
 /* UTILS */
 import { shuffle } from '../../../utils/shuffleArray';
 import { Capitalize } from '../../../utils/utils';
@@ -84,7 +88,10 @@ const AudioChallengeGame = () => {
   //окно результата
   const [showResult, setShowResult] = useState(false);
 
-  const onSetBooleanState = (value: boolean, callback: React.Dispatch<React.SetStateAction<boolean>>) => {
+  const onSetBooleanState = (
+    value: boolean,
+    callback: React.Dispatch<React.SetStateAction<boolean>>,
+  ) => {
     callback(value);
   };
 
@@ -173,9 +180,7 @@ const AudioChallengeGame = () => {
         }, 1000);
       }
       if (e.code === 'Space') {
-        const audioExample = new Audio(
-          `${url}/${currentWord.audio}`,
-        );
+        const audioExample = new Audio(`${url}/${currentWord.audio}`);
         audioExample.play();
       }
       if (e.code === 'Enter' && statusAnswered) {
@@ -210,8 +215,8 @@ const AudioChallengeGame = () => {
           isAnswered && item.id === currentWord.id && statusAnswered
             ? 'correct'
             : isAnswered && item.id !== currentWord.id && statusAnswered
-              ? 'wrong'
-              : ''
+            ? 'wrong'
+            : ''
         }
         onClick={() => {
           onSetBooleanState(true, setIsDisabled);
@@ -278,9 +283,7 @@ const AudioChallengeGame = () => {
                   {!statusAnswered && (
                     <SoundPictureWrapper
                       onClick={() => {
-                        const audioExample = new Audio(
-                          `${url}/${currentWord.audio}`,
-                        );
+                        const audioExample = new Audio(`${url}/${currentWord.audio}`);
                         audioExample.play();
                       }}
                     >
@@ -300,9 +303,7 @@ const AudioChallengeGame = () => {
                   <WordWrapper>
                     <PlayAudioInAnswerCard
                       onClick={() => {
-                        const audioExample = new Audio(
-                          `${url}/${currentWord.audio}`,
-                        );
+                        const audioExample = new Audio(`${url}/${currentWord.audio}`);
                         audioExample.play();
                       }}
                     >
@@ -333,8 +334,8 @@ const AudioChallengeGame = () => {
                       onSetTextBookWords([]);
                     }
                     if (isAuthorized && wordNumber === textBookWords.length - 1) {
-                      sentResultsToServer(correctAnswers, primaryCorrectObject, 1, 1, 0);                      
-                      sentResultsToServer(wrongAnswers, primaryWrongObject, 0, 0, 1);                    
+                      sentResultsToServer(correctAnswers, primaryCorrectObject, 1, 1, 0);
+                      sentResultsToServer(wrongAnswers, primaryWrongObject, 0, 0, 1);
                     }
                   }}
                 >
@@ -347,7 +348,7 @@ const AudioChallengeGame = () => {
       ) : showResult ? null : (
         <>
           <MoonLoader color="#fff" />
-          <p className='userMessage'>Слова еще не загрузились, либо вы уже все выучили!</p>
+          <p className="userMessage">Слова еще не загрузились, либо вы уже все выучили!</p>
         </>
       )}
       {showResult && (

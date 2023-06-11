@@ -11,5 +11,9 @@ jobs:
             - uses: actions/checkout@v3
             - name: install modules
               run: npm install
+            - name: eslint check
+              run: yarn run eslint:test
+            - name: prettier check
+              run: yarn run prettier:check
             - name: application build
               run: npm run build
